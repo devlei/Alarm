@@ -70,7 +70,7 @@ public class PersonalActivity extends Activity implements OnClickListener {
                 finish();
                 break;
             case R.id.personal_alarm_history:
-                ToastUtils.showToast(this, R.string.alarm_history);
+                IntentUtils.openAlarmHistory(this);
                 break;
             case R.id.personal_emergency_contact:
                 IntentUtils.openEmergencyContact(this);

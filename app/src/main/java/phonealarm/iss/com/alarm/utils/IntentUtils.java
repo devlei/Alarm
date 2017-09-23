@@ -10,7 +10,7 @@ import phonealarm.iss.com.alarm.personal.*;
 public class IntentUtils {
 
     /**
-     * 启动主页
+     * 打开主页
      *
      * @param context
      */
@@ -19,7 +19,7 @@ public class IntentUtils {
     }
 
     /**
-     * 启动个人中心
+     * 打开个人中心
      *
      * @param context
      */
@@ -28,7 +28,7 @@ public class IntentUtils {
     }
 
     /**
-     * 启动修改密码
+     * 打开修改密码
      *
      * @param context
      */
@@ -37,7 +37,7 @@ public class IntentUtils {
     }
 
     /**
-     * 启动附近派出所
+     * 打开附近派出所
      *
      * @param context
      */
@@ -46,7 +46,7 @@ public class IntentUtils {
     }
 
     /**
-     * 启动紧急联系人
+     * 打开紧急联系人
      *
      * @param context
      */
@@ -55,7 +55,7 @@ public class IntentUtils {
     }
 
     /**
-     * 启动紧急联系人添加
+     * 打开紧急联系人添加
      *
      * @param context
      */
@@ -64,7 +64,7 @@ public class IntentUtils {
     }
 
     /**
-     * 启动绑定号码
+     * 打开绑定号码
      *
      * @param context
      */
@@ -73,12 +73,21 @@ public class IntentUtils {
     }
 
     /**
-     * 启动更换号码
+     * 打开更换号码
      *
      * @param context
      */
     public static void openChangePhone(Context context) {
         ChangePhoneActivity.open(context);
+    }
+
+    /**
+     * 打开报警历史
+     *
+     * @param context
+     */
+    public static void openAlarmHistory(Context context) {
+        AlarmHistoryActivity.open(context);
     }
 
 }

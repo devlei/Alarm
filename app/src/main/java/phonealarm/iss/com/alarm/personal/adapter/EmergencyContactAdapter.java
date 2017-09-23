@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.personal.adapter.EmergencyContactAdapter.EmergencyContactViewHolder;
@@ -24,6 +26,14 @@ public class EmergencyContactAdapter extends RecyclerView.Adapter<EmergencyConta
 
     @Override
     public void onBindViewHolder(EmergencyContactViewHolder holder, int position) {
+        if (position == 0) {
+            LayoutParams params = holder.itemView.getLayoutParams();
+            if (params instanceof MarginLayoutParams) {
+                MarginLayoutParams lParams = (MarginLayoutParams) params;
+                lParams.topMargin = 0;
+                holder.itemView.setLayoutParams(lParams);
+            }
+        }
         holder.mNameTv.setText("永丰派出所" + position);
         holder.mPhoneTv.setText(String.valueOf((15212345678l + 1l)));
         holder.mAddressTv.setText("永丰派出所昌平区回龙观" + position);
