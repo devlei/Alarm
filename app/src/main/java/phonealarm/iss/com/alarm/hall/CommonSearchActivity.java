@@ -1,4 +1,4 @@
-package phonealarm.iss.com.alarm.personal;
+package phonealarm.iss.com.alarm.hall;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,24 +16,26 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
-import phonealarm.iss.com.alarm.personal.adapter.AlarmHistoryAdapter;
+import phonealarm.iss.com.alarm.hall.adapter.CommonSearchAdapter;
 
 /**
  * Created by weizhilei on 2017/9/23.
  */
-public class AlarmHistoryActivity extends Activity implements OnClickListener, TextWatcher {
+public class CommonSearchActivity extends Activity implements OnClickListener, TextWatcher {
 
     private EditText mSearchEt;
-    private RecyclerView mAlarmHistoryRv;
+    private RecyclerView mRv;
 
     /**
      * open
      *
      * @param context
+     * @param typeResId
      */
-    public static void open(Context context) {
+    public static void open(Context context, int typeResId) {
         if (context != null) {
-            Intent intent = new Intent(context, AlarmHistoryActivity.class);
+            Intent intent = new Intent(context, CommonSearchActivity.class);
+            intent.putExtra(context.getString(R.string.key_type), typeResId);
             context.startActivity(intent);
         }
     }
@@ -41,24 +43,48 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener, T
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alarm_history);
+        setContentView(R.layout.activity_common_search);
         init();
 
         // TODO: 2017/9/23 weizhilei 测试数据
-        mAlarmHistoryRv.setAdapter(new AlarmHistoryAdapter());
+        mRv.setAdapter(
+                new CommonSearchAdapter(getIntent().getIntExtra(getString(R.string.key_type), R.integer.type_cases)));
     }
 
     private void init() {
         TextView titleTv = (TextView) findViewById(R.id.title_name);
-        titleTv.setText(R.string.alarm_history);
-        mSearchEt = (EditText) findViewById(R.id.ah_search);
-        mAlarmHistoryRv = (RecyclerView) findViewById(R.id.alarmHistory);
+        mSearchEt = (EditText) findViewById(R.id.common_search);
+        mRv = (RecyclerView) findViewById(R.id.commonSearch);
 
+        //set listener
         findViewById(R.id.title_back).setOnClickListener(this);
+        findViewById(R.id.title_other).setVisibility(View.GONE);
         mSearchEt.addTextChangedListener(this);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
-        mAlarmHistoryRv.setLayoutManager(llm);
+        mRv.setLayoutManager(llm);
+
+        int typeResId = getIntent().getIntExtra(getString(R.string.key_type), R.integer.type_cases);
+        switch (typeResId) {
+            case R.integer.type_cases:
+                titleTv.setText(R.string.cases);
+                break;
+            case R.integer.type_vehicle_track:
+                titleTv.setText(R.string.vehicle_track);
+                break;
+            case R.integer.type_suspect_track:
+                titleTv.setText(R.string.suspect_track);
+                break;
+            case R.integer.type_people_lost:
+                titleTv.setText(R.string.people_lost);
+                break;
+            case R.integer.type_lost_found:
+                titleTv.setText(R.string.lost_found);
+                break;
+            case R.integer.type_alarm_history:
+                titleTv.setText(R.string.alarm_history);
+                break;
+        }
     }
 
     @Override

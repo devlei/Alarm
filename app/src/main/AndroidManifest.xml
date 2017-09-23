@@ -40,7 +40,7 @@
             android:name=".personal.ChangePhoneActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity
-            android:name=".personal.AlarmHistoryActivity"
+            android:name=".hall.CommonSearchActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
 

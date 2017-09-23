@@ -9,6 +9,7 @@ import java.util.Date;
 public class DateUtils {
 
     public static final String Y_M_D_H_M = "yyyy-MM-dd HH:mm";
+    public static final String D_M_H_M = "dd/MM HH:mm";
 
     /**
      * 格式化时间

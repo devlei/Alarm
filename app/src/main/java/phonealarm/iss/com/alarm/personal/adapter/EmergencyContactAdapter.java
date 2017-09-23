@@ -26,13 +26,15 @@ public class EmergencyContactAdapter extends RecyclerView.Adapter<EmergencyConta
 
     @Override
     public void onBindViewHolder(EmergencyContactViewHolder holder, int position) {
-        if (position == 0) {
-            LayoutParams params = holder.itemView.getLayoutParams();
-            if (params instanceof MarginLayoutParams) {
-                MarginLayoutParams lParams = (MarginLayoutParams) params;
+        LayoutParams params = holder.itemView.getLayoutParams();
+        if (params instanceof MarginLayoutParams) {
+            MarginLayoutParams lParams = (MarginLayoutParams) params;
+            if (position == 0) {
                 lParams.topMargin = 0;
-                holder.itemView.setLayoutParams(lParams);
+            } else {
+                lParams.topMargin = holder.itemView.getContext().getResources().getDimensionPixelSize(R.dimen.s_5);
             }
+            holder.itemView.setLayoutParams(lParams);
         }
         holder.mNameTv.setText("永丰派出所" + position);
         holder.mPhoneTv.setText(String.valueOf((15212345678l + 1l)));

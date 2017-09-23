@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="key_type">type</string>
+
     <!--信息发布类型-->
     <integer name="type_cases">0</integer>
     <integer name="type_vehicle_track">1</integer>
     <integer name="type_suspect_track">2</integer>
     <integer name="type_people_lost">3</integer>
     <integer name="type_lost_found">4</integer>
+    <integer name="type_alarm_history">5</integer>
 
     <integer-array name="type_release_info">
         <item>@integer/type_cases</item>

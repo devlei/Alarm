@@ -2,6 +2,7 @@ package phonealarm.iss.com.alarm.utils;
 
 import android.content.Context;
 import phonealarm.iss.com.alarm.MainActivity;
+import phonealarm.iss.com.alarm.hall.CommonSearchActivity;
 import phonealarm.iss.com.alarm.personal.*;
 
 /**
@@ -82,12 +83,13 @@ public class IntentUtils {
     }
 
     /**
-     * 打开报警历史
+     * 打开通用搜索展示
      *
      * @param context
+     * @param typeResId
      */
-    public static void openAlarmHistory(Context context) {
-        AlarmHistoryActivity.open(context);
+    public static void openCommonSearch(Context context, int typeResId) {
+        CommonSearchActivity.open(context, typeResId);
     }
 
 }

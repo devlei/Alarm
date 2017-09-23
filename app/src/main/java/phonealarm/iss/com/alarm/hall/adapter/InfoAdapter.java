@@ -14,7 +14,7 @@ import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.hall.HeaderSpanSizeLookup;
 import phonealarm.iss.com.alarm.hall.IHeader;
-import phonealarm.iss.com.alarm.utils.ToastUtils;
+import phonealarm.iss.com.alarm.utils.IntentUtils;
 
 /**
  * Created by weizhilei on 2017/9/23.
@@ -127,15 +127,15 @@ public class InfoAdapter extends RecyclerView.Adapter implements IHeader {
             if (view.getTag() != null) {
                 Integer type = (Integer) view.getTag();
                 if (type == getInteger(itemView.getContext(), R.integer.type_cases)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.cases);
+                    IntentUtils.openCommonSearch(itemView.getContext(), R.integer.type_cases);
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_vehicle_track)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.vehicle_track);
+                    IntentUtils.openCommonSearch(itemView.getContext(), R.integer.type_vehicle_track);
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_suspect_track)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.suspect_track);
+                    IntentUtils.openCommonSearch(itemView.getContext(), R.integer.type_suspect_track);
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_people_lost)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.people_lost);
+                    IntentUtils.openCommonSearch(itemView.getContext(), R.integer.type_people_lost);
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_lost_found)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.lost_found);
+                    IntentUtils.openCommonSearch(itemView.getContext(), R.integer.type_lost_found);
                 }
             }
         }
