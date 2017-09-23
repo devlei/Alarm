@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/s_150"
+    android:layout_height="@dimen/s_35"
     android:background="@color/colorTitleBackground"
     android:orientation="horizontal">
 
     <Button
         android:id="@+id/title_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/s_9"
+        android:layout_height="@dimen/s_15"
         android:layout_centerVertical="true"
-        android:text="backs"
-        android:textColor="@android:color/white"/>
+        android:layout_marginLeft="@dimen/s_15"
+        android:background="@drawable/icon_back_arrow"/>
 
     <TextView
         android:id="@+id/title_name"
@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="@string/hall"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/f_15"/>
 
     <TextView
         android:id="@+id/title_other"
@@ -27,7 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/s_50"
+        android:layout_marginRight="@dimen/s_15"
         android:text="@string/mine"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/f_15"/>
 </RelativeLayout>

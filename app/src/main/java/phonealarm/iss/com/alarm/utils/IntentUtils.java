@@ -1,8 +1,9 @@
 package phonealarm.iss.com.alarm.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import phonealarm.iss.com.alarm.MainActivity;
+import phonealarm.iss.com.alarm.personal.ChangePasswordActivity;
+import phonealarm.iss.com.alarm.personal.PersonalActivity;
 
 /**
  * Created by weizhilei on 2017/9/22.
@@ -15,10 +16,24 @@ public class IntentUtils {
      * @param context
      */
     public static void openMain(Context context) {
-        if (context != null) {
-            Intent intent = new Intent(context, MainActivity.class);
-            context.startActivity(intent);
-        }
+        MainActivity.open(context);
     }
 
+    /**
+     * 启动个人中心
+     *
+     * @param context
+     */
+    public static void openPersonal(Context context) {
+        PersonalActivity.open(context);
+    }
+
+    /**
+     * 启动修改密码
+     *
+     * @param context
+     */
+    public static void openChangePassword(Context context) {
+        ChangePasswordActivity.open(context);
+    }
 }

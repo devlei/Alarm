@@ -16,5 +16,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/s_15"
         android:text="@string/loading"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/f_30"/>
 </LinearLayout>

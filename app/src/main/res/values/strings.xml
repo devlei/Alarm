@@ -11,12 +11,29 @@
     <string name="vehicle_track">车辆追踪</string>
     <string name="suspect_track">疑犯追踪</string>
     <string name="people_lost">人员走失</string>
-    <string name="lost_list">遗失列表</string>
+    <string name="lost_found">遗失招领</string>
     <string name="my_benefit">我的惠民</string>
     <string name="alarm">一键报警</string>
     <string name="eager_report">热心举报</string>
     <string name="police_interact">警民互动</string>
     <string name="rent_collect">租房采集</string>
     <string name="hotel_collect">旅馆采集</string>
+
+    <string name="personal_center">个人中心</string>
+    <string name="alarm_history">报警历史</string>
+    <string name="emergency_contact">紧急联系人</string>
+    <string name="near_police">附近派出所</string>
+    <string name="bind_phone">绑定手机号</string>
+    <string name="change_password">修改密码</string>
+    <string name="check_update">检查更新</string>
+    <string name="about">关于</string>
+
+    <string name="old_password">旧密码</string>
+    <string name="new_password">新密码</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="old_password_hint">请输入旧密码</string>
+    <string name="new_password_hint">请输入新密码</string>
+    <string name="confirm_password_hint">请再次确认密码</string>
+    <string name="confirm">确认</string>
 
 </resources>

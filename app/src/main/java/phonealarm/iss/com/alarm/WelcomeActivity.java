@@ -27,8 +27,9 @@ public class WelcomeActivity extends Activity {
             @Override
             public void run() {
                 IntentUtils.openMain(WelcomeActivity.this);
+                finish();
             }
-        }, 5000);
+        }, 1000);
     }
 
 }

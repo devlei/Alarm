@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <array name="my_benefit">
-        <item>@string/alarm</item>
-        <item>@string/eager_report</item>
-        <item>@string/police_interact</item>
-        <item>@string/rent_collect</item>
-        <item>@string/hotel_collect</item>
-    </array>
+    <!--信息发布类型-->
+    <integer name="type_cases">0</integer>
+    <integer name="type_vehicle_track">1</integer>
+    <integer name="type_suspect_track">2</integer>
+    <integer name="type_people_lost">3</integer>
+    <integer name="type_lost_found">4</integer>
+
+    <integer-array name="type_release_info">
+        <item>@integer/type_cases</item>
+        <item>@integer/type_vehicle_track</item>
+        <item>@integer/type_suspect_track</item>
+        <item>@integer/type_people_lost</item>
+        <item>@integer/type_lost_found</item>
+    </integer-array>
+
+    <!--我的惠民-->
+    <integer name="type_alarm">0</integer>
+    <integer name="type_eager_report">1</integer>
+    <integer name="type_police_interact">2</integer>
+    <integer name="type_rent_collect">3</integer>
+    <integer name="type_hotel_collect">4</integer>
+
+    <integer-array name="type_benefit">
+        <item>@integer/type_alarm</item>
+        <item>@integer/type_eager_report</item>
+        <item>@integer/type_police_interact</item>
+        <item>@integer/type_rent_collect</item>
+        <item>@integer/type_hotel_collect</item>
+    </integer-array>
 
 </resources>

@@ -19,7 +19,7 @@ import phonealarm.iss.com.alarm.utils.ToastUtils;
 /**
  * Created by weizhilei on 2017/9/23.
  */
-public class BenefitAdapter extends RecyclerView.Adapter implements IHeader {
+public class InfoAdapter extends RecyclerView.Adapter implements IHeader {
 
     private static final int TYPE_HEADER = 1;
 
@@ -42,23 +42,23 @@ public class BenefitAdapter extends RecyclerView.Adapter implements IHeader {
             case TYPE_HEADER:
                 View headerView = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.layout_header, parent, false);
-                return new BenefitHeaderViewHolder(headerView);
+                return new InfoHeaderViewHolder(headerView);
             default:
-                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_benefit, parent, false);
-                return new BenefitViewHolder(itemView);
+                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_info, parent, false);
+                return new InfoViewHolder(itemView);
         }
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_HEADER) {
-            if (holder instanceof BenefitHeaderViewHolder) {
-                BenefitHeaderViewHolder headerViewHolder = (BenefitHeaderViewHolder) holder;
-                headerViewHolder.mNameTv.setText(R.string.my_benefit);
+            if (holder instanceof InfoHeaderViewHolder) {
+                InfoHeaderViewHolder headerViewHolder = (InfoHeaderViewHolder) holder;
+                headerViewHolder.mNameTv.setText(R.string.release_information);
             }
         } else {
-            if (holder instanceof BenefitViewHolder) {
-                BenefitViewHolder viewHolder = (BenefitViewHolder) holder;
+            if (holder instanceof InfoViewHolder) {
+                InfoViewHolder viewHolder = (InfoViewHolder) holder;
                 int[] typeArray = getTypeArray(mContext);
                 if (typeArray != null && position - 1 < typeArray.length) {
                     int type = typeArray[position - 1];
@@ -93,16 +93,16 @@ public class BenefitAdapter extends RecyclerView.Adapter implements IHeader {
 
     @Override
     public int getHeaderSpanSize() {
-        return 4;
+        return 5;
     }
 
     /**
      * Created by weizhilei on 2017/9/23.
      */
-    class BenefitHeaderViewHolder extends ViewHolder {
+    class InfoHeaderViewHolder extends ViewHolder {
         public TextView mNameTv;
 
-        public BenefitHeaderViewHolder(View itemView) {
+        public InfoHeaderViewHolder(View itemView) {
             super(itemView);
             mNameTv = (TextView) itemView.findViewById(R.id.header_name);
         }
@@ -111,12 +111,11 @@ public class BenefitAdapter extends RecyclerView.Adapter implements IHeader {
     /**
      * Created by weizhilei on 2017/9/23.
      */
-    class BenefitViewHolder extends ViewHolder implements OnClickListener {
-
+    class InfoViewHolder extends ViewHolder implements OnClickListener {
         public ImageView mIconIv;
         public TextView mNameTv;
 
-        public BenefitViewHolder(View itemView) {
+        public InfoViewHolder(View itemView) {
             super(itemView);
             mIconIv = (ImageView) itemView.findViewById(R.id.item_icon);
             mNameTv = (TextView) itemView.findViewById(R.id.item_name);
@@ -127,16 +126,16 @@ public class BenefitAdapter extends RecyclerView.Adapter implements IHeader {
         public void onClick(View view) {
             if (view.getTag() != null) {
                 Integer type = (Integer) view.getTag();
-                if (type == getInteger(itemView.getContext(), R.integer.type_alarm)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.alarm);
-                } else if (type == getInteger(itemView.getContext(), R.integer.type_eager_report)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.eager_report);
-                } else if (type == getInteger(itemView.getContext(), R.integer.type_police_interact)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.police_interact);
-                } else if (type == getInteger(itemView.getContext(), R.integer.type_rent_collect)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.rent_collect);
-                } else if (type == getInteger(itemView.getContext(), R.integer.type_hotel_collect)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.hotel_collect);
+                if (type == getInteger(itemView.getContext(), R.integer.type_cases)) {
+                    ToastUtils.showToast(itemView.getContext(), R.string.cases);
+                } else if (type == getInteger(itemView.getContext(), R.integer.type_vehicle_track)) {
+                    ToastUtils.showToast(itemView.getContext(), R.string.vehicle_track);
+                } else if (type == getInteger(itemView.getContext(), R.integer.type_suspect_track)) {
+                    ToastUtils.showToast(itemView.getContext(), R.string.suspect_track);
+                } else if (type == getInteger(itemView.getContext(), R.integer.type_people_lost)) {
+                    ToastUtils.showToast(itemView.getContext(), R.string.people_lost);
+                } else if (type == getInteger(itemView.getContext(), R.integer.type_lost_found)) {
+                    ToastUtils.showToast(itemView.getContext(), R.string.lost_found);
                 }
             }
         }
@@ -150,7 +149,7 @@ public class BenefitAdapter extends RecyclerView.Adapter implements IHeader {
      */
     private int[] getTypeArray(Context context) {
         if (context != null) {
-            return context.getResources().getIntArray(R.array.type_benefit);
+            return context.getResources().getIntArray(R.array.type_release_info);
         }
         return null;
     }
@@ -164,16 +163,16 @@ public class BenefitAdapter extends RecyclerView.Adapter implements IHeader {
      */
     private int getIconResId(Context context, int type) {
         int iconResId = R.color.colorPrimary;
-        if (type == getInteger(context, R.integer.type_alarm)) {
-            iconResId = R.drawable.icon_alarm;
-        } else if (type == getInteger(context, R.integer.type_eager_report)) {
-            iconResId = R.drawable.icon_eager_report;
-        } else if (type == getInteger(context, R.integer.type_police_interact)) {
+        if (type == getInteger(context, R.integer.type_cases)) {
+            iconResId = R.drawable.icon_cases;
+        } else if (type == getInteger(context, R.integer.type_vehicle_track)) {
+            iconResId = R.drawable.icon_vehicle_track;
+        } else if (type == getInteger(context, R.integer.type_suspect_track)) {
+            iconResId = R.drawable.icon_suspect_track;
+        } else if (type == getInteger(context, R.integer.type_people_lost)) {
             iconResId = R.drawable.icon_people_lost;
-        } else if (type == getInteger(context, R.integer.type_rent_collect)) {
-            iconResId = R.drawable.icon_rent_collect;
-        } else if (type == getInteger(context, R.integer.type_hotel_collect)) {
-            iconResId = R.drawable.icon_hotel_collect;
+        } else if (type == getInteger(context, R.integer.type_lost_found)) {
+            iconResId = R.drawable.icon_lost_found;
         }
         return iconResId;
     }
@@ -186,16 +185,16 @@ public class BenefitAdapter extends RecyclerView.Adapter implements IHeader {
      */
     private int getNameResId(Context context, int type) {
         int nameResId = R.string.cases;
-        if (type == getInteger(context, R.integer.type_alarm)) {
-            nameResId = R.string.alarm;
-        } else if (type == getInteger(context, R.integer.type_eager_report)) {
-            nameResId = R.string.eager_report;
-        } else if (type == getInteger(context, R.integer.type_police_interact)) {
-            nameResId = R.string.police_interact;
-        } else if (type == getInteger(context, R.integer.type_rent_collect)) {
-            nameResId = R.string.rent_collect;
-        } else if (type == getInteger(context, R.integer.type_hotel_collect)) {
-            nameResId = R.string.hotel_collect;
+        if (type == getInteger(context, R.integer.type_cases)) {
+            nameResId = R.string.cases;
+        } else if (type == getInteger(context, R.integer.type_vehicle_track)) {
+            nameResId = R.string.vehicle_track;
+        } else if (type == getInteger(context, R.integer.type_suspect_track)) {
+            nameResId = R.string.suspect_track;
+        } else if (type == getInteger(context, R.integer.type_people_lost)) {
+            nameResId = R.string.people_lost;
+        } else if (type == getInteger(context, R.integer.type_lost_found)) {
+            nameResId = R.string.lost_found;
         }
         return nameResId;
     }
