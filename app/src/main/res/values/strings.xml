@@ -1,3 +1,22 @@
 <resources>
+
     <string name="app_name">Alarm</string>
+
+    <string name="loading">正在加载...</string>
+
+    <string name="hall">惠民大厅</string>
+    <string name="mine">我的</string>
+    <string name="release_information">信息发布</string>
+    <string name="cases">要案</string>
+    <string name="vehicle_track">车辆追踪</string>
+    <string name="suspect_track">疑犯追踪</string>
+    <string name="people_lost">人员走失</string>
+    <string name="lost_list">遗失列表</string>
+    <string name="my_benefit">我的惠民</string>
+    <string name="alarm">一键报警</string>
+    <string name="eager_report">热心举报</string>
+    <string name="police_interact">警民互动</string>
+    <string name="rent_collect">租房采集</string>
+    <string name="hotel_collect">旅馆采集</string>
+
 </resources>

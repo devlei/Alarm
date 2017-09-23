@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="my_benefit">
+        <item>@string/alarm</item>
+        <item>@string/eager_report</item>
+        <item>@string/police_interact</item>
+        <item>@string/rent_collect</item>
+        <item>@string/hotel_collect</item>
+    </array>
+
+</resources>

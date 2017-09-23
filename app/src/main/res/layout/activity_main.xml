@@ -1,18 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="phonealarm.iss.com.alarm.MainActivity">
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title"/>
+
+    <ImageView
+        android:id="@+id/hall_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_500"
+        android:background="@color/colorAccent"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:background="@color/colorTabBackground"
+        android:paddingBottom="@dimen/s_20"
+        android:paddingLeft="@dimen/s_80"
+        android:paddingTop="@dimen/s_20"
+        android:text="@string/release_information"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/f_85"/>
 
-</android.support.constraint.ConstraintLayout>
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hall_cases"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_launcher_background"
+                android:text="@string/cases"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/s_75"/>
+
+            <TextView
+                android:id="@+id/hall_vehicle_track"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_launcher_background"
+                android:text="@string/vehicle_track"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/s_75"/>
+
+            <TextView
+                android:id="@+id/hall_suspect_track"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_launcher_background"
+                android:text="@string/suspect_track"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/s_75"/>
+
+            <TextView
+                android:id="@+id/hall_people_lost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_launcher_background"
+                android:text="@string/people_lost"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/s_75"/>
+
+            <TextView
+                android:id="@+id/hall_lost_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/ic_launcher_background"
+                android:text="@string/lost_list"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/s_75"/>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTabBackground"
+        android:paddingBottom="@dimen/s_20"
+        android:paddingLeft="@dimen/s_80"
+        android:paddingTop="@dimen/s_20"
+        android:text="@string/my_benefit"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/f_85"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/hall_benefit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
