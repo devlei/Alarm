@@ -15,11 +15,12 @@ import phonealarm.iss.com.alarm.utils.ToastUtils;
 /**
  * Created by weizhilei on 2017/9/23.
  */
-public class ChangePasswordActivity extends Activity implements OnClickListener {
+public class EmergencyContactAddActivity extends Activity implements OnClickListener {
 
-    private EditText mOldPasswordTv;
-    private EditText mNewPasswordTv;
-    private EditText mConfirmPasswordTv;
+    private EditText mNameEt;
+    private EditText mRelationEt;
+    private EditText mPhoneEt;
+    private EditText mAddressEt;
 
     /**
      * open
@@ -28,7 +29,7 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
      */
     public static void open(Context context) {
         if (context != null) {
-            Intent intent = new Intent(context, ChangePasswordActivity.class);
+            Intent intent = new Intent(context, EmergencyContactAddActivity.class);
             context.startActivity(intent);
         }
     }
@@ -36,21 +37,22 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_password);
+        setContentView(R.layout.activity_emergency_contact_add);
         init();
+
     }
 
     private void init() {
         TextView titleTv = (TextView) findViewById(R.id.title_name);
-        titleTv.setText(R.string.change_password);
-        TextView confirmTv = (TextView) findViewById(R.id.title_other);
-        confirmTv.setText(R.string.confirm);
-        confirmTv.setOnClickListener(this);
-        mOldPasswordTv = (EditText) findViewById(R.id.password_old);
-        mNewPasswordTv = (EditText) findViewById(R.id.password_new);
-        mConfirmPasswordTv = (EditText) findViewById(R.id.password_confirm);
+        titleTv.setText(R.string.emergency_contact);
+        mNameEt = (EditText) findViewById(R.id.eca_name);
+        mRelationEt = (EditText) findViewById(R.id.eca_relation);
+        mPhoneEt = (EditText) findViewById(R.id.eca_phone);
+        mAddressEt = (EditText) findViewById(R.id.eca_address);
 
+        findViewById(R.id.title_other).setVisibility(View.GONE);
         findViewById(R.id.title_back).setOnClickListener(this);
+        findViewById(R.id.eca_address_book).setOnClickListener(this);
     }
 
     @Override
@@ -59,9 +61,10 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
             case R.id.title_back:
                 finish();
                 break;
-            case R.id.title_other:
-                ToastUtils.showToast(this, R.string.confirm);
+            case R.id.eca_address_book:
+                ToastUtils.showToast(this, "通讯录");
                 break;
         }
     }
+
 }

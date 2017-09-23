@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/s_35"
-    android:background="@color/colorTitleBackground"
+    android:background="@color/color_4982F5"
     android:orientation="horizontal">
 
     <Button

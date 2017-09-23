@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:id="@+id/police_name"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/s_50"
+    android:layout_marginTop="@dimen/s_1"
+    android:background="@android:color/white"
+    android:ellipsize="end"
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/f_15"
+    android:paddingRight="@dimen/f_5"
+    android:singleLine="true"
+    android:text="永丰派出所"
+    android:textColor="@color/color_666666"
+    android:textSize="@dimen/f_13">
+
+</TextView>

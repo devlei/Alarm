@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/s_5"
+    android:background="@android:color/white"
+    android:paddingBottom="@dimen/s_10"
+    android:paddingLeft="@dimen/s_15"
+    android:paddingTop="@dimen/s_10">
+
+    <LinearLayout
+        android:id="@+id/ec_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ec_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名（关系）"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_15"/>
+
+        <TextView
+            android:id="@+id/ec_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/s_5"
+            android:text="15212345678"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_13"/>
+
+        <TextView
+            android:id="@+id/ec_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/s_5"
+            android:text="联系人地址详情"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/f_13"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/ec_call"
+        android:layout_width="@dimen/s_26"
+        android:layout_height="@dimen/s_26"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/s_15"
+        android:background="@drawable/icon_phone_blue"/>
+
+</RelativeLayout>

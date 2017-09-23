@@ -15,11 +15,9 @@ import phonealarm.iss.com.alarm.utils.ToastUtils;
 /**
  * Created by weizhilei on 2017/9/23.
  */
-public class ChangePasswordActivity extends Activity implements OnClickListener {
+public class ChangePhoneActivity extends Activity implements OnClickListener {
 
-    private EditText mOldPasswordTv;
-    private EditText mNewPasswordTv;
-    private EditText mConfirmPasswordTv;
+    private EditText mPhoneEt;
 
     /**
      * open
@@ -28,7 +26,7 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
      */
     public static void open(Context context) {
         if (context != null) {
-            Intent intent = new Intent(context, ChangePasswordActivity.class);
+            Intent intent = new Intent(context, ChangePhoneActivity.class);
             context.startActivity(intent);
         }
     }
@@ -36,21 +34,20 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_password);
+        setContentView(R.layout.activity_bind_change_phone);
         init();
     }
 
     private void init() {
         TextView titleTv = (TextView) findViewById(R.id.title_name);
-        titleTv.setText(R.string.change_password);
-        TextView confirmTv = (TextView) findViewById(R.id.title_other);
-        confirmTv.setText(R.string.confirm);
-        confirmTv.setOnClickListener(this);
-        mOldPasswordTv = (EditText) findViewById(R.id.password_old);
-        mNewPasswordTv = (EditText) findViewById(R.id.password_new);
-        mConfirmPasswordTv = (EditText) findViewById(R.id.password_confirm);
+        titleTv.setText(R.string.change_phone);
+        TextView completeTv = (TextView) findViewById(R.id.title_other);
+        completeTv.setText(R.string.complete);
+        completeTv.setOnClickListener(this);
+        mPhoneEt = (EditText) findViewById(R.id.bcp_phone);
 
         findViewById(R.id.title_back).setOnClickListener(this);
+        findViewById(R.id.bcp_submit).setVisibility(View.GONE);
     }
 
     @Override
@@ -60,8 +57,10 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
                 finish();
                 break;
             case R.id.title_other:
-                ToastUtils.showToast(this, R.string.confirm);
+                finish();
+                ToastUtils.showToast(this, R.string.change_phone);
                 break;
         }
     }
+
 }

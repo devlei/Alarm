@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorTabBackground"
+    android:background="@color/color_F6F6FA"
     android:orientation="vertical">
 
     <include layout="@layout/layout_title"/>
@@ -71,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/alarm_history"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/f_13"/>
     </LinearLayout>
 
@@ -95,6 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/emergency_contact"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/f_13"/>
     </LinearLayout>
 
@@ -119,6 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/near_police"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/f_13"/>
     </LinearLayout>
 
@@ -143,6 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/bind_phone"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/f_13"/>
     </LinearLayout>
 
@@ -167,6 +171,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/change_password"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/f_13"/>
     </LinearLayout>
 
@@ -191,6 +196,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/check_update"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/f_13"/>
     </LinearLayout>
 
@@ -215,6 +221,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/about"
+            android:textColor="@android:color/black"
             android:textSize="@dimen/f_13"/>
     </LinearLayout>
 

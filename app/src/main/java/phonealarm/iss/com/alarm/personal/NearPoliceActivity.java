@@ -5,21 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
-import phonealarm.iss.com.alarm.utils.ToastUtils;
+import phonealarm.iss.com.alarm.personal.adapter.NearPoliceAdapter;
 
 /**
  * Created by weizhilei on 2017/9/23.
  */
-public class ChangePasswordActivity extends Activity implements OnClickListener {
+public class NearPoliceActivity extends Activity implements OnClickListener {
 
-    private EditText mOldPasswordTv;
-    private EditText mNewPasswordTv;
-    private EditText mConfirmPasswordTv;
+    private RecyclerView mNearPoliceRv;
 
     /**
      * open
@@ -28,7 +27,7 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
      */
     public static void open(Context context) {
         if (context != null) {
-            Intent intent = new Intent(context, ChangePasswordActivity.class);
+            Intent intent = new Intent(context, NearPoliceActivity.class);
             context.startActivity(intent);
         }
     }
@@ -36,21 +35,23 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_password);
+        setContentView(R.layout.activity_near_police);
         init();
+
+        // TODO: 2017/9/23 weizhilei test data
+        mNearPoliceRv.setAdapter(new NearPoliceAdapter());
     }
 
     private void init() {
         TextView titleTv = (TextView) findViewById(R.id.title_name);
-        titleTv.setText(R.string.change_password);
-        TextView confirmTv = (TextView) findViewById(R.id.title_other);
-        confirmTv.setText(R.string.confirm);
-        confirmTv.setOnClickListener(this);
-        mOldPasswordTv = (EditText) findViewById(R.id.password_old);
-        mNewPasswordTv = (EditText) findViewById(R.id.password_new);
-        mConfirmPasswordTv = (EditText) findViewById(R.id.password_confirm);
+        titleTv.setText(R.string.near_police);
+        mNearPoliceRv = (RecyclerView) findViewById(R.id.nearPolice);
 
         findViewById(R.id.title_back).setOnClickListener(this);
+        findViewById(R.id.title_other).setVisibility(View.GONE);
+
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        mNearPoliceRv.setLayoutManager(llm);
     }
 
     @Override
@@ -58,9 +59,6 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
         switch (v.getId()) {
             case R.id.title_back:
                 finish();
-                break;
-            case R.id.title_other:
-                ToastUtils.showToast(this, R.string.confirm);
                 break;
         }
     }

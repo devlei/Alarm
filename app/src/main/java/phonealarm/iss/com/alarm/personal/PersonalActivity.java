@@ -18,8 +18,6 @@ import phonealarm.iss.com.alarm.utils.ToastUtils;
  */
 public class PersonalActivity extends Activity implements OnClickListener {
 
-    private TextView mTitleTv;
-    private TextView mOtherTv;
     private ImageView mHeaderIv;
     private TextView mNickNameTv;
     private TextView mPhoneTv;
@@ -47,12 +45,12 @@ public class PersonalActivity extends Activity implements OnClickListener {
      * 初始化
      */
     private void init() {
-        mTitleTv = (TextView) findViewById(R.id.title_name);
+        TextView titleTv = (TextView) findViewById(R.id.title_name);
+        titleTv.setText(R.string.personal_center);
         mHeaderIv = (ImageView) findViewById(R.id.personal_header);
         mNickNameTv = (TextView) findViewById(R.id.personal_nickname);
         mPhoneTv = (TextView) findViewById(R.id.personal_phone);
 
-        mTitleTv.setText(R.string.personal_center);
         findViewById(R.id.title_other).setVisibility(View.GONE);
         findViewById(R.id.title_back).setOnClickListener(this);
         findViewById(R.id.personal_alarm_history).setOnClickListener(this);
@@ -75,13 +73,13 @@ public class PersonalActivity extends Activity implements OnClickListener {
                 ToastUtils.showToast(this, R.string.alarm_history);
                 break;
             case R.id.personal_emergency_contact:
-                ToastUtils.showToast(this, R.string.emergency_contact);
+                IntentUtils.openEmergencyContact(this);
                 break;
             case R.id.personal_near_police:
-                ToastUtils.showToast(this, R.string.near_police);
+                IntentUtils.openNearPolice(this);
                 break;
             case R.id.personal_bind_phone:
-                ToastUtils.showToast(this, R.string.bind_phone);
+                IntentUtils.openBindPhone(this);
                 break;
             case R.id.personal_change_password:
                 IntentUtils.openChangePassword(this);

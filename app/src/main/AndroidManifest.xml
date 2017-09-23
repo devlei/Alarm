@@ -20,10 +20,25 @@
             android:theme="@style/AppTheme"/>
         <activity
             android:name=".personal.PersonalActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity
             android:name=".personal.ChangePasswordActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name=".personal.NearPoliceActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name=".personal.EmergencyContactActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name=".personal.EmergencyContactAddActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name=".personal.BindPhoneActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name=".personal.ChangePhoneActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
     </application>
 
