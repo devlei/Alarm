@@ -51,4 +51,9 @@
     <string name="complete">完成</string>
 
     <string name="search_hint">关键字搜索</string>
+
+    <string name="login_password_hint">请输入登录密码</string>
+    <string name="login_password_confirm_hint">请再次输入登录密码</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
 </resources>

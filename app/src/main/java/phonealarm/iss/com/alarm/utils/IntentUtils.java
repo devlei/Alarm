@@ -3,6 +3,8 @@ package phonealarm.iss.com.alarm.utils;
 import android.content.Context;
 import phonealarm.iss.com.alarm.MainActivity;
 import phonealarm.iss.com.alarm.hall.CommonSearchActivity;
+import phonealarm.iss.com.alarm.login.LoginActivity;
+import phonealarm.iss.com.alarm.login.RegisterActivity;
 import phonealarm.iss.com.alarm.personal.*;
 
 /**
@@ -90,6 +92,24 @@ public class IntentUtils {
      */
     public static void openCommonSearch(Context context, int typeResId) {
         CommonSearchActivity.open(context, typeResId);
+    }
+
+    /**
+     * 打开登录
+     *
+     * @param context
+     */
+    public static void openLogin(Context context) {
+        LoginActivity.open(context);
+    }
+
+    /**
+     * 打开注册
+     *
+     * @param context
+     */
+    public static void openRegister(Context context) {
+        RegisterActivity.open(context);
     }
 
 }

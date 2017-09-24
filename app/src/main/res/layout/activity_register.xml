@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/register_back"
+            android:layout_width="@dimen/s_9"
+            android:layout_height="@dimen/s_15"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_15"
+            android:background="@drawable/icon_back_arrow"/>
+
+        <ImageView
+            android:layout_width="@dimen/s_82"
+            android:layout_height="@dimen/s_84"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/icon_header_default"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s_40"
+            android:layout_marginTop="@dimen/s_100"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/s_15"
+                android:layout_height="@dimen/s_17"
+                android:layout_marginLeft="@dimen/s_25"
+                android:background="@drawable/icon_login"/>
+
+            <EditText
+                android:id="@+id/register_phone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/phone"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingLeft="@dimen/s_25"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s_1"
+            android:layout_marginLeft="@dimen/s_25"
+            android:layout_marginRight="@dimen/s_25"
+            android:background="@color/color_F6F6FA"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s_40"
+            android:layout_marginTop="@dimen/s_10"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/s_15"
+                android:layout_height="@dimen/s_17"
+                android:layout_marginLeft="@dimen/s_25"
+                android:background="@drawable/icon_password"/>
+
+            <EditText
+                android:id="@+id/register_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/login_password_hint"
+                android:inputType="textPassword"
+                android:maxLength="18"
+                android:paddingLeft="@dimen/s_25"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s_1"
+            android:layout_marginLeft="@dimen/s_25"
+            android:layout_marginRight="@dimen/s_25"
+            android:background="@color/color_F6F6FA"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s_40"
+            android:layout_marginTop="@dimen/s_15"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="@dimen/s_15"
+                android:layout_height="@dimen/s_17"
+                android:layout_marginLeft="@dimen/s_25"
+                android:background="@drawable/icon_password"/>
+
+            <EditText
+                android:id="@+id/register_password_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/login_password_confirm_hint"
+                android:inputType="textPassword"
+                android:maxLength="18"
+                android:paddingLeft="@dimen/s_25"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s_1"
+            android:layout_marginLeft="@dimen/s_25"
+            android:layout_marginRight="@dimen/s_25"
+            android:background="@color/color_F6F6FA"/>
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s_40"
+            android:layout_marginLeft="@dimen/s_15"
+            android:layout_marginRight="@dimen/s_15"
+            android:layout_marginTop="@dimen/s_40"
+            android:background="@drawable/button_selector"
+            android:text="@string/register"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/s_15"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/register_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/s_20"
+        android:text="V1.0"
+        android:textColor="@color/color_D3D3D3"
+        android:textSize="@dimen/f_15"/>
+
+</RelativeLayout>
