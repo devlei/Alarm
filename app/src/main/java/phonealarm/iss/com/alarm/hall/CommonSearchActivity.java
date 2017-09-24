@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.hall.adapter.CommonSearchAdapter;
+import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
  * Created by weizhilei on 2017/9/23.
@@ -53,12 +54,13 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
     private void init() {
         TextView titleTv = (TextView) findViewById(R.id.title_name);
+        TextView otherTv = (TextView) findViewById(R.id.title_other);
         mSearchEt = (EditText) findViewById(R.id.common_search);
         mRv = (RecyclerView) findViewById(R.id.commonSearch);
 
         //set listener
         findViewById(R.id.title_back).setOnClickListener(this);
-        findViewById(R.id.title_other).setVisibility(View.GONE);
+        otherTv.setVisibility(View.GONE);
         mSearchEt.addTextChangedListener(this);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -81,6 +83,12 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
             case R.integer.type_lost_found:
                 titleTv.setText(R.string.lost_found);
                 break;
+            case R.integer.type_police_interact:
+                titleTv.setText(R.string.police_interact);
+                otherTv.setVisibility(View.VISIBLE);
+                otherTv.setText(R.string.add);
+                otherTv.setOnClickListener(this);
+                break;
             case R.integer.type_alarm_history:
                 titleTv.setText(R.string.alarm_history);
                 break;
@@ -92,6 +100,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
         switch (v.getId()) {
             case R.id.title_back:
                 finish();
+                break;
+            case R.id.title_other:
+                ToastUtils.showToast(this, R.string.add);
                 break;
         }
     }

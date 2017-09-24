@@ -34,7 +34,7 @@ public class ChangePhoneActivity extends Activity implements OnClickListener {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bind_change_phone);
+        setContentView(R.layout.activity_change_phone);
         init();
     }
 
@@ -44,10 +44,9 @@ public class ChangePhoneActivity extends Activity implements OnClickListener {
         TextView completeTv = (TextView) findViewById(R.id.title_other);
         completeTv.setText(R.string.complete);
         completeTv.setOnClickListener(this);
-        mPhoneEt = (EditText) findViewById(R.id.bcp_phone);
+        mPhoneEt = (EditText) findViewById(R.id.cp_phone);
 
         findViewById(R.id.title_back).setOnClickListener(this);
-        findViewById(R.id.bcp_submit).setVisibility(View.GONE);
     }
 
     @Override

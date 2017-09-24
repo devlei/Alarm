@@ -56,4 +56,26 @@
     <string name="login_password_confirm_hint">请再次输入登录密码</string>
     <string name="login">登录</string>
     <string name="register">注册</string>
+
+    <string name="basic_info">基本信息</string>
+    <string name="gender">性别：</string>
+    <string name="age">年龄：</string>
+    <string name="miss_location">失踪地点：</string>
+    <string name="miss_time">失踪时间：</string>
+    <string name="birth_date">出生日期：</string>
+    <string name="height_weight">身高体重：</string>
+    <string name="hair_color">发型发色：</string>
+    <string name="detail_info">详细信息</string>
+    <string name="contact_family">联系家人</string>
+    <string name="report">举报</string>
+
+    <string name="personal_info">人员信息</string>
+    <string name="nation">民族：</string>
+    <string name="id_number">身份证号：</string>
+    <string name="wanted_level">通缉级别：</string>
+    <string name="case_category">涉案类别：</string>
+    <string name="signalment">特征描述：</string>
+    <string name="case_desc">案件描述</string>
+    <string name="reward">悬赏奖励</string>
+
 </resources>

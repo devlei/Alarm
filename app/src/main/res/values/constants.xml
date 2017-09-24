@@ -9,7 +9,12 @@
     <integer name="type_suspect_track">2</integer>
     <integer name="type_people_lost">3</integer>
     <integer name="type_lost_found">4</integer>
-    <integer name="type_alarm_history">5</integer>
+    <integer name="type_alarm">5</integer>
+    <integer name="type_eager_report">6</integer>
+    <integer name="type_police_interact">7</integer>
+    <integer name="type_rent_collect">8</integer>
+    <integer name="type_hotel_collect">9</integer>
+    <integer name="type_alarm_history">10</integer>
 
     <integer-array name="type_release_info">
         <item>@integer/type_cases</item>
@@ -18,13 +23,6 @@
         <item>@integer/type_people_lost</item>
         <item>@integer/type_lost_found</item>
     </integer-array>
-
-    <!--我的惠民-->
-    <integer name="type_alarm">0</integer>
-    <integer name="type_eager_report">1</integer>
-    <integer name="type_police_interact">2</integer>
-    <integer name="type_rent_collect">3</integer>
-    <integer name="type_hotel_collect">4</integer>
 
     <integer-array name="type_benefit">
         <item>@integer/type_alarm</item>

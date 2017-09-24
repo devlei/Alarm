@@ -54,6 +54,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         switch (v.getId()) {
             case R.id.login_confirm:
                 ToastUtils.showToast(this, R.string.login);
+                IntentUtils.openMain(this);
                 break;
             case R.id.login_register:
                 IntentUtils.openRegister(this);

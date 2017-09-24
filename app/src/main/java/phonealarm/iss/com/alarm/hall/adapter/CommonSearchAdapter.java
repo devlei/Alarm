@@ -12,6 +12,7 @@ import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.hall.adapter.CommonSearchAdapter.CommonSearchViewHolder;
 import phonealarm.iss.com.alarm.utils.DateUtils;
+import phonealarm.iss.com.alarm.utils.IntentUtils;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
@@ -59,6 +60,9 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                 break;
             case R.integer.type_lost_found:
                 setLostFoundData(holder, position);
+                break;
+            case R.integer.type_police_interact:
+                setPoliceInteractData(holder, position);
                 break;
             case R.integer.type_alarm_history:
                 setAlarmHistoryData(holder, position);
@@ -137,6 +141,19 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
     }
 
     /**
+     * 设置警民互动数据
+     *
+     * @param holder
+     */
+    private void setPoliceInteractData(CommonSearchViewHolder holder, int position) {
+        holder.mTopTv.setText(DateUtils.formatDate(DateUtils.Y_M_D_H_M, System.currentTimeMillis()));
+        holder.mTopTimeTv.setVisibility(View.GONE);
+        holder.mMiddleTv.setText("详情描述详情描述详情描述详情描述详情描述详情描述详情描述详情描述详情描述详情描述详情描述");
+        holder.mBottomTv.setText("永丰派出所昌平区回龙观");
+        holder.mBottomTimeTv.setVisibility(View.GONE);
+    }
+
+    /**
      * 设置报警历史数据
      *
      * @param holder
@@ -180,13 +197,16 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                     ToastUtils.showToast(v.getContext(), R.string.vehicle_track);
                     break;
                 case R.integer.type_suspect_track:
-                    ToastUtils.showToast(v.getContext(), R.string.suspect_track);
+                    IntentUtils.openSuspectTrack(v.getContext());
                     break;
                 case R.integer.type_people_lost:
-                    ToastUtils.showToast(v.getContext(), R.string.people_lost);
+                    IntentUtils.openPeopleLost(v.getContext());
                     break;
                 case R.integer.type_lost_found:
                     ToastUtils.showToast(v.getContext(), R.string.lost_found);
+                    break;
+                case R.integer.type_police_interact:
+                    ToastUtils.showToast(v.getContext(), R.string.police_interact);
                     break;
                 case R.integer.type_alarm_history:
                     ToastUtils.showToast(v.getContext(), R.string.alarm_history);

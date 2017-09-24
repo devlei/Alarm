@@ -23,7 +23,7 @@
             android:textSize="@dimen/f_15"/>
 
         <EditText
-            android:id="@+id/bcp_phone"
+            android:id="@+id/cp_phone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
@@ -34,17 +34,5 @@
             android:textColor="@color/color_666666"
             android:textSize="@dimen/f_15"/>
     </RelativeLayout>
-
-    <Button
-        android:id="@+id/bcp_submit"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/s_40"
-        android:layout_marginLeft="@dimen/s_15"
-        android:layout_marginRight="@dimen/s_15"
-        android:layout_marginTop="@dimen/s_40"
-        android:background="@drawable/button_selector"
-        android:text="@string/bind_phone"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/s_15"/>
 
 </LinearLayout>

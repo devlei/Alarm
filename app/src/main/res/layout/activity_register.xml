@@ -9,25 +9,26 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <Button
             android:id="@+id/register_back"
             android:layout_width="@dimen/s_9"
             android:layout_height="@dimen/s_15"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/s_15"
-            android:background="@drawable/icon_back_arrow"/>
+            android:layout_marginTop="@dimen/s_25"
+            android:background="@drawable/icon_blue_back_arrow"/>
 
         <ImageView
             android:layout_width="@dimen/s_82"
             android:layout_height="@dimen/s_84"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/s_60"
             android:background="@drawable/icon_header_default"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/s_40"
-            android:layout_marginTop="@dimen/s_100"
+            android:layout_marginTop="@dimen/s_70"
             android:background="@android:color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal">

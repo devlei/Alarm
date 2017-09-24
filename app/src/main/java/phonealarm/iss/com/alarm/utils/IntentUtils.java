@@ -3,6 +3,8 @@ package phonealarm.iss.com.alarm.utils;
 import android.content.Context;
 import phonealarm.iss.com.alarm.MainActivity;
 import phonealarm.iss.com.alarm.hall.CommonSearchActivity;
+import phonealarm.iss.com.alarm.hall.PeopleLostActivity;
+import phonealarm.iss.com.alarm.hall.SuspectTrackActivity;
 import phonealarm.iss.com.alarm.login.LoginActivity;
 import phonealarm.iss.com.alarm.login.RegisterActivity;
 import phonealarm.iss.com.alarm.personal.*;
@@ -110,6 +112,24 @@ public class IntentUtils {
      */
     public static void openRegister(Context context) {
         RegisterActivity.open(context);
+    }
+
+    /**
+     * 打开人员走失
+     *
+     * @param context
+     */
+    public static void openPeopleLost(Context context) {
+        PeopleLostActivity.open(context);
+    }
+
+    /**
+     * 打开疑犯追踪
+     *
+     * @param context
+     */
+    public static void openSuspectTrack(Context context) {
+        SuspectTrackActivity.open(context);
     }
 
 }

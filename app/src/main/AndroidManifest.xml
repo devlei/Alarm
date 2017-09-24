@@ -47,6 +47,12 @@
             android:name=".login.RegisterActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+        <activity
+            android:name=".hall.PeopleLostActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name=".hall.SuspectTrackActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <!--<activity-->
         <!--android:name=".login.LoginActivity"-->
         <!--android:theme="@android:style/Theme.NoTitleBar.Fullscreen"-->

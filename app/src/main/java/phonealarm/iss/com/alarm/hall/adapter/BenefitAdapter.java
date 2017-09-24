@@ -14,6 +14,7 @@ import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.hall.HeaderSpanSizeLookup;
 import phonealarm.iss.com.alarm.hall.IHeader;
+import phonealarm.iss.com.alarm.utils.IntentUtils;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
@@ -132,7 +133,7 @@ public class BenefitAdapter extends RecyclerView.Adapter implements IHeader {
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_eager_report)) {
                     ToastUtils.showToast(itemView.getContext(), R.string.eager_report);
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_police_interact)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.police_interact);
+                    IntentUtils.openCommonSearch(itemView.getContext(), R.integer.type_police_interact);
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_rent_collect)) {
                     ToastUtils.showToast(itemView.getContext(), R.string.rent_collect);
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_hotel_collect)) {
