@@ -1,0 +1,12 @@
+login包下的接口实体类为 、 注册登录、重置密码、修改个人昵称、更换手机号
+searchalarm   查询报警记录
+uploadalarm   多媒体报警
+alarmjdge     处警评价
+contact       添加联系人 获取联系人
+interact      警民互动
+modifyimg     修改个人头像
+carinfo       车辆列表接口
+cases         要案列表接口
+suspect       疑犯列表接口
+lost          招领列表接口
+beLost        走失列表接口
