@@ -2,12 +2,11 @@ package phonealarm.iss.com.alarm.utils;
 
 import android.content.Context;
 import phonealarm.iss.com.alarm.MainActivity;
-import phonealarm.iss.com.alarm.hall.CommonSearchActivity;
-import phonealarm.iss.com.alarm.hall.PeopleLostActivity;
-import phonealarm.iss.com.alarm.hall.SuspectTrackActivity;
+import phonealarm.iss.com.alarm.hall.*;
 import phonealarm.iss.com.alarm.login.LoginActivity;
 import phonealarm.iss.com.alarm.login.RegisterActivity;
 import phonealarm.iss.com.alarm.personal.*;
+import phonealarm.iss.com.alarm.webview.WebViewActivity;
 
 /**
  * Created by weizhilei on 2017/9/22.
@@ -130,6 +129,33 @@ public class IntentUtils {
      */
     public static void openSuspectTrack(Context context) {
         SuspectTrackActivity.open(context);
+    }
+
+    /**
+     * 打开网页
+     *
+     * @param context
+     */
+    public static void openWebView(Context context) {
+        WebViewActivity.open(context);
+    }
+
+    /**
+     * 打开车辆追踪
+     *
+     * @param context
+     */
+    public static void openVehicleTrack(Context context) {
+        VehicleTrackActivity.open(context);
+    }
+
+    /**
+     * 打开遗失招领
+     *
+     * @param context
+     */
+    public static void openLostFound(Context context) {
+        LostFoundActivity.open(context);
     }
 
 }

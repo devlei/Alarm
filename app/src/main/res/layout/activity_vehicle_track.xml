@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F6F6FA"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/s_5"
+        android:paddingLeft="@dimen/s_15"
+        android:paddingTop="@dimen/s_5"
+        android:text="@string/basic_info"
+        android:textColor="@color/color_4982F5"
+        android:textSize="@dimen/f_15"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/s_10"
+        android:paddingLeft="@dimen/s_15"
+        android:paddingTop="@dimen/s_10">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/car_number"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13"/>
+
+            <TextView
+                android:id="@+id/vt_car_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_80"
+                android:text="京A0987K"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13"/>
+
+            <TextView
+                android:id="@+id/vt_cat_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/s_100"
+                android:layout_marginRight="@dimen/s_5"
+                android:text="【已追踪59天1小时】"
+                android:textColor="@color/color_FFA336"
+                android:textSize="@dimen/f_15"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/s_5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/car_type"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13"/>
+
+            <TextView
+                android:id="@+id/vt_car_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_80"
+                android:text="大型货车"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/s_5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/car_brand"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13"/>
+
+            <TextView
+                android:id="@+id/vt_car_brand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_80"
+                android:text="福田-欧马可"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/s_5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/car_color"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13"/>
+
+            <TextView
+                android:id="@+id/vt_car_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_80"
+                android:text="红色"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_F6F6FA"
+        android:paddingBottom="@dimen/s_5"
+        android:paddingLeft="@dimen/s_15"
+        android:paddingTop="@dimen/s_5"
+        android:text="@string/detail_info"
+        android:textColor="@color/color_4982F5"
+        android:textSize="@dimen/f_15"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/s_10"
+        android:paddingLeft="@dimen/s_15"
+        android:paddingRight="@dimen/s_15"
+        android:paddingTop="@dimen/s_10">
+
+        <TextView
+            android:id="@+id/vt_car_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingExtra="@dimen/s_5"
+            android:maxLines="3"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_13"/>
+
+        <ImageView
+            android:id="@+id/vt_car_img"
+            android:layout_width="@dimen/s_67"
+            android:layout_height="@dimen/s_76"
+            android:layout_marginTop="@dimen/s_10"
+            android:background="@drawable/icon_header_default"/>
+    </LinearLayout>
+</LinearLayout>

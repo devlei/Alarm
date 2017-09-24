@@ -191,10 +191,10 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
             // TODO: 2017/9/24 weizhilei 搜索展示
             switch (mTypeResId) {
                 case R.integer.type_cases:
-                    ToastUtils.showToast(v.getContext(), R.string.cases);
+                    IntentUtils.openWebView(v.getContext());
                     break;
                 case R.integer.type_vehicle_track:
-                    ToastUtils.showToast(v.getContext(), R.string.vehicle_track);
+                    IntentUtils.openVehicleTrack(v.getContext());
                     break;
                 case R.integer.type_suspect_track:
                     IntentUtils.openSuspectTrack(v.getContext());
@@ -203,7 +203,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                     IntentUtils.openPeopleLost(v.getContext());
                     break;
                 case R.integer.type_lost_found:
-                    ToastUtils.showToast(v.getContext(), R.string.lost_found);
+                    IntentUtils.openLostFound(v.getContext());
                     break;
                 case R.integer.type_police_interact:
                     ToastUtils.showToast(v.getContext(), R.string.police_interact);
