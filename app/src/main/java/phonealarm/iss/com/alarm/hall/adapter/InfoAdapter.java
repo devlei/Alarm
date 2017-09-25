@@ -138,7 +138,7 @@ public class InfoAdapter extends RecyclerView.Adapter implements IHeader {
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_lost_found)) {
                     IntentUtils.openCommonSearch(itemView.getContext(), R.integer.type_lost_found);
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_safe)) {
-                    ToastUtils.showToast(view.getContext(), R.string.safe_info);
+                    ToastUtils.showToast(view.getContext(), R.string.function_not_open);
                 }
             }
         }

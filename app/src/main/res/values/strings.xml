@@ -123,4 +123,6 @@
 
     <string name="info_input_hint">请填写信息描述</string>
 
+    <string name="function_not_open">功能暂未开通</string>
+
 </resources>
