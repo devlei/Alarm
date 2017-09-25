@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.bean.login.UserInfoBean;
 import phonealarm.iss.com.alarm.network.UrlSet;
@@ -88,6 +89,8 @@ public class LoginActivity extends Activity implements OnClickListener {
                     @Override
                     public void onNext(UserInfoBean postBean) {
                         // TODO: 2017/9/25 weizhilei 登录成功后，记录，下次重新进入，自动登录
+                        AlarmApplication.mUserInfo = postBean;
+                        AlarmApplication.mAlarmApplication.setLogin(true);
                         IntentUtils.openMain(LoginActivity.this);
                     }
 

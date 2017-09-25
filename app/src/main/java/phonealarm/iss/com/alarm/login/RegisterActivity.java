@@ -78,7 +78,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
             return;
         }
         OkHttpUtils.postBuilder()
-                .url(UrlSet.URL_LOGIN)
+                .url(UrlSet.URL_REGISTERED)
                 .addParam("", "")
                 .build()
                 .buildRequestCall()
