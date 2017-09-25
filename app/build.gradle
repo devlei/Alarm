@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "phonealarm.iss.com.alarm"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 15
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -27,4 +27,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation 'com.android.support:recyclerview-v7:23.1.0'
+    compile 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.1.1'
 }

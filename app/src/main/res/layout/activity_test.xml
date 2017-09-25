@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:text="start" />
+
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:text="stop" />
+
+    <Button
+        android:id="@+id/paly"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:text="paly" />
+
+    <Button
+        android:id="@+id/pause_paly"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:text="pause_paly" />
+
+    <Button
+        android:id="@+id/stop_paly"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:text="stop_paly" />
+
+</LinearLayout>
