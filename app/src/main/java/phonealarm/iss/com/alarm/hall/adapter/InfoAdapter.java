@@ -15,6 +15,7 @@ import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.hall.HeaderSpanSizeLookup;
 import phonealarm.iss.com.alarm.hall.IHeader;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
+import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
  * Created by weizhilei on 2017/9/23.
@@ -93,7 +94,7 @@ public class InfoAdapter extends RecyclerView.Adapter implements IHeader {
 
     @Override
     public int getHeaderSpanSize() {
-        return 5;
+        return 6;
     }
 
     /**
@@ -136,6 +137,8 @@ public class InfoAdapter extends RecyclerView.Adapter implements IHeader {
                     IntentUtils.openCommonSearch(itemView.getContext(), R.integer.type_people_lost);
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_lost_found)) {
                     IntentUtils.openCommonSearch(itemView.getContext(), R.integer.type_lost_found);
+                } else if (type == getInteger(itemView.getContext(), R.integer.type_safe)) {
+                    ToastUtils.showToast(view.getContext(), R.string.safe_info);
                 }
             }
         }
@@ -173,6 +176,8 @@ public class InfoAdapter extends RecyclerView.Adapter implements IHeader {
             iconResId = R.drawable.icon_people_lost;
         } else if (type == getInteger(context, R.integer.type_lost_found)) {
             iconResId = R.drawable.icon_lost_found;
+        } else if (type == getInteger(context, R.integer.type_safe)) {
+            iconResId = R.drawable.icon_safe;
         }
         return iconResId;
     }
@@ -195,6 +200,8 @@ public class InfoAdapter extends RecyclerView.Adapter implements IHeader {
             nameResId = R.string.people_lost;
         } else if (type == getInteger(context, R.integer.type_lost_found)) {
             nameResId = R.string.lost_found;
+        } else if (type == getInteger(context, R.integer.type_safe)) {
+            nameResId = R.string.safe_info;
         }
         return nameResId;
     }

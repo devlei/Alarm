@@ -51,7 +51,7 @@ public class MainActivity extends Activity implements OnClickListener {
         findViewById(R.id.title_other).setOnClickListener(this);
 
         //信息发布
-        WrapGridLayoutManager glm = new WrapGridLayoutManager(this, 5);
+        WrapGridLayoutManager glm = new WrapGridLayoutManager(this, 6);
         glm.setOrientation(GridLayoutManager.VERTICAL);
         mInfoRv.setLayoutManager(glm);
         mInfoRv.setAdapter(new InfoAdapter());
