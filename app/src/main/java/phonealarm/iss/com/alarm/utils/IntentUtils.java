@@ -1,11 +1,13 @@
 package phonealarm.iss.com.alarm.utils;
 
 import android.content.Context;
+
 import phonealarm.iss.com.alarm.MainActivity;
 import phonealarm.iss.com.alarm.hall.*;
 import phonealarm.iss.com.alarm.login.LoginActivity;
 import phonealarm.iss.com.alarm.login.RegisterActivity;
 import phonealarm.iss.com.alarm.personal.*;
+import phonealarm.iss.com.alarm.uploadalarm.FastAlarmActivity;
 import phonealarm.iss.com.alarm.webview.WebViewActivity;
 
 /**
@@ -93,6 +95,13 @@ public class IntentUtils {
      */
     public static void openCommonSearch(Context context, int typeResId) {
         CommonSearchActivity.open(context, typeResId);
+    }
+
+    /**
+     * 打开快速报警页面
+     */
+    public static void openFastAlarmActivity(Context context, int typeResId) {
+        FastAlarmActivity.open(context, typeResId);
     }
 
     /**
