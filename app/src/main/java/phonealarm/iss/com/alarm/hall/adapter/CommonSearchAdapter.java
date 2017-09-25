@@ -206,7 +206,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                     IntentUtils.openLostFound(v.getContext());
                     break;
                 case R.integer.type_police_interact:
-                    ToastUtils.showToast(v.getContext(), R.string.police_interact);
+                    IntentUtils.openPoliceInteractDetail(v.getContext());
                     break;
                 case R.integer.type_alarm_history:
                     ToastUtils.showToast(v.getContext(), R.string.alarm_history);

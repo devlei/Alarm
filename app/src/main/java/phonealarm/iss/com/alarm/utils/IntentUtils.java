@@ -202,4 +202,13 @@ public class IntentUtils {
         RentCollectActivity.open(context);
     }
 
+    /**
+     * 打开警民互动详情
+     *
+     * @param context
+     */
+    public static void openPoliceInteractDetail(Context context) {
+        PoliceInteractDetailActivity.open(context);
+    }
+
 }

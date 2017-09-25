@@ -76,6 +76,9 @@
         <activity
             android:name=".hall.RentCollectActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name=".hall.PoliceInteractDetailActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <!-- <activity -->
         <!-- android:name=".login.LoginActivity" -->
         <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" -->

@@ -116,4 +116,7 @@
     <string name="householder_name_hint">请输入户主姓名</string>
     <string name="house_number_hint">请输入房产证号</string>
 
+    <string name="info_desc">信息描述</string>
+    <string name="reply">回复</string>
+
 </resources>
