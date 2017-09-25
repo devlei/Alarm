@@ -1,27 +1,39 @@
 package phonealarm.iss.com.alarm.uploadalarm;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaRecorder;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
+import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.SeekBar;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.utils.GlideUtils;
 
 public class FastAlarmActivity extends Activity implements View.OnClickListener {
 
@@ -42,9 +54,12 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
     private static final int TIMR = 60;
     private int typeResId;
     private EditText mEditText;
-    private ImageView video_btn, video_delete, video_record;
+    private ImageView video_btn, video_delete, video_record,
+            imgadd, imgaddone, imgaddtwo, imgaddthree, imgaddfour;
     private TextView video_local, voice_time;
     private ZzHorizontalProgressBar video_seekBar;
+    private LinearLayout imgarray;
+    private final int TAG = 9999;
     //录音
     private MediaRecorder mediaRecorder;
     private File recordFile;
@@ -83,6 +98,10 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         video_seekBar = (ZzHorizontalProgressBar) findViewById(R.id.video_seekBar);
         video_seekBar.setEnabled(false);
         video_seekBar.setPadding(0);
+
+        imgadd = (ImageView) findViewById(R.id.imgadd);
+        imgadd.setOnClickListener(this);
+        imgarray = (LinearLayout) findViewById(R.id.imgarray);
 
 
     }
@@ -142,9 +161,12 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         video_delete.setVisibility(isRecord ? View.VISIBLE : View.GONE);
     }
 
+    private ArrayList<File> arrayList=new ArrayList<>();
     private void upLoad() {
         this.finish();
         //TODO UPLOAD
+        if (null != imgarray) {
+        }
     }
 
     @Override
@@ -162,7 +184,144 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
             case R.id.video_delete:
                 deleteHandle();
                 break;
+            case R.id.imgadd:
+                dialog();
+                break;
         }
+    }
+
+    private void dialog() {
+        if (null != imgarray && imgarray.getChildCount() < 5) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("提示");
+            builder.setMessage("请选择添加图片方式");
+            //调用相机拍照
+            builder.setPositiveButton("拍照", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    takePhoto();
+                }
+            });
+            //从相册里面取照片
+            builder.setNegativeButton("相册", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    pickPhoto();
+                }
+            });
+            builder.create().show();
+        } else {
+            Toast.makeText(this, "已经不能添加更多了", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    /**
+     * 拍照获取图片
+     */
+    public static final int SELECT_PIC_BY_TACK_PHOTO = 2000;
+    public static final int REQ_IMAGE = 2001;
+
+    private Uri photoUri;
+
+    private void takePhoto() {
+        //执行拍照前，应该先判断SD卡是否存在
+        String SDState = Environment.getExternalStorageState();
+        if (SDState.equals(Environment.MEDIA_MOUNTED)) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//"android.media.action.IMAGE_CAPTURE"
+            ContentValues values = new ContentValues();
+            photoUri = this.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+            startActivityForResult(intent, SELECT_PIC_BY_TACK_PHOTO);
+        } else {
+            Toast.makeText(this, "内存卡不存在", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    /***
+     * 从相册中取图片
+     */
+    private void pickPhoto() {
+        //AndroidImagePicker.getInstance().setSelectMode(AndroidImagePicker.Select_Mode.MODE_MULTI);
+        Intent intent = new Intent(Intent.ACTION_PICK, null);
+        //通过Intent 筛选所有的图片
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "video/*;image/*");
+        startActivityForResult(intent, REQ_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == SELECT_PIC_BY_TACK_PHOTO) {
+            String[] pojo = {MediaStore.Images.Media.DATA, MediaStore.Images.Media.TITLE, MediaStore.Images.Media.SIZE};
+            Cursor cursor = getContentResolver().query(photoUri, pojo, null, null, null);
+            if (cursor != null) {
+                cursor.moveToFirst();
+                String picpath = cursor.getString(cursor.getColumnIndexOrThrow(pojo[0]));
+                if (picpath != null &&
+                        (picpath.endsWith(".png") || picpath.endsWith(".PNG") || picpath.endsWith(".jpg"))) {
+                    addImage(picpath);
+                } else {
+                    Toast.makeText(this, "选择图片文件不正确", Toast.LENGTH_LONG).show();
+                }
+                cursor.close();
+            }
+
+        } else {
+            try {
+                Uri uri = data.getData();
+                addImage(getRealFilePath(this, uri));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void addImage(String imgUri) {
+        System.out.println("==imgUri==>" + imgUri);
+        if (null != imgarray && imgarray.getChildCount() < 5) {
+            File file = new File(imgUri);
+            final ImageView img = new ImageView(this);
+            img.setScaleType(ImageView.ScaleType.FIT_XY);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    getResources().getDimensionPixelSize(R.dimen.s_50),
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            lp.rightMargin = getResources().getDimensionPixelSize(R.dimen.s_21);
+            imgarray.addView(img, imgarray.getChildCount() - 1, lp);
+            img.setOnClickListener(this);
+            img.setTag(R.id.imageid, imgUri);
+            Glide.with(this).load(file).into(img);
+            img.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    imgarray.removeView(img);
+                    return true;
+                }
+            });
+        }
+    }
+
+    public String getRealFilePath(final Context context, final Uri uri) {
+        if (null == uri) return null;
+        final String scheme = uri.getScheme();
+        String data = null;
+        if (scheme == null)
+            data = uri.getPath();
+        else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
+            data = uri.getPath();
+        } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
+            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
+            if (null != cursor) {
+                if (cursor.moveToFirst()) {
+                    int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                    if (index > -1) {
+                        data = cursor.getString(index);
+                    }
+                }
+                cursor.close();
+            }
+        }
+        return data;
     }
 
     private void deleteHandle() {

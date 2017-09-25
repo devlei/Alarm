@@ -23,38 +23,16 @@
         android:textSize="@dimen/f_13" />
 
     <LinearLayout
+        android:id="@+id/imgarray"
         android:layout_width="match_parent"
         android:layout_height="@dimen/s_53"
         android:background="@android:color/white"
         android:paddingLeft="@dimen/s_16">
 
         <ImageView
+            android:id="@+id/imgadd"
             android:layout_width="@dimen/s_50"
             android:layout_height="match_parent"
-            android:background="@drawable/addimg" />
-
-        <ImageView
-            android:layout_width="@dimen/s_50"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/s_21"
-            android:background="@drawable/addimg" />
-
-        <ImageView
-            android:layout_width="@dimen/s_50"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/s_21"
-            android:background="@drawable/addimg" />
-
-        <ImageView
-            android:layout_width="@dimen/s_50"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/s_21"
-            android:background="@drawable/addimg" />
-
-        <ImageView
-            android:layout_width="@dimen/s_50"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/s_21"
             android:background="@drawable/addimg" />
 
     </LinearLayout>

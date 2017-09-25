@@ -97,7 +97,6 @@ public class OkHttpUtils {
                     throws IOException {
 
                 try {
-
                     if (response.code() == 404) {
                         if (callBack != null) {
                             mDeliver.deliverError(callBack,
