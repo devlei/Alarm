@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.hall.adapter.CommonSearchAdapter;
-import phonealarm.iss.com.alarm.utils.ToastUtils;
+import phonealarm.iss.com.alarm.utils.IntentUtils;
 
 /**
  * Created by weizhilei on 2017/9/23.
@@ -102,7 +102,7 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 finish();
                 break;
             case R.id.title_other:
-                ToastUtils.showToast(this, R.string.add);
+                IntentUtils.openPoliceInteractAdd(this);
                 break;
         }
     }

@@ -211,4 +211,13 @@ public class IntentUtils {
         PoliceInteractDetailActivity.open(context);
     }
 
+    /**
+     * 打开警民互动添加
+     *
+     * @param context
+     */
+    public static void openPoliceInteractAdd(Context context) {
+        PoliceInteractAddActivity.open(context);
+    }
+
 }
