@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F6F6FA"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_F6F6FA"
+        android:paddingBottom="@dimen/s_5"
+        android:paddingLeft="@dimen/s_15"
+        android:paddingTop="@dimen/s_5"
+        android:text="@string/house_rent_info"
+        android:textColor="@color/color_4982F5"
+        android:textSize="@dimen/f_15"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_40"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/s_7"
+                android:layout_height="@dimen/s_6"
+                android:background="@drawable/mark_must"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_10"
+                android:text="@string/address"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/f_13"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/rc_house_address"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:background="@null"
+            android:hint="@string/address_hint"
+            android:inputType="textPersonName"
+            android:paddingLeft="@dimen/s_110"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_13"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_40"
+        android:layout_marginTop="@dimen/s_1"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/s_7"
+                android:layout_height="@dimen/s_6"
+                android:background="@drawable/mark_must"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_10"
+                android:text="@string/householder_name"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/f_13"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/rc_householder_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="@string/householder_name_hint"
+            android:inputType="text"
+            android:paddingLeft="@dimen/s_110"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_13"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_40"
+        android:layout_marginTop="@dimen/s_1"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/s_7"
+                android:layout_height="@dimen/s_6"
+                android:background="@drawable/mark_must"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_10"
+                android:text="@string/id_number"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/f_13"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/rc_householder_id_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="@string/id_number_hint"
+            android:inputType="text"
+            android:paddingLeft="@dimen/s_110"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_13"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_40"
+        android:layout_marginTop="@dimen/s_1"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_32"
+            android:text="@string/contact_way"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/f_13"/>
+
+        <EditText
+            android:id="@+id/rc_householder_phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="@string/contact_way_hint"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:paddingLeft="@dimen/s_110"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_13"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_40"
+        android:layout_marginTop="@dimen/s_1"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_32"
+            android:text="@string/house_number"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/f_13"/>
+
+        <EditText
+            android:id="@+id/rc_house_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="@string/house_number_hint"
+            android:inputType="number"
+            android:paddingLeft="@dimen/s_110"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_13"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_40"
+        android:layout_marginTop="@dimen/s_1"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/s_7"
+                android:layout_height="@dimen/s_6"
+                android:background="@drawable/mark_must"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_10"
+                android:text="@string/rental_time"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/f_13"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_110"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/rc_rent_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/rc_start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2016-7-30"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13"/>
+
+                <ImageView
+                    android:layout_width="@dimen/s_12"
+                    android:layout_height="@dimen/s_13"
+                    android:layout_marginLeft="@dimen/s_5"
+                    android:background="@drawable/icon_calendar"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_10"
+                android:layout_marginRight="@dimen/s_10"
+                android:text="~"
+                android:textColor="@android:color/black"/>
+
+            <LinearLayout
+                android:id="@+id/rc_rent_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/rc_end_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2019-7-30"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13"/>
+
+                <ImageView
+                    android:layout_width="@dimen/s_12"
+                    android:layout_height="@dimen/s_13"
+                    android:layout_marginLeft="@dimen/s_5"
+                    android:background="@drawable/icon_calendar"/>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_F6F6FA"
+        android:paddingBottom="@dimen/s_5"
+        android:paddingLeft="@dimen/s_15"
+        android:paddingTop="@dimen/s_5"
+        android:text="@string/tenant_info"
+        android:textColor="@color/color_4982F5"
+        android:textSize="@dimen/f_15"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_40"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/s_7"
+                android:layout_height="@dimen/s_6"
+                android:background="@drawable/mark_must"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_10"
+                android:text="@string/name"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/f_13"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/rc_tenant_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="@string/name_hint"
+            android:maxLength="6"
+            android:paddingLeft="@dimen/s_110"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_13"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_40"
+        android:layout_marginTop="@dimen/s_1"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_15"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/s_7"
+                android:layout_height="@dimen/s_6"
+                android:background="@drawable/mark_must"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_10"
+                android:text="@string/id_number"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/f_13"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/rc_tenant_id_number"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="@string/id_number_hint"
+            android:inputType="text"
+            android:paddingLeft="@dimen/s_110"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_13"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_40"
+        android:layout_marginTop="@dimen/s_1"
+        android:background="@android:color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_32"
+            android:text="@string/contact_way"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/f_13"/>
+
+        <EditText
+            android:id="@+id/rc_tenant_phone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="@string/contact_way_hint"
+            android:inputType="phone"
+            android:maxLength="11"
+            android:paddingLeft="@dimen/s_110"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_13"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_F6F6FA"
+        android:paddingBottom="@dimen/s_5"
+        android:paddingLeft="@dimen/s_15"
+        android:paddingTop="@dimen/s_5"
+        android:textColor="@color/color_4982F5"
+        android:textSize="@dimen/f_13"/>
+
+    <RelativeLayout
+        android:id="@+id/rc_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/s_10"
+        android:paddingLeft="@dimen/s_15"
+        android:paddingTop="@dimen/s_10">
+
+        <ImageView
+            android:id="@+id/rc_add_tenant"
+            android:layout_width="@dimen/s_14"
+            android:layout_height="@dimen/s_14"
+            android:layout_centerVertical="true"
+            android:background="@drawable/icon_add"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_5"
+            android:layout_toRightOf="@+id/rc_add_tenant"
+            android:text="@string/add_tenant"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_13"/>
+    </RelativeLayout>
+
+</LinearLayout>

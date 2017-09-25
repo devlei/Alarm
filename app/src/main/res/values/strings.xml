@@ -90,4 +90,30 @@
     <string name="goods_detail">物品详情</string>
     <string name="alarm_unit">报警单位</string>
 
+    <string name="header">头像</string>
+    <string name="nick_name">昵称</string>
+    <string name="people_info">个人信息</string>
+    <string name="change_nick_name">更改昵称</string>
+
+    <string name="hotal_info">旅馆信息</string>
+    <string name="address">地址：</string>
+    <string name="hotal_name">旅馆名称：</string>
+    <string name="room_name">房间名称：</string>
+    <string name="contact_way">联系方式：</string>
+    <string name="passenger_info">旅客信息</string>
+    <string name="add_people">添加人员</string>
+    <string name="hotal_name_hint">请输入旅馆名称</string>
+    <string name="room_name_hint">请输入房间名称</string>
+    <string name="contact_way_hint">请输入联系方式</string>
+    <string name="id_number_hint">请输入身份证号</string>
+
+    <string name="house_rent_info">房屋租住信息</string>
+    <string name="householder_name">户主姓名：</string>
+    <string name="house_number">房产证号：</string>
+    <string name="rental_time">租住时间：</string>
+    <string name="tenant_info">租户信息</string>
+    <string name="add_tenant">添加租户</string>
+    <string name="householder_name_hint">请输入户主姓名</string>
+    <string name="house_number_hint">请输入房产证号</string>
+
 </resources>

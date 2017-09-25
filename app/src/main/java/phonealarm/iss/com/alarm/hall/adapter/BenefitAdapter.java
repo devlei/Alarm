@@ -15,7 +15,6 @@ import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.hall.HeaderSpanSizeLookup;
 import phonealarm.iss.com.alarm.hall.IHeader;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
-import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
  * Created by weizhilei on 2017/9/23.
@@ -129,15 +128,15 @@ public class BenefitAdapter extends RecyclerView.Adapter implements IHeader {
             if (view.getTag() != null) {
                 Integer type = (Integer) view.getTag();
                 if (type == getInteger(itemView.getContext(), R.integer.type_alarm)) {//一键报警
-                    IntentUtils.openFastAlarmActivity(itemView.getContext(), R.integer.type_alarm);
+                    IntentUtils.openFastAlarmActivity(view.getContext(), R.integer.type_alarm);
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_eager_report)) {//热心举报
-                    IntentUtils.openFastAlarmActivity(itemView.getContext(), R.integer.type_eager_report);
-                } else if (type == getInteger(itemView.getContext(), R.integer.type_police_interact)) {
-                    IntentUtils.openCommonSearch(itemView.getContext(), R.integer.type_police_interact);
+                    IntentUtils.openFastAlarmActivity(view.getContext(), R.integer.type_eager_report);
+                } else if (type == getInteger(view.getContext(), R.integer.type_police_interact)) {
+                    IntentUtils.openCommonSearch(view.getContext(), R.integer.type_police_interact);
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_rent_collect)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.rent_collect);
+                    IntentUtils.openRentCollect(view.getContext());
                 } else if (type == getInteger(itemView.getContext(), R.integer.type_hotel_collect)) {
-                    ToastUtils.showToast(itemView.getContext(), R.string.hotel_collect);
+                    IntentUtils.openHotalCollect(view.getContext());
                 }
             }
         }

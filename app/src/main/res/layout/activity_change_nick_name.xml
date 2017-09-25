@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F6F6FA"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_40"
+        android:layout_marginTop="@dimen/s_20"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/s_15">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/new_password"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/f_15"/>
+
+        <EditText
+            android:id="@+id/cnn_nick_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="@string/nick_name"
+            android:inputType="text"
+            android:paddingLeft="@dimen/s_100"
+            android:singleLine="true"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/f_15"/>
+    </RelativeLayout>
+
+</LinearLayout>

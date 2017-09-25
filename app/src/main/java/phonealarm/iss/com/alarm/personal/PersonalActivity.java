@@ -53,6 +53,8 @@ public class PersonalActivity extends Activity implements OnClickListener {
 
         findViewById(R.id.title_other).setVisibility(View.GONE);
         findViewById(R.id.title_back).setOnClickListener(this);
+        findViewById(R.id.personal_header).setOnClickListener(this);
+        findViewById(R.id.personal_nickname).setOnClickListener(this);
         findViewById(R.id.personal_alarm_history).setOnClickListener(this);
         findViewById(R.id.personal_emergency_contact).setOnClickListener(this);
         findViewById(R.id.personal_near_police).setOnClickListener(this);
@@ -68,6 +70,12 @@ public class PersonalActivity extends Activity implements OnClickListener {
         switch (v.getId()) {
             case R.id.title_back:
                 finish();
+                break;
+            case R.id.personal_header:
+                IntentUtils.openPersonalInfo(this);
+                break;
+            case R.id.personal_nickname:
+                IntentUtils.openChangeNickName(this);
                 break;
             case R.id.personal_alarm_history:
                 IntentUtils.openCommonSearch(this, R.integer.type_alarm_history);

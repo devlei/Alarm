@@ -1,7 +1,6 @@
 package phonealarm.iss.com.alarm.utils;
 
 import android.content.Context;
-
 import phonealarm.iss.com.alarm.MainActivity;
 import phonealarm.iss.com.alarm.hall.*;
 import phonealarm.iss.com.alarm.login.LoginActivity;
@@ -165,6 +164,42 @@ public class IntentUtils {
      */
     public static void openLostFound(Context context) {
         LostFoundActivity.open(context);
+    }
+
+    /**
+     * 打开个人信息
+     *
+     * @param context
+     */
+    public static void openPersonalInfo(Context context) {
+        PersonalInfoActivity.open(context);
+    }
+
+    /**
+     * 打开更改昵称
+     *
+     * @param context
+     */
+    public static void openChangeNickName(Context context) {
+        ChangeNickNameActivity.open(context);
+    }
+
+    /**
+     * 打开旅馆采集
+     *
+     * @param context
+     */
+    public static void openHotalCollect(Context context) {
+        HotalCollectActivity.open(context);
+    }
+
+    /**
+     * 打开租房采集
+     *
+     * @param context
+     */
+    public static void openRentCollect(Context context) {
+        RentCollectActivity.open(context);
     }
 
 }
