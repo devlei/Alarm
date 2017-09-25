@@ -170,6 +170,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                 holder.mMiddleTv.setText("「已追踪59天1小时」于2017-9-31 10：25时许，啦啦啦啦啦");
                 holder.mBottomTv.setText("北京市朝阳区和平街15区");
                 holder.mBottomTimeTv.setVisibility(View.GONE);
+                holder.mCarInfo = carInfo;
             }
         }
     }
@@ -282,6 +283,12 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
         private TextView mMiddleTv;
         private TextView mBottomTv;
         private TextView mBottomTimeTv;
+        private CaseInfo mCasesInfo;
+        private CarInfo mCarInfo;
+        private SuspectInfo mSuspectInfo;
+        private BelostInfo mBelostInfo;
+        private LostInfo mLostInfo;
+        private AlarmInfoBean mAlarmInfo;
 
         public CommonSearchViewHolder(View itemView) {
             super(itemView);
@@ -301,7 +308,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                     IntentUtils.openWebView(v.getContext());
                     break;
                 case R.integer.type_vehicle_track:
-                    IntentUtils.openVehicleTrack(v.getContext());
+                    IntentUtils.openVehicleTrack(v.getContext(), mCarInfo);
                     break;
                 case R.integer.type_suspect_track:
                     IntentUtils.openSuspectTrack(v.getContext());

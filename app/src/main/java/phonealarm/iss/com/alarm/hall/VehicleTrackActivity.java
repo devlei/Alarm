@@ -10,12 +10,16 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.carinfo.CarInfo;
+import phonealarm.iss.com.alarm.utils.GlideUtils;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
  * Created by weizhilei on 2017/9/24.
  */
 public class VehicleTrackActivity extends Activity implements OnClickListener {
+
+    private static final String CAR_INFO = "car_info";
 
     private TextView mCarNumberTv;
     private TextView mCarTimeTv;
@@ -29,10 +33,12 @@ public class VehicleTrackActivity extends Activity implements OnClickListener {
      * open
      *
      * @param context
+     * @param carInfo
      */
-    public static void open(Context context) {
+    public static void open(Context context, CarInfo carInfo) {
         if (context != null) {
             Intent intent = new Intent(context, VehicleTrackActivity.class);
+            intent.putExtra(CAR_INFO, carInfo);
             context.startActivity(intent);
         }
     }
@@ -42,10 +48,7 @@ public class VehicleTrackActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_track);
         init();
-
-        mCarDescTv.setText(
-                "2017年10月20号18时，发现姓名A从位于北京市朝阳区和平街15区附近走失，姓名A，陕西省安康市人，走失时身高100cm" +
-                        "左右，体态教授，短发，上身蓝色半袖，下渗川河色短裤，娇喘白色运动鞋，未携带其他物品。");
+        setData();
     }
 
     private void init() {
@@ -66,6 +69,19 @@ public class VehicleTrackActivity extends Activity implements OnClickListener {
         findViewById(R.id.title_other).setOnClickListener(this);
     }
 
+    private void setData() {
+        CarInfo carInfo = (CarInfo) getIntent().getSerializableExtra(CAR_INFO);
+        if (carInfo != null) {
+            mCarNumberTv.setText(carInfo.getCar_num());
+            mCarTimeTv.setText(carInfo.getPursuit_time());
+            mCarTypeTv.setText(carInfo.getCar_type());
+            mCarBrandTv.setText(carInfo.getCar_brand());
+            mCarColorTv.setText(carInfo.getCar_color());
+            mCarDescTv.setText(carInfo.getCar_info());
+            GlideUtils.loadBackgroundImage(this, carInfo.getCar_purl(), R.drawable.icon_header_default, mCarIv);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -73,6 +89,7 @@ public class VehicleTrackActivity extends Activity implements OnClickListener {
                 finish();
                 break;
             case R.id.title_other:
+                // TODO: 2017/9/25 weizhilei 没有举报接口
                 ToastUtils.showToast(this, R.string.report);
                 break;
         }

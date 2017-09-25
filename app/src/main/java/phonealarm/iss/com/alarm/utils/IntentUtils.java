@@ -2,6 +2,7 @@ package phonealarm.iss.com.alarm.utils;
 
 import android.content.Context;
 import phonealarm.iss.com.alarm.MainActivity;
+import phonealarm.iss.com.alarm.bean.carinfo.CarInfo;
 import phonealarm.iss.com.alarm.hall.*;
 import phonealarm.iss.com.alarm.login.LoginActivity;
 import phonealarm.iss.com.alarm.login.RegisterActivity;
@@ -152,9 +153,10 @@ public class IntentUtils {
      * 打开车辆追踪
      *
      * @param context
+     * @param carInfo
      */
-    public static void openVehicleTrack(Context context) {
-        VehicleTrackActivity.open(context);
+    public static void openVehicleTrack(Context context, CarInfo carInfo) {
+        VehicleTrackActivity.open(context, carInfo);
     }
 
     /**
