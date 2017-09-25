@@ -1,8 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <include layout="@layout/layout_title"/>
+    <include layout="@layout/layout_title" />
+
+    <EditText
+        android:id="@+id/video_edit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_102"
+        android:background="@android:color/white"
+        android:gravity="top"
+        android:hint="请简单描述案情经过"
+        android:maxLines="20"
+        android:paddingBottom="@dimen/s_13"
+        android:paddingLeft="@dimen/s_16"
+        android:paddingRight="@dimen/s_16"
+        android:paddingTop="@dimen/s_13"
+        android:textColor="#d1d1d1"
+        android:textSize="@dimen/f_13" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_53"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/s_16">
+
+        <ImageView
+            android:layout_width="@dimen/s_50"
+            android:layout_height="match_parent"
+            android:background="@drawable/addimg" />
+
+        <ImageView
+            android:layout_width="@dimen/s_50"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/s_21"
+            android:background="@drawable/addimg" />
+
+        <ImageView
+            android:layout_width="@dimen/s_50"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/s_21"
+            android:background="@drawable/addimg" />
+
+        <ImageView
+            android:layout_width="@dimen/s_50"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/s_21"
+            android:background="@drawable/addimg" />
+
+        <ImageView
+            android:layout_width="@dimen/s_50"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/s_21"
+            android:background="@drawable/addimg" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_60"
+        android:background="@android:color/white"
+        android:paddingLeft="@dimen/s_16">
+
+        <ImageView
+            android:layout_width="@dimen/s_12"
+            android:layout_height="@dimen/s_16"
+            android:layout_marginTop="@dimen/s_28"
+            android:src="@drawable/local" />
+
+        <TextView
+            android:id="@+id/video_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/s_8"
+            android:layout_marginTop="@dimen/s_28"
+            android:text="北京市海淀区上地六街17号"
+            android:textSize="@dimen/f_13" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_120"
+        android:background="#F6F6FA">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s_43"
+            android:layout_marginTop="@dimen/s_6"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/s_16">
+
+            <ImageView
+                android:id="@+id/voice_icon"
+                android:layout_width="@dimen/s_12"
+                android:layout_height="@dimen/s_16"
+                android:src="@drawable/voice" />
+
+            <TextView
+                android:id="@+id/voice_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_9"
+                android:layout_toRightOf="@+id/voice_icon"
+                android:text="语音"
+                android:textColor="#666666"
+                android:textSize="@dimen/f_13" />
+
+            <TextView
+                android:id="@+id/voice_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_4"
+                android:layout_toRightOf="@+id/voice_text"
+                android:text="0:02"
+                android:textColor="#4982f5"
+                android:textSize="@dimen/f_13" />
+
+            <me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar
+                android:id="@+id/video_seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/s_6"
+                android:layout_marginLeft="@dimen/s_8"
+                android:layout_marginRight="@dimen/s_13"
+                android:layout_marginTop="@dimen/s_5"
+                android:layout_toRightOf="@+id/voice_time"
+                app:zpb_bg_color="#6633b5e5"
+                app:zpb_max="100"
+                app:zpb_pb_color="#4982f5"
+                app:zpb_progress="30" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/video_record"
+            android:layout_width="@dimen/s_86"
+            android:layout_height="@dimen/s_86"
+            android:layout_centerInParent="true"
+            android:src="@drawable/video_record" />
+
+        <ImageView
+            android:id="@+id/video_btn"
+            android:layout_width="@dimen/s_86"
+            android:layout_height="@dimen/s_86"
+            android:layout_centerInParent="true"
+            android:src="@drawable/video_play"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/video_delete"
+            android:layout_width="@dimen/s_33"
+            android:layout_height="@dimen/s_33"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/s_58"
+            android:src="@drawable/video_delete"
+            android:visibility="gone" />
+    </RelativeLayout>
 
 </LinearLayout>
