@@ -1,21 +1,29 @@
 package phonealarm.iss.com.alarm.hall;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
+import java.util.Calendar;
+
 /**
  * Created by weizhilei on 2017/9/25.
  */
 public class RentCollectActivity extends Activity implements OnClickListener {
+
+    private static final int TYPE_START_DATE = 0;
+    private static final int TYPE_END_DATE = 1;
 
     private EditText mHouseAddressEt;
     private EditText mHouseholderNameEt;
@@ -79,11 +87,36 @@ public class RentCollectActivity extends Activity implements OnClickListener {
                 ToastUtils.showToast(this, R.string.complete);
                 break;
             case R.id.rc_rent_start_time:
-                ToastUtils.showToast(this, "选择开始日期");
+                showDatePickerDialog(TYPE_START_DATE);
                 break;
             case R.id.rc_rent_end_time:
-                ToastUtils.showToast(this, "选择结束日期");
+                showDatePickerDialog(TYPE_END_DATE);
                 break;
         }
     }
+
+    /**
+     * 日期选择
+     *
+     * @param type
+     */
+    private void showDatePickerDialog(final int type) {
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                if (type == TYPE_START_DATE) {
+                    mRentStartTimeTv.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                } else {
+                    mRentEndTimeTv.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                }
+            }
+        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        try {
+            datePickerDialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
