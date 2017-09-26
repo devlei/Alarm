@@ -337,7 +337,7 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
             return;
         }
         OkHttpUtils.getBuilder()
-                .url(UrlSet.getAlarmHistory(AlarmApplication.mUserInfo.getUserid()))
+                .url(UrlSet.getAlarmHistoryUrl(AlarmApplication.mUserInfo.getUserid()))
                 .build()
                 .buildRequestCall()
                 .execute(new CallBack<AlarmInfoBeanList>() {

@@ -12,11 +12,14 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.searchalarm.AlarmInfoBean;
 
 /**
  * Created by weizhilei on 2017/9/26.
  */
 public class AlarmHistoryActivity extends Activity implements OnClickListener {
+
+    private static final String ALARM_INFO = "alarm_info";
 
     private TextView mTimeTv;
     private TextView mSiteTv;
@@ -32,10 +35,12 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
      * open
      *
      * @param context
+     * @param alarmInfo
      */
-    public static void open(Context context) {
+    public static void open(Context context, AlarmInfoBean alarmInfo) {
         if (context != null) {
             Intent intent = new Intent(context, AlarmHistoryActivity.class);
+            intent.putExtra(ALARM_INFO, alarmInfo);
             context.startActivity(intent);
         }
     }
@@ -45,6 +50,7 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_history);
         init();
+        setData();
     }
 
     private void init() {
@@ -60,7 +66,20 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
 
         findViewById(R.id.title_back).setOnClickListener(this);
         findViewById(R.id.title_other).setOnClickListener(this);
+        ((TextView) findViewById(R.id.title_name)).setText(R.string.alarm_history);
         ((TextView) findViewById(R.id.title_other)).setText(R.string.evaluate);
+    }
+
+    private void setData() {
+        AlarmInfoBean alarmInfo = (AlarmInfoBean) getIntent().getSerializableExtra(ALARM_INFO);
+        if (alarmInfo != null) {
+            mTimeTv.setText(alarmInfo.getRptalarm_time());
+            mSiteTv.setText(alarmInfo.getAlarm_addres());
+            // TODO: 2017/9/26 weizhilei 缺少手机号字段
+            mPhoneTv.setText("1234566745");
+            mContentTv.setText(alarmInfo.getAlarm_content());
+            // TODO: 2017/9/26 weizhilei 附件
+        }
     }
 
     @Override
@@ -70,7 +89,10 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
                 finish();
                 break;
             case R.id.title_other:
-                EvaluateDialog.show(this);
+                AlarmInfoBean alarmInfo = (AlarmInfoBean) getIntent().getSerializableExtra(ALARM_INFO);
+                if (alarmInfo != null) {
+                    EvaluateDialog.show(this, alarmInfo.getAlarm_id());
+                }
                 break;
         }
     }

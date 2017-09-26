@@ -19,6 +19,7 @@ public class AlarmApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        mAlarmApplication = this;
     }
 
     public void setLogin(boolean login) {

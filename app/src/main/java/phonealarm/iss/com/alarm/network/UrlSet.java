@@ -49,8 +49,28 @@ public class UrlSet {
      * @param userId
      * @return
      */
-    public static String getAlarmHistory(String userId) {
+    public static String getAlarmHistoryUrl(String userId) {
         return URL_BASIC + "GetAlarmService&userid=" + userId;
+    }
+
+    /**
+     * 修改昵称
+     *
+     * @param userId
+     * @return
+     */
+    public static String getChangeNickNameUrl(String userId) {
+        return URL_BASIC + "ResetUsername&userid=" + userId;
+    }
+
+    /**
+     * 处警评价
+     *
+     * @param userId
+     * @return
+     */
+    public static String getAlarmEvaluateUrl(String userId) {
+        return URL_BASIC + "AssessAlarm&userid=" + userId;
     }
 
 }

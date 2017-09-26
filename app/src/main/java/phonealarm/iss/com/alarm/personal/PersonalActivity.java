@@ -9,7 +9,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.login.UserInfoBean;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
@@ -39,6 +41,7 @@ public class PersonalActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
         init();
+        setData();
     }
 
     /**
@@ -63,6 +66,13 @@ public class PersonalActivity extends Activity implements OnClickListener {
         findViewById(R.id.personal_check_update).setOnClickListener(this);
         findViewById(R.id.personal_about).setOnClickListener(this);
 
+    }
+
+    private void setData() {
+        if (AlarmApplication.mAlarmApplication.isLogin() && AlarmApplication.mUserInfo != null) {
+            UserInfoBean userInfo = AlarmApplication.mUserInfo;
+            // TODO: 2017/9/26 weizhilei 缺少用户头像字段和用户昵称字段和手机号
+        }
     }
 
     @Override

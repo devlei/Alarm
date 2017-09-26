@@ -5,6 +5,7 @@ import phonealarm.iss.com.alarm.MainActivity;
 import phonealarm.iss.com.alarm.bean.beLost.BelostInfo;
 import phonealarm.iss.com.alarm.bean.carinfo.CarInfo;
 import phonealarm.iss.com.alarm.bean.lost.LostInfo;
+import phonealarm.iss.com.alarm.bean.searchalarm.AlarmInfoBean;
 import phonealarm.iss.com.alarm.bean.suspect.SuspectInfo;
 import phonealarm.iss.com.alarm.hall.*;
 import phonealarm.iss.com.alarm.login.LoginActivity;
@@ -232,9 +233,10 @@ public class IntentUtils {
      * 打开报警历史
      *
      * @param context
+     * @param alarmInfo
      */
-    public static void openAlarmHistory(Context context) {
-        AlarmHistoryActivity.open(context);
+    public static void openAlarmHistory(Context context, AlarmInfoBean alarmInfo) {
+        AlarmHistoryActivity.open(context, alarmInfo);
     }
 
 }

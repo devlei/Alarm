@@ -15,7 +15,12 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.searchalarm.AlarmInfoBean;
+import phonealarm.iss.com.alarm.network.UrlSet;
+import phonealarm.iss.com.alarm.network.callback.CallBack;
+import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
@@ -28,10 +33,12 @@ public class EvaluateDialog extends Dialog implements OnCheckedChangeListener, O
     private RadioButton mBadBtn;
     private EditText mContentEt;
 
-    public static Dialog show(Context context) {
+    private String mAlarmId;
+
+    public static Dialog show(Context context, String alarmId) {
         EvaluateDialog dialog = null;
         if (context != null) {
-            dialog = new EvaluateDialog(context);
+            dialog = new EvaluateDialog(context, alarmId);
             try {
                 dialog.show();
             } catch (Exception e) {
@@ -41,8 +48,9 @@ public class EvaluateDialog extends Dialog implements OnCheckedChangeListener, O
         return dialog;
     }
 
-    public EvaluateDialog(@NonNull Context context) {
+    public EvaluateDialog(@NonNull Context context, String alarmId) {
         super(context, R.style.ThemeTransparent);
+        this.mAlarmId = alarmId;
     }
 
     @Override
@@ -110,8 +118,38 @@ public class EvaluateDialog extends Dialog implements OnCheckedChangeListener, O
             ToastUtils.showToast(getContext(), R.string.evaluate_hint);
             return;
         }
-        // TODO: 2017/9/26 weizhilei 请求提交接口
-        dismiss();
+        if (AlarmApplication.mAlarmApplication.isLogin() && AlarmApplication.mUserInfo != null) {
+            int level = 0;
+            if (mGoodBtn.isChecked()) level = 0;
+            if (mMiddleBtn.isChecked()) level = 1;
+            if (mBadBtn.isChecked()) level = 2;
+            OkHttpUtils.postBuilder()
+                    .url(UrlSet.getAlarmEvaluateUrl(AlarmApplication.mUserInfo.getUserid()))
+                    .build()
+                    .buildRequestCall()
+                    .execute(new CallBack<AlarmInfoBean>() {
+
+                        @Override
+                        public void onStart() {
+
+                        }
+
+                        @Override
+                        public void onNext(AlarmInfoBean getBean) {
+                            dismiss();
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            super.onError(e);
+                        }
+                    });
+        }
     }
 
 }
