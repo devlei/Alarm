@@ -1,9 +1,7 @@
 package phonealarm.iss.com.alarm.hall.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,17 +10,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
-import phonealarm.iss.com.alarm.hall.HeaderSpanSizeLookup;
-import phonealarm.iss.com.alarm.hall.IHeader;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
  * Created by weizhilei on 2017/9/23.
  */
-public class InfoAdapter extends RecyclerView.Adapter implements IHeader {
-
-    private static final int TYPE_HEADER = 1;
+public class InfoAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
 
@@ -30,43 +24,24 @@ public class InfoAdapter extends RecyclerView.Adapter implements IHeader {
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         mContext = recyclerView.getContext();
-        LayoutManager manager = recyclerView.getLayoutManager();
-        if (manager instanceof GridLayoutManager) {
-            GridLayoutManager gridManager = ((GridLayoutManager) manager);
-            gridManager.setSpanSizeLookup(new HeaderSpanSizeLookup(this));
-        }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case TYPE_HEADER:
-                View headerView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.layout_header, parent, false);
-                return new InfoHeaderViewHolder(headerView);
-            default:
-                View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_info, parent, false);
-                return new InfoViewHolder(itemView);
-        }
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_info, parent, false);
+        return new InfoViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        if (getItemViewType(position) == TYPE_HEADER) {
-            if (holder instanceof InfoHeaderViewHolder) {
-                InfoHeaderViewHolder headerViewHolder = (InfoHeaderViewHolder) holder;
-                headerViewHolder.mNameTv.setText(R.string.release_information);
-            }
-        } else {
-            if (holder instanceof InfoViewHolder) {
-                InfoViewHolder viewHolder = (InfoViewHolder) holder;
-                int[] typeArray = getTypeArray(mContext);
-                if (typeArray != null && position - 1 < typeArray.length) {
-                    int type = typeArray[position - 1];
-                    viewHolder.mIconIv.setBackgroundResource(getIconResId(mContext, type));
-                    viewHolder.mNameTv.setText(getNameResId(mContext, type));
-                    viewHolder.itemView.setTag(type);
-                }
+        if (holder instanceof InfoViewHolder) {
+            InfoViewHolder viewHolder = (InfoViewHolder) holder;
+            int[] typeArray = getTypeArray(mContext);
+            if (typeArray != null && position < typeArray.length) {
+                int type = typeArray[position];
+                viewHolder.mIconIv.setBackgroundResource(getIconResId(mContext, type));
+                viewHolder.mNameTv.setText(getNameResId(mContext, type));
+                viewHolder.itemView.setTag(type);
             }
         }
     }
@@ -75,38 +50,9 @@ public class InfoAdapter extends RecyclerView.Adapter implements IHeader {
     public int getItemCount() {
         int[] typeArray = getTypeArray(mContext);
         if (typeArray != null) {
-            return typeArray.length + 1;
+            return typeArray.length;
         }
         return 0;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (isHeaderPosition(position)) return TYPE_HEADER;
-        return super.getItemViewType(position);
-    }
-
-    @Override
-    public boolean isHeaderPosition(int position) {
-        if (position == 0) return true;
-        return false;
-    }
-
-    @Override
-    public int getHeaderSpanSize() {
-        return 6;
-    }
-
-    /**
-     * Created by weizhilei on 2017/9/23.
-     */
-    class InfoHeaderViewHolder extends ViewHolder {
-        public TextView mNameTv;
-
-        public InfoHeaderViewHolder(View itemView) {
-            super(itemView);
-            mNameTv = (TextView) itemView.findViewById(R.id.header_name);
-        }
     }
 
     /**

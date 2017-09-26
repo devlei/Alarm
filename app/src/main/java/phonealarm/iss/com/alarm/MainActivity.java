@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -51,9 +52,9 @@ public class MainActivity extends Activity implements OnClickListener {
         findViewById(R.id.title_other).setOnClickListener(this);
 
         //信息发布
-        WrapGridLayoutManager glm = new WrapGridLayoutManager(this, 6);
-        glm.setOrientation(GridLayoutManager.VERTICAL);
-        mInfoRv.setLayoutManager(glm);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mInfoRv.setLayoutManager(llm);
         mInfoRv.setAdapter(new InfoAdapter());
 
         //我的惠民

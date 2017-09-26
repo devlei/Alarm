@@ -13,10 +13,13 @@
         android:layout_height="@dimen/s_150"
         android:background="@drawable/icon_hall_banner"/>
 
+    <include layout="@layout/layout_header"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/hall_info"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/s_135"/>
+        android:layout_height="@dimen/s_100"
+        android:layout_gravity="center_vertical"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/hall_benefit"

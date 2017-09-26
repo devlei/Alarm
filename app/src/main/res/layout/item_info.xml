@@ -4,8 +4,9 @@
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/s_20"
-    android:paddingTop="@dimen/s_20">
+    android:paddingLeft="@dimen/s_10"
+    android:paddingRight="@dimen/s_10"
+    android:paddingTop="@dimen/s_16">
 
     <ImageView
         android:id="@+id/item_icon"
