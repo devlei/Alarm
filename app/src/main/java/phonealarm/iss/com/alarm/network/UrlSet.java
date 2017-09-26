@@ -93,4 +93,14 @@ public class UrlSet {
         return URL_BASIC + "AddContacts&userid=" + userId;
     }
 
+    /**
+     * 更换手机号
+     *
+     * @param userId
+     * @return
+     */
+    public static String getChangePhoneUrl(String userId) {
+        return URL_BASIC + "ResetTelenum&userid=" + userId;
+    }
+
 }
