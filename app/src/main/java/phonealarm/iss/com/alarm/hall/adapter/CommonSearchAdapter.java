@@ -272,6 +272,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                 holder.mMiddleTv.setText(alarmInfo.getAlarm_content());
                 holder.mBottomTv.setText(alarmInfo.getAlarm_addres());
                 holder.mBottomTimeTv.setText(alarmInfo.getRptalarm_time());
+                holder.mAlarmInfo = alarmInfo;
             }
         }
     }
@@ -325,7 +326,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                     IntentUtils.openPoliceInteractDetail(v.getContext());
                     break;
                 case R.integer.type_alarm_history:
-                    IntentUtils.openAlarmHistory(v.getContext());
+                    IntentUtils.openAlarmHistory(v.getContext(), mAlarmInfo);
                     break;
             }
 
