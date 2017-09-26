@@ -121,7 +121,7 @@ public class NetTestActivity extends Activity {
     public static final String JINGMINHUDONGTIANJIA = "http://192.168.0.106:8085/WebService.action?Service=addNewFk";
 
     //警民互动接口
-    public static final String JINMINHUDONGCHAXUN = "http://192.168.0.106:8080/WebService.action?Service=queryFkInfo";
+    public static final String JINMINHUDONGCHAXUN = "http://218.241.189.52:8089/WebService.action?Service=queryFkInfo";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
