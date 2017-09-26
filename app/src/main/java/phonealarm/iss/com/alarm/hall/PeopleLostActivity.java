@@ -10,12 +10,16 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.beLost.BelostInfo;
+import phonealarm.iss.com.alarm.utils.GlideUtils;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
  * Created by weizhilei on 2017/9/24.
  */
 public class PeopleLostActivity extends Activity implements OnClickListener {
+
+    private static final String PEOPLE_LOST_INFO = "people_lost_info";
 
     private TextView mNameTv;
     private TextView mTimeTv;
@@ -35,10 +39,12 @@ public class PeopleLostActivity extends Activity implements OnClickListener {
      * open
      *
      * @param context
+     * @param belostInfo
      */
-    public static void open(Context context) {
+    public static void open(Context context, BelostInfo belostInfo) {
         if (context != null) {
             Intent intent = new Intent(context, PeopleLostActivity.class);
+            intent.putExtra(PEOPLE_LOST_INFO, belostInfo);
             context.startActivity(intent);
         }
     }
@@ -48,10 +54,7 @@ public class PeopleLostActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_people_lost);
         init();
-
-        mDetailTv.setText(
-                "2017年10月20号18时，发现姓名A从位于北京市朝阳区和平街15区附近走失，姓名A，陕西省安康市人，走失时身高100cm" +
-                        "左右，体态教授，短发，上身蓝色半袖，下渗川河色短裤，娇喘白色运动鞋，未携带其他物品。");
+        setData();
     }
 
     private void init() {
@@ -78,6 +81,26 @@ public class PeopleLostActivity extends Activity implements OnClickListener {
         findViewById(R.id.title_other).setOnClickListener(this);
     }
 
+    private void setData() {
+        BelostInfo belostInfo = (BelostInfo) getIntent().getSerializableExtra(PEOPLE_LOST_INFO);
+        if (belostInfo != null) {
+            mNameTv.setText(belostInfo.getBeLost_name());
+            mTimeTv.setText(belostInfo.getPursuit_time());
+            mGenderTv.setText(belostInfo.getBeLost_sex());
+            mAgeTv.setText(belostInfo.getBeLost_age());
+            mMissLocationTv.setText(belostInfo.getBeLost_site());
+            mMissTimeTv.setText(belostInfo.getBeLost_date());
+            mBirthDateTv.setText(belostInfo.getBeLost_bithdate());
+            mHeightWeightTv.setText(belostInfo.getBeLost_weigth());
+            mHairColorTv.setText(belostInfo.getBeLost_hairstyle());
+            mDetailTv.setText(belostInfo.getBeLost_information());
+            GlideUtils.loadBackgroundImage(this, belostInfo.getBeLost_pUrl(), R.drawable.icon_header_default,
+                    mHeaderIv);
+            mFamilyNameTv.setText(belostInfo.getBeLost_telename());
+            mFamilyPhoneTv.setText(belostInfo.getBeLost_telenum());
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -85,6 +108,7 @@ public class PeopleLostActivity extends Activity implements OnClickListener {
                 finish();
                 break;
             case R.id.title_other:
+                // TODO: 2017/9/26 weizhilei 缺少举报接口
                 ToastUtils.showToast(this, R.string.report);
                 break;
         }

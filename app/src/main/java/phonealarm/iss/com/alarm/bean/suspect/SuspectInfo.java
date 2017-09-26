@@ -2,13 +2,15 @@ package phonealarm.iss.com.alarm.bean.suspect;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+import java.io.Serializable;
+
 /**
  * 嫌疑犯信息
  *
  * @author Administrator
  */
 @XStreamAlias("suspectInfo")
-public class SuspectInfo {
+public class SuspectInfo implements Serializable {
 
     @XStreamAlias("suspect_id")
     private String suspect_id;

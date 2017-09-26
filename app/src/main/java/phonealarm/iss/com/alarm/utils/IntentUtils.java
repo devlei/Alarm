@@ -2,7 +2,10 @@ package phonealarm.iss.com.alarm.utils;
 
 import android.content.Context;
 import phonealarm.iss.com.alarm.MainActivity;
+import phonealarm.iss.com.alarm.bean.beLost.BelostInfo;
 import phonealarm.iss.com.alarm.bean.carinfo.CarInfo;
+import phonealarm.iss.com.alarm.bean.lost.LostInfo;
+import phonealarm.iss.com.alarm.bean.suspect.SuspectInfo;
 import phonealarm.iss.com.alarm.hall.*;
 import phonealarm.iss.com.alarm.login.LoginActivity;
 import phonealarm.iss.com.alarm.login.RegisterActivity;
@@ -126,18 +129,20 @@ public class IntentUtils {
      * 打开人员走失
      *
      * @param context
+     * @param belostInfo
      */
-    public static void openPeopleLost(Context context) {
-        PeopleLostActivity.open(context);
+    public static void openPeopleLost(Context context, BelostInfo belostInfo) {
+        PeopleLostActivity.open(context, belostInfo);
     }
 
     /**
      * 打开疑犯追踪
      *
      * @param context
+     * @param suspectInfo
      */
-    public static void openSuspectTrack(Context context) {
-        SuspectTrackActivity.open(context);
+    public static void openSuspectTrack(Context context, SuspectInfo suspectInfo) {
+        SuspectTrackActivity.open(context, suspectInfo);
     }
 
     /**
@@ -163,9 +168,10 @@ public class IntentUtils {
      * 打开遗失招领
      *
      * @param context
+     * @param lostInfo
      */
-    public static void openLostFound(Context context) {
-        LostFoundActivity.open(context);
+    public static void openLostFound(Context context, LostInfo lostInfo) {
+        LostFoundActivity.open(context, lostInfo);
     }
 
     /**

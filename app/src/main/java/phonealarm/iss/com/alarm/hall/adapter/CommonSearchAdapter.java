@@ -194,6 +194,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                 // TODO: 2017/9/25 weizhilei 缺少address
                 holder.mBottomTv.setText("北京市朝阳区和平街15区");
                 holder.mBottomTimeTv.setVisibility(View.GONE);
+                holder.mSuspectInfo = suspectInfo;
             }
         }
     }
@@ -216,6 +217,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                 holder.mMiddleTv.setText("「已丢失59天1小时」于2017-9-31 10：25时许，啦啦啦啦啦");
                 holder.mBottomTv.setText("北京市朝阳区和平街15区");
                 holder.mBottomTimeTv.setVisibility(View.GONE);
+                holder.mBelostInfo = belostInfo;
             }
         }
     }
@@ -236,6 +238,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                 holder.mMiddleTv.setText(lostInfo.getLost_info());
                 holder.mBottomTv.setText(lostInfo.getLost_unit());
                 holder.mBottomTimeTv.setVisibility(View.GONE);
+                holder.mLostInfo = lostInfo;
             }
         }
     }
@@ -310,13 +313,13 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                     IntentUtils.openVehicleTrack(v.getContext(), mCarInfo);
                     break;
                 case R.integer.type_suspect_track:
-                    IntentUtils.openSuspectTrack(v.getContext());
+                    IntentUtils.openSuspectTrack(v.getContext(), mSuspectInfo);
                     break;
                 case R.integer.type_people_lost:
-                    IntentUtils.openPeopleLost(v.getContext());
+                    IntentUtils.openPeopleLost(v.getContext(), mBelostInfo);
                     break;
                 case R.integer.type_lost_found:
-                    IntentUtils.openLostFound(v.getContext());
+                    IntentUtils.openLostFound(v.getContext(), mLostInfo);
                     break;
                 case R.integer.type_police_interact:
                     IntentUtils.openPoliceInteractDetail(v.getContext());

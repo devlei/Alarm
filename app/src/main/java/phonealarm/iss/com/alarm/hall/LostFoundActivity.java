@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.lost.LostInfo;
 
 /**
  * Created by weizhilei on 2017/9/24.
  */
 public class LostFoundActivity extends Activity implements OnClickListener {
+
+    private static final String LOST_INFO = "lost_info";
 
     private TextView mGoodsNameTv;
     private TextView mPickAddressTv;
@@ -25,10 +28,12 @@ public class LostFoundActivity extends Activity implements OnClickListener {
      * open
      *
      * @param context
+     * @param lostInfo
      */
-    public static void open(Context context) {
+    public static void open(Context context, LostInfo lostInfo) {
         if (context != null) {
             Intent intent = new Intent(context, LostFoundActivity.class);
+            intent.putExtra(LOST_INFO, lostInfo);
             context.startActivity(intent);
         }
     }
@@ -38,8 +43,7 @@ public class LostFoundActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lost_found);
         init();
-
-        mGoodsDetailTv.setText("银行卡，会员卡\n医保卡：姓名A");
+        setData();
     }
 
     private void init() {
@@ -54,6 +58,17 @@ public class LostFoundActivity extends Activity implements OnClickListener {
         //set listener
         findViewById(R.id.title_other).setVisibility(View.GONE);
         findViewById(R.id.title_back).setOnClickListener(this);
+    }
+
+    private void setData() {
+        LostInfo lostInfo = (LostInfo) getIntent().getSerializableExtra(LOST_INFO);
+        if (lostInfo != null) {
+            mGoodsNameTv.setText(lostInfo.getLost_name());
+            mPickAddressTv.setText(lostInfo.getLost_site());
+            mPickTimeTv.setText(lostInfo.getLost_date());
+            mGoodsDetailTv.setText(lostInfo.getLost_info());
+            mAlarmUnitTv.setText(lostInfo.getLost_unit());
+        }
     }
 
     @Override
