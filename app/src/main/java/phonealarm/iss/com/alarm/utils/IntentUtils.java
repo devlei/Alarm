@@ -222,4 +222,13 @@ public class IntentUtils {
         PoliceInteractAddActivity.open(context);
     }
 
+    /**
+     * 打开报警历史
+     *
+     * @param context
+     */
+    public static void openAlarmHistory(Context context) {
+        AlarmHistoryActivity.open(context);
+    }
+
 }

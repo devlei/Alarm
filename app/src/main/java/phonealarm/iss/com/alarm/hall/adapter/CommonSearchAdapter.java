@@ -20,7 +20,6 @@ import phonealarm.iss.com.alarm.hall.adapter.CommonSearchAdapter.CommonSearchVie
 import phonealarm.iss.com.alarm.utils.CollectionUtils;
 import phonealarm.iss.com.alarm.utils.DateUtils;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
-import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 import java.util.List;
 
@@ -323,7 +322,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                     IntentUtils.openPoliceInteractDetail(v.getContext());
                     break;
                 case R.integer.type_alarm_history:
-                    ToastUtils.showToast(v.getContext(), R.string.alarm_history);
+                    IntentUtils.openAlarmHistory(v.getContext());
                     break;
             }
 

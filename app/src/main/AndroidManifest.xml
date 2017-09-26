@@ -88,6 +88,9 @@
         <activity
             android:name=".hall.PoliceInteractAddActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name=".personal.AlarmHistoryActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <!-- <activity -->
         <!-- android:name=".login.LoginActivity" -->
         <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" -->

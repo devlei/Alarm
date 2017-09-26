@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/s_15"
-            android:text="@string/phone"
+            android:text="@string/phone_number"
             android:textColor="@color/color_666666"
             android:textSize="@dimen/f_15"/>
 

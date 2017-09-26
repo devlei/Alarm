@@ -47,7 +47,7 @@
     <string name="phone_hint">请输入手机号码</string>
     <string name="address_hint">请输入联系地址</string>
 
-    <string name="phone">手机号</string>
+    <string name="phone_number">手机号</string>
     <string name="change_phone">更换手机号</string>
     <string name="complete">完成</string>
 
@@ -124,5 +124,20 @@
     <string name="info_input_hint">请填写信息描述</string>
 
     <string name="function_not_open">功能暂未开通</string>
+
+    <string name="time">时间：</string>
+    <string name="site">地点：</string>
+    <string name="phone">手机：</string>
+    <string name="alarm_content">报警内容：</string>
+    <string name="alarm_related">报警相关：</string>
+
+    <string name="evaluate">评价</string>
+    <string name="alarm_evaluate">处警评价</string>
+    <string name="praise">好评</string>
+    <string name="middle_evaluate">中评</string>
+    <string name="bad_evaluate">差评</string>
+    <string name="evaluate_hint">请输入评价内容</string>
+    <string name="cancel">取消</string>
+    <string name="submit">提交</string>
 
 </resources>
