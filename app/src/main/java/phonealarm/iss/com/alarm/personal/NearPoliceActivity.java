@@ -37,7 +37,7 @@ public class NearPoliceActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_near_police);
         init();
-
+        getData();
         // TODO: 2017/9/23 weizhilei test data
         mNearPoliceRv.setAdapter(new NearPoliceAdapter());
     }
@@ -62,4 +62,9 @@ public class NearPoliceActivity extends Activity implements OnClickListener {
                 break;
         }
     }
+
+    private void getData() {
+        // TODO: 2017/9/26 weizhilei 缺少附近派出所接口
+    }
+
 }
