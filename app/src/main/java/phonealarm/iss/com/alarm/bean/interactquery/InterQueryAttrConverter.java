@@ -1,4 +1,4 @@
-package phonealarm.iss.com.alarm.bean.interact;
+package phonealarm.iss.com.alarm.bean.interactquery;
 
 import com.thoughtworks.xstream.converters.Converter;
 import com.thoughtworks.xstream.converters.MarshallingContext;
@@ -6,29 +6,31 @@ import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
 
-public class InterAttrConverter implements Converter {
+import phonealarm.iss.com.alarm.bean.interact.InteractFile;
+
+/**
+ * Created by zhaocuilong on 2017/9/27.
+ */
+
+public class InterQueryAttrConverter implements Converter {
 
     @Override
     public boolean canConvert(Class type) {
-        return type.equals(InteractFile.class);
+        return type.equals(InterQueryType.class);
     }
 
 
     @Override
     public void marshal(Object source, HierarchicalStreamWriter writer,
                         MarshallingContext context) {
-        InteractFile attr = (InteractFile) source;
-        writer.addAttribute("type", attr.getType());
-        writer.addAttribute("filename", attr.getType());
+        InterQueryType attr = (InterQueryType) source;
         writer.setValue(attr.getValue());
     }
 
     @Override
     public Object unmarshal(HierarchicalStreamReader reader,
                             UnmarshallingContext context) {
-        InteractFile a = new InteractFile();
-        a.setType(reader.getAttribute("type"));
-        a.setType(reader.getAttribute("filename"));
+        InterQueryType a = new InterQueryType();
         a.setValue(reader.getValue());
         return a;
     }

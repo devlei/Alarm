@@ -168,8 +168,8 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     public void onNext(CasesInfoListBean getBean) {
                         if (getBean != null) {
                             CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_cases);
-                            adapter.setCasesInfoList(getBean.getCasesInfoList());
-                            mRv.setAdapter(adapter);
+//                            adapter.setCasesInfoList(getBean.getCasesInfoList());
+//                            mRv.setAdapter(adapter);
                         }
                     }
 
@@ -240,8 +240,8 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     public void onNext(SuspectBean getBean) {
                         if (getBean != null) {
                             CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_suspect_track);
-                            adapter.setSuspectInfoList(getBean.getSuspectInfoList());
-                            mRv.setAdapter(adapter);
+//                            adapter.setSuspectInfoList(getBean.getSuspectInfoList());
+//                            mRv.setAdapter(adapter);
                         }
                     }
 
@@ -276,8 +276,8 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     public void onNext(BeLostBean getBean) {
                         if (getBean != null) {
                             CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_people_lost);
-                            adapter.setBelostInfoList(getBean.getBeLostInfoList());
-                            mRv.setAdapter(adapter);
+//                            adapter.setBelostInfoList(getBean.getBeLostInfoList());
+//                            mRv.setAdapter(adapter);
                         }
                     }
 
@@ -312,8 +312,8 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     public void onNext(LostBean getBean) {
                         if (getBean != null) {
                             CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_lost_found);
-                            adapter.setLostInfoList(getBean.getLostInfoList());
-                            mRv.setAdapter(adapter);
+//                            adapter.setLostInfoList(getBean.getLostInfoList());
+//                            mRv.setAdapter(adapter);
                         }
                     }
 

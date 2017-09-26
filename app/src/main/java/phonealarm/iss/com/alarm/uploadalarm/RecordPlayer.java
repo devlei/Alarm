@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by zhaocuilong on 2017/9/25.
@@ -20,7 +21,7 @@ public class RecordPlayer {
         this.mcontext = context;
     }
 
-    // 播放录音文件
+    // 播放本地录音文件
     public void playRecordFile(File file) {
         if (file.exists() && file != null) {
             if (mediaPlayer == null) {
@@ -39,6 +40,18 @@ public class RecordPlayer {
             });
 
 
+        }
+    }
+
+    // 播放网络在线录音文件
+    public void playNetAudio(String resUrl) {
+        try {
+            mediaPlayer.reset();
+            mediaPlayer.setDataSource(resUrl);
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

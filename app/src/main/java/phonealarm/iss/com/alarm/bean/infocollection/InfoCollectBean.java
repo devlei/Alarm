@@ -7,8 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import phonealarm.iss.com.alarm.bean.uploadalarm.UpLoadFileBean;
-
 /**
  * Created by zhaocuilong on 2017/9/26.
  */
@@ -24,14 +22,14 @@ public class InfoCollectBean implements Serializable {
     @XStreamAlias("FUZENAME")
     private String FUZENAME;
 
-    @XStreamAlias("FUZERENCARD")
+    @XStreamAlias("FUZECARD")
     private String FUZERENCARD;
 
     @XStreamAlias("FUZETELE")
-    private String FUZETELE;
+    private String FUZETELE = "";
 
-    @XStreamAlias("FUZERENHOUSE")
-    private String FUZERENHOUSE;
+    @XStreamAlias("FUZEHOUSE")
+    private String FUZERENHOUSE = "";
 
     @XStreamAlias("STARTTIME")
     private String STARTTIME;
@@ -39,8 +37,20 @@ public class InfoCollectBean implements Serializable {
     @XStreamAlias("ENDTIME")
     private String ENDTIME;
 
-    @XStreamImplicit(itemFieldName = "RZR_LIST")
-    private List<LiablePerson> rzeList = new ArrayList<LiablePerson>();
+    @XStreamAlias("HOTEL_ADRESS")
+    private String HOTEL_ADRESS;
+
+    @XStreamAlias("HOTEL_NAME")
+    private String HOTEL_NAME;
+
+    @XStreamAlias("HOME_NAME")
+    private String HOME_NAME;
+
+    @XStreamAlias("HOTEL_TELE")
+    private String HOTEL_TELE = "";
+
+    @XStreamAlias("RZR_LIST")
+    private LiablePersonList liablePersonList;
 
     public String getSHANGBAOID() {
         return SHANGBAOID;
@@ -106,12 +116,44 @@ public class InfoCollectBean implements Serializable {
         this.ENDTIME = ENDTIME;
     }
 
-    public List<LiablePerson> getRzeList() {
-        return rzeList;
+    public LiablePersonList getLiablePersonList() {
+        return liablePersonList;
     }
 
-    public void setRzeList(List<LiablePerson> rzeList) {
-        this.rzeList = rzeList;
+    public void setLiablePersonList(LiablePersonList liablePersonList) {
+        this.liablePersonList = liablePersonList;
+    }
+
+    public String getHOTEL_ADRESS() {
+        return HOTEL_ADRESS;
+    }
+
+    public void setHOTEL_ADRESS(String HOTEL_ADRESS) {
+        this.HOTEL_ADRESS = HOTEL_ADRESS;
+    }
+
+    public String getHOTEL_NAME() {
+        return HOTEL_NAME;
+    }
+
+    public void setHOTEL_NAME(String HOTEL_NAME) {
+        this.HOTEL_NAME = HOTEL_NAME;
+    }
+
+    public String getHOME_NAME() {
+        return HOME_NAME;
+    }
+
+    public void setHOME_NAME(String HOME_NAME) {
+        this.HOME_NAME = HOME_NAME;
+    }
+
+    public String getHOTEL_TELE() {
+        return HOTEL_TELE;
+    }
+
+    public void setHOTEL_TELE(String HOTEL_TELE) {
+        this.HOTEL_TELE = HOTEL_TELE;
     }
 
     @Override
@@ -125,7 +167,11 @@ public class InfoCollectBean implements Serializable {
                 ", FUZERENHOUSE='" + FUZERENHOUSE + '\'' +
                 ", STARTTIME='" + STARTTIME + '\'' +
                 ", ENDTIME='" + ENDTIME + '\'' +
-                ", rzeList=" + rzeList +
+                ", HOTEL_ADRESS='" + HOTEL_ADRESS + '\'' +
+                ", HOTEL_NAME='" + HOTEL_NAME + '\'' +
+                ", HOME_NAME='" + HOME_NAME + '\'' +
+                ", HOTEL_TELE='" + HOTEL_TELE + '\'' +
+                ", liablePersonList=" + liablePersonList +
                 '}';
     }
 }

@@ -48,6 +48,9 @@ public class SuspectInfo implements Serializable {
     @XStreamAlias("pursuit_time")
     private String pursuit_time;
 
+    @XStreamAlias("suspect_adress")
+    private String suspect_adress;
+
     public String getSuspect_id() {
         return suspect_id;
     }
@@ -144,13 +147,30 @@ public class SuspectInfo implements Serializable {
         this.pursuit_time = pursuit_time;
     }
 
-    @Override
-    public String toString() {
-        return "SuspectInfo [suspect_id=" + suspect_id + ", suspect_name=" + suspect_name + ", suspect_birth=" +
-                suspect_birth + ", suspect_card=" + suspect_card + ", suspect_rank=" + suspect_rank + ", " +
-                "suspect_feature=" + suspect_feature + ", suspect_case=" + suspect_case + ", suspect_award=" +
-                suspect_award + ", suspect_fanzui=" + suspect_fanzui + ", suspect_purl=" + suspect_purl + ", " +
-                "pursuit_time=" + pursuit_time + "]";
+    public String getSuspect_adress() {
+        return suspect_adress;
     }
 
+    public void setSuspect_adress(String suspect_adress) {
+        this.suspect_adress = suspect_adress;
+    }
+
+    @Override
+    public String toString() {
+        return "SuspectInfo{" +
+                "suspect_id='" + suspect_id + '\'' +
+                ", suspect_name='" + suspect_name + '\'' +
+                ", suspect_sex='" + suspect_sex + '\'' +
+                ", suspect_birth='" + suspect_birth + '\'' +
+                ", suspect_card='" + suspect_card + '\'' +
+                ", suspect_rank='" + suspect_rank + '\'' +
+                ", suspect_feature='" + suspect_feature + '\'' +
+                ", suspect_case='" + suspect_case + '\'' +
+                ", suspect_award='" + suspect_award + '\'' +
+                ", suspect_fanzui='" + suspect_fanzui + '\'' +
+                ", suspect_purl='" + suspect_purl + '\'' +
+                ", pursuit_time='" + pursuit_time + '\'' +
+                ", suspect_adress='" + suspect_adress + '\'' +
+                '}';
+    }
 }

@@ -17,7 +17,7 @@ public class LiablePerson implements Serializable {
     private String PIDCARD;
 
     @XStreamAlias("PTELE")
-    private String PTELE;
+    private String PTELE = "";
 
     public String getPNAME() {
         return PNAME;

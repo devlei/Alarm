@@ -2,16 +2,13 @@ package phonealarm.iss.com.alarm.bean.contact;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 /**
- * 添加联系人
- *
- * @author Administrator
+ * Created by zhaocuilong on 2017/9/26.
  */
-@XStreamAlias("information")
-public class AddContact implements Serializable {
+@XStreamAlias("contacts")
+public class GetContact {
 
     @XStreamAlias("contacts_id")
     private String contacts_id = UUID.randomUUID().toString();

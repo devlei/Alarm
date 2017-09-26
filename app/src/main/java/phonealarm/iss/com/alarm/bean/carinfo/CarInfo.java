@@ -10,7 +10,7 @@ public class CarInfo implements Serializable {
     private String car_id;
 
     @XStreamAlias("car_num")
-    private String car_num;
+    private String car_num;//车拍号
 
     @XStreamAlias("car_type")
     private String car_type;
@@ -28,10 +28,21 @@ public class CarInfo implements Serializable {
     private String car_purl;
 
     @XStreamAlias("car_date")
-    private String car_date;
+    private String car_date;//列表显示时间
 
     @XStreamAlias("pursuit_time")
-    private String pursuit_time;
+    private String pursuit_time;//追踪时间
+
+    @XStreamAlias("car_adress")
+    private String car_adress;
+
+    public String getCar_adress() {
+        return car_adress;
+    }
+
+    public void setCar_adress(String car_adress) {
+        this.car_adress = car_adress;
+    }
 
     public String getCar_id() {
         return car_id;

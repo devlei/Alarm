@@ -8,8 +8,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,12 +26,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar;
 import phonealarm.iss.com.alarm.R;
-import phonealarm.iss.com.alarm.utils.GlideUtils;
 
 public class FastAlarmActivity extends Activity implements View.OnClickListener {
 
@@ -55,11 +51,10 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
     private int typeResId;
     private EditText mEditText;
     private ImageView video_btn, video_delete, video_record,
-            imgadd, imgaddone, imgaddtwo, imgaddthree, imgaddfour;
+            imgadd;
     private TextView video_local, voice_time;
     private ZzHorizontalProgressBar video_seekBar;
     private LinearLayout imgarray;
-    private final int TAG = 9999;
     //录音
     private MediaRecorder mediaRecorder;
     private File recordFile;
@@ -161,7 +156,8 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         video_delete.setVisibility(isRecord ? View.VISIBLE : View.GONE);
     }
 
-    private ArrayList<File> arrayList=new ArrayList<>();
+    private ArrayList<File> arrayList = new ArrayList<>();
+
     private void upLoad() {
         this.finish();
         //TODO UPLOAD

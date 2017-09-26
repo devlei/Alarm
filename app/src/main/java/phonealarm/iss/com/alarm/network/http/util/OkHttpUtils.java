@@ -48,7 +48,7 @@ public class OkHttpUtils {
             .parse("text/plain");
 
     private static OkHttpUtils sOkHttpUtils;
-    private static final long TIME = 10;
+    private static final long TIME = 100;
     private OkHttpClient mOkHttpClient;
     private OkHttpDeliver mDeliver;
 
@@ -81,6 +81,7 @@ public class OkHttpUtils {
         requestCall.getCall().enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                System.out.println("=ttt==onFailure==>" + e);
                 if (call.isCanceled()) {
                     if (null != callBack) {
                         mDeliver.deliverError(callBack, new PotatoException("取消了"));
@@ -95,7 +96,7 @@ public class OkHttpUtils {
             @Override
             public void onResponse(Call call, Response response)
                     throws IOException {
-
+                System.out.println("=ttt==onResponse==>");
                 try {
                     if (response.code() == 404) {
                         if (callBack != null) {
@@ -132,6 +133,7 @@ public class OkHttpUtils {
                         reader.close();
                         // T t = parse(response.body().string(), callBack);
                         T t = parse(strResponse.toString(), callBack);
+                        System.out.println("===t"+t);
                         mDeliver.deliverSuccess(callBack, t);
                     }
 
@@ -160,6 +162,7 @@ public class OkHttpUtils {
      * @return
      */
     private <T> T parse(String bodyString, CallBack<T> back) {
+        System.out.println("===bodyString===>" + bodyString);
         try {
             T t;
             ParameterizedType type = (ParameterizedType) back.getClass()

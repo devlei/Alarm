@@ -1,11 +1,11 @@
 package phonealarm.iss.com.alarm.bean.searchalarm;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
  * @author Administrator
@@ -15,6 +15,9 @@ public class AlarmInfoBean implements Serializable {
 
     @XStreamAlias("alarm_id")
     private String alarm_id;
+
+    @XStreamAlias("alarm_phone")
+    private String alarm_phone;
 
     @XStreamAlias("alarm_addres")
     private String alarm_addres;
@@ -39,6 +42,14 @@ public class AlarmInfoBean implements Serializable {
 
     @XStreamImplicit(itemFieldName = "attach_list")
     private List<MultimediaAttrBean> attach_list = new ArrayList<MultimediaAttrBean>();
+
+    public String getAlarm_phone() {
+        return alarm_phone;
+    }
+
+    public void setAlarm_phone(String alarm_phone) {
+        this.alarm_phone = alarm_phone;
+    }
 
     public String getAlarm_id() {
         return alarm_id;
@@ -112,5 +123,18 @@ public class AlarmInfoBean implements Serializable {
         this.attach_list = attach_list;
     }
 
-
+    @Override
+    public String toString() {
+        return "AlarmInfoBean{" +
+                "alarm_id='" + alarm_id + '\'' +
+                ", alarm_addres='" + alarm_addres + '\'' +
+                ", alarm_content='" + alarm_content + '\'' +
+                ", rptalarm_time='" + rptalarm_time + '\'' +
+                ", alarm_longtitude='" + alarm_longtitude + '\'' +
+                ", alarm_latitude='" + alarm_latitude + '\'' +
+                ", alarm_status='" + alarm_status + '\'' +
+                ", alarm_type='" + alarm_type + '\'' +
+                ", attach_list=" + attach_list +
+                '}';
+    }
 }

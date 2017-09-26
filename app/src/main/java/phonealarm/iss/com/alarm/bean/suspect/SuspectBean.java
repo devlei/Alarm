@@ -9,62 +9,63 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
  * 嫌疑犯实体类
- * 
+ *
  * @author Administrator
- * 
  */
 @XStreamAlias("information")
 public class SuspectBean {
 
-	@XStreamAsAttribute
-	private String code;
+    @XStreamAsAttribute
+    private String code;
 
-	@XStreamAlias("result")
-	private String result;
+    @XStreamAlias("result")
+    private String result;
 
-	@XStreamAlias("message")
-	private String message;
+    @XStreamAlias("message")
+    private String message;
 
-	@XStreamImplicit(itemFieldName = "suspectInfoList")
-	private List<SuspectInfo> suspectInfoList = new ArrayList<SuspectInfo>();
+    @XStreamAlias("suspectInfoList")
+    private AllSuspectInfo suspectInfoList;
 
-	public String getCode() {
-		return code;
-	}
+    public String getCode() {
+        return code;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	public String getResult() {
-		return result;
-	}
+    public String getResult() {
+        return result;
+    }
 
-	public void setResult(String result) {
-		this.result = result;
-	}
+    public void setResult(String result) {
+        this.result = result;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public List<SuspectInfo> getSuspectInfoList() {
-		return suspectInfoList;
-	}
+    public AllSuspectInfo getSuspectInfoList() {
+        return suspectInfoList;
+    }
 
-	public void setSuspectInfoList(List<SuspectInfo> suspectInfoList) {
-		this.suspectInfoList = suspectInfoList;
-	}
+    public void setSuspectInfoList(AllSuspectInfo suspectInfoList) {
+        this.suspectInfoList = suspectInfoList;
+    }
 
-	@Override
-	public String toString() {
-		return "SuspectBean [code=" + code + ", result=" + result
-				+ ", message=" + message + ", suspectInfoList="
-				+ suspectInfoList + "]";
-	}
-
+    @Override
+    public String toString() {
+        return "SuspectBean{" +
+                "code='" + code + '\'' +
+                ", result='" + result + '\'' +
+                ", message='" + message + '\'' +
+                ", suspectInfoList=" + suspectInfoList +
+                '}';
+    }
 }

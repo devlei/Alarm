@@ -88,8 +88,8 @@ public class EmergencyContactActivity extends Activity implements OnClickListene
                         @Override
                         public void onNext(ContactList getBean) {
                             if (getBean != null) {
-                                EmergencyContactAdapter adapter = new EmergencyContactAdapter(getBean.getContacts());
-                                mEmergencyContactRv.setAdapter(adapter);
+//                                EmergencyContactAdapter adapter = new EmergencyContactAdapter(getBean.getContacts());
+//                                mEmergencyContactRv.setAdapter(adapter);
                             }
                         }
 

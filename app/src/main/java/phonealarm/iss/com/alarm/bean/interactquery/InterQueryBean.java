@@ -1,9 +1,14 @@
-package phonealarm.iss.com.alarm.bean.contact;
+package phonealarm.iss.com.alarm.bean.interactquery;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+import java.io.Serializable;
+
+/**
+ * Created by zhaocuilong on 2017/9/27.
+ */
 @XStreamAlias("information")
-public class GetContactListBean {
+public class InterQueryBean implements Serializable {
 
     @XStreamAlias("result")
     private String result;
@@ -11,8 +16,9 @@ public class GetContactListBean {
     @XStreamAlias("message")
     private String message;
 
-    @XStreamAlias("contactslist")
-    private ContactList contactslist;
+    @XStreamAlias("jmhdInfoList")
+    private AllQueryList jmhdInfoList;
+
 
     public String getResult() {
         return result;
@@ -30,20 +36,20 @@ public class GetContactListBean {
         this.message = message;
     }
 
-    public ContactList getContactslist() {
-        return contactslist;
+    public AllQueryList getJmhdInfoList() {
+        return jmhdInfoList;
     }
 
-    public void setContactslist(ContactList contactslist) {
-        this.contactslist = contactslist;
+    public void setJmhdInfoList(AllQueryList jmhdInfoList) {
+        this.jmhdInfoList = jmhdInfoList;
     }
 
     @Override
     public String toString() {
-        return "GetContactListBean{" +
+        return "InterQueryBean{" +
                 "result='" + result + '\'' +
                 ", message='" + message + '\'' +
-                ", contactslist=" + contactslist +
+                ", jmhdInfoList=" + jmhdInfoList +
                 '}';
     }
 }
