@@ -10,7 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.contact.ContactList;
+import phonealarm.iss.com.alarm.network.UrlSet;
+import phonealarm.iss.com.alarm.network.callback.CallBack;
+import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
 import phonealarm.iss.com.alarm.personal.adapter.EmergencyContactAdapter;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
 
@@ -38,9 +43,7 @@ public class EmergencyContactActivity extends Activity implements OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency_contact);
         init();
-
-        // TODO: 2017/9/23 weizhilei test data
-        mEmergencyContactRv.setAdapter(new EmergencyContactAdapter());
+        loadData();
     }
 
     private void init() {
@@ -66,6 +69,40 @@ public class EmergencyContactActivity extends Activity implements OnClickListene
             case R.id.title_other:
                 IntentUtils.openEmergencyContactAdd(this);
                 break;
+        }
+    }
+
+    private void loadData() {
+        if (AlarmApplication.mAlarmApplication.isLogin() && AlarmApplication.mUserInfo != null) {
+            OkHttpUtils.getBuilder()
+                    .url(UrlSet.getEmergencyContactUrl(AlarmApplication.mUserInfo.getUserid()))
+                    .build()
+                    .buildRequestCall()
+                    .execute(new CallBack<ContactList>() {
+
+                        @Override
+                        public void onStart() {
+
+                        }
+
+                        @Override
+                        public void onNext(ContactList getBean) {
+                            if (getBean != null) {
+                                EmergencyContactAdapter adapter = new EmergencyContactAdapter(getBean.getContacts());
+                                mEmergencyContactRv.setAdapter(adapter);
+                            }
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            super.onError(e);
+                        }
+                    });
         }
     }
 }

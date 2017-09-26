@@ -73,4 +73,24 @@ public class UrlSet {
         return URL_BASIC + "AssessAlarm&userid=" + userId;
     }
 
+    /**
+     * 紧急联系人
+     *
+     * @param userId
+     * @return
+     */
+    public static String getEmergencyContactUrl(String userId) {
+        return URL_BASIC + "GetContacts&userid=" + userId;
+    }
+
+    /**
+     * 添加联系人
+     *
+     * @param userId
+     * @return
+     */
+    public static String getAddContactUrl(String userId) {
+        return URL_BASIC + "AddContacts&userid=" + userId;
+    }
+
 }

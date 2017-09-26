@@ -10,13 +10,23 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.contact.AddContact;
 import phonealarm.iss.com.alarm.personal.adapter.EmergencyContactAdapter.EmergencyContactViewHolder;
-import phonealarm.iss.com.alarm.utils.ToastUtils;
+import phonealarm.iss.com.alarm.utils.CollectionUtils;
+import phonealarm.iss.com.alarm.utils.Utils;
+
+import java.util.List;
 
 /**
  * Created by weizhilei on 2017/9/23.
  */
 public class EmergencyContactAdapter extends RecyclerView.Adapter<EmergencyContactViewHolder> {
+
+    private List<AddContact> mContactList;
+
+    public EmergencyContactAdapter(List<AddContact> contactList) {
+        mContactList = contactList;
+    }
 
     @Override
     public EmergencyContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -36,9 +46,15 @@ public class EmergencyContactAdapter extends RecyclerView.Adapter<EmergencyConta
             }
             holder.itemView.setLayoutParams(lParams);
         }
-        holder.mNameTv.setText("永丰派出所" + position);
-        holder.mPhoneTv.setText(String.valueOf((15212345678l + 1l)));
-        holder.mAddressTv.setText("永丰派出所昌平区回龙观" + position);
+        if (!CollectionUtils.isEmpty(mContactList) && position < mContactList.size()) {
+            AddContact contactInfo = mContactList.get(position);
+            if (contactInfo != null) {
+                holder.mNameTv.setText(contactInfo.getContacts_name());
+                holder.mPhoneTv.setText(contactInfo.getContacts_phone());
+                holder.mAddressTv.setText(contactInfo.getContacts_address());
+                holder.mContactInfo = contactInfo;
+            }
+        }
     }
 
     @Override
@@ -53,6 +69,7 @@ public class EmergencyContactAdapter extends RecyclerView.Adapter<EmergencyConta
         private TextView mNameTv;
         private TextView mPhoneTv;
         private TextView mAddressTv;
+        private AddContact mContactInfo;
 
         public EmergencyContactViewHolder(View itemView) {
             super(itemView);
@@ -64,8 +81,9 @@ public class EmergencyContactAdapter extends RecyclerView.Adapter<EmergencyConta
 
         @Override
         public void onClick(View v) {
-            // TODO: 2017/9/23 weizhilei 拨打电话
-            ToastUtils.showToast(v.getContext(), "拨打电话");
+            if (mContactInfo != null) {
+                Utils.call(v.getContext(), mContactInfo.getContacts_phone());
+            }
         }
     }
 
