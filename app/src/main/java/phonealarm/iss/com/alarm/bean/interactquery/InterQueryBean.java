@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class InterQueryBean implements Serializable {
 
     @XStreamAlias("result")
-    private String result;
+    private int result;
 
     @XStreamAlias("message")
     private String message;
@@ -20,11 +20,11 @@ public class InterQueryBean implements Serializable {
     private AllQueryList jmhdInfoList;
 
 
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(int result) {
         this.result = result;
     }
 
@@ -46,10 +46,7 @@ public class InterQueryBean implements Serializable {
 
     @Override
     public String toString() {
-        return "InterQueryBean{" +
-                "result='" + result + '\'' +
-                ", message='" + message + '\'' +
-                ", jmhdInfoList=" + jmhdInfoList +
-                '}';
+        return "InterQueryBean{" + "result='" + result + '\'' + ", message='" + message + '\'' + ", jmhdInfoList=" +
+                jmhdInfoList + '}';
     }
 }

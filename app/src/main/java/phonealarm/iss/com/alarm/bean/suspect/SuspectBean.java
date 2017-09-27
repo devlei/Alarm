@@ -1,11 +1,7 @@
 package phonealarm.iss.com.alarm.bean.suspect;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 /**
  * 嫌疑犯实体类
@@ -19,7 +15,7 @@ public class SuspectBean {
     private String code;
 
     @XStreamAlias("result")
-    private String result;
+    private int result;
 
     @XStreamAlias("message")
     private String message;
@@ -35,11 +31,11 @@ public class SuspectBean {
         this.code = code;
     }
 
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(int result) {
         this.result = result;
     }
 
@@ -61,11 +57,7 @@ public class SuspectBean {
 
     @Override
     public String toString() {
-        return "SuspectBean{" +
-                "code='" + code + '\'' +
-                ", result='" + result + '\'' +
-                ", message='" + message + '\'' +
-                ", suspectInfoList=" + suspectInfoList +
-                '}';
+        return "SuspectBean{" + "code='" + code + '\'' + ", result='" + result + '\'' + ", message='" + message +
+                '\'' + ", suspectInfoList=" + suspectInfoList + '}';
     }
 }

@@ -1,11 +1,7 @@
 package phonealarm.iss.com.alarm.bean.beLost;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 @XStreamAlias("information")
 public class BeLostBean {
@@ -14,7 +10,7 @@ public class BeLostBean {
     private String code;
 
     @XStreamAlias("result")
-    private String result;
+    private int result;
 
     @XStreamAlias("message")
     private String message;
@@ -30,11 +26,11 @@ public class BeLostBean {
         this.code = code;
     }
 
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(int result) {
         this.result = result;
     }
 
@@ -56,11 +52,7 @@ public class BeLostBean {
 
     @Override
     public String toString() {
-        return "BeLostBean{" +
-                "code='" + code + '\'' +
-                ", result='" + result + '\'' +
-                ", message='" + message + '\'' +
-                ", allBelost=" + allBelost +
-                '}';
+        return "BeLostBean{" + "code='" + code + '\'' + ", result='" + result + '\'' + ", message='" + message + '\''
+                + ", allBelost=" + allBelost + '}';
     }
 }

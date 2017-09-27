@@ -1,12 +1,9 @@
 package phonealarm.iss.com.alarm.bean.caseinfo;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamAsAttribute;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
+
+import java.io.Serializable;
 
 /**
  * 要案返回接受参数实体类
@@ -20,7 +17,7 @@ public class CasesInfoListBean implements Serializable {
     private String code;
 
     @XStreamAlias("result")
-    private String result;
+    private int result;
 
     @XStreamAlias("message")
     private String message;
@@ -36,11 +33,11 @@ public class CasesInfoListBean implements Serializable {
         this.code = code;
     }
 
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(int result) {
         this.result = result;
     }
 
@@ -62,11 +59,7 @@ public class CasesInfoListBean implements Serializable {
 
     @Override
     public String toString() {
-        return "CasesInfoListBean{" +
-                "code='" + code + '\'' +
-                ", result='" + result + '\'' +
-                ", message='" + message + '\'' +
-                ", casesInfoList=" + casesInfoList +
-                '}';
+        return "CasesInfoListBean{" + "code='" + code + '\'' + ", result='" + result + '\'' + ", message='" + message
+                + '\'' + ", casesInfoList=" + casesInfoList + '}';
     }
 }

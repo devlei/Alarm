@@ -11,17 +11,17 @@ import java.io.Serializable;
 public class CheckAlarmMessage implements Serializable {
 
     @XStreamAlias("result")
-    private String result;
+    private int result;
     @XStreamAlias("message")
     private String message;
     @XStreamAlias("alarmlist")
     private AlarmInfoBeanList alarmlist;
 
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(int result) {
         this.result = result;
     }
 
@@ -43,10 +43,7 @@ public class CheckAlarmMessage implements Serializable {
 
     @Override
     public String toString() {
-        return "CheckAlarmMessage{" +
-                "result='" + result + '\'' +
-                ", message='" + message + '\'' +
-                ", alarmlist=" + alarmlist +
-                '}';
+        return "CheckAlarmMessage{" + "result='" + result + '\'' + ", message='" + message + '\'' + ", alarmlist=" +
+                alarmlist + '}';
     }
 }

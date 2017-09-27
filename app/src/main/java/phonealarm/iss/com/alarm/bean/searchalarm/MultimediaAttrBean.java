@@ -3,40 +3,39 @@ package phonealarm.iss.com.alarm.bean.searchalarm;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
+import java.io.Serializable;
+
 /**
  * 多媒体类
- * @author Administrator
  *
+ * @author Administrator
  */
 @XStreamAlias("attachment")
 @XStreamConverter(MultAttrConverter.class)
-public class MultimediaAttrBean {
+public class MultimediaAttrBean implements Serializable {
 
-	private String type;
-	
-	private String value;
+    private String type;
 
-	public String getType() {
-		return type;
-	}
+    private String value;
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public String getValue() {
-		return value;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public void setValue(String value) {
-		this.value = value;
-	}
+    public String getValue() {
+        return value;
+    }
 
-	@Override
-	public String toString() {
-		return "MultimediaAttrBean{" +
-				"type='" + type + '\'' +
-				", value='" + value + '\'' +
-				'}';
-	}
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "MultimediaAttrBean{" + "type='" + type + '\'' + ", value='" + value + '\'' + '}';
+    }
 }

@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.BaseResponseBean;
 import phonealarm.iss.com.alarm.bean.beLost.BeLostBean;
 import phonealarm.iss.com.alarm.bean.carinfo.InformationBean;
 import phonealarm.iss.com.alarm.bean.caseinfo.CasesInfoListBean;
@@ -30,6 +31,7 @@ import phonealarm.iss.com.alarm.network.callback.CallBack;
 import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
 import phonealarm.iss.com.alarm.utils.LogUtils;
+import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
  * Created by weizhilei on 2017/9/23.
@@ -167,11 +169,15 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     @Override
                     public void onNext(CasesInfoListBean getBean) {
                         if (getBean != null) {
-                            CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_cases);
-                            if (getBean.getCasesInfoList() != null) {
-                                adapter.setCasesInfoList(getBean.getCasesInfoList().getCasesInfoList());
-                                mRv.setAdapter(adapter);
-                                LogUtils.d(getBean.getCasesInfoList().toString());
+                            if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                if (getBean.getCasesInfoList() != null) {
+                                    CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_cases);
+                                    adapter.setCasesInfoList(getBean.getCasesInfoList().getCasesInfoList());
+                                    mRv.setAdapter(adapter);
+                                    LogUtils.d(getBean.getCasesInfoList().toString());
+                                }
+                            } else {
+                                ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());
                             }
                         }
                     }
@@ -196,10 +202,16 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
                     @Override
                     public void onNext(InformationBean getBean) {
-                        if (getBean != null && getBean.getCarInfoList() != null) {
-                            CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_vehicle_track);
-                            adapter.setCarInfoList(getBean.getCarInfoList().getCarInfoList());
-                            mRv.setAdapter(adapter);
+                        if (getBean != null) {
+                            if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                if (getBean.getCarInfoList() != null) {
+                                    CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_vehicle_track);
+                                    adapter.setCarInfoList(getBean.getCarInfoList().getCarInfoList());
+                                    mRv.setAdapter(adapter);
+                                }
+                            } else {
+                                ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());
+                            }
                         }
                     }
 
@@ -223,10 +235,16 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
                     @Override
                     public void onNext(SuspectBean getBean) {
-                        if (getBean != null && getBean.getSuspectInfoList() != null) {
-                            CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_suspect_track);
-                            adapter.setSuspectInfoList(getBean.getSuspectInfoList().getSuspectInfoList());
-                            mRv.setAdapter(adapter);
+                        if (getBean != null) {
+                            if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                if (getBean.getSuspectInfoList() != null) {
+                                    CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_suspect_track);
+                                    adapter.setSuspectInfoList(getBean.getSuspectInfoList().getSuspectInfoList());
+                                    mRv.setAdapter(adapter);
+                                }
+                            } else {
+                                ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());
+                            }
                         }
                     }
 
@@ -250,10 +268,16 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
                     @Override
                     public void onNext(BeLostBean getBean) {
-                        if (getBean != null && getBean.getAllBelost() != null) {
-                            CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_people_lost);
-                            adapter.setBelostInfoList(getBean.getAllBelost().getBeLostInfoList());
-                            mRv.setAdapter(adapter);
+                        if (getBean != null) {
+                            if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                if (getBean.getAllBelost() != null) {
+                                    CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_people_lost);
+                                    adapter.setBelostInfoList(getBean.getAllBelost().getBeLostInfoList());
+                                    mRv.setAdapter(adapter);
+                                }
+                            } else {
+                                ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());
+                            }
                         }
                     }
 
@@ -277,10 +301,16 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
                     @Override
                     public void onNext(LostBean getBean) {
-                        if (getBean != null && getBean.getAllLost() != null) {
-                            CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_lost_found);
-                            adapter.setLostInfoList(getBean.getAllLost().getLostInfoList());
-                            mRv.setAdapter(adapter);
+                        if (getBean != null) {
+                            if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                if (getBean.getAllLost() != null) {
+                                    CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_lost_found);
+                                    adapter.setLostInfoList(getBean.getAllLost().getLostInfoList());
+                                    mRv.setAdapter(adapter);
+                                }
+                            } else {
+                                ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());
+                            }
                         }
                     }
 
@@ -306,10 +336,17 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
                         @Override
                         public void onNext(CheckAlarmMessage getBean) {
-                            if (getBean != null && getBean.getAlarmlist() != null) {
-                                CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_alarm_history);
-                                adapter.setAlarmInfoList(getBean.getAlarmlist().getAlarminfo());
-                                mRv.setAdapter(adapter);
+                            if (getBean != null) {
+                                if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                    if (getBean.getAlarmlist() != null) {
+                                        CommonSearchAdapter adapter = new CommonSearchAdapter(
+                                                R.integer.type_alarm_history);
+                                        adapter.setAlarmInfoList(getBean.getAlarmlist().getAlarminfo());
+                                        mRv.setAdapter(adapter);
+                                    }
+                                } else {
+                                    ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());
+                                }
                             }
                         }
 
@@ -337,10 +374,17 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
                         @Override
                         public void onNext(InterQueryBean getBean) {
-                            if (getBean != null && getBean.getJmhdInfoList() != null) {
-                                CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_police_interact);
-                                adapter.setInterQueryInfoList(getBean.getJmhdInfoList().getJmhdInfo());
-                                mRv.setAdapter(adapter);
+                            if (getBean != null) {
+                                if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                    if (getBean.getJmhdInfoList() != null) {
+                                        CommonSearchAdapter adapter = new CommonSearchAdapter(
+                                                R.integer.type_police_interact);
+                                        adapter.setInterQueryInfoList(getBean.getJmhdInfoList().getJmhdInfo());
+                                        mRv.setAdapter(adapter);
+                                    }
+                                } else {
+                                    ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());
+                                }
                             }
                         }
 
