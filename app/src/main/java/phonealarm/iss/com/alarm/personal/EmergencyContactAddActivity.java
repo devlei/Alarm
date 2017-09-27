@@ -2,7 +2,6 @@ package phonealarm.iss.com.alarm.personal;
 
 import android.app.Activity;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -14,9 +13,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.thoughtworks.xstream.XStream;
 import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.BaseResponseBean;
+import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
 import phonealarm.iss.com.alarm.bean.contact.AddContact;
+import phonealarm.iss.com.alarm.bean.interactquery.InterQueryAttrConverter;
 import phonealarm.iss.com.alarm.network.UrlSet;
 import phonealarm.iss.com.alarm.network.callback.CallBack;
 import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
@@ -26,6 +29,7 @@ import phonealarm.iss.com.alarm.utils.ToastUtils;
  * Created by weizhilei on 2017/9/23.
  */
 public class EmergencyContactAddActivity extends Activity implements OnClickListener {
+    private static final String REQUEST_CODE = "request_code";
 
     private EditText mNameEt;
     private EditText mRelationEt;
@@ -35,12 +39,14 @@ public class EmergencyContactAddActivity extends Activity implements OnClickList
     /**
      * open
      *
-     * @param context
+     * @param activity
+     * @param requestCode
      */
-    public static void open(Context context) {
-        if (context != null) {
-            Intent intent = new Intent(context, EmergencyContactAddActivity.class);
-            context.startActivity(intent);
+    public static void openForResult(Activity activity, int requestCode) {
+        if (activity != null) {
+            Intent intent = new Intent(activity, EmergencyContactAddActivity.class);
+            intent.putExtra(REQUEST_CODE, requestCode);
+            activity.startActivityForResult(intent, requestCode);
         }
     }
 
@@ -53,15 +59,15 @@ public class EmergencyContactAddActivity extends Activity implements OnClickList
     }
 
     private void init() {
-        TextView titleTv = (TextView) findViewById(R.id.title_name);
-        titleTv.setText(R.string.emergency_contact);
         mNameEt = (EditText) findViewById(R.id.eca_name);
         mRelationEt = (EditText) findViewById(R.id.eca_relation);
         mPhoneEt = (EditText) findViewById(R.id.eca_phone);
         mAddressEt = (EditText) findViewById(R.id.eca_address);
 
-        findViewById(R.id.title_other).setVisibility(View.GONE);
+        ((TextView) findViewById(R.id.title_name)).setText(R.string.emergency_contact);
+        ((TextView) findViewById(R.id.title_other)).setText(R.string.complete);
         findViewById(R.id.title_back).setOnClickListener(this);
+        findViewById(R.id.title_other).setOnClickListener(this);
         findViewById(R.id.eca_address_book).setOnClickListener(this);
     }
 
@@ -70,6 +76,9 @@ public class EmergencyContactAddActivity extends Activity implements OnClickList
         switch (v.getId()) {
             case R.id.title_back:
                 finish();
+                break;
+            case R.id.title_other:
+                addContact();
                 break;
             case R.id.eca_address_book:
                 openAddressBook();
@@ -90,32 +99,48 @@ public class EmergencyContactAddActivity extends Activity implements OnClickList
             ToastUtils.showToast(this, "电话不能为空");
             return;
         }
-        if (AlarmApplication.mAlarmApplication.isLogin() && AlarmApplication.mUserInfo != null) {
+        AddContact addContact = new AddContact();
+        addContact.setContacts_name(mNameEt.getText().toString());
+        addContact.setContacts_bind(mRelationEt.getText().toString());
+        addContact.setContacts_phone(mPhoneEt.getText().toString());
+        if (!TextUtils.isEmpty(mAddressEt.getText())) {
+            addContact.setContacts_address(mAddressEt.getText().toString());
+        } else {
+            addContact.setContacts_address("");
+        }
+
+        XStream xStream = new XStream();
+        xStream.autodetectAnnotations(true);
+        xStream.registerConverter(new InterQueryAttrConverter());
+        String xmlString = xStream.toXML(addContact).replace("__", "_");
+
+        if (AlarmApplication.mAlarmApplication.isLogin()) {
             OkHttpUtils.postBuilder()
-                    .url(UrlSet.getAddContactUrl(AlarmApplication.mUserInfo.getUserid()))
+                    .url(UrlSet.URL_ADD_CONTACTS)
+                    .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
+                    .addParam("value", xmlString)
                     .build()
                     .buildRequestCall()
-                    .execute(new CallBack<AddContact>() {
+                    .execute(new CallBack<ResponseMessageBean>() {
 
                         @Override
-                        public void onStart() {
+                        public void onStart() {}
 
+                        @Override
+                        public void onNext(ResponseMessageBean postBean) {
+                            if (postBean != null) {
+                                if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                    ToastUtils.showToast(EmergencyContactAddActivity.this, "添加成功");
+                                    finish();
+                                    setResult(getIntent().getIntExtra(REQUEST_CODE, 0));
+                                } else {
+                                    ToastUtils.showToast(EmergencyContactAddActivity.this, postBean.getMessage());
+                                }
+                            }
                         }
 
                         @Override
-                        public void onNext(AddContact getBean) {
-                            finish();
-                        }
-
-                        @Override
-                        public void onComplete() {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            super.onError(e);
-                        }
+                        public void onComplete() {}
                     });
         }
     }

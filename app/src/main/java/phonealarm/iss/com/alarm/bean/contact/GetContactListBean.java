@@ -11,7 +11,7 @@ public class GetContactListBean {
     @XStreamAlias("message")
     private String message;
 
-    @XStreamAlias("contactslist")
+    @XStreamAlias("contactsList")
     private ContactList contactslist;
 
     public int getResult() {

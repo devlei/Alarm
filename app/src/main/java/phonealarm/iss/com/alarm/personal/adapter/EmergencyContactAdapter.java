@@ -24,7 +24,7 @@ public class EmergencyContactAdapter extends RecyclerView.Adapter<EmergencyConta
 
     private List<GetContact> mContactList;
 
-    public EmergencyContactAdapter(List<GetContact> contactList) {
+    public void setContactList(List<GetContact> contactList) {
         mContactList = contactList;
     }
 
@@ -59,7 +59,7 @@ public class EmergencyContactAdapter extends RecyclerView.Adapter<EmergencyConta
 
     @Override
     public int getItemCount() {
-        return 50;
+        return mContactList != null ? mContactList.size() : 0;
     }
 
     /**

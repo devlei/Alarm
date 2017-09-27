@@ -139,7 +139,8 @@ public class EvaluateDialog extends Dialog implements OnCheckedChangeListener, O
             XStream xStream = new XStream();
             xStream.autodetectAnnotations(true);
             xStream.registerConverter(new InterQueryAttrConverter());
-            String xmlString = xStream.toXML(alarmJudgeBean);
+            String xmlString = xStream.toXML(alarmJudgeBean).replace("__", "_");
+            ;
             OkHttpUtils.postBuilder()
                     .url(UrlSet.URL_ALARM_EVALUATE)
                     .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
@@ -154,6 +155,7 @@ public class EvaluateDialog extends Dialog implements OnCheckedChangeListener, O
                         @Override
                         public void onNext(ResponseMessageBean postBean) {
                             if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                ToastUtils.showToast(getContext(), "评价成功");
                                 dismiss();
                             } else {
                                 ToastUtils.showToast(getContext(), postBean.getMessage());

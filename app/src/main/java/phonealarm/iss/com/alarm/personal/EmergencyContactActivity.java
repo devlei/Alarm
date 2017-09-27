@@ -25,8 +25,11 @@ import phonealarm.iss.com.alarm.utils.ToastUtils;
  * Created by weizhilei on 2017/9/23.
  */
 public class EmergencyContactActivity extends Activity implements OnClickListener {
+    private static final int REQUEST_CODE = 1;
 
     private RecyclerView mEmergencyContactRv;
+
+    private EmergencyContactAdapter mAdapter;
 
     /**
      * open
@@ -69,7 +72,7 @@ public class EmergencyContactActivity extends Activity implements OnClickListene
                 finish();
                 break;
             case R.id.title_other:
-                IntentUtils.openEmergencyContactAdd(this);
+                IntentUtils.openEmergencyContactAdd(this, REQUEST_CODE);
                 break;
         }
     }
@@ -91,9 +94,14 @@ public class EmergencyContactActivity extends Activity implements OnClickListene
                             if (postBean != null) {
                                 if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                     if (postBean.getContactslist() != null) {
-                                        EmergencyContactAdapter adapter = new EmergencyContactAdapter(
-                                                postBean.getContactslist().getContacts());
-                                        mEmergencyContactRv.setAdapter(adapter);
+                                        if (mAdapter == null) {
+                                            mAdapter = new EmergencyContactAdapter();
+                                            mAdapter.setContactList(postBean.getContactslist().getContacts());
+                                            mEmergencyContactRv.setAdapter(mAdapter);
+                                        } else {
+                                            mAdapter.setContactList(postBean.getContactslist().getContacts());
+                                            mAdapter.notifyDataSetChanged();
+                                        }
                                     }
                                 } else {
                                     ToastUtils.showToast(EmergencyContactActivity.this, postBean.getMessage());
@@ -104,6 +112,14 @@ public class EmergencyContactActivity extends Activity implements OnClickListene
                         @Override
                         public void onComplete() {}
                     });
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            loadData();
         }
     }
 }

@@ -87,7 +87,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         XStream xStream = new XStream();
         xStream.autodetectAnnotations(true);
         xStream.registerConverter(new InterQueryAttrConverter());
-        String xmlString = xStream.toXML(userInfoBean);
+        String xmlString = xStream.toXML(userInfoBean).replace("__", "_");
         OkHttpUtils.postBuilder()
                 .url(UrlSet.URL_LOGIN)
                 .addParam("value", xmlString)

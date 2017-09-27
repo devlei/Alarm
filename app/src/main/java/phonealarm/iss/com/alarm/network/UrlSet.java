@@ -64,6 +64,11 @@ public class UrlSet {
     public static final String URL_GET_CONTACTS = URL_BASIC + "GetContacts";
 
     /**
+     * 添加紧急联系人
+     */
+    public static final String URL_ADD_CONTACTS = URL_BASIC + "AddContacts";
+
+    /**
      * 重置密码
      */
     public static final String URL_REST_PASSWORD = URL_BASIC + "ResetPassword";
@@ -85,7 +90,7 @@ public class UrlSet {
      * @return
      */
     public static String getAddContactUrl(String userId) {
-        return URL_BASIC + "AddContacts&userid=" + userId;
+        return URL_BASIC + "&userid=" + userId;
     }
 
     /**

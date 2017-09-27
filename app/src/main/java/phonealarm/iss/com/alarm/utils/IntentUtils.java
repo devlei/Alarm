@@ -1,5 +1,6 @@
 package phonealarm.iss.com.alarm.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import phonealarm.iss.com.alarm.MainActivity;
 import phonealarm.iss.com.alarm.bean.beLost.BelostInfo;
@@ -68,10 +69,11 @@ public class IntentUtils {
     /**
      * 打开紧急联系人添加
      *
-     * @param context
+     * @param activity
+     * @param requestCode
      */
-    public static void openEmergencyContactAdd(Context context) {
-        EmergencyContactAddActivity.open(context);
+    public static void openEmergencyContactAdd(Activity activity, int requestCode) {
+        EmergencyContactAddActivity.openForResult(activity, requestCode);
     }
 
     /**
