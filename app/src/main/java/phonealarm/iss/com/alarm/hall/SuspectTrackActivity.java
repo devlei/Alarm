@@ -85,16 +85,13 @@ public class SuspectTrackActivity extends Activity implements OnClickListener {
             mNameTv.setText(suspectInfo.getSuspect_name());
             mTimeTv.setText(suspectInfo.getPursuit_time());
             mGenderTv.setText(suspectInfo.getSuspect_sex());
-            // TODO: 2017/9/26 weizhilei 缺少民族字段
             mNationTv.setText("汉");
             mBirthDateTv.setText(suspectInfo.getSuspect_birth());
             mIdNumberTv.setText(suspectInfo.getSuspect_card());
             mWantedLevelTv.setText(suspectInfo.getSuspect_rank());
-            // TODO: 2017/9/26 weizhilei 涉案类别有2个字段
-            mCaseCategoryTv.setText(suspectInfo.getSuspect_feature());
-            mSignalmentTv.setText(suspectInfo.getSuspect_case());
-            // TODO: 2017/9/26 weizhilei 缺少案件描述字段 
-            mCaseDescTv.setText("按键描述");
+            mCaseCategoryTv.setText(suspectInfo.getSuspect_fanzui());
+            mSignalmentTv.setText(suspectInfo.getSuspect_feature());
+            mCaseDescTv.setText(suspectInfo.getSuspect_case());
             GlideUtils.loadBackgroundImage(this, suspectInfo.getSuspect_purl(), R.drawable.icon_header_default,
                     mHeaderIv);
             mRewardTv.setText(suspectInfo.getSuspect_award());
