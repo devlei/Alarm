@@ -2,6 +2,7 @@ package phonealarm.iss.com.alarm.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import phonealarm.iss.com.alarm.personal.AboutActivity;
 import phonealarm.iss.com.alarm.MainActivity;
 import phonealarm.iss.com.alarm.bean.beLost.BelostInfo;
 import phonealarm.iss.com.alarm.bean.carinfo.CarInfo;
@@ -242,6 +243,15 @@ public class IntentUtils {
      */
     public static void openAlarmHistory(Context context, AlarmInfoBean alarmInfo) {
         AlarmHistoryActivity.open(context, alarmInfo);
+    }
+
+    /**
+     * 打开关于
+     *
+     * @param context
+     */
+    public static void openAbout(Context context) {
+        AboutActivity.open(context);
     }
 
 }

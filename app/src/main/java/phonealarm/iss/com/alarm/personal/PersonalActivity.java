@@ -12,6 +12,7 @@ import android.widget.TextView;
 import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.bean.login.UserInfoBean;
+import phonealarm.iss.com.alarm.utils.AppUtils;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
@@ -103,10 +104,10 @@ public class PersonalActivity extends Activity implements OnClickListener {
                 IntentUtils.openChangePassword(this);
                 break;
             case R.id.personal_check_update:
-                ToastUtils.showToast(this, R.string.check_update);
+                ToastUtils.showToast(this, "已是最新版本：" + AppUtils.getVersionName(this));
                 break;
             case R.id.personal_about:
-                ToastUtils.showToast(this, R.string.about);
+                IntentUtils.openAbout(this);
                 break;
         }
     }
