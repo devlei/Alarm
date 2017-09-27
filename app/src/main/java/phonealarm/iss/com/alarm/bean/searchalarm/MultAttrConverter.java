@@ -26,7 +26,6 @@ public class MultAttrConverter implements Converter {
     @Override
     public Object unmarshal(HierarchicalStreamReader reader,
                             UnmarshallingContext context) {
-        //TODO 未解析出来
         MultimediaAttrBean a = new MultimediaAttrBean();
         a.setType(reader.getAttribute("type"));
         a.setValue(reader.getValue());

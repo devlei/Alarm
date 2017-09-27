@@ -1,6 +1,8 @@
 package phonealarm.iss.com.alarm;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Base64;
@@ -9,8 +11,11 @@ import android.view.View;
 import com.thoughtworks.xstream.XStream;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -18,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
+import phonealarm.iss.com.alarm.bean.alarmjudge.AlarmJudgeBean;
 import phonealarm.iss.com.alarm.bean.beLost.BeLostBean;
 import phonealarm.iss.com.alarm.bean.carinfo.InformationBean;
 import phonealarm.iss.com.alarm.bean.caseinfo.CasesInfoListBean;
@@ -44,6 +50,7 @@ import phonealarm.iss.com.alarm.bean.uploadalarm.UpLoadFileBean;
 import phonealarm.iss.com.alarm.bean.uploadalarm.UploadFileList;
 import phonealarm.iss.com.alarm.network.callback.CallBack;
 import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
+import phonealarm.iss.com.alarm.utils.FileUtils;
 
 
 public class NetTestActivity extends Activity {
@@ -61,13 +68,13 @@ public class NetTestActivity extends Activity {
     public static final String queryAllCarInfo = "http://192.168.0.106:8085/WebService.action?Service=queryAllCarInfo";
 
     //处警评价   OK OK
-    public static final String CHUJING_PINGJIA = "http://192.168.0.106:8085/WebService.action?Service=AssessAlarm";
+    public static final String CHUJING_PINGJIA = "http://218.241.189.52:8089/WebService.action?Service=AssessAlarm";
 
     //多媒体报警 OK OK
-    public static final String YIJIAN_BAOJING = "http://192.168.0.106:8085/WebService.action?Service=CallAlarmService";
+    public static final String YIJIAN_BAOJING = "http://218.241.189.52:8089/WebService.action?Service=CallAlarmService";
 
     //报警记录 OK OK
-    public static final String BAOJING_JILU = "http://192.168.0.106:8085/WebService.action?Service=GetAlarmService";
+    public static final String BAOJING_JILU = "http://218.241.189.52:8089/WebService.action?Service=GetAlarmService";
 
     //注册 OK OK
     public static final String REGIST = "http://192.168.0.106:8085/WebService.action?Service=Registered";
@@ -120,7 +127,7 @@ public class NetTestActivity extends Activity {
     //警民互动添加 OK OK
     public static final String JINGMINHUDONGTIANJIA = "http://192.168.0.106:8085/WebService.action?Service=addNewFk";
 
-    //警民互动接口
+    //警民互动接口 OK OK
     public static final String JINMINHUDONGCHAXUN = "http://218.241.189.52:8089/WebService.action?Service=queryFkInfo";
 
     @Override
@@ -162,40 +169,42 @@ public class NetTestActivity extends Activity {
     public void post(View view) {
 
         //一键报警
-//        UpLoadAlarmInfo upLoadAlarmInfo = new UpLoadAlarmInfo();
-//        upLoadAlarmInfo.setAlarm_addres("地址");
-//        upLoadAlarmInfo.setAlarm_content("内容");
-//        upLoadAlarmInfo.setAlarm_id("121313");
-//        upLoadAlarmInfo.setAlarm_latitude("11.2");
-//        upLoadAlarmInfo.setAlarm_longtitude("323.3");
-//        upLoadAlarmInfo.setAlarm_phone("110");
-//        upLoadAlarmInfo.setAlarm_type("1");
-//
-//
-//        UpLoadFileBean upLoadFileBean = new UpLoadFileBean();
-//        upLoadFileBean.setType("jpg");
-//        upLoadFileBean.setFilename("111.jpg");
+        UpLoadAlarmInfo upLoadAlarmInfo = new UpLoadAlarmInfo();
+        upLoadAlarmInfo.setAlarm_addres("地址");
+        upLoadAlarmInfo.setAlarm_content("内容");
+        upLoadAlarmInfo.setAlarm_id("121313");
+        upLoadAlarmInfo.setAlarm_latitude("11.2");
+        upLoadAlarmInfo.setAlarm_longtitude("323.3");
+        upLoadAlarmInfo.setAlarm_phone("110");
+        upLoadAlarmInfo.setAlarm_type("1");
+
+
+        UpLoadFileBean upLoadFileBean = new UpLoadFileBean();
+        upLoadFileBean.setType("jpg");
+        upLoadFileBean.setFilename("111.jpg");
 //        upLoadFileBean.setValue(getImageStr(IMAGEPATH3));
-//        UpLoadFileBean upLoadFileBean2 = new UpLoadFileBean();
-//        upLoadFileBean2.setType("jpg");
-//        upLoadFileBean2.setFilename("111.jpg");
+        upLoadFileBean.setValue(FileUtils.getimage(IMAHEPATH1));
+        UpLoadFileBean upLoadFileBean2 = new UpLoadFileBean();
+        upLoadFileBean2.setType("jpg");
+        upLoadFileBean2.setFilename("222.jpg");
 //        upLoadFileBean2.setValue(getImageStr(IMAGEPATH3));
-//        List<UpLoadFileBean> list = new ArrayList<>();
-////        list.add(upLoadFileBean);
-//        list.add(upLoadFileBean2);
-//
-//
-//        UploadFileList uploadFileList = new UploadFileList();
-//        uploadFileList.setFile(list);
-//
-//        upLoadAlarmInfo.setFilelist(uploadFileList);
+        upLoadFileBean.setValue(FileUtils.getimage(IMAGEPATH1));
+        List<UpLoadFileBean> list = new ArrayList<>();
+        list.add(upLoadFileBean);
+        list.add(upLoadFileBean2);
+
+
+        UploadFileList uploadFileList = new UploadFileList();
+        uploadFileList.setFile(list);
+
+        upLoadAlarmInfo.setFilelist(uploadFileList);
 
 //        //注册,登录  Userid==username==telephone
 //        UserInfoBean userInfoBean = new UserInfoBean();
-//        userInfoBean.setTelephone("110");
-//        userInfoBean.setUserid("12306");
+//        userInfoBean.setTelephone("15810632322");
+//        userInfoBean.setUserid("15810632322");
 //        userInfoBean.setUsername("昵称");
-//        userInfoBean.setPassword("321");//old 123 new 321
+//        userInfoBean.setPassword("111111");//old 123 new 321
 //        userInfoBean.setStartadress("海淀区");
 
         //添加联系人
@@ -234,42 +243,49 @@ public class NetTestActivity extends Activity {
 //        infoCollectBean.setLiablePersonList(libs);
 
         //警民互动添加
-        InterActBean interActBean = new InterActBean();
-        interActBean.setFk_content("内容");
-        interActBean.setFk_date("2015-12-3");
-        interActBean.setFk_nickname("昵称");
-        interActBean.setFk_telenum("666");
-        interActBean.setFk_appuser("110");
-        AllInterAct allInterAct = new AllInterAct();
-        InteractFile interactFile = new InteractFile();
-        interactFile.setFilename("111");
-        interactFile.setType("jpg");
-        interactFile.setValue(getImageStr(IMAGEPATH3));
-        InteractFile interactFile2 = new InteractFile();
-        interactFile2.setFilename("222");
-        interactFile2.setType("jpg");
-        interactFile2.setValue(getImageStr(IMAGEPATH3));
-        ArrayList<InteractFile> interactFiles = new ArrayList<>();
-        interactFiles.add(interactFile);
-        interactFiles.add(interactFile2);
-        allInterAct.setFilelist(interactFiles);
+//        InterActBean interActBean = new InterActBean();
+//        interActBean.setFk_content("内容");
+//        interActBean.setFk_date("2015-12-3");
+//        interActBean.setFk_nickname("昵称");
+//        interActBean.setFk_telenum("666");
+//        interActBean.setFk_appuser("110");
+//        AllInterAct allInterAct = new AllInterAct();
+//        InteractFile interactFile = new InteractFile();
+//        interactFile.setFilename("111");
+//        interactFile.setType("jpg");
+//        interactFile.setValue(getImageStr(IMAGEPATH3));
+//        InteractFile interactFile2 = new InteractFile();
+//        interactFile2.setFilename("222");
+//        interactFile2.setType("jpg");
+//        interactFile2.setValue(getImageStr(IMAGEPATH3));
+//        ArrayList<InteractFile> interactFiles = new ArrayList<>();
+//        interactFiles.add(interactFile);
+//        interactFiles.add(interactFile2);
+//        allInterAct.setFilelist(interactFiles);
+//
+//        interActBean.setFilelist(allInterAct);
 
-        interActBean.setFilelist(allInterAct);
+
+//        AlarmJudgeBean alarmJudgeBean = new AlarmJudgeBean();
+//        alarmJudgeBean.setAlarm_id("123123");
+//        alarmJudgeBean.setAssess_content("baojingle");
+//        alarmJudgeBean.setAssess_level("0");
+//        alarmJudgeBean.setPhone("15810632322");
 
 
         XStream xStream = new XStream();
         xStream.autodetectAnnotations(true);
-        xStream.registerConverter(new InterQueryAttrConverter());
-        String xmlString = xStream.toXML(interActBean).replace("__", "_");
+        xStream.registerConverter(new UpLoadAttrConverter());
+        String xmlString = xStream.toXML(upLoadAlarmInfo).replace("__", "_");
         System.out.println("===>" + xmlString);
 
         OkHttpUtils.postBuilder()
-                .url(JINMINHUDONGCHAXUN)// YIJIAN_BAOJING  CHAKAN_PERSONINFO CHECK_ALARM_LIST
-                .addParam("userid", "110")
-//                .addParam("value", xmlString)
+                .url(BAOJING_JILU)// YIJIAN_BAOJING  CHAKAN_PERSONINFO CHECK_ALARM_LIST
+                .addParam("userid", "15810632322")
+                .addParam("value", xmlString)
                 .build()
                 .buildRequestCall()
-                .execute(new CallBack<InterQueryBean>() {//ResponseMessageBean InterQueryBean
+                .execute(new CallBack<ResponseMessageBean>() {//ResponseMessageBean InterQueryBean
 
                     @Override
                     public void onStart() {
@@ -277,7 +293,7 @@ public class NetTestActivity extends Activity {
                     }
 
                     @Override
-                    public void onNext(InterQueryBean postBean) {
+                    public void onNext(ResponseMessageBean postBean) {
                         System.out.println("=====onNext====" + postBean);
                     }
 
@@ -344,4 +360,5 @@ public class NetTestActivity extends Activity {
 //        return encoder.encode(data);// 返回Base64编码过的字节数组字符串
         return Base64.encodeToString(data, Base64.DEFAULT);
     }
+
 }

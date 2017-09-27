@@ -40,8 +40,16 @@ public class AlarmInfoBean implements Serializable {
     @XStreamAlias("alarm_type")
     private String alarm_type;
 
-    @XStreamImplicit(itemFieldName = "attach_list")
-    private List<MultimediaAttrBean> attach_list = new ArrayList<MultimediaAttrBean>();
+    @XStreamAlias("attach_list")
+    private AlarmFilesList alarmFilesList;
+
+    public AlarmFilesList getAlarmFilesList() {
+        return alarmFilesList;
+    }
+
+    public void setAlarmFilesList(AlarmFilesList alarmFilesList) {
+        this.alarmFilesList = alarmFilesList;
+    }
 
     public String getAlarm_phone() {
         return alarm_phone;
@@ -115,18 +123,11 @@ public class AlarmInfoBean implements Serializable {
         this.alarm_type = alarm_type;
     }
 
-    public List<MultimediaAttrBean> getAttach_list() {
-        return attach_list;
-    }
-
-    public void setAttach_list(List<MultimediaAttrBean> attach_list) {
-        this.attach_list = attach_list;
-    }
-
     @Override
     public String toString() {
         return "AlarmInfoBean{" +
                 "alarm_id='" + alarm_id + '\'' +
+                ", alarm_phone='" + alarm_phone + '\'' +
                 ", alarm_addres='" + alarm_addres + '\'' +
                 ", alarm_content='" + alarm_content + '\'' +
                 ", rptalarm_time='" + rptalarm_time + '\'' +
@@ -134,7 +135,7 @@ public class AlarmInfoBean implements Serializable {
                 ", alarm_latitude='" + alarm_latitude + '\'' +
                 ", alarm_status='" + alarm_status + '\'' +
                 ", alarm_type='" + alarm_type + '\'' +
-                ", attach_list=" + attach_list +
+                ", alarmFilesList=" + alarmFilesList +
                 '}';
     }
 }

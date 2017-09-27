@@ -13,7 +13,7 @@ import phonealarm.iss.com.alarm.bean.interact.InteractFile;
 @XStreamAlias("files")
 public class InterQueryFile {
 
-    @XStreamImplicit(itemFieldName = "file")
+    @XStreamImplicit(itemFieldName = "fileurl")
     private List<InterQueryType> file;
 
     public List<InterQueryType> getFile() {

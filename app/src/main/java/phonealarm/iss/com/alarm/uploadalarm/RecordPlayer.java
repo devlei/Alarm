@@ -24,12 +24,9 @@ public class RecordPlayer {
     // 播放本地录音文件
     public void playRecordFile(File file) {
         if (file.exists() && file != null) {
-            if (mediaPlayer == null) {
-                Uri uri = Uri.fromFile(file);
-                mediaPlayer = MediaPlayer.create(mcontext, uri);
-            }
+            Uri uri = Uri.fromFile(file);
+            mediaPlayer = MediaPlayer.create(mcontext, uri);
             mediaPlayer.start();
-
             //监听MediaPlayer播放完成
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
@@ -38,10 +35,9 @@ public class RecordPlayer {
 
                 }
             });
-
-
         }
     }
+
 
     // 播放网络在线录音文件
     public void playNetAudio(String resUrl) {

@@ -8,7 +8,7 @@ import phonealarm.iss.com.alarm.bean.interact.InterAttrConverter;
 /**
  * Created by zhaocuilong on 2017/9/27.
  */
-@XStreamAlias("file")
+@XStreamAlias("fileurl")
 @XStreamConverter(InterQueryAttrConverter.class)
 public class InterQueryType {
 
@@ -20,5 +20,12 @@ public class InterQueryType {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return "InterQueryType{" +
+                "value='" + value + '\'' +
+                '}';
     }
 }

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
 import me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar;
@@ -60,18 +63,67 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
     private File recordFile;
     private RecordPlayer player;
 
-    public static Handler mHandler = new Handler() {
+    public static final int TEXT = 121;
+    public static final int PROGRESS = 122;
+    private int duration = 0;
+    private int totalLength = 0;
+    public Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-
+            if (msg.what == TEXT) {
+                if (null != voice_time) {
+                    if (totalLength < 20) {
+                        if (totalLength < 10) {
+                            voice_time.setText("0:0" + totalLength);
+                        } else {
+                            voice_time.setText("0:" + totalLength);
+                        }
+                        totalLength++;
+                        mHandler.sendEmptyMessageDelayed(TEXT, 1000);
+                    } else {
+                        mHandler.removeMessages(TEXT);
+                        stopRecording();
+                        checkTimeLength();
+                    }
+                }
+            } else if (msg.what == PROGRESS) {
+                if (null != video_seekBar) {
+                    try {
+                        int amrDuration = getAmrDuration(recordFile);
+                        video_seekBar.setMax(amrDuration);
+                        if (amrDuration < 20) {
+                            mHandler.sendEmptyMessageDelayed(PROGRESS, 1000);
+                            video_seekBar.setProgress(duration++);
+                        } else {
+                            duration = 0;
+                            video_seekBar.setProgress(20);
+                            mHandler.removeMessages(PROGRESS);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (null != mHandler) {
+            mHandler.removeMessages(PROGRESS);
+            mHandler.removeMessages(TEXT);
+            mHandler.removeCallbacks(null);
+            mHandler = null;
+            duration = 0;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fast_alarm);
-        recordFile = new File("/mnt/sdcard", "kk.amr");
+        recordFile = new File(Environment.getExternalStorageDirectory().getPath(), "kk.amr");
         player = new RecordPlayer(this);
         initView();
         init();
@@ -93,6 +145,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         video_seekBar = (ZzHorizontalProgressBar) findViewById(R.id.video_seekBar);
         video_seekBar.setEnabled(false);
         video_seekBar.setPadding(0);
+        video_seekBar.setMax(60);
 
         imgadd = (ImageView) findViewById(R.id.imgadd);
         imgadd.setOnClickListener(this);
@@ -130,12 +183,16 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
                 switch (action) {
                     case MotionEvent.ACTION_DOWN:
                         System.out.println("===down===");
+                        totalLength = 0;
                         startRecording();//开始录制
+                        mHandler.removeMessages(TEXT);
+                        mHandler.sendEmptyMessage(TEXT);
                         return true;
                     case MotionEvent.ACTION_UP:
                         System.out.println("===up===");
                         stopRecording();
                         checkTimeLength();
+                        mHandler.removeMessages(TEXT);
                         return true;
                     default:
                         break;
@@ -146,8 +203,40 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
     }
 
     private void checkTimeLength() {
-        //TODO
         buttonHandle(true);
+    }
+
+    public static int getAmrDuration(File file) throws IOException {
+        long duration = -1;
+        int[] packedSize = {12, 13, 15, 17, 19, 20, 26, 31, 5, 0, 0, 0, 0, 0,
+                0, 0};
+        RandomAccessFile randomAccessFile = null;
+        try {
+            randomAccessFile = new RandomAccessFile(file, "rw");
+            long length = file.length();// 文件的长度
+            int pos = 6;// 设置初始位置
+            int frameCount = 0;// 初始帧数
+            int packedPos = -1;
+
+            byte[] datas = new byte[1];// 初始数据值
+            while (pos <= length) {
+                randomAccessFile.seek(pos);
+                if (randomAccessFile.read(datas, 0, 1) != 1) {
+                    duration = length > 0 ? ((length - 6) / 650) : 0;
+                    break;
+                }
+                packedPos = (datas[0] >> 3) & 0x0F;
+                pos += packedSize[packedPos] + 1;
+                frameCount++;
+            }
+
+            duration += frameCount * 20;// 帧数*20
+        } finally {
+            if (randomAccessFile != null) {
+                randomAccessFile.close();
+            }
+        }
+        return (int) ((duration / 1000) + 1);
     }
 
     private void buttonHandle(boolean isRecord) {
@@ -322,8 +411,13 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
 
     private void deleteHandle() {
         buttonHandle(false);
-        if (recordFile.exists()) {
+        if (null != recordFile && recordFile.exists()) {
+            stopplayer();
             recordFile.delete();
+            mHandler.removeMessages(TEXT);
+            voice_time.setText("0:00");
+            duration = 0;
+            totalLength = 0;
         }
     }
 
@@ -331,9 +425,14 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
     private void handleVieo() {
         if (player.isPlaying()) {
             pauseplayer();
+            mHandler.removeMessages(PROGRESS);
             video_btn.setImageResource(R.drawable.video_pause);
         } else {
             playRecording();
+            video_seekBar.setProgress(0);
+            mHandler.removeMessages(PROGRESS);
+            mHandler.sendEmptyMessage(PROGRESS);
+            duration = 0;
             video_btn.setImageResource(R.drawable.video_play);
         }
     }
@@ -342,6 +441,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         // 判断，若当前文件已存在，则删除
         mediaRecorder = new MediaRecorder();
         if (recordFile.exists()) {
+            System.out.println("---delete--->");
             recordFile.delete();
         }
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -377,7 +477,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
     }
 
     private void stopplayer() {
-        if (null != player) {
+        if (null != player && player.isPlaying()) {
             player.stopPalyer();
         }
     }

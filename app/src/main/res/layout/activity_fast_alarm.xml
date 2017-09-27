@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/s_4"
                 android:layout_toRightOf="@+id/voice_text"
-                android:text="0:02"
+                android:text="0:00"
                 android:textColor="#4982f5"
                 android:textSize="@dimen/f_13" />
 
@@ -107,9 +107,9 @@
                 android:layout_marginTop="@dimen/s_5"
                 android:layout_toRightOf="@+id/voice_time"
                 app:zpb_bg_color="#6633b5e5"
-                app:zpb_max="100"
+                app:zpb_max="60"
                 app:zpb_pb_color="#4982f5"
-                app:zpb_progress="30" />
+                app:zpb_progress="0" />
 
         </RelativeLayout>
     </LinearLayout>
