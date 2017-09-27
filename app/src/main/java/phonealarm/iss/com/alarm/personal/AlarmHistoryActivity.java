@@ -75,8 +75,7 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
         if (alarmInfo != null) {
             mTimeTv.setText(alarmInfo.getRptalarm_time());
             mSiteTv.setText(alarmInfo.getAlarm_addres());
-            // TODO: 2017/9/26 weizhilei 缺少手机号字段
-            mPhoneTv.setText("1234566745");
+            mPhoneTv.setText(alarmInfo.getAlarm_phone());
             mContentTv.setText(alarmInfo.getAlarm_content());
             // TODO: 2017/9/26 weizhilei 附件
         }

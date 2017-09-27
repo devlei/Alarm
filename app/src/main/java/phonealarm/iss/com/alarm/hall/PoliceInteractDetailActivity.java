@@ -11,6 +11,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.bean.interactquery.InterQueryInfo;
+import phonealarm.iss.com.alarm.bean.interactquery.InterQueryType;
+import phonealarm.iss.com.alarm.utils.CollectionUtils;
+import phonealarm.iss.com.alarm.utils.GlideUtils;
+
+import java.util.List;
 
 /**
  * Created by weizhilei on 2017/9/25.
@@ -47,6 +52,17 @@ public class PoliceInteractDetailActivity extends Activity implements OnClickLis
         InterQueryInfo interQueryInfo = (InterQueryInfo) getIntent().getSerializableExtra(POLICE_INTERACT_INFO);
         if (interQueryInfo != null) {
             mDescTv.setText(interQueryInfo.getFk_content());
+            if (interQueryInfo.getFiles() != null) {
+                List<InterQueryType> interQueryTypeList = interQueryInfo.getFiles().getFile();
+                if (!CollectionUtils.isEmpty(interQueryTypeList)) {
+                    // TODO: 2017/9/27 weizhilei 目前先去第一张图
+                    InterQueryType interQueryType = interQueryTypeList.get(0);
+                    if (interQueryType != null) {
+                        GlideUtils.loadBackgroundImage(this, interQueryType.getValue(), R.drawable.icon_header_default,
+                                mCoverIv);
+                    }
+                }
+            }
             mReplyDescTv.setText(interQueryInfo.getReply_content());
             mReplyTimeTv.setText(interQueryInfo.getReply_date());
         }
