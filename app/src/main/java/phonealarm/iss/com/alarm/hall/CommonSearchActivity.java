@@ -294,7 +294,7 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
      */
     private void getAlarmHistoryData() {
         if (AlarmApplication.mAlarmApplication.isLogin()) {
-            OkHttpUtils.getBuilder()
+            OkHttpUtils.postBuilder()
                     .url(UrlSet.URL_ALARM_HISTORY)
                     .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
                     .build()
@@ -325,7 +325,7 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
      */
     private void getPoliceInteractData() {
         if (AlarmApplication.mAlarmApplication.isLogin()) {
-            OkHttpUtils.getBuilder()
+            OkHttpUtils.postBuilder()
                     .url(UrlSet.URL_POLICE_INTERACT)
                     .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
                     .build()
@@ -338,7 +338,7 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                         @Override
                         public void onNext(InterQueryBean getBean) {
                             if (getBean != null && getBean.getJmhdInfoList() != null) {
-                                CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_alarm_history);
+                                CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_police_interact);
                                 adapter.setInterQueryInfoList(getBean.getJmhdInfoList().getJmhdInfo());
                                 mRv.setAdapter(adapter);
                             }
