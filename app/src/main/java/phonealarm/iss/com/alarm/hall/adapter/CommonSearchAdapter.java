@@ -13,12 +13,12 @@ import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.bean.beLost.BelostInfo;
 import phonealarm.iss.com.alarm.bean.carinfo.CarInfo;
 import phonealarm.iss.com.alarm.bean.caseinfo.CaseInfo;
+import phonealarm.iss.com.alarm.bean.interactquery.InterQueryInfo;
 import phonealarm.iss.com.alarm.bean.lost.LostInfo;
 import phonealarm.iss.com.alarm.bean.searchalarm.AlarmInfoBean;
 import phonealarm.iss.com.alarm.bean.suspect.SuspectInfo;
 import phonealarm.iss.com.alarm.hall.adapter.CommonSearchAdapter.CommonSearchViewHolder;
 import phonealarm.iss.com.alarm.utils.CollectionUtils;
-import phonealarm.iss.com.alarm.utils.DateUtils;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
 
 import java.util.List;
@@ -35,6 +35,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
     private List<SuspectInfo> mSuspectInfoList;
     private List<BelostInfo> mBelostInfoList;
     private List<LostInfo> mLostInfoList;
+    private List<InterQueryInfo> mInterQueryInfoList;
     private List<AlarmInfoBean> mAlarmInfoList;
 
 
@@ -60,6 +61,10 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
 
     public void setLostInfoList(List<LostInfo> lostInfoList) {
         mLostInfoList = lostInfoList;
+    }
+
+    public void setInterQueryInfoList(List<InterQueryInfo> interQueryInfoList) {
+        mInterQueryInfoList = interQueryInfoList;
     }
 
     public void setAlarmInfoList(List<AlarmInfoBean> alarmInfoList) {
@@ -124,8 +129,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
             case R.integer.type_lost_found:
                 return mLostInfoList != null ? mLostInfoList.size() : 0;
             case R.integer.type_police_interact:
-                // TODO: 2017/9/25 weizhilei 缺少警民互动接口
-                break;
+                return mInterQueryInfoList != null ? mInterQueryInfoList.size() : 0;
             case R.integer.type_alarm_history:
                 return mAlarmInfoList != null ? mAlarmInfoList.size() : 0;
         }
@@ -243,11 +247,17 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
      * @param position
      */
     private void setPoliceInteractData(CommonSearchViewHolder holder, int position) {
-        holder.mTopTv.setText(DateUtils.formatDate(DateUtils.Y_M_D_H_M, System.currentTimeMillis()));
-        holder.mTopTimeTv.setVisibility(View.GONE);
-        holder.mMiddleTv.setText("详情描述详情描述详情描述详情描述详情描述详情描述详情描述详情描述详情描述详情描述详情描述");
-        holder.mBottomTv.setText("永丰派出所昌平区回龙观");
-        holder.mBottomTimeTv.setVisibility(View.GONE);
+        if (CollectionUtils.isEmpty(mInterQueryInfoList) && position < mInterQueryInfoList.size()) {
+            InterQueryInfo interQueryInfo = mInterQueryInfoList.get(position);
+            if (interQueryInfo != null) {
+                holder.mTopTv.setText(interQueryInfo.getFk_date());
+                holder.mTopTimeTv.setVisibility(View.GONE);
+                holder.mMiddleTv.setText(interQueryInfo.getFk_content());
+                holder.mBottomTv.setText(interQueryInfo.getReply_content());
+                holder.mBottomTimeTv.setVisibility(View.GONE);
+                holder.mInterQueryInfo = interQueryInfo;
+            }
+        }
     }
 
     /**
@@ -279,11 +289,13 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
         private TextView mMiddleTv;
         private TextView mBottomTv;
         private TextView mBottomTimeTv;
+
         private CaseInfo mCasesInfo;
         private CarInfo mCarInfo;
         private SuspectInfo mSuspectInfo;
         private BelostInfo mBelostInfo;
         private LostInfo mLostInfo;
+        private InterQueryInfo mInterQueryInfo;
         private AlarmInfoBean mAlarmInfo;
 
         public CommonSearchViewHolder(View itemView) {
@@ -317,7 +329,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                     IntentUtils.openLostFound(v.getContext(), mLostInfo);
                     break;
                 case R.integer.type_police_interact:
-                    IntentUtils.openPoliceInteractDetail(v.getContext());
+                    IntentUtils.openPoliceInteractDetail(v.getContext(), mInterQueryInfo);
                     break;
                 case R.integer.type_alarm_history:
                     IntentUtils.openAlarmHistory(v.getContext(), mAlarmInfo);

@@ -20,6 +20,7 @@ import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.bean.beLost.BeLostBean;
 import phonealarm.iss.com.alarm.bean.carinfo.InformationBean;
 import phonealarm.iss.com.alarm.bean.caseinfo.CasesInfoListBean;
+import phonealarm.iss.com.alarm.bean.interactquery.InterQueryBean;
 import phonealarm.iss.com.alarm.bean.lost.LostBean;
 import phonealarm.iss.com.alarm.bean.searchalarm.CheckAlarmMessage;
 import phonealarm.iss.com.alarm.bean.suspect.SuspectBean;
@@ -100,7 +101,7 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 otherTv.setVisibility(View.VISIBLE);
                 otherTv.setText(R.string.add);
                 otherTv.setOnClickListener(this);
-                // TODO: 2017/9/25 weizhilei 无列表接口
+                getPoliceInteractData();
                 break;
             case R.integer.type_alarm_history:
                 titleTv.setText(R.string.alarm_history);
@@ -308,6 +309,37 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                             if (getBean != null && getBean.getAlarmlist() != null) {
                                 CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_alarm_history);
                                 adapter.setAlarmInfoList(getBean.getAlarmlist().getAlarminfo());
+                                mRv.setAdapter(adapter);
+                            }
+                        }
+
+                        @Override
+                        public void onComplete() {}
+
+                    });
+        }
+    }
+
+    /**
+     * 获取警民互动数据
+     */
+    private void getPoliceInteractData() {
+        if (AlarmApplication.mAlarmApplication.isLogin()) {
+            OkHttpUtils.getBuilder()
+                    .url(UrlSet.URL_POLICE_INTERACT)
+                    .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
+                    .build()
+                    .buildRequestCall()
+                    .execute(new CallBack<InterQueryBean>() {
+
+                        @Override
+                        public void onStart() {}
+
+                        @Override
+                        public void onNext(InterQueryBean getBean) {
+                            if (getBean != null && getBean.getJmhdInfoList() != null) {
+                                CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_alarm_history);
+                                adapter.setInterQueryInfoList(getBean.getJmhdInfoList().getJmhdInfo());
                                 mRv.setAdapter(adapter);
                             }
                         }

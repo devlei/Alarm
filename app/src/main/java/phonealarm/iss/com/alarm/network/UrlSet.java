@@ -49,6 +49,11 @@ public class UrlSet {
     public static final String URL_ALARM_HISTORY = URL_BASIC + "GetAlarmService";
 
     /**
+     * 警民互动列表
+     */
+    public static final String URL_POLICE_INTERACT = URL_BASIC + "queryFkInfo";
+
+    /**
      * 重置密码
      */
     public static final String URL_REST_PASSWORD = URL_BASIC + "ResetPassword";

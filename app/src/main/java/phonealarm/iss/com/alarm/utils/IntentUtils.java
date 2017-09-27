@@ -4,6 +4,7 @@ import android.content.Context;
 import phonealarm.iss.com.alarm.MainActivity;
 import phonealarm.iss.com.alarm.bean.beLost.BelostInfo;
 import phonealarm.iss.com.alarm.bean.carinfo.CarInfo;
+import phonealarm.iss.com.alarm.bean.interactquery.InterQueryInfo;
 import phonealarm.iss.com.alarm.bean.lost.LostInfo;
 import phonealarm.iss.com.alarm.bean.searchalarm.AlarmInfoBean;
 import phonealarm.iss.com.alarm.bean.suspect.SuspectInfo;
@@ -216,9 +217,10 @@ public class IntentUtils {
      * 打开警民互动详情
      *
      * @param context
+     * @param interQueryInfo
      */
-    public static void openPoliceInteractDetail(Context context) {
-        PoliceInteractDetailActivity.open(context);
+    public static void openPoliceInteractDetail(Context context, InterQueryInfo interQueryInfo) {
+        PoliceInteractDetailActivity.open(context, interQueryInfo);
     }
 
     /**

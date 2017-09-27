@@ -2,11 +2,13 @@ package phonealarm.iss.com.alarm.bean.interactquery;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+import java.io.Serializable;
+
 /**
  * Created by zhaocuilong on 2017/9/27.
  */
 @XStreamAlias("jmhdInfo")
-public class InterQueryInfo {
+public class InterQueryInfo implements Serializable {
 
     @XStreamAlias("jmhd_id")
     private String jmhd_id;
@@ -98,15 +100,9 @@ public class InterQueryInfo {
 
     @Override
     public String toString() {
-        return "InterQueryInfo{" +
-                "jmhd_id='" + jmhd_id + '\'' +
-                ", jmhd_nickname='" + jmhd_nickname + '\'' +
-                ", jmhd_telenum='" + jmhd_telenum + '\'' +
-                ", fk_content='" + fk_content + '\'' +
-                ", reply_content='" + reply_content + '\'' +
-                ", fk_date='" + fk_date + '\'' +
-                ", reply_date='" + reply_date + '\'' +
-                ", files=" + files +
-                '}';
+        return "InterQueryInfo{" + "jmhd_id='" + jmhd_id + '\'' + ", jmhd_nickname='" + jmhd_nickname + '\'' + ", " +
+                "jmhd_telenum='" + jmhd_telenum + '\'' + ", fk_content='" + fk_content + '\'' + ", reply_content='" +
+                reply_content + '\'' + ", fk_date='" + fk_date + '\'' + ", reply_date='" + reply_date + '\'' + ", " +
+                "files=" + files + '}';
     }
 }

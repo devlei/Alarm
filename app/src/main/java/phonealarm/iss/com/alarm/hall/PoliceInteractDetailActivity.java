@@ -10,12 +10,14 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
-import phonealarm.iss.com.alarm.utils.DateUtils;
+import phonealarm.iss.com.alarm.bean.interactquery.InterQueryInfo;
 
 /**
  * Created by weizhilei on 2017/9/25.
  */
 public class PoliceInteractDetailActivity extends Activity implements OnClickListener {
+
+    private static final String POLICE_INTERACT_INFO = "police_interact_info";
 
     private TextView mDescTv;
     private ImageView mCoverIv;
@@ -27,10 +29,12 @@ public class PoliceInteractDetailActivity extends Activity implements OnClickLis
      * open
      *
      * @param context
+     * @param interQueryInfo
      */
-    public static void open(Context context) {
+    public static void open(Context context, InterQueryInfo interQueryInfo) {
         if (context != null) {
             Intent intent = new Intent(context, PoliceInteractDetailActivity.class);
+            intent.putExtra(POLICE_INTERACT_INFO, interQueryInfo);
             context.startActivity(intent);
         }
     }
@@ -40,11 +44,12 @@ public class PoliceInteractDetailActivity extends Activity implements OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_police_interact_detail);
         init();
-
-        //test data
-        mDescTv.setText("省政府周边北京第九中学旁的兴华长街长期有车辆停放，该地区有九中和风华小学，一到放学时间就造成道路拥堵，周围小区居民进出也不方便，建议将兴华街划上道牙儿，禁止道边停车。");
-        mReplyDescTv.setText("您好，我们会转交交警部门实地查看，进行整改请您耐心等待我们为您反馈信息。");
-        mReplyTimeTv.setText(DateUtils.formatDate(DateUtils.Y_M_D_H_M, System.currentTimeMillis()));
+        InterQueryInfo interQueryInfo = (InterQueryInfo) getIntent().getSerializableExtra(POLICE_INTERACT_INFO);
+        if (interQueryInfo != null) {
+            mDescTv.setText(interQueryInfo.getFk_content());
+            mReplyDescTv.setText(interQueryInfo.getReply_content());
+            mReplyTimeTv.setText(interQueryInfo.getReply_date());
+        }
     }
 
     private void init() {
