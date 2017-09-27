@@ -165,9 +165,8 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                 String title = carInfo.getCar_num() + "," + carInfo.getCar_type() + "," + carInfo.getCar_color();
                 holder.mTopTv.setText(title);
                 holder.mTopTimeTv.setText(carInfo.getCar_date());
-                // TODO: 2017/9/25 weizhilei 无字段
-                holder.mMiddleTv.setText("「已追踪59天1小时」于2017-9-31 10：25时许，啦啦啦啦啦");
-                holder.mBottomTv.setText("北京市朝阳区和平街15区");
+                holder.mMiddleTv.setText(carInfo.getPursuit_time() + carInfo.getCar_info());
+                holder.mBottomTv.setText(carInfo.getCar_adress());
                 holder.mBottomTimeTv.setVisibility(View.GONE);
                 holder.mCarInfo = carInfo;
             }
@@ -184,15 +183,11 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
         if (!CollectionUtils.isEmpty(mSuspectInfoList) && position < mSuspectInfoList.size()) {
             SuspectInfo suspectInfo = mSuspectInfoList.get(position);
             if (suspectInfo != null) {
-                // TODO: 2017/9/25 weizhilei 缺少年龄字段
                 String title = suspectInfo.getSuspect_name() + "," + suspectInfo.getSuspect_sex();
                 holder.mTopTv.setText(title);
-                // TODO: 2017/9/25 weizhilei 缺少右上角日期 
-                holder.mTopTimeTv.setText(DateUtils.formatDate(DateUtils.Y_M_D_H_M, System.currentTimeMillis()));
-                // TODO: 2017/9/25 weizhilei 缺少描述字段
-                holder.mMiddleTv.setText("「已追踪59天1小时」于2017-9-31 10：25时许，啦啦啦啦啦");
-                // TODO: 2017/9/25 weizhilei 缺少address
-                holder.mBottomTv.setText("北京市朝阳区和平街15区");
+                holder.mTopTimeTv.setText(suspectInfo.getSuspect_sendtime());
+                holder.mMiddleTv.setText(suspectInfo.getPursuit_time() + suspectInfo.getSuspect_case());
+                holder.mBottomTv.setText(suspectInfo.getSuspect_adress());
                 holder.mBottomTimeTv.setVisibility(View.GONE);
                 holder.mSuspectInfo = suspectInfo;
             }

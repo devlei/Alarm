@@ -51,6 +51,9 @@ public class SuspectInfo implements Serializable {
     @XStreamAlias("suspect_adress")
     private String suspect_adress;
 
+    @XStreamAlias("suspect_sendtime")
+    private String suspect_sendtime;
+
     public String getSuspect_id() {
         return suspect_id;
     }
@@ -155,22 +158,22 @@ public class SuspectInfo implements Serializable {
         this.suspect_adress = suspect_adress;
     }
 
+    public String getSuspect_sendtime() {
+        return suspect_sendtime;
+    }
+
+    public void setSuspect_sendtime(String suspect_sendtime) {
+        this.suspect_sendtime = suspect_sendtime;
+    }
+
     @Override
     public String toString() {
-        return "SuspectInfo{" +
-                "suspect_id='" + suspect_id + '\'' +
-                ", suspect_name='" + suspect_name + '\'' +
-                ", suspect_sex='" + suspect_sex + '\'' +
-                ", suspect_birth='" + suspect_birth + '\'' +
-                ", suspect_card='" + suspect_card + '\'' +
-                ", suspect_rank='" + suspect_rank + '\'' +
-                ", suspect_feature='" + suspect_feature + '\'' +
-                ", suspect_case='" + suspect_case + '\'' +
-                ", suspect_award='" + suspect_award + '\'' +
-                ", suspect_fanzui='" + suspect_fanzui + '\'' +
-                ", suspect_purl='" + suspect_purl + '\'' +
-                ", pursuit_time='" + pursuit_time + '\'' +
-                ", suspect_adress='" + suspect_adress + '\'' +
-                '}';
+        return "SuspectInfo{" + "suspect_id='" + suspect_id + '\'' + ", suspect_name='" + suspect_name + '\'' + ", "
+                + "suspect_sex='" + suspect_sex + '\'' + ", suspect_birth='" + suspect_birth + '\'' + ", " +
+                "suspect_card='" + suspect_card + '\'' + ", suspect_rank='" + suspect_rank + '\'' + ", " +
+                "suspect_feature='" + suspect_feature + '\'' + ", suspect_case='" + suspect_case + '\'' + ", " +
+                "suspect_award='" + suspect_award + '\'' + ", suspect_fanzui='" + suspect_fanzui + '\'' + ", " +
+                "suspect_purl='" + suspect_purl + '\'' + ", pursuit_time='" + pursuit_time + '\'' + ", " +
+                "suspect_adress='" + suspect_adress + '\'' + '}';
     }
 }

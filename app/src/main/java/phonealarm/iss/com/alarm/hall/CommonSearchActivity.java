@@ -18,7 +18,7 @@ import android.widget.TextView;
 import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.bean.beLost.BeLostBean;
-import phonealarm.iss.com.alarm.bean.carinfo.CarInfoList;
+import phonealarm.iss.com.alarm.bean.carinfo.InformationBean;
 import phonealarm.iss.com.alarm.bean.caseinfo.CasesInfoListBean;
 import phonealarm.iss.com.alarm.bean.lost.LostBean;
 import phonealarm.iss.com.alarm.bean.searchalarm.AlarmInfoBeanList;
@@ -188,31 +188,22 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .url(UrlSet.URL_VEHICLE_TRACK)
                 .build()
                 .buildRequestCall()
-                .execute(new CallBack<CarInfoList>() {
+                .execute(new CallBack<InformationBean>() {
 
                     @Override
-                    public void onStart() {
-
-                    }
+                    public void onStart() { }
 
                     @Override
-                    public void onNext(CarInfoList getBean) {
-                        if (getBean != null) {
+                    public void onNext(InformationBean getBean) {
+                        if (getBean != null && getBean.getCarInfoList() != null) {
                             CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_vehicle_track);
-                            adapter.setCarInfoList(getBean.getCarInfoList());
+                            adapter.setCarInfoList(getBean.getCarInfoList().getCarInfoList());
                             mRv.setAdapter(adapter);
                         }
                     }
 
                     @Override
-                    public void onComplete() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                    }
+                    public void onComplete() {}
                 });
     }
 
@@ -227,28 +218,19 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<SuspectBean>() {
 
                     @Override
-                    public void onStart() {
-
-                    }
+                    public void onStart() {}
 
                     @Override
                     public void onNext(SuspectBean getBean) {
-                        if (getBean != null) {
+                        if (getBean != null && getBean.getSuspectInfoList() != null) {
                             CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_suspect_track);
-                            //                            adapter.setSuspectInfoList(getBean.getSuspectInfoList());
-                            //                            mRv.setAdapter(adapter);
+                            adapter.setSuspectInfoList(getBean.getSuspectInfoList().getSuspectInfoList());
+                            mRv.setAdapter(adapter);
                         }
                     }
 
                     @Override
-                    public void onComplete() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                    }
+                    public void onComplete() {}
                 });
     }
 
