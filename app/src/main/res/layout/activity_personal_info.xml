@@ -26,6 +26,7 @@
             android:textSize="@dimen/f_15"/>
 
         <ImageView
+            android:id="@+id/pi_header"
             android:layout_width="@dimen/s_55"
             android:layout_height="@dimen/s_57"
             android:layout_alignParentRight="true"
@@ -35,6 +36,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/pi_nickname_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/s_1"
@@ -52,6 +54,7 @@
             android:textSize="@dimen/f_15"/>
 
         <TextView
+            android:id="@+id/pi_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/s_80"
@@ -78,6 +81,7 @@
             android:textSize="@dimen/f_15"/>
 
         <TextView
+            android:id="@+id/pi_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/s_80"

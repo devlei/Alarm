@@ -5,17 +5,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.thoughtworks.xstream.XStream;
 import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.BaseResponseBean;
+import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
+import phonealarm.iss.com.alarm.bean.interactquery.InterQueryAttrConverter;
 import phonealarm.iss.com.alarm.bean.login.UserInfoBean;
 import phonealarm.iss.com.alarm.network.UrlSet;
 import phonealarm.iss.com.alarm.network.callback.CallBack;
 import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
+import phonealarm.iss.com.alarm.personal.observer.UserReceiver;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
@@ -63,40 +69,81 @@ public class ChangeNickNameActivity extends Activity implements OnClickListener 
     }
 
     private void changeNickName() {
-        if (!AlarmApplication.mAlarmApplication.isLogin() || AlarmApplication.mUserInfo == null) {
-            return;
-        }
         if (TextUtils.isEmpty(mNickNameEt.getText())) {
             ToastUtils.showToast(this, "昵称不合法");
             return;
         }
+        UserInfoBean userInfoBean = new UserInfoBean();
+        userInfoBean.setUserid(AlarmApplication.mAlarmApplication.getUserId());
+        userInfoBean.setUsername(mNickNameEt.getText().toString());
+
+        XStream xStream = new XStream();
+        xStream.autodetectAnnotations(true);
+        xStream.registerConverter(new InterQueryAttrConverter());
+        String xmlString = xStream.toXML(userInfoBean).replace("__", "_");
         OkHttpUtils.postBuilder()
-                .url(UrlSet.getChangeNickNameUrl(AlarmApplication.mUserInfo.getUserid()))
+                .url(UrlSet.URL_RESET_NICKNAME)
+                .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
+                .addParam("value", xmlString)
                 .build()
                 .buildRequestCall()
-                .execute(new CallBack<UserInfoBean>() {
+                .execute(new CallBack<ResponseMessageBean>() {
 
                     @Override
-                    public void onStart() {
-
-                    }
+                    public void onStart() {}
 
                     @Override
-                    public void onNext(UserInfoBean getBean) {
+                    public void onNext(ResponseMessageBean postBean) {
+                        if (postBean != null) {
+                            if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                ToastUtils.showToast(ChangeNickNameActivity.this, "修改成功");
+                                loadUserInfo();
+                            } else {
+                                ToastUtils.showToast(ChangeNickNameActivity.this, postBean.getMessage());
+                            }
+                        }
                         finish();
-                        // TODO: 2017/9/26 weizhilei 通知外面更新
                     }
 
                     @Override
-                    public void onComplete() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                    }
+                    public void onComplete() {}
                 });
+    }
+
+    /**
+     * 发送账户信息改变的广播
+     */
+    private void sendUserInfoChangeBroadCast() {
+        LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(UserReceiver.ACTION_USER_INFO_CHANGE));
+    }
+
+    private void loadUserInfo() {
+        if (AlarmApplication.mAlarmApplication.isLogin()) {
+            OkHttpUtils.postBuilder()
+                    .url(UrlSet.URL_GET_USER)
+                    .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
+                    .build()
+                    .buildRequestCall()
+                    .execute(new CallBack<ResponseMessageBean>() {
+
+                        @Override
+                        public void onStart() {}
+
+                        @Override
+                        public void onNext(ResponseMessageBean postBean) {
+                            if (postBean != null) {
+                                if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                    AlarmApplication.mUserInfo = postBean.getUserInfo();
+                                    finish();
+                                    sendUserInfoChangeBroadCast();
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onComplete() {}
+                    });
+        }
     }
 
 }

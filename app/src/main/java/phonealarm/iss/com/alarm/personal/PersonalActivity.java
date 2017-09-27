@@ -11,8 +11,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
-import phonealarm.iss.com.alarm.bean.login.UserInfoBean;
+import phonealarm.iss.com.alarm.bean.BaseResponseBean;
+import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
+import phonealarm.iss.com.alarm.bean.modifyimg.AllUserInfo;
+import phonealarm.iss.com.alarm.network.UrlSet;
+import phonealarm.iss.com.alarm.network.callback.CallBack;
+import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
+import phonealarm.iss.com.alarm.personal.observer.UserAdapterObserver;
+import phonealarm.iss.com.alarm.personal.observer.UserObserverHelper;
 import phonealarm.iss.com.alarm.utils.AppUtils;
+import phonealarm.iss.com.alarm.utils.GlideUtils;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
@@ -42,7 +50,8 @@ public class PersonalActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal);
         init();
-        setData();
+        loadUserInfo();
+        UserObserverHelper.getInstance().addUserObserver(mUserAdapterObserver);
     }
 
     /**
@@ -57,8 +66,7 @@ public class PersonalActivity extends Activity implements OnClickListener {
 
         findViewById(R.id.title_other).setVisibility(View.GONE);
         findViewById(R.id.title_back).setOnClickListener(this);
-        findViewById(R.id.personal_header).setOnClickListener(this);
-        findViewById(R.id.personal_nickname).setOnClickListener(this);
+        findViewById(R.id.personal_info).setOnClickListener(this);
         findViewById(R.id.personal_alarm_history).setOnClickListener(this);
         findViewById(R.id.personal_emergency_contact).setOnClickListener(this);
         findViewById(R.id.personal_near_police).setOnClickListener(this);
@@ -69,10 +77,14 @@ public class PersonalActivity extends Activity implements OnClickListener {
 
     }
 
-    private void setData() {
-        if (AlarmApplication.mAlarmApplication.isLogin() && AlarmApplication.mUserInfo != null) {
-            UserInfoBean userInfo = AlarmApplication.mUserInfo;
-            // TODO: 2017/9/26 weizhilei 缺少用户头像字段和用户昵称字段和手机号
+    private void setData(AllUserInfo userInfo) {
+        if (userInfo != null) {
+            GlideUtils.loadImage(this, userInfo.getUser_picture(), R.drawable.icon_header_default, mHeaderIv);
+            mNickNameTv.setText(userInfo.getUser_username());
+            mPhoneTv.setText(userInfo.getUser_userid());
+        } else {
+            mNickNameTv.setText("");
+            mPhoneTv.setText("");
         }
     }
 
@@ -82,11 +94,8 @@ public class PersonalActivity extends Activity implements OnClickListener {
             case R.id.title_back:
                 finish();
                 break;
-            case R.id.personal_header:
+            case R.id.personal_info:
                 IntentUtils.openPersonalInfo(this);
-                break;
-            case R.id.personal_nickname:
-                IntentUtils.openChangeNickName(this);
                 break;
             case R.id.personal_alarm_history:
                 IntentUtils.openCommonSearch(this, R.integer.type_alarm_history);
@@ -111,4 +120,49 @@ public class PersonalActivity extends Activity implements OnClickListener {
                 break;
         }
     }
+
+    private void loadUserInfo() {
+        if (AlarmApplication.mAlarmApplication.isLogin()) {
+            OkHttpUtils.postBuilder()
+                    .url(UrlSet.URL_GET_USER)
+                    .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
+                    .build()
+                    .buildRequestCall()
+                    .execute(new CallBack<ResponseMessageBean>() {
+
+                        @Override
+                        public void onStart() {}
+
+                        @Override
+                        public void onNext(ResponseMessageBean postBean) {
+                            if (postBean != null) {
+                                if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                    AlarmApplication.mUserInfo = postBean.getUserInfo();
+                                    setData(postBean.getUserInfo());
+                                } else {
+                                    ToastUtils.showToast(PersonalActivity.this, postBean.getMessage());
+                                    setData(null);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onComplete() {}
+                    });
+        }
+    }
+
+    private UserAdapterObserver mUserAdapterObserver = new UserAdapterObserver() {
+        @Override
+        public void onUserInfoChange() {
+            setData(AlarmApplication.mUserInfo);
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UserObserverHelper.getInstance().removeUserObserver(mUserAdapterObserver);
+    }
+
 }

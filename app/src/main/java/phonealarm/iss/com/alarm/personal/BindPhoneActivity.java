@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.personal.observer.UserAdapterObserver;
+import phonealarm.iss.com.alarm.personal.observer.UserObserverHelper;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
 
 /**
@@ -18,8 +19,7 @@ import phonealarm.iss.com.alarm.utils.IntentUtils;
  */
 public class BindPhoneActivity extends Activity implements OnClickListener {
 
-    private EditText mPhoneEt;
-    private Button mChangeBtn;
+    private TextView mPhoneTv;
 
     /**
      * open
@@ -43,11 +43,15 @@ public class BindPhoneActivity extends Activity implements OnClickListener {
     private void init() {
         TextView titleTv = (TextView) findViewById(R.id.title_name);
         titleTv.setText(R.string.bind_phone);
-        mPhoneEt = (EditText) findViewById(R.id.bp_phone);
+        mPhoneTv = (TextView) findViewById(R.id.bp_phone);
 
         findViewById(R.id.title_back).setOnClickListener(this);
         findViewById(R.id.title_other).setVisibility(View.GONE);
         findViewById(R.id.bp_change).setOnClickListener(this);
+
+        mPhoneTv.setText(AlarmApplication.mAlarmApplication.getUserId());
+
+        UserObserverHelper.getInstance().addUserObserver(mUserAdapterObserver);
     }
 
     @Override
@@ -62,5 +66,19 @@ public class BindPhoneActivity extends Activity implements OnClickListener {
         }
     }
 
+    private UserAdapterObserver mUserAdapterObserver = new UserAdapterObserver() {
+        @Override
+        public void onUserInfoChange() {
+            if (AlarmApplication.mUserInfo != null) {
+                mPhoneTv.setText(AlarmApplication.mUserInfo.getUser_userid());
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UserObserverHelper.getInstance().removeUserObserver(mUserAdapterObserver);
+    }
 
 }

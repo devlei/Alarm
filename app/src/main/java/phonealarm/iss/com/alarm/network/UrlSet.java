@@ -74,33 +74,18 @@ public class UrlSet {
     public static final String URL_REST_PASSWORD = URL_BASIC + "ResetPassword";
 
     /**
+     * 查询用户信息
+     */
+    public static final String URL_GET_USER = URL_BASIC + "queryUserInfo";
+
+    /**
      * 修改昵称
-     *
-     * @param userId
-     * @return
      */
-    public static String getChangeNickNameUrl(String userId) {
-        return URL_BASIC + "ResetUsername&userid=" + userId;
-    }
+    public static final String URL_RESET_NICKNAME = URL_BASIC + "ResetUsername";
 
     /**
-     * 添加联系人
-     *
-     * @param userId
-     * @return
+     * 修改手机号
      */
-    public static String getAddContactUrl(String userId) {
-        return URL_BASIC + "&userid=" + userId;
-    }
-
-    /**
-     * 更换手机号
-     *
-     * @param userId
-     * @return
-     */
-    public static String getChangePhoneUrl(String userId) {
-        return URL_BASIC + "ResetTelenum&userid=" + userId;
-    }
+    public static final String URL_RESET_PHONE = URL_BASIC + "ResetTelenum";
 
 }
