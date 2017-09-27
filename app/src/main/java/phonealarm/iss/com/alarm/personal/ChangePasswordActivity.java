@@ -10,8 +10,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.thoughtworks.xstream.XStream;
 import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.BaseResponseBean;
+import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
+import phonealarm.iss.com.alarm.bean.interactquery.InterQueryAttrConverter;
 import phonealarm.iss.com.alarm.bean.login.UserInfoBean;
 import phonealarm.iss.com.alarm.network.UrlSet;
 import phonealarm.iss.com.alarm.network.callback.CallBack;
@@ -77,32 +81,42 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
             ToastUtils.showToast(this, "密码不能为空");
             return;
         }
-        if (AlarmApplication.mAlarmApplication.isLogin() && AlarmApplication.mUserInfo != null) {
+        if (!mNewPasswordTv.getText().toString().equals(mConfirmPasswordTv.getText().toString())) {
+            ToastUtils.showToast(this, "密码输入不一致");
+            return;
+        }
+        if (AlarmApplication.mAlarmApplication.isLogin()) {
+            UserInfoBean userInfoBean = new UserInfoBean();
+            userInfoBean.setUserid(AlarmApplication.mAlarmApplication.getUserId());
+            userInfoBean.setPassword(mNewPasswordTv.getText().toString());
+
+            XStream xStream = new XStream();
+            xStream.autodetectAnnotations(true);
+            xStream.registerConverter(new InterQueryAttrConverter());
+            String xmlString = xStream.toXML(userInfoBean);
+
             OkHttpUtils.postBuilder()
-                    .url(UrlSet.getChangePhoneUrl(UrlSet.URL_REST_PASSWORD))
+                    .url(UrlSet.URL_REST_PASSWORD)
+                    .addParam("value", xmlString)
                     .build()
                     .buildRequestCall()
-                    .execute(new CallBack<UserInfoBean>() {
+                    .execute(new CallBack<ResponseMessageBean>() {
 
                         @Override
-                        public void onStart() {
+                        public void onStart() {}
 
+                        @Override
+                        public void onNext(ResponseMessageBean postBean) {
+                            if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                ToastUtils.showToast(ChangePasswordActivity.this, "重置密码成功");
+                                finish();
+                            } else {
+                                ToastUtils.showToast(ChangePasswordActivity.this, postBean.getMessage());
+                            }
                         }
 
                         @Override
-                        public void onNext(UserInfoBean getBean) {
-                            finish();
-                        }
-
-                        @Override
-                        public void onComplete() {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            super.onError(e);
-                        }
+                        public void onComplete() {}
                     });
         }
     }
