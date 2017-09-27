@@ -54,6 +54,11 @@ public class UrlSet {
     public static final String URL_POLICE_INTERACT = URL_BASIC + "queryFkInfo";
 
     /**
+     * 处警评价
+     */
+    public static final String URL_ALARM_EVALUATE = URL_BASIC + "AssessAlarm";
+
+    /**
      * 重置密码
      */
     public static final String URL_REST_PASSWORD = URL_BASIC + "ResetPassword";
@@ -66,16 +71,6 @@ public class UrlSet {
      */
     public static String getChangeNickNameUrl(String userId) {
         return URL_BASIC + "ResetUsername&userid=" + userId;
-    }
-
-    /**
-     * 处警评价
-     *
-     * @param userId
-     * @return
-     */
-    public static String getAlarmEvaluateUrl(String userId) {
-        return URL_BASIC + "AssessAlarm&userid=" + userId;
     }
 
     /**

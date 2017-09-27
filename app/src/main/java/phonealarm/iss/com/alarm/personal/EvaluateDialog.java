@@ -15,9 +15,13 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import com.thoughtworks.xstream.XStream;
 import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
-import phonealarm.iss.com.alarm.bean.searchalarm.AlarmInfoBean;
+import phonealarm.iss.com.alarm.bean.BaseResponseBean;
+import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
+import phonealarm.iss.com.alarm.bean.alarmjudge.AlarmJudgeBean;
+import phonealarm.iss.com.alarm.bean.interactquery.InterQueryAttrConverter;
 import phonealarm.iss.com.alarm.network.UrlSet;
 import phonealarm.iss.com.alarm.network.callback.CallBack;
 import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
@@ -34,11 +38,12 @@ public class EvaluateDialog extends Dialog implements OnCheckedChangeListener, O
     private EditText mContentEt;
 
     private String mAlarmId;
+    private String mAlarmPhone;
 
-    public static Dialog show(Context context, String alarmId) {
+    public static Dialog show(Context context, String alarmId, String alarmPhone) {
         EvaluateDialog dialog = null;
         if (context != null) {
-            dialog = new EvaluateDialog(context, alarmId);
+            dialog = new EvaluateDialog(context, alarmId, alarmPhone);
             try {
                 dialog.show();
             } catch (Exception e) {
@@ -48,9 +53,10 @@ public class EvaluateDialog extends Dialog implements OnCheckedChangeListener, O
         return dialog;
     }
 
-    public EvaluateDialog(@NonNull Context context, String alarmId) {
+    public EvaluateDialog(@NonNull Context context, String alarmId, String alarmPhone) {
         super(context, R.style.ThemeTransparent);
         this.mAlarmId = alarmId;
+        this.mAlarmPhone = alarmPhone;
     }
 
     @Override
@@ -118,35 +124,45 @@ public class EvaluateDialog extends Dialog implements OnCheckedChangeListener, O
             ToastUtils.showToast(getContext(), R.string.evaluate_hint);
             return;
         }
-        if (AlarmApplication.mAlarmApplication.isLogin() && AlarmApplication.mUserInfo != null) {
+        if (AlarmApplication.mAlarmApplication.isLogin()) {
             int level = 0;
             if (mGoodBtn.isChecked()) level = 0;
             if (mMiddleBtn.isChecked()) level = 1;
             if (mBadBtn.isChecked()) level = 2;
+
+            AlarmJudgeBean alarmJudgeBean = new AlarmJudgeBean();
+            alarmJudgeBean.setAlarm_id(mAlarmId);
+            alarmJudgeBean.setPhone(mAlarmPhone);
+            alarmJudgeBean.setAssess_level(String.valueOf(level));
+            alarmJudgeBean.setAssess_content(mContentEt.getText().toString());
+
+            XStream xStream = new XStream();
+            xStream.autodetectAnnotations(true);
+            xStream.registerConverter(new InterQueryAttrConverter());
+            String xmlString = xStream.toXML(alarmJudgeBean);
             OkHttpUtils.postBuilder()
-                    .url(UrlSet.getAlarmEvaluateUrl(AlarmApplication.mUserInfo.getUserid()))
+                    .url(UrlSet.URL_ALARM_EVALUATE)
+                    .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
+                    .addParam("value", xmlString)
                     .build()
                     .buildRequestCall()
-                    .execute(new CallBack<AlarmInfoBean>() {
+                    .execute(new CallBack<ResponseMessageBean>() {
 
                         @Override
-                        public void onStart() {
-
-                        }
+                        public void onStart() {}
 
                         @Override
-                        public void onNext(AlarmInfoBean getBean) {
-                            dismiss();
+                        public void onNext(ResponseMessageBean postBean) {
+                            if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                dismiss();
+                            } else {
+                                ToastUtils.showToast(getContext(), postBean.getMessage());
+                            }
                         }
 
                         @Override
                         public void onComplete() {
 
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            super.onError(e);
                         }
                     });
         }

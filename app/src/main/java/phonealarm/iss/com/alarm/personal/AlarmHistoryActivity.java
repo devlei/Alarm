@@ -90,7 +90,7 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
             case R.id.title_other:
                 AlarmInfoBean alarmInfo = (AlarmInfoBean) getIntent().getSerializableExtra(ALARM_INFO);
                 if (alarmInfo != null) {
-                    EvaluateDialog.show(this, alarmInfo.getAlarm_id());
+                    EvaluateDialog.show(this, alarmInfo.getAlarm_id(), alarmInfo.getAlarm_phone());
                 }
                 break;
         }
