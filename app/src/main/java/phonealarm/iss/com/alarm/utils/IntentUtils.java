@@ -150,9 +150,10 @@ public class IntentUtils {
      * 打开网页
      *
      * @param context
+     * @param url
      */
-    public static void openWebView(Context context) {
-        WebViewActivity.open(context);
+    public static void openWebView(Context context, String url) {
+        WebViewActivity.open(context, url);
     }
 
     /**

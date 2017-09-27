@@ -14,16 +14,20 @@ import phonealarm.iss.com.alarm.R;
  */
 public class WebViewActivity extends Activity {
 
+    private static final String H5_URL = "h5_url";
+
     private WebView mWebView;
 
     /**
      * open
      *
      * @param context
+     * @param url
      */
-    public static void open(Context context) {
+    public static void open(Context context, String url) {
         if (context != null) {
             Intent intent = new Intent(context, WebViewActivity.class);
+            intent.putExtra(H5_URL, url);
             context.startActivity(intent);
         }
     }
@@ -37,7 +41,8 @@ public class WebViewActivity extends Activity {
         mWebView.getSettings().setJavaScriptEnabled(true);
         mWebView.setWebViewClient(mWebViewClient);
 
-        mWebView.loadUrl("http://baidu.com");
+        String url = getIntent().getStringExtra(H5_URL);
+        mWebView.loadUrl(url);
     }
 
     private WebViewClient mWebViewClient = new WebViewClient() {

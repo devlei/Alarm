@@ -145,9 +145,9 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                 holder.mTopTv.setText(caseInfo.getCases_theme());
                 holder.mTopTimeTv.setText(caseInfo.getCases_sendtime());
                 holder.mMiddleTv.setText(caseInfo.getCases_content());
-                // TODO: 2017/9/25 weizhilei 需要确认字段 
-                holder.mBottomTv.setText("要案发布机构要案发布机构要案发布机构要案发布机构要案发布机构");
+                holder.mBottomTv.setText(caseInfo.getSendproxy());
                 holder.mBottomTimeTv.setVisibility(View.GONE);
+                holder.mCasesInfo = caseInfo;
             }
         }
     }
@@ -307,8 +307,9 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
         public void onClick(View v) {
             switch (mTypeResId) {
                 case R.integer.type_cases:
-                    // TODO: 2017/9/25 weizhilei 没有H5字段
-                    IntentUtils.openWebView(v.getContext());
+                    if (mCasesInfo != null) {
+                        IntentUtils.openWebView(v.getContext(), mCasesInfo.getWeburl());
+                    }
                     break;
                 case R.integer.type_vehicle_track:
                     IntentUtils.openVehicleTrack(v.getContext(), mCarInfo);

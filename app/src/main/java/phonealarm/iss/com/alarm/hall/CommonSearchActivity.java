@@ -28,6 +28,7 @@ import phonealarm.iss.com.alarm.network.UrlSet;
 import phonealarm.iss.com.alarm.network.callback.CallBack;
 import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
+import phonealarm.iss.com.alarm.utils.LogUtils;
 
 /**
  * Created by weizhilei on 2017/9/23.
@@ -160,28 +161,22 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<CasesInfoListBean>() {
 
                     @Override
-                    public void onStart() {
-
-                    }
+                    public void onStart() {}
 
                     @Override
                     public void onNext(CasesInfoListBean getBean) {
                         if (getBean != null) {
                             CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_cases);
-//                            adapter.setCasesInfoList(getBean.getCasesInfoList());
-//                            mRv.setAdapter(adapter);
+                            if (getBean.getCasesInfoList() != null) {
+                                adapter.setCasesInfoList(getBean.getCasesInfoList().getCasesInfoList());
+                                mRv.setAdapter(adapter);
+                                LogUtils.d(getBean.getCasesInfoList().toString());
+                            }
                         }
                     }
 
                     @Override
-                    public void onComplete() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                    }
+                    public void onComplete() {}
                 });
     }
 
@@ -240,8 +235,8 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     public void onNext(SuspectBean getBean) {
                         if (getBean != null) {
                             CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_suspect_track);
-//                            adapter.setSuspectInfoList(getBean.getSuspectInfoList());
-//                            mRv.setAdapter(adapter);
+                            //                            adapter.setSuspectInfoList(getBean.getSuspectInfoList());
+                            //                            mRv.setAdapter(adapter);
                         }
                     }
 
@@ -276,8 +271,8 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     public void onNext(BeLostBean getBean) {
                         if (getBean != null) {
                             CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_people_lost);
-//                            adapter.setBelostInfoList(getBean.getBeLostInfoList());
-//                            mRv.setAdapter(adapter);
+                            //                            adapter.setBelostInfoList(getBean.getBeLostInfoList());
+                            //                            mRv.setAdapter(adapter);
                         }
                     }
 
@@ -312,8 +307,8 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     public void onNext(LostBean getBean) {
                         if (getBean != null) {
                             CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_lost_found);
-//                            adapter.setLostInfoList(getBean.getLostInfoList());
-//                            mRv.setAdapter(adapter);
+                            //                            adapter.setLostInfoList(getBean.getLostInfoList());
+                            //                            mRv.setAdapter(adapter);
                         }
                     }
 
