@@ -1,6 +1,9 @@
 package phonealarm.iss.com.alarm;
 
 import android.app.Application;
+
+import com.baidu.mapapi.SDKInitializer;
+
 import phonealarm.iss.com.alarm.bean.modifyimg.AllUserInfo;
 import phonealarm.iss.com.alarm.personal.observer.UserObserverHelper;
 
@@ -22,6 +25,7 @@ public class AlarmApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        SDKInitializer.initialize(getApplicationContext());
         mAlarmApplication = this;
         UserObserverHelper.getInstance().registerUserReceiver(this);
     }
