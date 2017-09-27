@@ -208,9 +208,8 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                         .getBeLost_age();
                 holder.mTopTv.setText(title);
                 holder.mTopTimeTv.setText(belostInfo.getBeLost_date());
-                // TODO: 2017/9/25 weizhilei 缺少描述和地址字段
-                holder.mMiddleTv.setText("「已丢失59天1小时」于2017-9-31 10：25时许，啦啦啦啦啦");
-                holder.mBottomTv.setText("北京市朝阳区和平街15区");
+                holder.mMiddleTv.setText(belostInfo.getPursuit_time() + belostInfo.getBeLost_information());
+                holder.mBottomTv.setText(belostInfo.getBeLost_site());
                 holder.mBottomTimeTv.setVisibility(View.GONE);
                 holder.mBelostInfo = belostInfo;
             }
@@ -227,11 +226,10 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
         if (!CollectionUtils.isEmpty(mLostInfoList) && position < mLostInfoList.size()) {
             LostInfo lostInfo = mLostInfoList.get(position);
             if (lostInfo != null) {
-                // TODO: 2017/9/25 weizhilei 缺少标题
-                holder.mTopTv.setText("遗失招领标题" + position);
+                holder.mTopTv.setText(lostInfo.getLost_name());
                 holder.mTopTimeTv.setText(lostInfo.getLost_date());
                 holder.mMiddleTv.setText(lostInfo.getLost_info());
-                holder.mBottomTv.setText(lostInfo.getLost_unit());
+                holder.mBottomTv.setText(lostInfo.getLost_site());
                 holder.mBottomTimeTv.setVisibility(View.GONE);
                 holder.mLostInfo = lostInfo;
             }

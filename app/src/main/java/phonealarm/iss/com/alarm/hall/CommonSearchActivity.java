@@ -245,28 +245,19 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<BeLostBean>() {
 
                     @Override
-                    public void onStart() {
-
-                    }
+                    public void onStart() {}
 
                     @Override
                     public void onNext(BeLostBean getBean) {
-                        if (getBean != null) {
+                        if (getBean != null && getBean.getAllBelost() != null) {
                             CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_people_lost);
-                            //                            adapter.setBelostInfoList(getBean.getBeLostInfoList());
-                            //                            mRv.setAdapter(adapter);
+                            adapter.setBelostInfoList(getBean.getAllBelost().getBeLostInfoList());
+                            mRv.setAdapter(adapter);
                         }
                     }
 
                     @Override
-                    public void onComplete() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                    }
+                    public void onComplete() {}
                 });
     }
 
@@ -281,28 +272,19 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<LostBean>() {
 
                     @Override
-                    public void onStart() {
-
-                    }
+                    public void onStart() {}
 
                     @Override
                     public void onNext(LostBean getBean) {
-                        if (getBean != null) {
+                        if (getBean != null && getBean.getAllLost() != null) {
                             CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_lost_found);
-                            //                            adapter.setLostInfoList(getBean.getLostInfoList());
-                            //                            mRv.setAdapter(adapter);
+                            adapter.setLostInfoList(getBean.getAllLost().getLostInfoList());
+                            mRv.setAdapter(adapter);
                         }
                     }
 
                     @Override
-                    public void onComplete() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                    }
+                    public void onComplete() {}
                 });
     }
 
