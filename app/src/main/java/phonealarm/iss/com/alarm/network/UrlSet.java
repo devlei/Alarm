@@ -59,6 +59,11 @@ public class UrlSet {
     public static final String URL_ALARM_EVALUATE = URL_BASIC + "AssessAlarm";
 
     /**
+     * 获取紧急联系人
+     */
+    public static final String URL_GET_CONTACTS = URL_BASIC + "GetContacts";
+
+    /**
      * 重置密码
      */
     public static final String URL_REST_PASSWORD = URL_BASIC + "ResetPassword";
@@ -71,16 +76,6 @@ public class UrlSet {
      */
     public static String getChangeNickNameUrl(String userId) {
         return URL_BASIC + "ResetUsername&userid=" + userId;
-    }
-
-    /**
-     * 紧急联系人
-     *
-     * @param userId
-     * @return
-     */
-    public static String getEmergencyContactUrl(String userId) {
-        return URL_BASIC + "GetContacts&userid=" + userId;
     }
 
     /**

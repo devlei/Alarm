@@ -10,7 +10,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
-import phonealarm.iss.com.alarm.bean.contact.AddContact;
+import phonealarm.iss.com.alarm.bean.contact.GetContact;
 import phonealarm.iss.com.alarm.personal.adapter.EmergencyContactAdapter.EmergencyContactViewHolder;
 import phonealarm.iss.com.alarm.utils.CollectionUtils;
 import phonealarm.iss.com.alarm.utils.Utils;
@@ -22,9 +22,9 @@ import java.util.List;
  */
 public class EmergencyContactAdapter extends RecyclerView.Adapter<EmergencyContactViewHolder> {
 
-    private List<AddContact> mContactList;
+    private List<GetContact> mContactList;
 
-    public EmergencyContactAdapter(List<AddContact> contactList) {
+    public EmergencyContactAdapter(List<GetContact> contactList) {
         mContactList = contactList;
     }
 
@@ -47,7 +47,7 @@ public class EmergencyContactAdapter extends RecyclerView.Adapter<EmergencyConta
             holder.itemView.setLayoutParams(lParams);
         }
         if (!CollectionUtils.isEmpty(mContactList) && position < mContactList.size()) {
-            AddContact contactInfo = mContactList.get(position);
+            GetContact contactInfo = mContactList.get(position);
             if (contactInfo != null) {
                 holder.mNameTv.setText(contactInfo.getContacts_name());
                 holder.mPhoneTv.setText(contactInfo.getContacts_phone());
@@ -69,7 +69,7 @@ public class EmergencyContactAdapter extends RecyclerView.Adapter<EmergencyConta
         private TextView mNameTv;
         private TextView mPhoneTv;
         private TextView mAddressTv;
-        private AddContact mContactInfo;
+        private GetContact mContactInfo;
 
         public EmergencyContactViewHolder(View itemView) {
             super(itemView);

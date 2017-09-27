@@ -12,12 +12,14 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
-import phonealarm.iss.com.alarm.bean.contact.ContactList;
+import phonealarm.iss.com.alarm.bean.BaseResponseBean;
+import phonealarm.iss.com.alarm.bean.contact.GetContactListBean;
 import phonealarm.iss.com.alarm.network.UrlSet;
 import phonealarm.iss.com.alarm.network.callback.CallBack;
 import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
 import phonealarm.iss.com.alarm.personal.adapter.EmergencyContactAdapter;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
+import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
  * Created by weizhilei on 2017/9/23.
@@ -73,35 +75,34 @@ public class EmergencyContactActivity extends Activity implements OnClickListene
     }
 
     private void loadData() {
-        if (AlarmApplication.mAlarmApplication.isLogin() && AlarmApplication.mUserInfo != null) {
-            OkHttpUtils.getBuilder()
-                    .url(UrlSet.getEmergencyContactUrl(AlarmApplication.mUserInfo.getUserid()))
+        if (AlarmApplication.mAlarmApplication.isLogin()) {
+            OkHttpUtils.postBuilder()
+                    .url(UrlSet.URL_GET_CONTACTS)
+                    .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
                     .build()
                     .buildRequestCall()
-                    .execute(new CallBack<ContactList>() {
+                    .execute(new CallBack<GetContactListBean>() {
 
                         @Override
-                        public void onStart() {
-
-                        }
+                        public void onStart() {}
 
                         @Override
-                        public void onNext(ContactList getBean) {
-                            if (getBean != null) {
-//                                EmergencyContactAdapter adapter = new EmergencyContactAdapter(getBean.getContacts());
-//                                mEmergencyContactRv.setAdapter(adapter);
+                        public void onNext(GetContactListBean postBean) {
+                            if (postBean != null) {
+                                if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                    if (postBean.getContactslist() != null) {
+                                        EmergencyContactAdapter adapter = new EmergencyContactAdapter(
+                                                postBean.getContactslist().getContacts());
+                                        mEmergencyContactRv.setAdapter(adapter);
+                                    }
+                                } else {
+                                    ToastUtils.showToast(EmergencyContactActivity.this, postBean.getMessage());
+                                }
                             }
                         }
 
                         @Override
-                        public void onComplete() {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            super.onError(e);
-                        }
+                        public void onComplete() {}
                     });
         }
     }

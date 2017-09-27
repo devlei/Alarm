@@ -6,7 +6,7 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 public class GetContactListBean {
 
     @XStreamAlias("result")
-    private String result;
+    private int result;
 
     @XStreamAlias("message")
     private String message;
@@ -14,11 +14,11 @@ public class GetContactListBean {
     @XStreamAlias("contactslist")
     private ContactList contactslist;
 
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(int result) {
         this.result = result;
     }
 
@@ -40,10 +40,7 @@ public class GetContactListBean {
 
     @Override
     public String toString() {
-        return "GetContactListBean{" +
-                "result='" + result + '\'' +
-                ", message='" + message + '\'' +
-                ", contactslist=" + contactslist +
-                '}';
+        return "GetContactListBean{" + "result='" + result + '\'' + ", message='" + message + '\'' + ", " +
+                "contactslist=" + contactslist + '}';
     }
 }
