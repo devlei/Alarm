@@ -21,7 +21,7 @@ import phonealarm.iss.com.alarm.bean.beLost.BeLostBean;
 import phonealarm.iss.com.alarm.bean.carinfo.InformationBean;
 import phonealarm.iss.com.alarm.bean.caseinfo.CasesInfoListBean;
 import phonealarm.iss.com.alarm.bean.lost.LostBean;
-import phonealarm.iss.com.alarm.bean.searchalarm.AlarmInfoBeanList;
+import phonealarm.iss.com.alarm.bean.searchalarm.CheckAlarmMessage;
 import phonealarm.iss.com.alarm.bean.suspect.SuspectBean;
 import phonealarm.iss.com.alarm.hall.adapter.CommonSearchAdapter;
 import phonealarm.iss.com.alarm.network.UrlSet;
@@ -292,39 +292,31 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
      * 获取报警历史数据
      */
     private void getAlarmHistoryData() {
-        if (!AlarmApplication.mAlarmApplication.isLogin() || AlarmApplication.mUserInfo == null) {
-            return;
-        }
-        OkHttpUtils.getBuilder()
-                .url(UrlSet.getAlarmHistoryUrl(AlarmApplication.mUserInfo.getUserid()))
-                .build()
-                .buildRequestCall()
-                .execute(new CallBack<AlarmInfoBeanList>() {
+        if (AlarmApplication.mAlarmApplication.isLogin()) {
+            OkHttpUtils.getBuilder()
+                    .url(UrlSet.URL_ALARM_HISTORY)
+                    .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
+                    .build()
+                    .buildRequestCall()
+                    .execute(new CallBack<CheckAlarmMessage>() {
 
-                    @Override
-                    public void onStart() {
+                        @Override
+                        public void onStart() {}
 
-                    }
-
-                    @Override
-                    public void onNext(AlarmInfoBeanList getBean) {
-                        if (getBean != null) {
-                            CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_alarm_history);
-                            adapter.setAlarmInfoList(getBean.getAlarminfo());
-                            mRv.setAdapter(adapter);
+                        @Override
+                        public void onNext(CheckAlarmMessage getBean) {
+                            if (getBean != null && getBean.getAlarmlist() != null) {
+                                CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_alarm_history);
+                                adapter.setAlarmInfoList(getBean.getAlarmlist().getAlarminfo());
+                                mRv.setAdapter(adapter);
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onComplete() {
+                        @Override
+                        public void onComplete() {}
 
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        super.onError(e);
-                    }
-                });
+                    });
+        }
     }
 
 }

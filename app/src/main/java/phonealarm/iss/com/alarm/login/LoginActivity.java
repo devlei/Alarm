@@ -102,8 +102,11 @@ public class LoginActivity extends Activity implements OnClickListener {
                     public void onNext(ResponseMessageBean postBean) {
                         if (postBean != null) {
                             if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
-                                AlarmApplication.mAlarmApplication.setUserId(postBean.getUsername());
+                                // TODO: 2017/9/27 weizhilei 应该存后台返回的userid，目前后台无返回，先用本地userid
+                                AlarmApplication.mAlarmApplication.setUserId(mUserEt.getText().toString());
+                                AlarmApplication.mAlarmApplication.setLogin(true);
                                 IntentUtils.openMain(LoginActivity.this);
+                                finish();
                             } else {
                                 ToastUtils.showToast(LoginActivity.this, postBean.getMessage());
                             }

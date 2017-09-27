@@ -44,19 +44,14 @@ public class UrlSet {
     public static final String URL_LOST_FOUND = URL_BASIC + "queryAllFoundInfo";
 
     /**
+     * 报警历史
+     */
+    public static final String URL_ALARM_HISTORY = URL_BASIC + "GetAlarmService";
+
+    /**
      * 重置密码
      */
     public static final String URL_REST_PASSWORD = URL_BASIC + "ResetPassword";
-
-    /**
-     * 报警历史
-     *
-     * @param userId
-     * @return
-     */
-    public static String getAlarmHistoryUrl(String userId) {
-        return URL_BASIC + "GetAlarmService&userid=" + userId;
-    }
 
     /**
      * 修改昵称
