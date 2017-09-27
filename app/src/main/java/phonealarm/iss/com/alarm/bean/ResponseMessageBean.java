@@ -1,8 +1,6 @@
 package phonealarm.iss.com.alarm.bean;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-
-import phonealarm.iss.com.alarm.bean.login.UserInfoBean;
 import phonealarm.iss.com.alarm.bean.modifyimg.AllUserInfo;
 
 /**
@@ -14,7 +12,7 @@ import phonealarm.iss.com.alarm.bean.modifyimg.AllUserInfo;
 public class ResponseMessageBean {
 
     @XStreamAlias("result")
-    private String result;
+    private int result;
 
     @XStreamAlias("message")
     private String message;
@@ -39,11 +37,11 @@ public class ResponseMessageBean {
         this.userInfo = userInfo;
     }
 
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(int result) {
         this.result = result;
     }
 
@@ -81,13 +79,8 @@ public class ResponseMessageBean {
 
     @Override
     public String toString() {
-        return "ResponseMessageBean{" +
-                "result='" + result + '\'' +
-                ", message='" + message + '\'' +
-                ", username='" + username + '\'' +
-                ", alarm_id='" + alarm_id + '\'' +
-                ", contacts_id='" + contacts_id + '\'' +
-                ", userInfo=" + userInfo +
-                '}';
+        return "ResponseMessageBean{" + "result='" + result + '\'' + ", message='" + message + '\'' + ", username='"
+                + username + '\'' + ", alarm_id='" + alarm_id + '\'' + ", contacts_id='" + contacts_id + '\'' + ", "
+                + "userInfo=" + userInfo + '}';
     }
 }

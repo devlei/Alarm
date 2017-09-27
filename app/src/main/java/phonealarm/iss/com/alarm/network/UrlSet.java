@@ -6,7 +6,7 @@ package phonealarm.iss.com.alarm.network;
 public class UrlSet {
 
     //basic url
-    private static final String URL_BASIC = "http://ip:port/WebService.action?Service=";
+    private static final String URL_BASIC = "http://218.241.189.52:8089/WebService.action?Service=";
 
     /**
      * 登录

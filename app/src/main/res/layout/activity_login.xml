@@ -62,7 +62,7 @@
                 android:background="@drawable/icon_password"/>
 
             <EditText
-                android:id="@+id/password_old"
+                android:id="@+id/login_password"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"

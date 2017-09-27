@@ -10,7 +10,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.thoughtworks.xstream.XStream;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.BaseResponseBean;
+import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
+import phonealarm.iss.com.alarm.bean.interactquery.InterQueryAttrConverter;
 import phonealarm.iss.com.alarm.bean.login.UserInfoBean;
 import phonealarm.iss.com.alarm.network.UrlSet;
 import phonealarm.iss.com.alarm.network.callback.CallBack;
@@ -77,26 +81,45 @@ public class RegisterActivity extends Activity implements OnClickListener {
             ToastUtils.showToast(this, "手机号或密码不能为空");
             return;
         }
+        if (!mPasswordEt.getText().toString().equals(mConfirmPasswordEt.getText().toString())) {
+            ToastUtils.showToast(this, "密码输入不一致");
+            return;
+        }
+        UserInfoBean userInfoBean = new UserInfoBean();
+        userInfoBean.setUserid(mPhoneEt.getText().toString());
+        userInfoBean.setUsername(mPhoneEt.getText().toString());
+        userInfoBean.setTelephone(mPhoneEt.getText().toString());
+        userInfoBean.setStartadress("北京市昌平区回龙观新龙城二期");
+        userInfoBean.setPassword(mPasswordEt.getText().toString());
+
+        XStream xStream = new XStream();
+        xStream.autodetectAnnotations(true);
+        xStream.registerConverter(new InterQueryAttrConverter());
+        String xmlString = xStream.toXML(userInfoBean);
         OkHttpUtils.postBuilder()
                 .url(UrlSet.URL_REGISTERED)
-                .addParam("", "")
+                .addParam("value", xmlString)
                 .build()
                 .buildRequestCall()
-                .execute(new CallBack<UserInfoBean>() {
+                .execute(new CallBack<ResponseMessageBean>() {
 
                     @Override
                     public void onStart() {}
 
                     @Override
-                    public void onNext(UserInfoBean postBean) {
-                        finish();
+                    public void onNext(ResponseMessageBean postBean) {
+                        if (postBean != null) {
+                            if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                ToastUtils.showToast(RegisterActivity.this, "注册成功");
+                                finish();
+                            } else {
+                                ToastUtils.showToast(RegisterActivity.this, postBean.getMessage());
+                            }
+                        }
                     }
 
                     @Override
-                    public void onComplete() {
-                        // TODO: 2017/9/25 weizhilei 添加失败原因
-                        ToastUtils.showToast(RegisterActivity.this, "注册失败");
-                    }
+                    public void onComplete() {}
                 });
     }
 

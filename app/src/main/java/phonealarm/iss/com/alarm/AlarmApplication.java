@@ -14,12 +14,22 @@ public class AlarmApplication extends Application {
     //用户信息
     public static UserInfoBean mUserInfo;
 
+    private String mUserId;
+
     private boolean mIsLogin;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mAlarmApplication = this;
+    }
+
+    public String getUserId() {
+        return mUserId;
+    }
+
+    public void setUserId(String userId) {
+        mUserId = userId;
     }
 
     public void setLogin(boolean login) {
