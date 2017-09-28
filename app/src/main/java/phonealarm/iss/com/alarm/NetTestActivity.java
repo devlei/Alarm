@@ -70,13 +70,14 @@ public class NetTestActivity extends Activity {
     //public static final String XINXICAIJI = "http://192.168.0.106:8085/WebService.action?Service=addNewInfo";
 
     //旅馆采集 OK OK
-    public static final String LVGUANCAIJI = "http://192.168.0.106:8085/WebService.action?Service=addHotelInfo";
+    //public static final String LVGUANCAIJI = "http://192.168.0.106:8085/WebService.action?Service=addHotelInfo";
 
     //查看个人信息 OK OK
     //public static final String CHAKANGERENXINXI = "http://192.168.0.106:8085/WebService.action?Service=queryUserInfo";
 
     //修改个人昵称 OK OK
-    public static final String XIUGAIGERENNICHENG = "http://192.168.0.106:8085/WebService.action?Service=ResetUsername";
+    //public static final String XIUGAIGERENNICHENG = "http://192.168.0.106:8085/WebService
+    // .action?Service=ResetUsername";
 
     //修改个人头像  未测
     public static final String XIUGAIGERENTOUXIANG = "http://192.168.0.106:8085/WebService.action?Service=Resetpicture";

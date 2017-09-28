@@ -204,7 +204,7 @@ public class IntentUtils {
      * @param context
      */
     public static void openHotalCollect(Context context) {
-        HotalCollectActivity.open(context);
+        HotelCollectActivity.open(context);
     }
 
     /**

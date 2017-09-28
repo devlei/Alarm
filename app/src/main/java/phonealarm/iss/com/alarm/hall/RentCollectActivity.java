@@ -32,6 +32,7 @@ import phonealarm.iss.com.alarm.utils.ToastUtils;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by weizhilei on 2017/9/25.
@@ -146,92 +147,95 @@ public class RentCollectActivity extends Activity implements OnClickListener {
     }
 
     private void collect() {
-        if (TextUtils.isEmpty(mHouseAddressEt.getText())) {
-            ToastUtils.showToast(this, "地址不能为空");
-            return;
-        }
-        if (TextUtils.isEmpty(mHouseholderNameEt.getText())) {
-            ToastUtils.showToast(this, "地址不能为空");
-            return;
-        }
-        if (TextUtils.isEmpty(mHouseholderIdNumberEt.getText())) {
-            ToastUtils.showToast(this, "地址不能为空");
-            return;
-        }
-        for (View view : mTenantViewList) {
-            EditText tenantNameEt = (EditText) view.findViewById(R.id.rc_tenant_name);
-            EditText tenantIdNumberEt = (EditText) view.findViewById(R.id.rc_tenant_id_number);
-            //EditText tenantPhoneEt = (EditText) view.findViewById(R.id.rc_tenant_phone);
-            if (TextUtils.isEmpty(tenantNameEt.getText())) {
-                ToastUtils.showToast(this, "姓名不能为空");
+        if (AlarmApplication.mAlarmApplication.isLogin()) {
+            if (TextUtils.isEmpty(mHouseAddressEt.getText())) {
+                ToastUtils.showToast(this, R.string.address_hint);
                 return;
             }
-            if (TextUtils.isEmpty(tenantIdNumberEt.getText())) {
-                ToastUtils.showToast(this, "身份证号不能为空");
+            if (TextUtils.isEmpty(mHouseholderNameEt.getText())) {
+                ToastUtils.showToast(this, R.string.householder_name_hint);
                 return;
             }
-        }
-        //租房房屋信息
-        InfoCollectBean infoCollectBean = new InfoCollectBean();
-        infoCollectBean.setSHANGBAOID("12306");
-        infoCollectBean.setHOUSEADRESS(mHouseAddressEt.getText().toString());
-        infoCollectBean.setFUZENAME(mHouseholderNameEt.getText().toString());
-        infoCollectBean.setFUZERENCARD(mHouseholderIdNumberEt.getText().toString());
-        if (!TextUtils.isEmpty(mHouseNumberEt.getText()))
-            infoCollectBean.setFUZERENHOUSE(mHouseNumberEt.getText().toString());
-        infoCollectBean.setFUZETELE(mHouseholderPhoneEt.getText().toString());
-        infoCollectBean.setSTARTTIME(mRentStartTimeTv.getText().toString());
-        infoCollectBean.setENDTIME(mRentEndTimeTv.getText().toString());
-        //租户信息
-        List<LiablePerson> liablePersonList = new ArrayList<>();
-        for (View view : mTenantViewList) {
-            EditText tenantNameEt = (EditText) view.findViewById(R.id.rc_tenant_name);
-            EditText tenantIdNumberEt = (EditText) view.findViewById(R.id.rc_tenant_id_number);
-            EditText tenantPhoneEt = (EditText) view.findViewById(R.id.rc_tenant_phone);
+            if (TextUtils.isEmpty(mHouseholderIdNumberEt.getText())) {
+                ToastUtils.showToast(this, R.string.id_number_hint);
+                return;
+            }
+            for (View view : mTenantViewList) {
+                EditText tenantNameEt = (EditText) view.findViewById(R.id.rc_tenant_name);
+                EditText tenantIdNumberEt = (EditText) view.findViewById(R.id.rc_tenant_id_number);
+                //EditText tenantPhoneEt = (EditText) view.findViewById(R.id.rc_tenant_phone);
+                if (TextUtils.isEmpty(tenantNameEt.getText())) {
+                    ToastUtils.showToast(this, R.string.name_hint);
+                    return;
+                }
+                if (TextUtils.isEmpty(tenantIdNumberEt.getText())) {
+                    ToastUtils.showToast(this, R.string.id_number_hint);
+                    return;
+                }
+            }
+            //租房房屋信息
+            InfoCollectBean infoCollectBean = new InfoCollectBean();
+            infoCollectBean.setSHANGBAOID(UUID.randomUUID().toString());
+            infoCollectBean.setHOUSEADRESS(mHouseAddressEt.getText().toString());
+            infoCollectBean.setFUZENAME(mHouseholderNameEt.getText().toString());
+            infoCollectBean.setFUZERENCARD(mHouseholderIdNumberEt.getText().toString());
+            if (!TextUtils.isEmpty(mHouseNumberEt.getText()))
+                infoCollectBean.setFUZERENHOUSE(mHouseNumberEt.getText().toString());
+            infoCollectBean.setFUZETELE(mHouseholderPhoneEt.getText().toString());
+            infoCollectBean.setSTARTTIME(mRentStartTimeTv.getText().toString());
+            infoCollectBean.setENDTIME(mRentEndTimeTv.getText().toString());
+            //租户信息
+            List<LiablePerson> liablePersonList = new ArrayList<>();
+            for (View view : mTenantViewList) {
+                EditText tenantNameEt = (EditText) view.findViewById(R.id.rc_tenant_name);
+                EditText tenantIdNumberEt = (EditText) view.findViewById(R.id.rc_tenant_id_number);
+                EditText tenantPhoneEt = (EditText) view.findViewById(R.id.rc_tenant_phone);
 
-            LiablePerson liablePerson = new LiablePerson();
-            liablePerson.setPNAME(tenantNameEt.getText().toString());
-            liablePerson.setPIDCARD(tenantIdNumberEt.getText().toString());
-            if (!TextUtils.isEmpty(tenantPhoneEt.getText())) liablePerson.setPTELE(tenantPhoneEt.getText().toString());
-            liablePersonList.add(liablePerson);
-        }
-        LiablePersonList libs = new LiablePersonList();
-        libs.setRzeList(liablePersonList);
-        infoCollectBean.setLiablePersonList(libs);
+                LiablePerson liablePerson = new LiablePerson();
+                liablePerson.setPNAME(tenantNameEt.getText().toString());
+                liablePerson.setPIDCARD(tenantIdNumberEt.getText().toString());
+                if (!TextUtils.isEmpty(tenantPhoneEt.getText()))
+                    liablePerson.setPTELE(tenantPhoneEt.getText().toString());
+                liablePersonList.add(liablePerson);
+            }
+            LiablePersonList libs = new LiablePersonList();
+            libs.setRzeList(liablePersonList);
+            infoCollectBean.setLiablePersonList(libs);
 
-        //转换为xml
-        XStream xStream = new XStream();
-        xStream.autodetectAnnotations(true);
-        xStream.registerConverter(new UpLoadAttrConverter());
-        String xmlString = xStream.toXML(infoCollectBean).replace("__", "_");
+            //转换为xml
+            XStream xStream = new XStream();
+            xStream.autodetectAnnotations(true);
+            xStream.registerConverter(new UpLoadAttrConverter());
+            String xmlString = xStream.toXML(infoCollectBean).replace("__", "_");
 
-        //请求采集接口
-        OkHttpUtils.postBuilder()
-                .url(UrlSet.URL_RENT_COLLECT)
-                .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
-                .addParam("value", xmlString)
-                .build()
-                .buildRequestCall()
-                .execute(new CallBack<ResponseMessageBean>() {
+            //请求采集接口
+            OkHttpUtils.postBuilder()
+                    .url(UrlSet.URL_RENT_COLLECT)
+                    .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
+                    .addParam("value", xmlString)
+                    .build()
+                    .buildRequestCall()
+                    .execute(new CallBack<ResponseMessageBean>() {
 
-                    @Override
-                    public void onStart() {}
+                        @Override
+                        public void onStart() {}
 
-                    @Override
-                    public void onNext(ResponseMessageBean postBean) {
-                        if (postBean != null) {
-                            if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
-                                ToastUtils.showToast(RentCollectActivity.this, "采集成功");
-                                finish();
-                            } else {
-                                ToastUtils.showToast(RentCollectActivity.this, postBean.getMessage());
+                        @Override
+                        public void onNext(ResponseMessageBean postBean) {
+                            if (postBean != null) {
+                                if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                    ToastUtils.showToast(RentCollectActivity.this, "采集成功");
+                                    finish();
+                                } else {
+                                    ToastUtils.showToast(RentCollectActivity.this, postBean.getMessage());
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onComplete() {}
-                });
+                        @Override
+                        public void onComplete() {}
+                    });
+        }
     }
 
 }
