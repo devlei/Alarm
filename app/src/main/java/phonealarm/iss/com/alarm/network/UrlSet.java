@@ -88,4 +88,15 @@ public class UrlSet {
      */
     public static final String URL_RESET_PHONE = URL_BASIC + "ResetTelenum";
 
+    /**
+     * 租房采集
+     */
+    public static final String URL_RENT_COLLECT = URL_BASIC + "addNewInfo";
+
+    /**
+     * 旅馆采集
+     */
+    public static final String URL_HOTEL_COLLECT = URL_BASIC + "addHotelInfo";
+
+
 }
