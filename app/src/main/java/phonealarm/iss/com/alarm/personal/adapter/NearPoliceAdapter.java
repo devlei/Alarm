@@ -27,7 +27,7 @@ public class NearPoliceAdapter extends RecyclerView.Adapter<NearPoliceViewHolder
 
     @Override
     public int getItemCount() {
-        return 50;
+        return 0;
     }
 
     /**

@@ -160,6 +160,10 @@
             android:name=".personal.AlarmHistoryActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name=".personal.AboutActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
         <activity
             android:name=".uploadalarm.FastAlarmActivity"
