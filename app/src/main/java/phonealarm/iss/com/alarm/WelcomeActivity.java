@@ -26,10 +26,14 @@ public class WelcomeActivity extends Activity {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                IntentUtils.openMain(WelcomeActivity.this);
+                if (AlarmApplication.mAlarmApplication.isLogin()) {
+                    IntentUtils.openMain(WelcomeActivity.this);
+                } else {
+                    IntentUtils.openLogin(WelcomeActivity.this);
+                }
                 finish();
             }
-        }, 1000);
+        }, 3000);
     }
 
 }

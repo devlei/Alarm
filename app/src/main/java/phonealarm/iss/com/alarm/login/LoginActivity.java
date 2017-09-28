@@ -17,11 +17,13 @@ import phonealarm.iss.com.alarm.bean.BaseResponseBean;
 import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
 import phonealarm.iss.com.alarm.bean.interactquery.InterQueryAttrConverter;
 import phonealarm.iss.com.alarm.bean.login.UserInfoBean;
+import phonealarm.iss.com.alarm.constants.Constants;
 import phonealarm.iss.com.alarm.network.UrlSet;
 import phonealarm.iss.com.alarm.network.callback.CallBack;
 import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
 import phonealarm.iss.com.alarm.utils.AppUtils;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
+import phonealarm.iss.com.alarm.utils.SharePreferencesUtils;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 /**
@@ -82,7 +84,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         UserInfoBean userInfoBean = new UserInfoBean();
         userInfoBean.setUserid(mUserEt.getText().toString());
         userInfoBean.setPassword(mPasswordEt.getText().toString());
-        userInfoBean.setEndadress(AlarmApplication.address);
+        if (!TextUtils.isEmpty(AlarmApplication.address)) userInfoBean.setEndadress(AlarmApplication.address);
 
         XStream xStream = new XStream();
         xStream.autodetectAnnotations(true);
@@ -102,6 +104,10 @@ public class LoginActivity extends Activity implements OnClickListener {
                     public void onNext(ResponseMessageBean postBean) {
                         if (postBean != null) {
                             if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                SharePreferencesUtils.getInstance()
+                                        .setString(Constants.KEY_USER, mUserEt.getText().toString());
+                                SharePreferencesUtils.getInstance()
+                                        .setString(Constants.KEY_PASSWORD, mPasswordEt.getText().toString());
                                 // TODO: 2017/9/27 weizhilei 应该存后台返回的userid，目前后台无返回，先用本地userid
                                 AlarmApplication.mAlarmApplication.setUserId(mUserEt.getText().toString());
                                 AlarmApplication.mAlarmApplication.setLogin(true);
