@@ -103,22 +103,21 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
         if (null != attach_list && attach_list.size() > 0) {
             for (int i = 0; i < attach_list.size(); i++) {
                 MultimediaAttrBean multimediaAttrBean = attach_list.get(i);
-//                if (null != multimediaAttrBean) {
-//                    if (multimediaAttrBean.getType().equals("jpg")
-//                            || multimediaAttrBean.getType().equals("png")) {
-//                        final ImageView img = new ImageView(this);
-//                        img.setScaleType(ImageView.ScaleType.FIT_XY);
-//                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-//                                getResources().getDimensionPixelSize(R.dimen.s_50),
-//                                LinearLayout.LayoutParams.MATCH_PARENT);
-//                        lp.rightMargin = getResources().getDimensionPixelSize(R.dimen.s_21);
-//                        imgarray.addView(img, lp);
-//                        Glide.with(this).load(multimediaAttrBean.getValue()).into(img);
-//                    } else {
-//                        mediaPath = multimediaAttrBean.getValue();
-//                    }
-//                    System.out.println("===>" + multimediaAttrBean.getType() + "nnnn--" + multimediaAttrBean.getValue());
-//                }
+                if (null != multimediaAttrBean) {
+                    if (multimediaAttrBean.getType().equals("jpg")
+                            || multimediaAttrBean.getType().equals("png")) {
+                        final ImageView img = new ImageView(this);
+                        img.setScaleType(ImageView.ScaleType.FIT_XY);
+                        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                                getResources().getDimensionPixelSize(R.dimen.s_50),
+                                LinearLayout.LayoutParams.MATCH_PARENT);
+                        lp.rightMargin = getResources().getDimensionPixelSize(R.dimen.s_21);
+                        imgarray.addView(img, lp);
+                        Glide.with(this).load(multimediaAttrBean.getValue()).into(img);
+                    } else {
+                        mediaPath = multimediaAttrBean.getValue();
+                    }
+                }
             }
         }
 
