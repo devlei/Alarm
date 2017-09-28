@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.AlarmApplication;
+import phonealarm.iss.com.alarm.LoadingDialog;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.bean.BaseResponseBean;
 import phonealarm.iss.com.alarm.bean.contact.GetContactListBean;
@@ -87,10 +88,11 @@ public class EmergencyContactActivity extends Activity implements OnClickListene
                     .execute(new CallBack<GetContactListBean>() {
 
                         @Override
-                        public void onStart() {}
+                        public void onStart() {LoadingDialog.show(EmergencyContactActivity.this);}
 
                         @Override
                         public void onNext(GetContactListBean postBean) {
+                            LoadingDialog.dismissSelf();
                             if (postBean != null) {
                                 if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                     if (postBean.getContactslist() != null) {
@@ -111,6 +113,9 @@ public class EmergencyContactActivity extends Activity implements OnClickListene
 
                         @Override
                         public void onComplete() {}
+
+                        @Override
+                        public void onError(Throwable e) {LoadingDialog.dismissSelf();}
                     });
         }
     }

@@ -205,6 +205,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
                     @Override
                     public void onComplete() {}
+
+                    @Override
+                    public void onError(Throwable e) {LoadingDialog.dismissSelf();}
                 });
     }
 
@@ -239,6 +242,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
                     @Override
                     public void onComplete() {}
+
+                    @Override
+                    public void onError(Throwable e) {LoadingDialog.dismissSelf();}
                 });
     }
 
@@ -273,6 +279,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
                     @Override
                     public void onComplete() {}
+
+                    @Override
+                    public void onError(Throwable e) {LoadingDialog.dismissSelf();}
                 });
     }
 
@@ -307,6 +316,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
                     @Override
                     public void onComplete() {}
+
+                    @Override
+                    public void onError(Throwable e) {LoadingDialog.dismissSelf();}
                 });
     }
 
@@ -341,6 +353,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
                     @Override
                     public void onComplete() {}
+
+                    @Override
+                    public void onError(Throwable e) {LoadingDialog.dismissSelf();}
                 });
     }
 
@@ -378,6 +393,8 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                         @Override
                         public void onComplete() {}
 
+                        @Override
+                        public void onError(Throwable e) {LoadingDialog.dismissSelf();}
                     });
         }
     }
@@ -416,6 +433,8 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                         @Override
                         public void onComplete() {}
 
+                        @Override
+                        public void onError(Throwable e) {LoadingDialog.dismissSelf();}
                     });
         }
     }
