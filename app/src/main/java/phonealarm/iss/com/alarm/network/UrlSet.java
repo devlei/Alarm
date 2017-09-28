@@ -101,5 +101,10 @@ public class UrlSet {
      */
     public static final String URL_HOTEL_COLLECT = URL_BASIC + "addHotelInfo";
 
+    /**
+     * 警民互动添加
+     */
+    public static final String URL_JINMINHUDONG_ADD = URL_BASIC + "addNewFk";
+
 
 }
