@@ -43,7 +43,7 @@ public class NetTestActivity extends Activity {
     //public static final String CHUJING_PINGJIA = "http://218.241.189.52:8089/WebService.action?Service=AssessAlarm";
 
     //多媒体报警 OK OK
-    public static final String YIJIAN_BAOJING = "http://218.241.189.52:8089/WebService.action?Service=CallAlarmService";
+//    public static final String YIJIAN_BAOJING = "http://218.241.189.52:8089/WebService.action?Service=CallAlarmService";
 
     //报警记录 OK OK
     //public static final String BAOJING_JILU = "http://218.241.189.52:8089/WebService.action?Service=GetAlarmService";
@@ -80,7 +80,7 @@ public class NetTestActivity extends Activity {
     // .action?Service=ResetUsername";
 
     //修改个人头像  未测
-    public static final String XIUGAIGERENTOUXIANG = "http://192.168.0.106:8085/WebService.action?Service=Resetpicture";
+//    public static final String XIUGAIGERENTOUXIANG = "http://192.168.0.106:8085/WebService.action?Service=Resetpicture";
 
     //更换手机号 OK OK
     //public static final String GENGGAISHOUJIHAO = "http://192.168.0.106:8085/WebService.action?Service=ResetTelenum";
@@ -99,7 +99,7 @@ public class NetTestActivity extends Activity {
     //public static final String ZOUSHILIST = "http://192.168.0.106:8085/WebService.action?Service=queryAllBelostInfo";
 
     //警民互动添加 OK OK
-    public static final String JINGMINHUDONGTIANJIA = "http://192.168.0.106:8085/WebService.action?Service=addNewFk";
+//    public static final String JINGMINHUDONGTIANJIA = "http://192.168.0.106:8085/WebService.action?Service=addNewFk";
 
     //警民互动接口 OK OK
     //public static final String JINMINHUDONGCHAXUN = "http://218.241.189.52:8089/WebService
