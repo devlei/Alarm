@@ -88,6 +88,9 @@ public class UrlSet {
      */
     public static final String URL_RESET_PHONE = URL_BASIC + "ResetTelenum";
 
+    //多媒体报警 OK OK
+    public static final String YIJIAN_BAOJING = URL_BASIC + "CallAlarmService";
+
     /**
      * 租房采集
      */

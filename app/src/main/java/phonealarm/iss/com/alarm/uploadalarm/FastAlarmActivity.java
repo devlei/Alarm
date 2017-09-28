@@ -25,14 +25,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.thoughtworks.xstream.XStream;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar;
+import phonealarm.iss.com.alarm.AlarmApplication;
+import phonealarm.iss.com.alarm.BaiduMapTestActivity;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
+import phonealarm.iss.com.alarm.bean.uploadalarm.UpLoadAlarmInfo;
+import phonealarm.iss.com.alarm.bean.uploadalarm.UpLoadAttrConverter;
+import phonealarm.iss.com.alarm.bean.uploadalarm.UpLoadFileBean;
+import phonealarm.iss.com.alarm.bean.uploadalarm.UploadFileList;
+import phonealarm.iss.com.alarm.network.UrlSet;
+import phonealarm.iss.com.alarm.network.callback.CallBack;
+import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
+import phonealarm.iss.com.alarm.utils.FileUtils;
+
+import static phonealarm.iss.com.alarm.NetTestActivity.IMAGEPATH3;
+import static phonealarm.iss.com.alarm.NetTestActivity.getImageStr;
 
 public class FastAlarmActivity extends Activity implements View.OnClickListener {
 
@@ -119,6 +136,8 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         }
     }
 
+    private TextView title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,6 +158,8 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         video_local = (TextView) findViewById(R.id.video_local);
         voice_time = (TextView) findViewById(R.id.voice_time);
 
+        findViewById(R.id.location_ll).setOnClickListener(this);
+
         video_delete.setOnClickListener(this);
         video_btn.setOnClickListener(this);
 
@@ -151,6 +172,8 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         imgadd.setOnClickListener(this);
         imgarray = (LinearLayout) findViewById(R.id.imgarray);
 
+        video_local.setText(AlarmApplication.address);
+
 
     }
 
@@ -160,7 +183,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
             typeResId = intent.getIntExtra(getString(R.string.key_type), 0);
         }
 
-        TextView title = (TextView) findViewById(R.id.title_name);
+        title = (TextView) findViewById(R.id.title_name);
         TextView titleOther = (TextView) findViewById(R.id.title_other);
         titleOther.setOnClickListener(this);
         findViewById(R.id.title_back).setOnClickListener(this);
@@ -248,10 +271,81 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
     private ArrayList<File> arrayList = new ArrayList<>();
 
     private void upLoad() {
-        this.finish();
-        //TODO UPLOAD
-        if (null != imgarray) {
+        //一键报警 xml构建
+        UpLoadAlarmInfo upLoadAlarmInfo = new UpLoadAlarmInfo();
+        upLoadAlarmInfo.setAlarm_addres(AlarmApplication.address);
+        upLoadAlarmInfo.setAlarm_content(mEditText.getText().toString());
+        upLoadAlarmInfo.setAlarm_id(UUID.randomUUID().toString());
+        upLoadAlarmInfo.setAlarm_latitude(weidu + "");
+        upLoadAlarmInfo.setAlarm_longtitude(jingdu + "");
+        if (title.getText().equals("报警")) {
+            upLoadAlarmInfo.setInfo_type("1");
+        } else {
+            upLoadAlarmInfo.setInfo_type("2");
         }
+        upLoadAlarmInfo.setAlarm_phone(AlarmApplication.mAlarmApplication.getUserId());
+        upLoadAlarmInfo.setAlarm_type("1");
+
+        List<UpLoadFileBean> list = new ArrayList<>();
+        if (null != imgarray && imgarray.getChildCount() > 1) {
+            for (int i = 0; i < imgarray.getChildCount() - 1; i++) {
+                View childAt = imgarray.getChildAt(i);
+                UpLoadFileBean upLoadFileBean = new UpLoadFileBean();
+                upLoadFileBean.setType("jpg");
+                upLoadFileBean.setFilename(UUID.randomUUID().toString() + ".jpg");
+                if (null != childAt) {
+                    String tag = (String) childAt.getTag(R.id.imageid);
+                    upLoadFileBean.setValue(FileUtils.getimage(tag));
+                    list.add(upLoadFileBean);
+                }
+            }
+        }
+        if (recordFile != null && recordFile.exists()) {
+            System.out.println("----path----" + recordFile.getAbsolutePath());
+            UpLoadFileBean upLoadFileBean = new UpLoadFileBean();
+            upLoadFileBean.setType("amr");
+            upLoadFileBean.setFilename(UUID.randomUUID().toString() + ".amr");
+            upLoadFileBean.setValue(FileUtils.getFileStr(recordFile.getAbsolutePath()));
+        }
+        UploadFileList uploadFileList = new UploadFileList();
+        uploadFileList.setFile(list);
+        upLoadAlarmInfo.setFilelist(uploadFileList);
+
+        XStream xStream = new XStream();
+        xStream.autodetectAnnotations(true);
+        xStream.registerConverter(new UpLoadAttrConverter());
+        String xmlString = xStream.toXML(upLoadAlarmInfo).replace("__", "_");
+        System.out.println("===xmlString==" + xmlString);
+        OkHttpUtils.postBuilder()
+                .url(UrlSet.YIJIAN_BAOJING)
+                .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())//AlarmApplication.mAlarmApplication.getUserId()
+                .addParam("value", xmlString)
+                .build()
+                .buildRequestCall()
+                .execute(new CallBack<ResponseMessageBean>() {//ResponseMessageBean InterQueryBean
+
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onNext(ResponseMessageBean postBean) {
+                        finish();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        System.out.println("=====error====" + e);
+                    }
+                });
+
     }
 
     @Override
@@ -272,6 +366,15 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
             case R.id.imgadd:
                 dialog();
                 break;
+            case R.id.location_ll:
+                setLocation();
+                break;
+        }
+    }
+
+    private void setLocation() {
+        if (null != title) {
+            BaiduMapTestActivity.open(this, title.getText().toString(), MAP_REQUEST_CODE);
         }
     }
 
@@ -306,6 +409,8 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
      */
     public static final int SELECT_PIC_BY_TACK_PHOTO = 2000;
     public static final int REQ_IMAGE = 2001;
+    public static final int MAP_REQUEST_CODE = 2003;
+    public static double weidu, jingdu;
 
     private Uri photoUri;
 
@@ -330,7 +435,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         //AndroidImagePicker.getInstance().setSelectMode(AndroidImagePicker.Select_Mode.MODE_MULTI);
         Intent intent = new Intent(Intent.ACTION_PICK, null);
         //通过Intent 筛选所有的图片
-        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "video/*;image/*");
+        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");//video/*;image/*
         startActivityForResult(intent, REQ_IMAGE);
     }
 
@@ -352,12 +457,19 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
                 cursor.close();
             }
 
-        } else {
+        } else if (requestCode == REQ_IMAGE) {
             try {
                 Uri uri = data.getData();
                 addImage(getRealFilePath(this, uri));
             } catch (Exception e) {
                 e.printStackTrace();
+            }
+        } else if (requestCode == MAP_REQUEST_CODE) {
+            if (null != data) {
+                String address = data.getStringExtra("Address");
+                video_local.setText(address);
+                weidu = data.getDoubleExtra("WEIDU", 0.0);
+                jingdu = data.getDoubleExtra("JINGDU", 0.0);
             }
         }
     }

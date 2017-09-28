@@ -2,13 +2,120 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical">
 
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/bmapView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:clickable="true" />
+    <include layout="@layout/layout_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_213">
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/bmapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true" />
+
+        <ImageView
+            android:id="@+id/backorigin"
+            android:layout_width="@dimen/s_40"
+            android:layout_height="@dimen/s_40"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/map_eye" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@drawable/line_divider"
+        android:orientation="vertical"
+        android:showDividers="beginning|middle|end">
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/s_17"
+            android:paddingRight="@dimen/s_17"
+            android:singleLine="true"
+            android:textSize="@dimen/f_14" />
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/s_17"
+            android:paddingRight="@dimen/s_17"
+            android:singleLine="true"
+            android:textSize="@dimen/f_14" />
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/s_17"
+            android:paddingRight="@dimen/s_17"
+            android:singleLine="true"
+            android:textSize="@dimen/f_14" />
+
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/s_17"
+            android:paddingRight="@dimen/s_17"
+            android:singleLine="true"
+            android:textSize="@dimen/f_14" />
+
+        <TextView
+            android:id="@+id/text5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/s_17"
+            android:paddingRight="@dimen/s_17"
+            android:singleLine="true"
+            android:textSize="@dimen/f_14" />
+
+        <TextView
+            android:id="@+id/text6"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/s_17"
+            android:paddingRight="@dimen/s_17"
+            android:singleLine="true"
+            android:textSize="@dimen/f_14" />
+
+        <TextView
+            android:id="@+id/text7"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/s_17"
+            android:paddingRight="@dimen/s_17"
+            android:singleLine="true"
+            android:textSize="@dimen/f_14" />
+    </LinearLayout>
+
 
 </LinearLayout>

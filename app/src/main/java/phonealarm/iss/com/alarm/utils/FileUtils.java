@@ -6,7 +6,9 @@ import android.util.Base64;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * 图片压缩
@@ -61,5 +63,21 @@ public class FileUtils {
         //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
         bitmap = BitmapFactory.decodeFile(srcPath, newOpts);
         return compressImage(bitmap);//压缩好比例大小后再进行质量压缩
+    }
+
+    public static String getFileStr(String imgFile) {
+        InputStream in = null;
+        byte[] data = null;
+        // 读取图片字节数组
+        try {
+            in = new FileInputStream(imgFile);
+            data = new byte[in.available()];
+            in.read(data);
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // 对字节数组Base64编码
+        return Base64.encodeToString(data, Base64.DEFAULT);
     }
 }

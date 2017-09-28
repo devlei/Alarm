@@ -33,11 +33,22 @@ public class UpLoadAlarmInfo implements Serializable {
     @XStreamAlias("alarm_type")
     private String alarm_type;
 
+    @XStreamAlias("info_type")
+    private String info_type;
+
     @XStreamAlias("filelist")
     private UploadFileList filelist;
 
     public UploadFileList getFilelist() {
         return filelist;
+    }
+
+    public String getInfo_type() {
+        return info_type;
+    }
+
+    public void setInfo_type(String info_type) {
+        this.info_type = info_type;
     }
 
     public void setFilelist(UploadFileList filelist) {
