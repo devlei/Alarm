@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#26000000"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/s_10"
+    android:paddingRight="@dimen/s_10">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dialog"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/s_30"
+        android:paddingLeft="@dimen/s_10"
+        android:paddingRight="@dimen/s_10"
+        android:paddingTop="@dimen/s_30">
+
+        <Button
+            android:id="@+id/camera"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s_40"
+            android:background="@color/color_4982F5"
+            android:text="@string/camera"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/s_15"/>
+
+        <Button
+            android:id="@+id/album"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s_40"
+            android:layout_marginTop="@dimen/s_10"
+            android:background="@color/color_4982F5"
+            android:text="@string/album_select"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/s_15"/>
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/s_40"
+            android:layout_marginTop="@dimen/s_20"
+            android:background="@color/color_4982F5"
+            android:text="@string/cancel"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/s_15"/>
+    </LinearLayout>
+</LinearLayout>

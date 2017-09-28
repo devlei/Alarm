@@ -3,15 +3,14 @@ package phonealarm.iss.com.alarm.bean.interactquery;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
+import java.io.Serializable;
 import java.util.List;
-
-import phonealarm.iss.com.alarm.bean.interact.InteractFile;
 
 /**
  * Created by zhaocuilong on 2017/9/27.
  */
 @XStreamAlias("files")
-public class InterQueryFile {
+public class InterQueryFile implements Serializable {
 
     @XStreamImplicit(itemFieldName = "fileurl")
     private List<InterQueryType> file;
@@ -26,8 +25,6 @@ public class InterQueryFile {
 
     @Override
     public String toString() {
-        return "InterQueryFile{" +
-                "file=" + file +
-                '}';
+        return "InterQueryFile{" + "file=" + file + '}';
     }
 }

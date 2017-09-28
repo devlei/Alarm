@@ -28,6 +28,7 @@ import phonealarm.iss.com.alarm.utils.ToastUtils;
  * Created by weizhilei on 2017/9/23.
  */
 public class PersonalActivity extends Activity implements OnClickListener {
+    public static final int REQUEST_CODE = 1;
 
     private ImageView mHeaderIv;
     private TextView mNickNameTv;
@@ -95,7 +96,7 @@ public class PersonalActivity extends Activity implements OnClickListener {
                 finish();
                 break;
             case R.id.personal_info:
-                IntentUtils.openPersonalInfo(this);
+                IntentUtils.openPersonalInfo(this, REQUEST_CODE);
                 break;
             case R.id.personal_alarm_history:
                 IntentUtils.openCommonSearch(this, R.integer.type_alarm_history);
@@ -117,6 +118,16 @@ public class PersonalActivity extends Activity implements OnClickListener {
                 break;
             case R.id.personal_about:
                 IntentUtils.openAbout(this);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_CODE:
+                loadUserInfo();
                 break;
         }
     }

@@ -2,7 +2,6 @@ package phonealarm.iss.com.alarm.utils;
 
 import android.app.Activity;
 import android.content.Context;
-import phonealarm.iss.com.alarm.personal.AboutActivity;
 import phonealarm.iss.com.alarm.MainActivity;
 import phonealarm.iss.com.alarm.bean.beLost.BelostInfo;
 import phonealarm.iss.com.alarm.bean.carinfo.CarInfo;
@@ -183,10 +182,11 @@ public class IntentUtils {
     /**
      * 打开个人信息
      *
-     * @param context
+     * @param activity
+     * @param requestCode
      */
-    public static void openPersonalInfo(Context context) {
-        PersonalInfoActivity.open(context);
+    public static void openPersonalInfo(Activity activity, int requestCode) {
+        PersonalInfoActivity.openForResult(activity, requestCode);
     }
 
     /**
@@ -229,10 +229,11 @@ public class IntentUtils {
     /**
      * 打开警民互动添加
      *
-     * @param context
+     * @param activity
+     * @param requestCode
      */
-    public static void openPoliceInteractAdd(Context context) {
-        PoliceInteractAddActivity.open(context);
+    public static void openPoliceInteractAdd(Activity activity, int requestCode) {
+        PoliceInteractAddActivity.openForResult(activity, requestCode);
     }
 
     /**

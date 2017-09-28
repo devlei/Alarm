@@ -29,7 +29,6 @@ import phonealarm.iss.com.alarm.utils.ToastUtils;
  * Created by weizhilei on 2017/9/23.
  */
 public class EmergencyContactAddActivity extends Activity implements OnClickListener {
-    private static final String REQUEST_CODE = "request_code";
 
     private EditText mNameEt;
     private EditText mRelationEt;
@@ -45,7 +44,6 @@ public class EmergencyContactAddActivity extends Activity implements OnClickList
     public static void openForResult(Activity activity, int requestCode) {
         if (activity != null) {
             Intent intent = new Intent(activity, EmergencyContactAddActivity.class);
-            intent.putExtra(REQUEST_CODE, requestCode);
             activity.startActivityForResult(intent, requestCode);
         }
     }
@@ -132,7 +130,7 @@ public class EmergencyContactAddActivity extends Activity implements OnClickList
                                 if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                     ToastUtils.showToast(EmergencyContactAddActivity.this, "添加成功");
                                     finish();
-                                    setResult(getIntent().getIntExtra(REQUEST_CODE, 0));
+                                    setResult(RESULT_OK);
                                 } else {
                                     ToastUtils.showToast(EmergencyContactAddActivity.this, postBean.getMessage());
                                 }

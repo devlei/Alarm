@@ -2,11 +2,7 @@ package phonealarm.iss.com.alarm.hall;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.content.*;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,20 +11,9 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import android.widget.*;
 import com.bumptech.glide.Glide;
 import com.thoughtworks.xstream.XStream;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
@@ -36,15 +21,15 @@ import phonealarm.iss.com.alarm.bean.interact.AllInterAct;
 import phonealarm.iss.com.alarm.bean.interact.InterActBean;
 import phonealarm.iss.com.alarm.bean.interact.InterAttrConverter;
 import phonealarm.iss.com.alarm.bean.interact.InteractFile;
-import phonealarm.iss.com.alarm.bean.uploadalarm.UpLoadAlarmInfo;
-import phonealarm.iss.com.alarm.bean.uploadalarm.UpLoadAttrConverter;
-import phonealarm.iss.com.alarm.bean.uploadalarm.UpLoadFileBean;
-import phonealarm.iss.com.alarm.bean.uploadalarm.UploadFileList;
 import phonealarm.iss.com.alarm.network.UrlSet;
 import phonealarm.iss.com.alarm.network.callback.CallBack;
 import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
 import phonealarm.iss.com.alarm.utils.FileUtils;
-import phonealarm.iss.com.alarm.utils.ToastUtils;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by weizhilei on 2017/9/25.
@@ -61,12 +46,13 @@ public class PoliceInteractAddActivity extends Activity implements OnClickListen
     /**
      * open
      *
-     * @param context
+     * @param activity
+     * @param requestCode
      */
-    public static void open(Context context) {
-        if (context != null) {
-            Intent intent = new Intent(context, PoliceInteractAddActivity.class);
-            context.startActivity(intent);
+    public static void openForResult(Activity activity, int requestCode) {
+        if (activity != null) {
+            Intent intent = new Intent(activity, PoliceInteractAddActivity.class);
+            activity.startActivityForResult(intent, requestCode);
         }
     }
 
@@ -145,8 +131,7 @@ public class PoliceInteractAddActivity extends Activity implements OnClickListen
             final ImageView img = new ImageView(this);
             img.setScaleType(ImageView.ScaleType.FIT_XY);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    getResources().getDimensionPixelSize(R.dimen.s_50),
-                    LinearLayout.LayoutParams.MATCH_PARENT);
+                    getResources().getDimensionPixelSize(R.dimen.s_50), LinearLayout.LayoutParams.MATCH_PARENT);
             lp.rightMargin = getResources().getDimensionPixelSize(R.dimen.s_21);
             imgarray.addView(img, imgarray.getChildCount() - 1, lp);
             img.setOnClickListener(this);
@@ -171,8 +156,8 @@ public class PoliceInteractAddActivity extends Activity implements OnClickListen
             if (cursor != null) {
                 cursor.moveToFirst();
                 String picpath = cursor.getString(cursor.getColumnIndexOrThrow(pojo[0]));
-                if (picpath != null &&
-                        (picpath.endsWith(".png") || picpath.endsWith(".PNG") || picpath.endsWith(".jpg"))) {
+                if (picpath != null && (picpath.endsWith(".png") || picpath.endsWith(".PNG") || picpath.endsWith(
+                        ".jpg"))) {
                     addImage(picpath);
                 } else {
                     Toast.makeText(this, "选择图片文件不正确", Toast.LENGTH_LONG).show();
@@ -194,12 +179,12 @@ public class PoliceInteractAddActivity extends Activity implements OnClickListen
         if (null == uri) return null;
         final String scheme = uri.getScheme();
         String data = null;
-        if (scheme == null)
-            data = uri.getPath();
+        if (scheme == null) data = uri.getPath();
         else if (ContentResolver.SCHEME_FILE.equals(scheme)) {
             data = uri.getPath();
         } else if (ContentResolver.SCHEME_CONTENT.equals(scheme)) {
-            Cursor cursor = context.getContentResolver().query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
+            Cursor cursor = context.getContentResolver()
+                    .query(uri, new String[]{MediaStore.Images.ImageColumns.DATA}, null, null, null);
             if (null != cursor) {
                 if (cursor.moveToFirst()) {
                     int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
@@ -264,7 +249,8 @@ public class PoliceInteractAddActivity extends Activity implements OnClickListen
         System.out.println("===xmlString==" + xmlString);
         OkHttpUtils.postBuilder()
                 .url(UrlSet.URL_JINMINHUDONG_ADD)
-                .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())//AlarmApplication.mAlarmApplication.getUserId()
+                .addParam("userid",
+                        AlarmApplication.mAlarmApplication.getUserId())//AlarmApplication.mAlarmApplication.getUserId()
                 .addParam("value", xmlString)
                 .build()
                 .buildRequestCall()

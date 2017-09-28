@@ -3,14 +3,14 @@ package phonealarm.iss.com.alarm.bean.interactquery;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
-import phonealarm.iss.com.alarm.bean.interact.InterAttrConverter;
+import java.io.Serializable;
 
 /**
  * Created by zhaocuilong on 2017/9/27.
  */
 @XStreamAlias("fileurl")
 @XStreamConverter(InterQueryAttrConverter.class)
-public class InterQueryType {
+public class InterQueryType implements Serializable {
 
     private String value;
 
@@ -24,8 +24,6 @@ public class InterQueryType {
 
     @Override
     public String toString() {
-        return "InterQueryType{" +
-                "value='" + value + '\'' +
-                '}';
+        return "InterQueryType{" + "value='" + value + '\'' + '}';
     }
 }

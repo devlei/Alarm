@@ -140,4 +140,7 @@
     <string name="cancel">取消</string>
     <string name="submit">提交</string>
 
+    <string name="camera">拍照</string>
+    <string name="album_select">从相册中选择</string>
+
 </resources>

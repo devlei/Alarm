@@ -38,16 +38,13 @@ import phonealarm.iss.com.alarm.utils.ToastUtils;
  */
 public class CommonSearchActivity extends Activity implements OnClickListener, TextWatcher {
 
+    //添加警民互动code
+    private static final int REQUEST_CODE_ADD_INTERACT = 1;
+
     private EditText mSearchEt;
     private RecyclerView mRv;
 
     private CommonSearchAdapter mAdapter;
-    //private CommonSearchAdapter mCarAdapter;
-    //private CommonSearchAdapter mSuspectAdapter;
-    //private CommonSearchAdapter mPeopleLostAdapter;
-    //private CommonSearchAdapter mLostFoundAdapter;
-    //private CommonSearchAdapter mPoliceInteractAdapter;
-    //private CommonSearchAdapter mAlarmHistoryAdapter;
 
     /**
      * open
@@ -127,7 +124,7 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 finish();
                 break;
             case R.id.title_other:
-                IntentUtils.openPoliceInteractAdd(this);
+                IntentUtils.openPoliceInteractAdd(this, REQUEST_CODE_ADD_INTERACT);
                 break;
         }
     }
@@ -161,6 +158,16 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 return true;
         }
         return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_CODE_ADD_INTERACT:
+                getPoliceInteractData();
+                break;
+        }
     }
 
     /**
