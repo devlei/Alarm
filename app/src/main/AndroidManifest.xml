@@ -57,7 +57,9 @@
             android:enabled="true"
             android:process=":remote"></service>
 
-        <activity android:name=".login.LoginActivity">
+        <activity
+            android:name=".login.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -66,71 +68,93 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".personal.PersonalActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".personal.ChangePasswordActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".personal.NearPoliceActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".personal.EmergencyContactActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".personal.EmergencyContactAddActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".personal.BindPhoneActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".personal.ChangePhoneActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".hall.CommonSearchActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".login.RegisterActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".hall.PeopleLostActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".hall.SuspectTrackActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".webview.WebViewActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".hall.VehicleTrackActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".hall.LostFoundActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".personal.PersonalInfoActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".personal.ChangeNickNameActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".hall.HotelCollectActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".hall.RentCollectActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".hall.PoliceInteractDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".hall.PoliceInteractAddActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <activity
             android:name=".personal.AlarmHistoryActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
         <!-- <activity -->
@@ -138,7 +162,9 @@
         <!-- android:theme="@android:style/Theme.NoTitleBar.Fullscreen" -->
         <!-- android:windowSoftInputMode="adjustUnspecified|stateHidden"/> -->
 
-        <activity android:name=".uploadalarm.FastAlarmActivity" />
+        <activity
+            android:name=".uploadalarm.FastAlarmActivity"
+            android:screenOrientation="portrait" />
 
         <activity android:name=".TestActivity" />
         <activity android:name=".NetTestActivity">
@@ -148,7 +174,9 @@
             <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".BaiduMapTestActivity">
+        <activity
+            android:name=".BaiduMapTestActivity"
+            android:screenOrientation="portrait">
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->
 
