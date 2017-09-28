@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.thoughtworks.xstream.XStream;
+import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.bean.BaseResponseBean;
 import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
@@ -89,7 +90,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
         userInfoBean.setUserid(mPhoneEt.getText().toString());
         userInfoBean.setUsername(mPhoneEt.getText().toString());
         userInfoBean.setTelephone(mPhoneEt.getText().toString());
-        userInfoBean.setStartadress("北京市昌平区回龙观新龙城二期");
+        userInfoBean.setStartadress(AlarmApplication.address);
         userInfoBean.setPassword(mPasswordEt.getText().toString());
 
         XStream xStream = new XStream();

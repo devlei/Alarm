@@ -82,7 +82,7 @@ public class LoginActivity extends Activity implements OnClickListener {
         UserInfoBean userInfoBean = new UserInfoBean();
         userInfoBean.setUserid(mUserEt.getText().toString());
         userInfoBean.setPassword(mPasswordEt.getText().toString());
-        userInfoBean.setEndadress("");
+        userInfoBean.setEndadress(AlarmApplication.address);
 
         XStream xStream = new XStream();
         xStream.autodetectAnnotations(true);
