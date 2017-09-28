@@ -106,5 +106,10 @@ public class UrlSet {
      */
     public static final String URL_JINMINHUDONG_ADD = URL_BASIC + "addNewFk";
 
+    /**
+     * 修改头像
+     */
+    public static final String URL_HEADER_MODIFY = URL_BASIC + "Resetpicture";
+
 
 }

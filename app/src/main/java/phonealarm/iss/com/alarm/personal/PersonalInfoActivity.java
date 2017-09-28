@@ -12,17 +12,31 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.thoughtworks.xstream.XStream;
+
 import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.R;
+import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
 import phonealarm.iss.com.alarm.bean.modifyimg.AllUserInfo;
+import phonealarm.iss.com.alarm.bean.modifyimg.HeaderAttrConverter;
+import phonealarm.iss.com.alarm.bean.modifyimg.HeaderFile;
+import phonealarm.iss.com.alarm.bean.modifyimg.ModifyHeaderImage;
+import phonealarm.iss.com.alarm.bean.uploadalarm.UpLoadAttrConverter;
+import phonealarm.iss.com.alarm.network.UrlSet;
+import phonealarm.iss.com.alarm.network.callback.CallBack;
+import phonealarm.iss.com.alarm.network.http.util.OkHttpUtils;
 import phonealarm.iss.com.alarm.personal.HeaderDialog.OnHeaderDismissListener;
 import phonealarm.iss.com.alarm.personal.observer.UserAdapterObserver;
 import phonealarm.iss.com.alarm.personal.observer.UserObserverHelper;
+import phonealarm.iss.com.alarm.utils.FileUtils;
 import phonealarm.iss.com.alarm.utils.GlideUtils;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
 import phonealarm.iss.com.alarm.utils.ToastUtils;
 
 import java.io.File;
+import java.util.UUID;
 
 /**
  * Created by weizhilei on 2017/9/25.
@@ -161,6 +175,66 @@ public class PersonalInfoActivity extends Activity implements OnClickListener, O
         }
     }
 
+    private void setImageToView(Intent data) {
+        Bundle extras = data.getExtras();
+        if (extras != null) {
+            final Bitmap photo = extras.getParcelable("data");
+            String string = FileUtils.compressImage(photo);
+
+            ModifyHeaderImage modifyHeaderImage = new ModifyHeaderImage();
+            modifyHeaderImage.setUserid(AlarmApplication.mAlarmApplication.getUserId());
+            HeaderFile headerFile = new HeaderFile();
+            headerFile.setFilename(UUID.randomUUID().toString() + ".jpg");
+            headerFile.setType("jpg");
+            headerFile.setValue(string);
+            modifyHeaderImage.setHeaderFile(headerFile);
+
+            XStream xStream = new XStream();
+            xStream.autodetectAnnotations(true);
+            xStream.registerConverter(new HeaderAttrConverter());
+            String xmlString = xStream.toXML(modifyHeaderImage).replace("__", "_");
+
+            System.out.println("===xmlString==" + xmlString);
+            OkHttpUtils.postBuilder()
+                    .url(UrlSet.URL_HEADER_MODIFY)
+                    .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())//AlarmApplication.mAlarmApplication.getUserId()
+                    .addParam("value", xmlString)
+                    .build()
+                    .buildRequestCall()
+                    .execute(new CallBack<ResponseMessageBean>() {//ResponseMessageBean InterQueryBean
+
+                        @Override
+                        public void onStart() {
+
+                        }
+
+                        @Override
+                        public void onNext(ResponseMessageBean postBean) {
+                            if (postBean.getResult() == 1) {
+                                mHeaderIv.setImageBitmap(photo);
+                                setResult(200);
+                                finish();
+                            } else {
+                                Toast.makeText(PersonalInfoActivity.this, "服务器请求出错,请重新尝试", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+                            super.onError(e);
+                            System.out.println("=====error====" + e);
+                        }
+                    });
+        }
+
+    }
+
     /**
      * 裁剪图片
      *
@@ -178,19 +252,6 @@ public class PersonalInfoActivity extends Activity implements OnClickListener, O
         intent.putExtra("outputY", 150);
         intent.putExtra("return-data", true);
         startActivityForResult(intent, 3);
-    }
-
-    /**
-     * set image
-     *
-     * @param data
-     */
-    private void setImageToView(Intent data) {
-        Bundle extras = data.getExtras();
-        if (extras != null) {
-            Bitmap photo = extras.getParcelable("data");
-            mHeaderIv.setImageBitmap(photo);
-        }
     }
 
 }
