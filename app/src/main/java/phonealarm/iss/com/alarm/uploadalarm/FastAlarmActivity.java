@@ -37,6 +37,7 @@ import java.util.UUID;
 import me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar;
 import phonealarm.iss.com.alarm.AlarmApplication;
 import phonealarm.iss.com.alarm.BaiduMapTestActivity;
+import phonealarm.iss.com.alarm.LoadingDialog;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.bean.ResponseMessageBean;
 import phonealarm.iss.com.alarm.bean.uploadalarm.UpLoadAlarmInfo;
@@ -306,6 +307,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
             upLoadFileBean.setType("amr");
             upLoadFileBean.setFilename(UUID.randomUUID().toString() + ".amr");
             upLoadFileBean.setValue(FileUtils.getFileStr(recordFile.getAbsolutePath()));
+            list.add(upLoadFileBean);
         }
         UploadFileList uploadFileList = new UploadFileList();
         uploadFileList.setFile(list);
@@ -316,6 +318,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         xStream.registerConverter(new UpLoadAttrConverter());
         String xmlString = xStream.toXML(upLoadAlarmInfo).replace("__", "_");
         System.out.println("===xmlString==" + xmlString);
+        LoadingDialog.show(this);
         OkHttpUtils.postBuilder()
                 .url(UrlSet.YIJIAN_BAOJING)
                 .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())//AlarmApplication.mAlarmApplication.getUserId()
@@ -331,6 +334,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
 
                     @Override
                     public void onNext(ResponseMessageBean postBean) {
+                        LoadingDialog.dismissSelf();
                         finish();
                     }
 
@@ -342,6 +346,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
                     @Override
                     public void onError(Throwable e) {
                         super.onError(e);
+                        LoadingDialog.dismissSelf();
                         System.out.println("=====error====" + e);
                     }
                 });
