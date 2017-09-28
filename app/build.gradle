@@ -4,7 +4,7 @@ android {
     compileSdkVersion 23
     buildToolsVersion '26.0.0'
     defaultConfig {
-        applicationId "phonealarm.iss.com.alarm"
+        applicationId "com.iss.phonealarm"
         minSdkVersion 15
         targetSdkVersion 15
         versionCode 1

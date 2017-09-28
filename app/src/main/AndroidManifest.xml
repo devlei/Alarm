@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="phonealarm.iss.com.alarm"
+<manifest package="com.iss.phonealarm"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:versionCode="10"
     android:versionName="1.0">
