@@ -158,6 +158,12 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stop();
+    }
+
     public void start() {
         //播放
         if (null != mPlayer) {
