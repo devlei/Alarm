@@ -41,6 +41,14 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
     private EditText mSearchEt;
     private RecyclerView mRv;
 
+    private CommonSearchAdapter mAdapter;
+    //private CommonSearchAdapter mCarAdapter;
+    //private CommonSearchAdapter mSuspectAdapter;
+    //private CommonSearchAdapter mPeopleLostAdapter;
+    //private CommonSearchAdapter mLostFoundAdapter;
+    //private CommonSearchAdapter mPoliceInteractAdapter;
+    //private CommonSearchAdapter mAlarmHistoryAdapter;
+
     /**
      * open
      *
@@ -131,7 +139,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        // TODO: 2017/9/23 weizhilei 搜索更新列表
+        if (mAdapter != null && mAdapter.getFilter() != null) {
+            mAdapter.getFilter().filter(s);
+        }
     }
 
     @Override
@@ -171,9 +181,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                         if (getBean != null) {
                             if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                 if (getBean.getCasesInfoList() != null) {
-                                    CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_cases);
-                                    adapter.setCasesInfoList(getBean.getCasesInfoList().getCasesInfoList());
-                                    mRv.setAdapter(adapter);
+                                    mAdapter = new CommonSearchAdapter(R.integer.type_cases);
+                                    mAdapter.setCasesInfoList(getBean.getCasesInfoList().getCasesInfoList());
+                                    mRv.setAdapter(mAdapter);
                                     LogUtils.d(getBean.getCasesInfoList().toString());
                                 }
                             } else {
@@ -205,9 +215,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                         if (getBean != null) {
                             if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                 if (getBean.getCarInfoList() != null) {
-                                    CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_vehicle_track);
-                                    adapter.setCarInfoList(getBean.getCarInfoList().getCarInfoList());
-                                    mRv.setAdapter(adapter);
+                                    mAdapter = new CommonSearchAdapter(R.integer.type_vehicle_track);
+                                    mAdapter.setCarInfoList(getBean.getCarInfoList().getCarInfoList());
+                                    mRv.setAdapter(mAdapter);
                                 }
                             } else {
                                 ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());
@@ -238,9 +248,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                         if (getBean != null) {
                             if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                 if (getBean.getSuspectInfoList() != null) {
-                                    CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_suspect_track);
-                                    adapter.setSuspectInfoList(getBean.getSuspectInfoList().getSuspectInfoList());
-                                    mRv.setAdapter(adapter);
+                                    mAdapter = new CommonSearchAdapter(R.integer.type_suspect_track);
+                                    mAdapter.setSuspectInfoList(getBean.getSuspectInfoList().getSuspectInfoList());
+                                    mRv.setAdapter(mAdapter);
                                 }
                             } else {
                                 ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());
@@ -271,9 +281,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                         if (getBean != null) {
                             if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                 if (getBean.getAllBelost() != null) {
-                                    CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_people_lost);
-                                    adapter.setBelostInfoList(getBean.getAllBelost().getBeLostInfoList());
-                                    mRv.setAdapter(adapter);
+                                    mAdapter = new CommonSearchAdapter(R.integer.type_people_lost);
+                                    mAdapter.setBelostInfoList(getBean.getAllBelost().getBeLostInfoList());
+                                    mRv.setAdapter(mAdapter);
                                 }
                             } else {
                                 ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());
@@ -304,9 +314,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                         if (getBean != null) {
                             if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                 if (getBean.getAllLost() != null) {
-                                    CommonSearchAdapter adapter = new CommonSearchAdapter(R.integer.type_lost_found);
-                                    adapter.setLostInfoList(getBean.getAllLost().getLostInfoList());
-                                    mRv.setAdapter(adapter);
+                                    mAdapter = new CommonSearchAdapter(R.integer.type_lost_found);
+                                    mAdapter.setLostInfoList(getBean.getAllLost().getLostInfoList());
+                                    mRv.setAdapter(mAdapter);
                                 }
                             } else {
                                 ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());
@@ -339,10 +349,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                             if (getBean != null) {
                                 if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                     if (getBean.getAlarmlist() != null) {
-                                        CommonSearchAdapter adapter = new CommonSearchAdapter(
-                                                R.integer.type_alarm_history);
-                                        adapter.setAlarmInfoList(getBean.getAlarmlist().getAlarminfo());
-                                        mRv.setAdapter(adapter);
+                                        mAdapter = new CommonSearchAdapter(R.integer.type_alarm_history);
+                                        mAdapter.setAlarmInfoList(getBean.getAlarmlist().getAlarminfo());
+                                        mRv.setAdapter(mAdapter);
                                     }
                                 } else {
                                     ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());
@@ -377,10 +386,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                             if (getBean != null) {
                                 if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                     if (getBean.getJmhdInfoList() != null) {
-                                        CommonSearchAdapter adapter = new CommonSearchAdapter(
-                                                R.integer.type_police_interact);
-                                        adapter.setInterQueryInfoList(getBean.getJmhdInfoList().getJmhdInfo());
-                                        mRv.setAdapter(adapter);
+                                        mAdapter = new CommonSearchAdapter(R.integer.type_police_interact);
+                                        mAdapter.setInterQueryInfoList(getBean.getJmhdInfoList().getJmhdInfo());
+                                        mRv.setAdapter(mAdapter);
                                     }
                                 } else {
                                     ToastUtils.showToast(CommonSearchActivity.this, getBean.getMessage());

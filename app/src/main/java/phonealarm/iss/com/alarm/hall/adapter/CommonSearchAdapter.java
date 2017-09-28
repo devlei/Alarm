@@ -8,6 +8,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.bean.beLost.BelostInfo;
@@ -18,6 +20,7 @@ import phonealarm.iss.com.alarm.bean.lost.LostInfo;
 import phonealarm.iss.com.alarm.bean.searchalarm.AlarmInfoBean;
 import phonealarm.iss.com.alarm.bean.suspect.SuspectInfo;
 import phonealarm.iss.com.alarm.hall.adapter.CommonSearchAdapter.CommonSearchViewHolder;
+import phonealarm.iss.com.alarm.hall.filter.*;
 import phonealarm.iss.com.alarm.utils.CollectionUtils;
 import phonealarm.iss.com.alarm.utils.IntentUtils;
 
@@ -26,7 +29,7 @@ import java.util.List;
 /**
  * Created by weizhilei on 2017/9/23.
  */
-public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHolder> {
+public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHolder> implements Filterable {
 
     private int mTypeResId;
 
@@ -38,6 +41,13 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
     private List<InterQueryInfo> mInterQueryInfoList;
     private List<AlarmInfoBean> mAlarmInfoList;
 
+    private CaseFilter mCaseFilter;
+    private CarFilter mCarFilter;
+    private SuspectFilter mSuspectFilter;
+    private PeopleLostFilter mPeopleLostFilter;
+    private LostFoundFilter mLostFoundFilter;
+    private InteractFilter mInteractFilter;
+    private AlarmHistoryFilter mAlarmHistoryFilter;
 
     public CommonSearchAdapter(int typeResId) {
         this.mTypeResId = typeResId;
@@ -247,7 +257,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
      * @param position
      */
     private void setPoliceInteractData(CommonSearchViewHolder holder, int position) {
-        if (CollectionUtils.isEmpty(mInterQueryInfoList) && position < mInterQueryInfoList.size()) {
+        if (!CollectionUtils.isEmpty(mInterQueryInfoList) && position < mInterQueryInfoList.size()) {
             InterQueryInfo interQueryInfo = mInterQueryInfoList.get(position);
             if (interQueryInfo != null) {
                 holder.mTopTv.setText(interQueryInfo.getFk_date());
@@ -278,6 +288,48 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
                 holder.mAlarmInfo = alarmInfo;
             }
         }
+    }
+
+    @Override
+    public Filter getFilter() {
+        switch (mTypeResId) {
+            case R.integer.type_cases:
+                if (mCaseFilter == null) {
+                    mCaseFilter = new CaseFilter(this, mCasesInfoList);
+                }
+                return mCaseFilter;
+            case R.integer.type_vehicle_track:
+                if (mCarFilter == null) {
+                    mCarFilter = new CarFilter(this, mCarInfoList);
+                }
+                return mCarFilter;
+            case R.integer.type_suspect_track:
+                if (mSuspectFilter == null) {
+                    mSuspectFilter = new SuspectFilter(this, mSuspectInfoList);
+                }
+                return mSuspectFilter;
+            case R.integer.type_people_lost:
+                if (mPeopleLostFilter == null) {
+                    mPeopleLostFilter = new PeopleLostFilter(this, mBelostInfoList);
+                }
+                return mPeopleLostFilter;
+            case R.integer.type_lost_found:
+                if (mLostFoundFilter == null) {
+                    mLostFoundFilter = new LostFoundFilter(this, mLostInfoList);
+                }
+                return mLostFoundFilter;
+            case R.integer.type_police_interact:
+                if (mInteractFilter == null) {
+                    mInteractFilter = new InteractFilter(this, mInterQueryInfoList);
+                }
+                return mInteractFilter;
+            case R.integer.type_alarm_history:
+                if (mAlarmHistoryFilter == null) {
+                    mAlarmHistoryFilter = new AlarmHistoryFilter(this, mAlarmInfoList);
+                }
+                return mAlarmHistoryFilter;
+        }
+        return null;
     }
 
     /**
