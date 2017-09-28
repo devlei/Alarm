@@ -54,7 +54,7 @@ public class EvaluateDialog extends Dialog implements OnCheckedChangeListener, O
     }
 
     public EvaluateDialog(@NonNull Context context, String alarmId, String alarmPhone) {
-        super(context, R.style.ThemeTransparent);
+        super(context, R.style.ThemeFullscreen);
         this.mAlarmId = alarmId;
         this.mAlarmPhone = alarmPhone;
     }

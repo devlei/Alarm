@@ -36,7 +36,7 @@ public class HeaderDialog extends Dialog implements OnClickListener {
     }
 
     public HeaderDialog(@NonNull Context context, OnHeaderDismissListener listener) {
-        super(context, R.style.ThemeTransparent);
+        super(context, R.style.ThemeFullscreen);
         this.mListener = listener;
     }
 

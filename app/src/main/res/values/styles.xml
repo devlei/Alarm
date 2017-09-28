@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="ThemeTransparent">
+    <style name="ThemeFullscreen">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowFullscreen">true</item>
@@ -19,4 +19,8 @@
         <item name="android:windowActionModeOverlay">true</item>
     </style>
 
+    <style name="ThemeFullscreen.Transparent" parent="ThemeFullscreen">
+        <!-- 屏幕背景不变暗 -->
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
 </resources>

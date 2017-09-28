@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import phonealarm.iss.com.alarm.AlarmApplication;
+import phonealarm.iss.com.alarm.LoadingDialog;
 import phonealarm.iss.com.alarm.R;
 import phonealarm.iss.com.alarm.bean.BaseResponseBean;
 import phonealarm.iss.com.alarm.bean.beLost.BeLostBean;
@@ -181,10 +182,13 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<CasesInfoListBean>() {
 
                     @Override
-                    public void onStart() {}
+                    public void onStart() {
+                        LoadingDialog.show(CommonSearchActivity.this);
+                    }
 
                     @Override
                     public void onNext(CasesInfoListBean getBean) {
+                        LoadingDialog.dismissSelf();
                         if (getBean != null) {
                             if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                 if (getBean.getCasesInfoList() != null) {
@@ -215,10 +219,11 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<InformationBean>() {
 
                     @Override
-                    public void onStart() { }
+                    public void onStart() { LoadingDialog.show(CommonSearchActivity.this);}
 
                     @Override
                     public void onNext(InformationBean getBean) {
+                        LoadingDialog.dismissSelf();
                         if (getBean != null) {
                             if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                 if (getBean.getCarInfoList() != null) {
@@ -248,10 +253,11 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<SuspectBean>() {
 
                     @Override
-                    public void onStart() {}
+                    public void onStart() {LoadingDialog.show(CommonSearchActivity.this);}
 
                     @Override
                     public void onNext(SuspectBean getBean) {
+                        LoadingDialog.dismissSelf();
                         if (getBean != null) {
                             if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                 if (getBean.getSuspectInfoList() != null) {
@@ -281,10 +287,11 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<BeLostBean>() {
 
                     @Override
-                    public void onStart() {}
+                    public void onStart() {LoadingDialog.show(CommonSearchActivity.this);}
 
                     @Override
                     public void onNext(BeLostBean getBean) {
+                        LoadingDialog.dismissSelf();
                         if (getBean != null) {
                             if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                 if (getBean.getAllBelost() != null) {
@@ -314,10 +321,11 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<LostBean>() {
 
                     @Override
-                    public void onStart() {}
+                    public void onStart() {LoadingDialog.show(CommonSearchActivity.this);}
 
                     @Override
                     public void onNext(LostBean getBean) {
+                        LoadingDialog.dismissSelf();
                         if (getBean != null) {
                             if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                 if (getBean.getAllLost() != null) {
@@ -349,10 +357,11 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     .execute(new CallBack<CheckAlarmMessage>() {
 
                         @Override
-                        public void onStart() {}
+                        public void onStart() {LoadingDialog.show(CommonSearchActivity.this);}
 
                         @Override
                         public void onNext(CheckAlarmMessage getBean) {
+                            LoadingDialog.dismissSelf();
                             if (getBean != null) {
                                 if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                     if (getBean.getAlarmlist() != null) {
@@ -386,10 +395,11 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     .execute(new CallBack<InterQueryBean>() {
 
                         @Override
-                        public void onStart() {}
+                        public void onStart() {LoadingDialog.show(CommonSearchActivity.this);}
 
                         @Override
                         public void onNext(InterQueryBean getBean) {
+                            LoadingDialog.dismissSelf();
                             if (getBean != null) {
                                 if (getBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                     if (getBean.getJmhdInfoList() != null) {
