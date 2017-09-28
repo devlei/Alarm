@@ -3,14 +3,14 @@ package phonealarm.iss.com.alarm.bean.searchalarm;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by zhaocuilong on 2017/9/27.
  */
 @XStreamAlias("attach_list")
-public class AlarmFilesList {
+public class AlarmFilesList implements Serializable {
 
     @XStreamImplicit(itemFieldName = "attachment")
     private List<MultimediaAttrBean> attach_list;
@@ -25,8 +25,6 @@ public class AlarmFilesList {
 
     @Override
     public String toString() {
-        return "AlarmFilesList{" +
-                "attach_list=" + attach_list +
-                '}';
+        return "AlarmFilesList{" + "attach_list=" + attach_list + '}';
     }
 }
