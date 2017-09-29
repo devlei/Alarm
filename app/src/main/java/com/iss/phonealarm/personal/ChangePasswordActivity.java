@@ -85,6 +85,10 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
             ToastUtils.showToast(this, "密码输入不一致");
             return;
         }
+        if (mOldPasswordTv.getText().toString().equals(mNewPasswordTv.getText().toString())) {
+            ToastUtils.showToast(this, "不能与上次密码相同");
+            return;
+        }
         if (AlarmApplication.mAlarmApplication.isLogin()) {
             UserInfoBean userInfoBean = new UserInfoBean();
             userInfoBean.setUserid(AlarmApplication.mAlarmApplication.getUserId());
