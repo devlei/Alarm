@@ -10,7 +10,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="@dimen/s_360"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/s_247"
             android:background="@drawable/bg_login"/>
 
