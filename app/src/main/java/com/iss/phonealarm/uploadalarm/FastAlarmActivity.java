@@ -222,7 +222,8 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
     }
 
     private final static int READ_PHONE_STATE_REQUEST_CODE = 300;
-    private final static String DANGEROUS_PERMISSION[] = new String[]{Manifest.permission.RECORD_AUDIO};
+    private final static String DANGEROUS_PERMISSION[] = new String[]{Manifest.permission.RECORD_AUDIO
+            , Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -242,9 +243,12 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
 
     private void permissionRequest() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            System.out.println("======");
             if (ActivityCompat.checkSelfPermission(this,
-                    Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                    Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED || ActivityCompat
+                    .checkSelfPermission(this,
+                            Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat
+                    .checkSelfPermission(
+                            this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 //申请权限
                 ActivityCompat.requestPermissions(this, DANGEROUS_PERMISSION, READ_PHONE_STATE_REQUEST_CODE);
             } else {
