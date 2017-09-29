@@ -12,15 +12,15 @@
         android:id="@+id/item_icon"
         android:layout_width="@dimen/s_46"
         android:layout_height="@dimen/s_46"
-        android:background="@drawable/icon_cases"/>
+        android:background="@drawable/icon_cases" />
 
     <TextView
         android:id="@+id/item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/s_10"
+        android:layout_marginTop="@dimen/s_8"
         android:text="@string/cases"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/f_10"/>
+        android:textSize="@dimen/f_13" />
 
 </LinearLayout>

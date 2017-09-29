@@ -23,10 +23,15 @@ public class RecordPlayer {
 
     // 播放本地录音文件
     public void playRecordFile(File file) {
-        if (file.exists() && file != null) {
+        if (file.exists() && file != null && file.length() > 0) {
             Uri uri = Uri.fromFile(file);
             mediaPlayer = MediaPlayer.create(mcontext, uri);
-            mediaPlayer.start();
+            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mp) {
+                    mp.start();
+                }
+            });
             //监听MediaPlayer播放完成
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 

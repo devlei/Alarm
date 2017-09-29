@@ -6,11 +6,8 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/s_15"
-        android:text="welcome to alarm"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/f_30"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/start_page" />
 </LinearLayout>

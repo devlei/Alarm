@@ -1,19 +1,25 @@
 package com.iss.phonealarm.uploadalarm;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.*;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.*;
+
 import com.bumptech.glide.Glide;
 import com.iss.phonealarm.AlarmApplication;
 import com.iss.phonealarm.BaiduMapTestActivity;
@@ -29,6 +35,7 @@ import com.iss.phonealarm.network.callback.CallBack;
 import com.iss.phonealarm.network.http.util.OkHttpUtils;
 import com.iss.phonealarm.utils.FileUtils;
 import com.thoughtworks.xstream.XStream;
+
 import me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar;
 
 import java.io.File;
@@ -116,13 +123,14 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         if (null != mHandler) {
             mHandler.removeMessages(PROGRESS);
             mHandler.removeMessages(TEXT);
-            mHandler.removeCallbacks(null);
+            mHandler.removeCallbacksAndMessages(null);
             mHandler = null;
             duration = 0;
         }
     }
 
     private TextView title;
+    private RelativeLayout recore_ll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +148,8 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         video_btn = (ImageView) findViewById(R.id.video_btn);
         video_delete = (ImageView) findViewById(R.id.video_delete);
         video_record = (ImageView) findViewById(R.id.video_record);
+        recore_ll = (RelativeLayout) findViewById(R.id.recore_ll);
+        findViewById(R.id.voice_icon).setOnClickListener(this);
 
         video_local = (TextView) findViewById(R.id.video_local);
         voice_time = (TextView) findViewById(R.id.voice_time);
@@ -206,9 +216,42 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
                     default:
                         break;
                 }
-                return false;
+                return true;
             }
         });
+    }
+
+    private final static int READ_PHONE_STATE_REQUEST_CODE = 300;
+    private final static String DANGEROUS_PERMISSION[] = new String[]{Manifest.permission.RECORD_AUDIO};
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == READ_PHONE_STATE_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                //权限授予成功,初始化
+                recore_ll.setVisibility(View.VISIBLE);
+            } else {
+
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
+
+    private void permissionRequest() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            System.out.println("======");
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                //申请权限
+                ActivityCompat.requestPermissions(this, DANGEROUS_PERMISSION, READ_PHONE_STATE_REQUEST_CODE);
+            } else {
+                //权限已经授予,直接初始化
+                recore_ll.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private void checkTimeLength() {
@@ -358,6 +401,10 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
                 break;
             case R.id.location_ll:
                 setLocation();
+                break;
+            case R.id.voice_icon:
+                Toast.makeText(this, "申请权限", Toast.LENGTH_SHORT).show();
+                permissionRequest();
                 break;
         }
     }
@@ -560,8 +607,11 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
 
     private void stopRecording() {
         if (recordFile != null) {
-            mediaRecorder.stop();
-            mediaRecorder.release();
+            try {
+                mediaRecorder.stop();
+                mediaRecorder.release();
+            } catch (Exception e) {
+            }
         }
     }
 

@@ -5,10 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.*;
+
 import com.bumptech.glide.Glide;
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.searchalarm.AlarmFilesList;
@@ -108,6 +111,24 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
                         Glide.with(this).load(multimediaAttrBean.getValue()).into(img);
                     } else {
                         mediaPath = multimediaAttrBean.getValue();
+                        if (null == mPlayer) {
+                            try {
+                                mPlayer = new MediaPlayer();
+                                mPlayer.setDataSource(mediaPath);
+                                mPlayer.prepare();
+//                                mPlayTimeTv.setText("0:" + mPlayer.getDuration() / 60);
+                                mProgressPb.setMax(mPlayer.getDuration());
+                                handler.sendEmptyMessageDelayed(200, 500);
+                                mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                    @Override
+                                    public void onCompletion(MediaPlayer mp) {
+                                        mProgressPb.setProgress(mPlayer.getDuration());
+                                        handler.removeCallbacksAndMessages(null);
+                                    }
+                                });
+                            } catch (Exception e) {
+                            }
+                        }
                     }
                 }
             }
@@ -133,15 +154,8 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
         }
     }
 
+
     private void play(String path) {
-        if (null == mPlayer) {
-            try {
-                mPlayer = new MediaPlayer();
-                mPlayer.setDataSource(path);
-                mPlayer.prepare();
-            } catch (Exception e) {
-            }
-        }
         if (mPlayer.isPlaying()) {
             mPlayer.pause();
         } else {
@@ -154,11 +168,13 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
     protected void onDestroy() {
         super.onDestroy();
         stop();
+        handler.removeCallbacksAndMessages(null);
     }
 
     public void start() {
         //播放
         if (null != mPlayer) {
+            mProgressPb.setProgress(0);
             mPlayer.start();
         }
     }
@@ -170,5 +186,13 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
             mPlayer = null;
         }
     }
+
+    public Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            mProgressPb.setProgress(mPlayer.getCurrentPosition());
+            handler.sendEmptyMessageDelayed(200, 500);
+        }
+    };
 
 }
