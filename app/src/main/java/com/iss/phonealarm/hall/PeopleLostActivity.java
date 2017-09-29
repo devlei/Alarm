@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.beLost.BelostInfo;
 import com.iss.phonealarm.utils.GlideUtils;
-import com.iss.phonealarm.utils.ToastUtils;
+import com.iss.phonealarm.utils.IntentUtils;
 
 /**
  * Created by weizhilei on 2017/9/24.
@@ -108,8 +108,7 @@ public class PeopleLostActivity extends Activity implements OnClickListener {
                 finish();
                 break;
             case R.id.title_other:
-                // TODO: 2017/9/26 weizhilei 缺少举报接口
-                ToastUtils.showToast(this, R.string.report);
+                IntentUtils.openFastAlarmActivity(this, R.integer.type_people_lost);
                 break;
         }
     }

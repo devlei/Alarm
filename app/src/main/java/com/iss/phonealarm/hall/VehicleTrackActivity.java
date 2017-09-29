@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.carinfo.CarInfo;
 import com.iss.phonealarm.utils.GlideUtils;
-import com.iss.phonealarm.utils.ToastUtils;
+import com.iss.phonealarm.utils.IntentUtils;
 
 /**
  * Created by weizhilei on 2017/9/24.
@@ -89,8 +89,7 @@ public class VehicleTrackActivity extends Activity implements OnClickListener {
                 finish();
                 break;
             case R.id.title_other:
-                // TODO: 2017/9/25 weizhilei 没有举报接口
-                ToastUtils.showToast(this, R.string.report);
+                IntentUtils.openFastAlarmActivity(this, R.integer.type_vehicle_track);
                 break;
         }
     }
