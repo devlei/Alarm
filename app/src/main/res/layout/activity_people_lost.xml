@@ -2,309 +2,318 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_F6F6FA"
+    android:background="@color/color_4982F5"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_title"/>
+    <include layout="@layout/layout_title" />
 
-    <TextView
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/color_F6F6FA"
-        android:paddingBottom="@dimen/s_5"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_5"
-        android:text="@string/basic_info"
-        android:textColor="@color/color_4982F5"
-        android:textSize="@dimen/f_15"/>
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/s_15"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_10">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/name"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/pl_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="姓名A"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/pl_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="@dimen/s_100"
-                android:layout_marginRight="@dimen/s_5"
-                android:text="【已丢失59天1小时】"
-                android:textColor="@color/color_FFA336"
-                android:textSize="@dimen/f_15"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/gender"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/pl_gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="男"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/age"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/pl_age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="23岁"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/miss_location"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/pl_miss_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="北京市朝阳区和平区15区"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/miss_time"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/pl_miss_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="2017-9-31 10:39"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/birth_date"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/pl_birth_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="2017-8-29"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/height_weight"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/pl_height_weight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="100CM,30KG"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/hair_color"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/pl_hair"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="长发，黑色"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_F6F6FA"
-        android:paddingBottom="@dimen/s_5"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_5"
-        android:text="@string/detail_info"
-        android:textColor="@color/color_4982F5"
-        android:textSize="@dimen/f_15"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/s_10"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingRight="@dimen/s_15"
-        android:paddingTop="@dimen/s_10">
 
         <TextView
-            android:id="@+id/pl_detail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:lineSpacingExtra="@dimen/s_5"
-            android:maxLines="4"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
+            android:background="@color/color_F6F6FA"
+            android:paddingBottom="@dimen/s_5"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_5"
+            android:text="@string/basic_info"
+            android:textColor="@color/color_4982F5"
+            android:textSize="@dimen/f_15" />
 
-        <ImageView
-            android:id="@+id/pl_header"
-            android:layout_width="@dimen/s_67"
-            android:layout_height="@dimen/s_76"
-            android:layout_marginTop="@dimen/s_10"
-            android:background="@drawable/icon_header_default"/>
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/s_15"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_10">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_F6F6FA"
-        android:paddingBottom="@dimen/s_5"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_5"
-        android:text="@string/contact_family"
-        android:textColor="@color/color_4982F5"
-        android:textSize="@dimen/f_15"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/s_10"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_10">
+                <TextView
+                    android:id="@+id/pl_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="姓名A"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/pl_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:layout_marginRight="@dimen/s_5"
+                    android:text="【已丢失59天1小时】"
+                    android:textColor="@color/color_FFA336"
+                    android:textSize="@dimen/f_15" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/pl_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="男"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/age"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/pl_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="23岁"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/miss_location"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/pl_miss_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="北京市朝阳区和平区15区"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/miss_time"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/pl_miss_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="2017-9-31 10:39"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/birth_date"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/pl_birth_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="2017-8-29"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/height_weight"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/pl_height_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="100CM,30KG"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hair_color"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/pl_hair"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="长发，黑色"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/pl_family_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="姓名A"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
+            android:background="@color/color_F6F6FA"
+            android:paddingBottom="@dimen/s_5"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_5"
+            android:text="@string/detail_info"
+            android:textColor="@color/color_4982F5"
+            android:textSize="@dimen/f_15" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/s_10"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingRight="@dimen/s_15"
+            android:paddingTop="@dimen/s_10">
+
+            <TextView
+                android:id="@+id/pl_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/s_5"
+                android:maxLines="4"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
 
             <ImageView
-                android:id="@+id/pl_phone_icon"
-                android:layout_width="@dimen/s_11"
-                android:layout_height="@dimen/s_11"
-                android:layout_centerVertical="true"
-                android:background="@drawable/icon_black_phone"/>
+                android:id="@+id/pl_header"
+                android:layout_width="@dimen/s_67"
+                android:layout_height="@dimen/s_76"
+                android:layout_marginTop="@dimen/s_10"
+                android:background="@drawable/icon_header_default" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_F6F6FA"
+            android:paddingBottom="@dimen/s_5"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_5"
+            android:text="@string/contact_family"
+            android:textColor="@color/color_4982F5"
+            android:textSize="@dimen/f_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/s_10"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_10">
 
             <TextView
-                android:id="@+id/pl_family_phone"
+                android:id="@+id/pl_family_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/s_5"
-                android:layout_marginTop="@dimen/s_10"
-                android:layout_toRightOf="@+id/pl_phone_icon"
-                android:text="15212345678"
+                android:text="姓名A"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
+                android:textSize="@dimen/f_13" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/pl_phone_icon"
+                    android:layout_width="@dimen/s_11"
+                    android:layout_height="@dimen/s_11"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_black_phone" />
+
+                <TextView
+                    android:id="@+id/pl_family_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/s_5"
+                    android:layout_marginTop="@dimen/s_10"
+                    android:layout_toRightOf="@+id/pl_phone_icon"
+                    android:text="15212345678"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

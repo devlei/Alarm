@@ -79,7 +79,7 @@
                 android:layout_width="@dimen/s_34"
                 android:layout_height="@dimen/s_34"
                 android:layout_marginLeft="@dimen/s_220"
-                android:background="#FF00FF" />
+                android:background="@drawable/info_delete" />
         </LinearLayout>
 
         <EditText

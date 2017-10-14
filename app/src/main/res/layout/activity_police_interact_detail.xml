@@ -2,89 +2,98 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_F6F6FA"
+    android:background="@color/color_4982F5"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_title"/>
+    <include layout="@layout/layout_title" />
 
-    <TextView
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/color_F6F6FA"
-        android:paddingBottom="@dimen/s_5"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_5"
-        android:text="@string/info_desc"
-        android:textColor="@color/color_4982F5"
-        android:textSize="@dimen/f_15"/>
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/s_10"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingRight="@dimen/s_15"
-        android:paddingTop="@dimen/s_10">
 
         <TextView
-            android:id="@+id/pid_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:lineSpacingExtra="@dimen/s_5"
-            android:maxLines="4"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
+            android:background="@color/color_F6F6FA"
+            android:paddingBottom="@dimen/s_5"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_5"
+            android:text="@string/info_desc"
+            android:textColor="@color/color_4982F5"
+            android:textSize="@dimen/f_15" />
 
-        <ImageView
-            android:id="@+id/pid_img"
-            android:layout_width="@dimen/s_67"
-            android:layout_height="@dimen/s_76"
-            android:layout_marginTop="@dimen/s_10"
-            android:background="@drawable/icon_header_default"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/s_10"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingRight="@dimen/s_15"
+            android:paddingTop="@dimen/s_10">
+
+            <TextView
+                android:id="@+id/pid_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/s_5"
+                android:maxLines="4"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+
+            <ImageView
+                android:id="@+id/pid_img"
+                android:layout_width="@dimen/s_67"
+                android:layout_height="@dimen/s_76"
+                android:layout_marginTop="@dimen/s_10"
+                android:background="@drawable/icon_header_default" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_F6F6FA"
+            android:paddingBottom="@dimen/s_5"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_5"
+            android:text="@string/reply"
+            android:textColor="@color/color_4982F5"
+            android:textSize="@dimen/f_15" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingBottom="@dimen/s_10"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingRight="@dimen/s_15"
+            android:paddingTop="@dimen/s_10">
+
+            <TextView
+                android:id="@+id/pid_reply_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="@dimen/s_5"
+                android:maxLines="2"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+
+            <TextView
+                android:id="@+id/pid_reply_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/pid_reply_desc"
+                android:layout_marginTop="@dimen/s_5"
+                android:text="2017-9-30 13:25"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+        </RelativeLayout>
     </LinearLayout>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_F6F6FA"
-        android:paddingBottom="@dimen/s_5"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_5"
-        android:text="@string/reply"
-        android:textColor="@color/color_4982F5"
-        android:textSize="@dimen/f_15"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:paddingBottom="@dimen/s_10"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingRight="@dimen/s_15"
-        android:paddingTop="@dimen/s_10">
-
-        <TextView
-            android:id="@+id/pid_reply_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:lineSpacingExtra="@dimen/s_5"
-            android:maxLines="2"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
-
-        <TextView
-            android:id="@+id/pid_reply_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/pid_reply_desc"
-            android:layout_marginTop="@dimen/s_5"
-            android:text="2017-9-30 13:25"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
-    </RelativeLayout>
 </LinearLayout>

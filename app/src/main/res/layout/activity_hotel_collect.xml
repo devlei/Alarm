@@ -1,223 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_F6F6FA">
+    android:background="@color/color_4982F5"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <include layout="@layout/layout_title" />
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <include layout="@layout/layout_title"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_F6F6FA"
-            android:paddingBottom="@dimen/s_5"
-            android:paddingLeft="@dimen/s_15"
-            android:paddingTop="@dimen/s_5"
-            android:text="@string/hotel_info"
-            android:textColor="@color/color_4982F5"
-            android:textSize="@dimen/f_15"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/s_40"
-            android:background="@android:color/white">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/s_15"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/s_7"
-                    android:layout_height="@dimen/s_6"
-                    android:background="@drawable/mark_must"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/s_10"
-                    android:text="@string/address"
-                    android:textColor="@color/color_666666"
-                    android:textSize="@dimen/f_15"/>
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/hc_hotel_address"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="@string/address_hint"
-                android:inputType="textPersonName"
-                android:paddingLeft="@dimen/s_130"
-                android:singleLine="true"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_15"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/s_40"
-            android:layout_marginTop="@dimen/s_1"
-            android:background="@android:color/white">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/s_15"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/s_7"
-                    android:layout_height="@dimen/s_6"
-                    android:background="@drawable/mark_must"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/s_10"
-                    android:text="@string/hotel_name"
-                    android:textColor="@color/color_666666"
-                    android:textSize="@dimen/f_15"/>
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/hc_hotel_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="@string/hotel_name_hint"
-                android:inputType="text"
-                android:paddingLeft="@dimen/s_130"
-                android:singleLine="true"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_15"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/s_40"
-            android:layout_marginTop="@dimen/s_1"
-            android:background="@android:color/white">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/s_15"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/s_7"
-                    android:layout_height="@dimen/s_6"
-                    android:background="@drawable/mark_must"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/s_10"
-                    android:text="@string/room_name"
-                    android:textColor="@color/color_666666"
-                    android:textSize="@dimen/f_15"/>
-            </LinearLayout>
-
-            <EditText
-                android:id="@+id/hc_room_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="@string/room_name_hint"
-                android:inputType="text"
-                android:paddingLeft="@dimen/s_130"
-                android:singleLine="true"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_15"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/s_40"
-            android:layout_marginTop="@dimen/s_1"
-            android:background="@android:color/white">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/s_32"
-                android:text="@string/contact_way"
-                android:textColor="@color/color_666666"
-                android:textSize="@dimen/f_15"/>
-
-            <EditText
-                android:id="@+id/hc_hotel_phone"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@null"
-                android:hint="@string/contact_way_hint"
-                android:inputType="phone"
-                android:maxLength="11"
-                android:paddingLeft="@dimen/s_130"
-                android:singleLine="true"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_15"/>
-        </RelativeLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_F6F6FA"
-            android:paddingBottom="@dimen/s_5"
-            android:paddingLeft="@dimen/s_15"
-            android:paddingTop="@dimen/s_5"
-            android:text="@string/passenger_info"
-            android:textColor="@color/color_4982F5"
-            android:textSize="@dimen/f_15"/>
-
+        android:background="@color/color_F6F6FA">
 
         <LinearLayout
-            android:id="@+id/hc_passenger_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"/>
-
-        <RelativeLayout
-            android:id="@+id/hc_add"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/s_30"
-            android:background="@android:color/white"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/s_10"
-            android:paddingLeft="@dimen/s_15"
-            android:paddingTop="@dimen/s_10">
-
-            <ImageView
-                android:id="@+id/hc_add_people"
-                android:layout_width="@dimen/s_14"
-                android:layout_height="@dimen/s_14"
-                android:layout_centerVertical="true"
-                android:background="@drawable/icon_add"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/s_5"
-                android:layout_toRightOf="@+id/hc_add_people"
-                android:text="@string/add_people"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_15"/>
-        </RelativeLayout>
-    </LinearLayout>
-</ScrollView>
+                android:background="@color/color_F6F6FA"
+                android:paddingBottom="@dimen/s_5"
+                android:paddingLeft="@dimen/s_15"
+                android:paddingTop="@dimen/s_5"
+                android:text="@string/hotel_info"
+                android:textColor="@color/color_4982F5"
+                android:textSize="@dimen/f_15" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/s_40"
+                android:background="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/s_15"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/s_7"
+                        android:layout_height="@dimen/s_6"
+                        android:background="@drawable/mark_must" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/s_10"
+                        android:text="@string/address"
+                        android:textColor="@color/color_666666"
+                        android:textSize="@dimen/f_15" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/hc_hotel_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/address_hint"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="@dimen/s_130"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_15" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/s_40"
+                android:layout_marginTop="@dimen/s_1"
+                android:background="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/s_15"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/s_7"
+                        android:layout_height="@dimen/s_6"
+                        android:background="@drawable/mark_must" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/s_10"
+                        android:text="@string/hotel_name"
+                        android:textColor="@color/color_666666"
+                        android:textSize="@dimen/f_15" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/hc_hotel_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/hotel_name_hint"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/s_130"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_15" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/s_40"
+                android:layout_marginTop="@dimen/s_1"
+                android:background="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/s_15"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/s_7"
+                        android:layout_height="@dimen/s_6"
+                        android:background="@drawable/mark_must" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/s_10"
+                        android:text="@string/room_name"
+                        android:textColor="@color/color_666666"
+                        android:textSize="@dimen/f_15" />
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/hc_room_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/room_name_hint"
+                    android:inputType="text"
+                    android:paddingLeft="@dimen/s_130"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_15" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/s_40"
+                android:layout_marginTop="@dimen/s_1"
+                android:background="@android:color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/s_32"
+                    android:text="@string/contact_way"
+                    android:textColor="@color/color_666666"
+                    android:textSize="@dimen/f_15" />
+
+                <EditText
+                    android:id="@+id/hc_hotel_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="@string/contact_way_hint"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:paddingLeft="@dimen/s_130"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_15" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_F6F6FA"
+                android:paddingBottom="@dimen/s_5"
+                android:paddingLeft="@dimen/s_15"
+                android:paddingTop="@dimen/s_5"
+                android:text="@string/passenger_info"
+                android:textColor="@color/color_4982F5"
+                android:textSize="@dimen/f_15" />
+
+
+            <LinearLayout
+                android:id="@+id/hc_passenger_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <RelativeLayout
+                android:id="@+id/hc_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/s_30"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/s_10"
+                android:paddingLeft="@dimen/s_15"
+                android:paddingTop="@dimen/s_10">
+
+                <ImageView
+                    android:id="@+id/hc_add_people"
+                    android:layout_width="@dimen/s_14"
+                    android:layout_height="@dimen/s_14"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/icon_add" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/s_5"
+                    android:layout_toRightOf="@+id/hc_add_people"
+                    android:text="@string/add_people"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_15" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

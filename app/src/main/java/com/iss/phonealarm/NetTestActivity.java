@@ -9,6 +9,7 @@ import com.iss.phonealarm.bean.ResponseMessageBean;
 import com.iss.phonealarm.bean.carinfo.InformationBean;
 import com.iss.phonealarm.bean.login.UserInfoBean;
 import com.iss.phonealarm.bean.searchalarm.CheckAlarmMessage;
+import com.iss.phonealarm.bean.uploadalarm.UpDateInfo;
 import com.iss.phonealarm.bean.uploadalarm.UpLoadAlarmInfo;
 import com.iss.phonealarm.bean.uploadalarm.UpLoadAttrConverter;
 import com.iss.phonealarm.bean.uploadalarm.UpLoadFileBean;
@@ -109,6 +110,9 @@ public class NetTestActivity extends Activity {
 
     //注销接口
     public static final String LOGOUT = "http://192.168.0.105:8085/WebService.action?Service=quitService";
+
+    //更新接口
+    public static final String UP_DATE = "http://192.168.0.105:8085/WebService.action?Service=checkOfUpdates";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -263,12 +267,12 @@ public class NetTestActivity extends Activity {
         System.out.println("===>" + xmlString);
 
         OkHttpUtils.postBuilder()
-                .url(LOGOUT)// YIJIAN_BAOJING  CHAKAN_PERSONINFO CHECK_ALARM_LIST
+                .url(UP_DATE)// YIJIAN_BAOJING  CHAKAN_PERSONINFO CHECK_ALARM_LIST
                 .addParam("userid", "15810632322")
-                .addParam("value", xmlString)
+//                .addParam("value", xmlString)
                 .build()
                 .buildRequestCall()
-                .execute(new CallBack<ResponseMessageBean>() {//ResponseMessageBean InterQueryBean
+                .execute(new CallBack<UpDateInfo>() {//ResponseMessageBean InterQueryBean
 
                     @Override
                     public void onStart() {
@@ -276,7 +280,7 @@ public class NetTestActivity extends Activity {
                     }
 
                     @Override
-                    public void onNext(ResponseMessageBean postBean) {
+                    public void onNext(UpDateInfo postBean) {
                         System.out.println("=====onNext====" + postBean);
                     }
 

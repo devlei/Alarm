@@ -2,280 +2,289 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_F6F6FA"
+    android:background="@color/color_4982F5"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_title"/>
+    <include layout="@layout/layout_title" />
 
-    <TextView
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@color/color_F6F6FA"
-        android:paddingBottom="@dimen/s_5"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_5"
-        android:text="@string/personal_info"
-        android:textColor="@color/color_4982F5"
-        android:textSize="@dimen/f_15"/>
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/s_10"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_10">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/name"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/st_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="姓名A"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/st_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="@dimen/s_100"
-                android:layout_marginRight="@dimen/s_5"
-                android:text="【已追踪59天1小时】"
-                android:textColor="@color/color_FFA336"
-                android:textSize="@dimen/f_15"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/gender"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/st_gender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="男"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nation"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/st_nation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="汉"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/birth_date"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/st_birth_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="2017-9-31 10:39"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/id_number"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/st_id_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="41092819788783782718"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/wanted_level"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/st_wanted_level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="A级"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/case_category"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/st_case_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:text="故意伤害罪"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/s_5">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/signalment"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-
-            <TextView
-                android:id="@+id/st_signalment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/s_100"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="大眼睛，短发，身高1.70左右，体态中等"
-                android:textColor="@android:color/black"
-                android:textSize="@dimen/f_13"/>
-        </RelativeLayout>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_F6F6FA"
-        android:paddingBottom="@dimen/s_5"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_5"
-        android:text="@string/case_desc"
-        android:textColor="@color/color_4982F5"
-        android:textSize="@dimen/f_15"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/s_10"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingRight="@dimen/s_15"
-        android:paddingTop="@dimen/s_10">
 
         <TextView
-            android:id="@+id/st_case_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:lineSpacingExtra="@dimen/s_5"
-            android:maxLines="3"
+            android:background="@color/color_F6F6FA"
+            android:paddingBottom="@dimen/s_5"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_5"
+            android:text="@string/personal_info"
+            android:textColor="@color/color_4982F5"
+            android:textSize="@dimen/f_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/s_10"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_10">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/st_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="姓名A"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/st_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:layout_marginRight="@dimen/s_5"
+                    android:text="【已追踪59天1小时】"
+                    android:textColor="@color/color_FFA336"
+                    android:textSize="@dimen/f_15" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/st_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="男"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nation"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/st_nation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="汉"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/birth_date"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/st_birth_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="2017-9-31 10:39"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/id_number"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/st_id_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="41092819788783782718"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wanted_level"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/st_wanted_level"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="A级"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/case_category"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/st_case_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:text="故意伤害罪"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/signalment"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+
+                <TextView
+                    android:id="@+id/st_signalment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_100"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="大眼睛，短发，身高1.70左右，体态中等"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/f_13" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_F6F6FA"
+            android:paddingBottom="@dimen/s_5"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_5"
+            android:text="@string/case_desc"
+            android:textColor="@color/color_4982F5"
+            android:textSize="@dimen/f_15" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/s_10"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingRight="@dimen/s_15"
+            android:paddingTop="@dimen/s_10">
+
+            <TextView
+                android:id="@+id/st_case_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/s_5"
+                android:maxLines="3"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+
+            <ImageView
+                android:id="@+id/st_header"
+                android:layout_width="@dimen/s_67"
+                android:layout_height="@dimen/s_76"
+                android:layout_marginTop="@dimen/s_10"
+                android:background="@drawable/icon_header_default" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_F6F6FA"
+            android:paddingBottom="@dimen/s_5"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_5"
+            android:text="@string/reward"
+            android:textColor="@color/color_4982F5"
+            android:textSize="@dimen/f_15" />
+
+        <TextView
+            android:id="@+id/st_reward"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingBottom="@dimen/s_10"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_10"
+            android:text="@string/reward"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
+            android:textSize="@dimen/f_13" />
 
-        <ImageView
-            android:id="@+id/st_header"
-            android:layout_width="@dimen/s_67"
-            android:layout_height="@dimen/s_76"
-            android:layout_marginTop="@dimen/s_10"
-            android:background="@drawable/icon_header_default"/>
     </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_F6F6FA"
-        android:paddingBottom="@dimen/s_5"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_5"
-        android:text="@string/reward"
-        android:textColor="@color/color_4982F5"
-        android:textSize="@dimen/f_15"/>
-
-    <TextView
-        android:id="@+id/st_reward"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:paddingBottom="@dimen/s_10"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_10"
-        android:text="@string/reward"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/f_13"/>
-
 </LinearLayout>

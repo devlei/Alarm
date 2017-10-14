@@ -2,157 +2,165 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_F6F6FA"
+    android:background="@color/color_4982F5"
     android:orientation="vertical">
 
     <include layout="@layout/layout_title" />
 
-    <TextView
-        android:id="@+id/ah_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingTop="@dimen/s_15"
-        android:text="正在处理"
-        android:textColor="@color/color_4982F5"
-        android:textSize="@dimen/f_15" />
-
-    <RelativeLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingRight="@dimen/s_15"
-        android:paddingTop="@dimen/s_20">
+        android:layout_height="match_parent"
+        android:background="@color/color_F6F6FA"
+        android:orientation="vertical">
+
 
         <TextView
+            android:id="@+id/ah_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/time"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13" />
+            android:paddingLeft="@dimen/s_15"
+            android:paddingTop="@dimen/s_15"
+            android:text="正在处理"
+            android:textColor="@color/color_4982F5"
+            android:textSize="@dimen/f_15" />
 
-        <TextView
-            android:id="@+id/ah_time"
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingRight="@dimen/s_15"
+            android:paddingTop="@dimen/s_20">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+
+            <TextView
+                android:id="@+id/ah_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_75"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="2017-9-30 10:25"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingRight="@dimen/s_15"
+            android:paddingTop="@dimen/s_20">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/site"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+
+            <TextView
+                android:id="@+id/ah_site"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_75"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="北京市海淀区上地六街15号"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingRight="@dimen/s_15"
+            android:paddingTop="@dimen/s_20">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phone"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+
+            <TextView
+                android:id="@+id/ah_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_75"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="15212345678"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingRight="@dimen/s_15"
+            android:paddingTop="@dimen/s_20">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alarm_content"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+
+            <TextView
+                android:id="@+id/ah_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/s_75"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="案情详情"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/s_20"
+            android:paddingLeft="@dimen/s_15"
+            android:paddingRight="@dimen/s_15">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/alarm_related"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/f_13" />
+
+            <LinearLayout
+                android:id="@+id/imgarray"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/s_53"
+                android:layout_marginLeft="@dimen/s_75"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/s_75"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="2017-9-30 10:25"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13" />
-    </RelativeLayout>
+            android:layout_gravity="right"
+            android:paddingRight="@dimen/s_15"
+            android:paddingTop="@dimen/s_20">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingRight="@dimen/s_15"
-        android:paddingTop="@dimen/s_20">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/site"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13" />
-
-        <TextView
-            android:id="@+id/ah_site"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/s_75"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="北京市海淀区上地六街15号"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingRight="@dimen/s_15"
-        android:paddingTop="@dimen/s_20">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/phone"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13" />
-
-        <TextView
-            android:id="@+id/ah_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/s_75"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="15212345678"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingRight="@dimen/s_15"
-        android:paddingTop="@dimen/s_20">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/alarm_content"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13" />
-
-        <TextView
-            android:id="@+id/ah_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/s_75"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="案情详情"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/s_20"
-        android:paddingLeft="@dimen/s_15"
-        android:paddingRight="@dimen/s_15">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="@string/alarm_related"
-            android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13" />
-
-        <LinearLayout
-            android:id="@+id/imgarray"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/s_53"
-            android:layout_marginLeft="@dimen/s_75"
-            android:orientation="horizontal">
-
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:paddingRight="@dimen/s_15"
-        android:paddingTop="@dimen/s_20">
-
-        <include layout="@layout/layout_progressbar" />
-    </RelativeLayout>
+            <include layout="@layout/layout_progressbar" />
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

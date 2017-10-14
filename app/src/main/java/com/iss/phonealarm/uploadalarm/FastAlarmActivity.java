@@ -18,6 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.*;
 
 import com.bumptech.glide.Glide;
@@ -169,6 +170,35 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         imgarray = (LinearLayout) findViewById(R.id.imgarray);
 
         video_local.setText(AlarmApplication.address);
+        mEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != recore_ll)
+                    recore_ll.setVisibility(View.INVISIBLE);
+            }
+        });
+        findViewById(R.id.recore_ll).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        findViewById(R.id.root_view).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    if (!(v.getId() == R.id.recore_ll || v.getId() == R.id.voice_icon)) {
+                        if (null != recore_ll) {
+                            if (recore_ll.getVisibility() == View.VISIBLE) {
+                                recore_ll.setVisibility(View.INVISIBLE);
+                                return true;
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+        });
 
 
     }
@@ -407,19 +437,22 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
                 setLocation();
                 break;
             case R.id.voice_icon:
-                Toast.makeText(this, "申请权限", Toast.LENGTH_SHORT).show();
                 permissionRequest();
                 break;
         }
     }
 
     private void setLocation() {
+        if (null != recore_ll)
+            recore_ll.setVisibility(View.INVISIBLE);
         if (null != title) {
             BaiduMapTestActivity.open(this, title.getText().toString(), MAP_REQUEST_CODE);
         }
     }
 
     private void dialog() {
+        if (null != recore_ll)
+            recore_ll.setVisibility(View.INVISIBLE);
         if (null != imgarray && imgarray.getChildCount() < 5) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("提示");
@@ -533,6 +566,13 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
                 public boolean onLongClick(View v) {
                     imgarray.removeView(img);
                     return true;
+                }
+            });
+            img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (null != recore_ll)
+                        recore_ll.setVisibility(View.INVISIBLE);
                 }
             });
         }

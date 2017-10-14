@@ -3,6 +3,7 @@ package com.iss.phonealarm.personal;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -26,6 +27,8 @@ import com.iss.phonealarm.utils.GlideUtils;
 import com.iss.phonealarm.utils.IntentUtils;
 import com.iss.phonealarm.utils.ToastUtils;
 import com.thoughtworks.xstream.XStream;
+
+import java.io.File;
 
 /**
  * Created by weizhilei on 2017/9/23.
@@ -127,6 +130,23 @@ public class PersonalActivity extends Activity implements OnClickListener {
                 logout();
                 break;
         }
+    }
+
+    /**
+     * 安装APK文件
+     */
+    private void installApk() {
+        File apkfile = new File("apkName");
+        if (!apkfile.exists()) {
+            return;
+        }
+        // 通过Intent安装APK文件
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setDataAndType(Uri.parse("file://" + apkfile.toString()),
+                "application/vnd.android.package-archive");
+        startActivity(i);
+        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     @Override

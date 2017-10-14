@@ -2,17 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_F6F6FA"
+    android:background="@color/color_4982F5"
     android:orientation="vertical">
 
     <include layout="@layout/layout_title" />
 
-    <TextView
-        android:id="@+id/about_version"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="中卫市公安局版权所有"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/f_30" />
+        android:background="@color/color_F6F6FA"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/about_version"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="中卫市公安局版权所有"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/f_30" />
+    </LinearLayout>
 </LinearLayout>

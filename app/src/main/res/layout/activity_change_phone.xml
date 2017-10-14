@@ -2,37 +2,46 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_F6F6FA"
+    android:background="@color/color_4982F5"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_title"/>
+    <include layout="@layout/layout_title" />
 
-    <RelativeLayout
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/s_50"
-        android:layout_marginTop="@dimen/s_40"
-        android:background="@android:color/white">
+        android:layout_height="match_parent"
+        android:background="@color/color_F6F6FA"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/s_15"
-            android:text="@string/phone_number"
-            android:textColor="@color/color_666666"
-            android:textSize="@dimen/f_15"/>
 
-        <EditText
-            android:id="@+id/cp_phone"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:hint="@string/phone_hint"
-            android:inputType="phone"
-            android:maxLength="11"
-            android:paddingLeft="@dimen/s_100"
-            android:textColor="@color/color_666666"
-            android:textSize="@dimen/f_15"/>
-    </RelativeLayout>
+            android:layout_height="@dimen/s_50"
+            android:layout_marginTop="@dimen/s_40"
+            android:background="@android:color/white">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/s_15"
+                android:text="@string/phone_number"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/f_15" />
+
+            <EditText
+                android:id="@+id/cp_phone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="@string/phone_hint"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:paddingLeft="@dimen/s_100"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/f_15" />
+        </RelativeLayout>
+
+    </LinearLayout>
 </LinearLayout>
