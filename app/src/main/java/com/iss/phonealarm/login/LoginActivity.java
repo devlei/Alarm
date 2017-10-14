@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.iss.phonealarm.AlarmApplication;
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.BaseResponseBean;
@@ -24,6 +25,7 @@ import com.iss.phonealarm.utils.AppUtils;
 import com.iss.phonealarm.utils.IntentUtils;
 import com.iss.phonealarm.utils.SharePreferencesUtils;
 import com.iss.phonealarm.utils.ToastUtils;
+import com.iss.phonealarm.utils.Utils;
 import com.thoughtworks.xstream.XStream;
 
 /**
@@ -81,10 +83,15 @@ public class LoginActivity extends Activity implements OnClickListener {
             ToastUtils.showToast(this, "手机号或密码不能为空");
             return;
         }
+        if (!Utils.isMobile(mUserEt.getText().toString())) {
+            ToastUtils.showToast(this, "请检查输入的手机号是否正确");
+            return;
+        }
         UserInfoBean userInfoBean = new UserInfoBean();
         userInfoBean.setUserid(mUserEt.getText().toString());
         userInfoBean.setPassword(mPasswordEt.getText().toString());
-        if (!TextUtils.isEmpty(AlarmApplication.address)) userInfoBean.setEndadress(AlarmApplication.address);
+        if (!TextUtils.isEmpty(AlarmApplication.address))
+            userInfoBean.setEndadress(AlarmApplication.address);
 
         XStream xStream = new XStream();
         xStream.autodetectAnnotations(true);
@@ -98,7 +105,8 @@ public class LoginActivity extends Activity implements OnClickListener {
                 .execute(new CallBack<ResponseMessageBean>() {
 
                     @Override
-                    public void onStart() {}
+                    public void onStart() {
+                    }
 
                     @Override
                     public void onNext(ResponseMessageBean postBean) {
@@ -111,6 +119,7 @@ public class LoginActivity extends Activity implements OnClickListener {
                                 // TODO: 2017/9/27 weizhilei 应该存后台返回的userid，目前后台无返回，先用本地userid
                                 AlarmApplication.mAlarmApplication.setUserId(mUserEt.getText().toString());
                                 AlarmApplication.mAlarmApplication.setLogin(true);
+                                AlarmApplication.pwd = mPasswordEt.getText().toString();
                                 IntentUtils.openMain(LoginActivity.this);
                                 finish();
                             } else {
@@ -120,7 +129,8 @@ public class LoginActivity extends Activity implements OnClickListener {
                     }
 
                     @Override
-                    public void onComplete() {}
+                    public void onComplete() {
+                    }
                 });
     }
 

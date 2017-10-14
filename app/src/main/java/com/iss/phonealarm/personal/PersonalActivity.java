@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.iss.phonealarm.AlarmApplication;
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.BaseResponseBean;
 import com.iss.phonealarm.bean.ResponseMessageBean;
+import com.iss.phonealarm.bean.login.UserInfoBean;
 import com.iss.phonealarm.bean.modifyimg.AllUserInfo;
 import com.iss.phonealarm.network.UrlSet;
 import com.iss.phonealarm.network.callback.CallBack;
@@ -23,6 +25,7 @@ import com.iss.phonealarm.utils.AppUtils;
 import com.iss.phonealarm.utils.GlideUtils;
 import com.iss.phonealarm.utils.IntentUtils;
 import com.iss.phonealarm.utils.ToastUtils;
+import com.thoughtworks.xstream.XStream;
 
 /**
  * Created by weizhilei on 2017/9/23.
@@ -75,6 +78,7 @@ public class PersonalActivity extends Activity implements OnClickListener {
         findViewById(R.id.personal_change_password).setOnClickListener(this);
         findViewById(R.id.personal_check_update).setOnClickListener(this);
         findViewById(R.id.personal_about).setOnClickListener(this);
+        findViewById(R.id.logout).setOnClickListener(this);
 
     }
 
@@ -119,6 +123,9 @@ public class PersonalActivity extends Activity implements OnClickListener {
             case R.id.personal_about:
                 IntentUtils.openAbout(this);
                 break;
+            case R.id.logout:
+                logout();
+                break;
         }
     }
 
@@ -132,6 +139,44 @@ public class PersonalActivity extends Activity implements OnClickListener {
         }
     }
 
+    private void logout() {
+        if (AlarmApplication.mAlarmApplication.isLogin()) {
+            UserInfoBean userInfoBean = new UserInfoBean();
+            userInfoBean.setUserid(AlarmApplication.mAlarmApplication.getUserId());
+            userInfoBean.setEndAddress(AlarmApplication.address);
+            XStream xStream = new XStream();
+            xStream.autodetectAnnotations(true);
+            String xmlString = xStream.toXML(userInfoBean).replace("__", "_");
+            OkHttpUtils.postBuilder()
+                    .url(UrlSet.URL_LOGOUT)
+                    .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
+                    .addParam("value", xmlString)
+                    .build()
+                    .buildRequestCall()
+                    .execute(new CallBack<ResponseMessageBean>() {
+
+                        @Override
+                        public void onStart() {
+                        }
+
+                        @Override
+                        public void onNext(ResponseMessageBean postBean) {
+                            if (postBean != null) {
+                                if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                    IntentUtils.openLogin(PersonalActivity.this);
+                                } else {
+                                    ToastUtils.showToast(PersonalActivity.this, postBean.getMessage());
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onComplete() {
+                        }
+                    });
+        }
+    }
+
     private void loadUserInfo() {
         if (AlarmApplication.mAlarmApplication.isLogin()) {
             OkHttpUtils.postBuilder()
@@ -142,7 +187,8 @@ public class PersonalActivity extends Activity implements OnClickListener {
                     .execute(new CallBack<ResponseMessageBean>() {
 
                         @Override
-                        public void onStart() {}
+                        public void onStart() {
+                        }
 
                         @Override
                         public void onNext(ResponseMessageBean postBean) {
@@ -158,7 +204,8 @@ public class PersonalActivity extends Activity implements OnClickListener {
                         }
 
                         @Override
-                        public void onComplete() {}
+                        public void onComplete() {
+                        }
                     });
         }
     }

@@ -5,14 +5,14 @@
     android:background="@color/color_F6F6FA"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_title"/>
+    <include layout="@layout/layout_title" />
 
     <TextView
         android:id="@+id/about_version"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="V1.0"
+        android:text="中卫市公安局版权所有"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/f_30"/>
+        android:textSize="@dimen/f_30" />
 </LinearLayout>

@@ -9,9 +9,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.iss.phonealarm.AlarmApplication;
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.BaseResponseBean;
@@ -24,6 +27,7 @@ import com.iss.phonealarm.network.UrlSet;
 import com.iss.phonealarm.network.callback.CallBack;
 import com.iss.phonealarm.network.http.util.OkHttpUtils;
 import com.iss.phonealarm.utils.ToastUtils;
+import com.iss.phonealarm.utils.Utils;
 import com.thoughtworks.xstream.XStream;
 
 import java.util.ArrayList;
@@ -89,6 +93,21 @@ public class HotelCollectActivity extends Activity implements OnClickListener {
             case R.id.hc_add:
                 addPassenger();
                 break;
+            case R.id.delete:
+                delete(v);
+                break;
+        }
+    }
+
+    private void delete(View v) {
+        if (null != v) {
+            ViewGroup parent = (ViewGroup) v.getParent().getParent().getParent();
+            if (null != parent) {
+                if (null != parent.getTag() && parent.getTag().equals("itemRoot")) {
+                    mPassengerViewList.remove(parent);
+                    mPassengerContainerTv.removeView(parent);
+                }
+            }
         }
     }
 
@@ -98,6 +117,7 @@ public class HotelCollectActivity extends Activity implements OnClickListener {
     private void addPassenger() {
         View view = LayoutInflater.from(this).inflate(R.layout.layout_passenger, mPassengerContainerTv, false);
         mPassengerContainerTv.addView(view);
+        view.findViewById(R.id.delete).setOnClickListener(this);
         mPassengerViewList.add(view);
     }
 
@@ -125,6 +145,10 @@ public class HotelCollectActivity extends Activity implements OnClickListener {
                 }
                 if (TextUtils.isEmpty(passengerIdNumberEt.getText())) {
                     ToastUtils.showToast(this, R.string.id_number_hint);
+                    return;
+                }
+                if (!Utils.isMobile(passengerIdNumberEt.getText().toString())) {
+                    ToastUtils.showToast(this, "请检查身份证号" + passengerIdNumberEt.getText() + "是否正确");
                     return;
                 }
             }
@@ -170,7 +194,8 @@ public class HotelCollectActivity extends Activity implements OnClickListener {
                     .execute(new CallBack<ResponseMessageBean>() {
 
                         @Override
-                        public void onStart() {}
+                        public void onStart() {
+                        }
 
                         @Override
                         public void onNext(ResponseMessageBean postBean) {
@@ -185,7 +210,8 @@ public class HotelCollectActivity extends Activity implements OnClickListener {
                         }
 
                         @Override
-                        public void onComplete() {}
+                        public void onComplete() {
+                        }
                     });
         }
     }

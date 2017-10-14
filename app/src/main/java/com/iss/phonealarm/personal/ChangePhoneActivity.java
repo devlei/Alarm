@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.iss.phonealarm.AlarmApplication;
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.BaseResponseBean;
@@ -22,6 +23,7 @@ import com.iss.phonealarm.network.callback.CallBack;
 import com.iss.phonealarm.network.http.util.OkHttpUtils;
 import com.iss.phonealarm.personal.observer.UserReceiver;
 import com.iss.phonealarm.utils.ToastUtils;
+import com.iss.phonealarm.utils.Utils;
 import com.thoughtworks.xstream.XStream;
 
 /**
@@ -78,6 +80,10 @@ public class ChangePhoneActivity extends Activity implements OnClickListener {
             ToastUtils.showToast(this, "手机号不能为空");
             return;
         }
+        if (!Utils.isMobile(mPhoneEt.getText().toString())) {
+            ToastUtils.showToast(this, "请检查手机号是否正确");
+            return;
+        }
         if (AlarmApplication.mAlarmApplication.isLogin()) {
             UserInfoBean userInfoBean = new UserInfoBean();
             userInfoBean.setUserid(AlarmApplication.mAlarmApplication.getUserId());
@@ -96,7 +102,8 @@ public class ChangePhoneActivity extends Activity implements OnClickListener {
                     .execute(new CallBack<ResponseMessageBean>() {
 
                         @Override
-                        public void onStart() {}
+                        public void onStart() {
+                        }
 
                         @Override
                         public void onNext(ResponseMessageBean postBean) {
@@ -109,7 +116,8 @@ public class ChangePhoneActivity extends Activity implements OnClickListener {
                         }
 
                         @Override
-                        public void onComplete() {}
+                        public void onComplete() {
+                        }
                     });
         }
     }
@@ -131,7 +139,8 @@ public class ChangePhoneActivity extends Activity implements OnClickListener {
                     .execute(new CallBack<ResponseMessageBean>() {
 
                         @Override
-                        public void onStart() {}
+                        public void onStart() {
+                        }
 
                         @Override
                         public void onNext(ResponseMessageBean postBean) {
@@ -145,7 +154,8 @@ public class ChangePhoneActivity extends Activity implements OnClickListener {
                         }
 
                         @Override
-                        public void onComplete() {}
+                        public void onComplete() {
+                        }
                     });
         }
     }

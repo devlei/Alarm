@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.beLost.BelostInfo;
 import com.iss.phonealarm.utils.GlideUtils;
 import com.iss.phonealarm.utils.IntentUtils;
+import com.iss.phonealarm.utils.Utils;
 
 /**
  * Created by weizhilei on 2017/9/24.
@@ -79,6 +81,7 @@ public class PeopleLostActivity extends Activity implements OnClickListener {
         //set listener
         findViewById(R.id.title_back).setOnClickListener(this);
         findViewById(R.id.title_other).setOnClickListener(this);
+        findViewById(R.id.pl_phone_icon).setOnClickListener(this);
     }
 
     private void setData() {
@@ -109,6 +112,11 @@ public class PeopleLostActivity extends Activity implements OnClickListener {
                 break;
             case R.id.title_other:
                 IntentUtils.openFastAlarmActivity(this, R.integer.type_people_lost);
+                break;
+            case R.id.pl_phone_icon:
+                if (null != mFamilyPhoneTv.getText()) {
+                    Utils.call(this, mFamilyPhoneTv.getText().toString());
+                }
                 break;
         }
     }

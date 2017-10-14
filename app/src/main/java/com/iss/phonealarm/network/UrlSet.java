@@ -112,4 +112,9 @@ public class UrlSet {
     public static final String URL_HEADER_MODIFY = URL_BASIC + "Resetpicture";
 
 
+    /**
+     * 退出登录
+     */
+    public static final String URL_LOGOUT = URL_BASIC + "quitService";
+
 }

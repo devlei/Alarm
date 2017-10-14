@@ -11,10 +11,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.iss.phonealarm.AlarmApplication;
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.BaseResponseBean;
@@ -27,6 +29,7 @@ import com.iss.phonealarm.network.UrlSet;
 import com.iss.phonealarm.network.callback.CallBack;
 import com.iss.phonealarm.network.http.util.OkHttpUtils;
 import com.iss.phonealarm.utils.ToastUtils;
+import com.iss.phonealarm.utils.Utils;
 import com.thoughtworks.xstream.XStream;
 
 import java.util.ArrayList;
@@ -98,7 +101,20 @@ public class RentCollectActivity extends Activity implements OnClickListener {
     private void addTenant() {
         View view = LayoutInflater.from(this).inflate(R.layout.layout_tenant, mTenantContainerTv, false);
         mTenantContainerTv.addView(view);
+        view.findViewById(R.id.delete).setOnClickListener(this);
         mTenantViewList.add(view);
+    }
+
+    private void delete(View v) {
+        if (null != v) {
+            ViewGroup parent = (ViewGroup) v.getParent().getParent().getParent();
+            if (null != parent) {
+                if (null != parent.getTag() && parent.getTag().equals("itemRoot")) {
+                    mTenantViewList.remove(parent);
+                    mTenantContainerTv.removeView(parent);
+                }
+            }
+        }
     }
 
     @Override
@@ -118,6 +134,9 @@ public class RentCollectActivity extends Activity implements OnClickListener {
                 break;
             case R.id.rc_add:
                 addTenant();
+                break;
+            case R.id.delete:
+                delete(v);
                 break;
         }
     }
@@ -172,6 +191,10 @@ public class RentCollectActivity extends Activity implements OnClickListener {
                     ToastUtils.showToast(this, R.string.id_number_hint);
                     return;
                 }
+                if (!Utils.isMobile(tenantIdNumberEt.getText().toString())) {
+                    ToastUtils.showToast(this, "请检查身份证号" + tenantIdNumberEt.getText() + "是否正确");
+                    return;
+                }
             }
             //租房房屋信息
             InfoCollectBean infoCollectBean = new InfoCollectBean();
@@ -218,7 +241,8 @@ public class RentCollectActivity extends Activity implements OnClickListener {
                     .execute(new CallBack<ResponseMessageBean>() {
 
                         @Override
-                        public void onStart() {}
+                        public void onStart() {
+                        }
 
                         @Override
                         public void onNext(ResponseMessageBean postBean) {
@@ -233,7 +257,8 @@ public class RentCollectActivity extends Activity implements OnClickListener {
                         }
 
                         @Override
-                        public void onComplete() {}
+                        public void onComplete() {
+                        }
                     });
         }
     }

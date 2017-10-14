@@ -5,7 +5,7 @@
     android:background="@color/color_F6F6FA"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_title"/>
+    <include layout="@layout/layout_title" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             <ImageView
                 android:layout_width="@dimen/s_7"
                 android:layout_height="@dimen/s_6"
-                android:background="@drawable/mark_must"/>
+                android:background="@drawable/mark_must" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -31,20 +31,22 @@
                 android:layout_marginLeft="@dimen/s_10"
                 android:text="@string/name"
                 android:textColor="@color/color_666666"
-                android:textSize="@dimen/f_15"/>
+                android:textSize="@dimen/f_15" />
         </LinearLayout>
 
         <EditText
             android:id="@+id/eca_name"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/s_40"
+            android:layout_toLeftOf="@+id/eca_address_book"
             android:background="@null"
             android:hint="@string/name_hint"
             android:inputType="textPersonName"
-            android:maxLength="8"
             android:paddingLeft="@dimen/s_140"
+            android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_15"/>
+            android:textSize="@dimen/f_15" />
 
         <Button
             android:id="@+id/eca_address_book"
@@ -53,7 +55,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/s_20"
-            android:background="@drawable/icon_address_book"/>
+            android:background="@drawable/icon_address_book" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -73,7 +75,7 @@
             <ImageView
                 android:layout_width="@dimen/s_7"
                 android:layout_height="@dimen/s_6"
-                android:background="@drawable/mark_must"/>
+                android:background="@drawable/mark_must" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -81,7 +83,7 @@
                 android:layout_marginLeft="@dimen/s_10"
                 android:text="@string/contact_relation"
                 android:textColor="@color/color_666666"
-                android:textSize="@dimen/f_15"/>
+                android:textSize="@dimen/f_15" />
         </LinearLayout>
 
         <EditText
@@ -93,7 +95,7 @@
             android:maxLength="6"
             android:paddingLeft="@dimen/s_140"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_15"/>
+            android:textSize="@dimen/f_15" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -113,7 +115,7 @@
             <ImageView
                 android:layout_width="@dimen/s_7"
                 android:layout_height="@dimen/s_6"
-                android:background="@drawable/mark_must"/>
+                android:background="@drawable/mark_must" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -121,7 +123,7 @@
                 android:layout_marginLeft="@dimen/s_10"
                 android:text="@string/contact_phone"
                 android:textColor="@color/color_666666"
-                android:textSize="@dimen/f_15"/>
+                android:textSize="@dimen/f_15" />
         </LinearLayout>
 
         <EditText
@@ -133,7 +135,7 @@
             android:inputType="phone"
             android:paddingLeft="@dimen/s_140"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_15"/>
+            android:textSize="@dimen/f_15" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -149,7 +151,7 @@
             android:layout_marginLeft="@dimen/s_32"
             android:text="@string/contact_address"
             android:textColor="@color/color_666666"
-            android:textSize="@dimen/f_15"/>
+            android:textSize="@dimen/f_15" />
 
         <EditText
             android:id="@+id/eca_address"
@@ -161,7 +163,7 @@
             android:paddingLeft="@dimen/s_140"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_15"/>
+            android:textSize="@dimen/f_15" />
     </RelativeLayout>
 
 </LinearLayout>

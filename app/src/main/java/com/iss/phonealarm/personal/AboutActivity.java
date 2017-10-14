@@ -34,7 +34,7 @@ public class AboutActivity extends Activity implements OnClickListener {
         setContentView(R.layout.activity_about);
 
         TextView version = (TextView) findViewById(R.id.about_version);
-        version.setText(AppUtils.getVersionName(this));
+//        version.setText(AppUtils.getVersionName(this));
         findViewById(R.id.title_back).setOnClickListener(this);
         findViewById(R.id.title_other).setVisibility(View.GONE);
         ((TextView) findViewById(R.id.title_name)).setText(R.string.about);

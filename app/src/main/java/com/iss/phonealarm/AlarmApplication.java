@@ -3,6 +3,7 @@ package com.iss.phonealarm;
 import android.app.Application;
 import android.text.TextUtils;
 import android.widget.Toast;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -37,6 +38,7 @@ public class AlarmApplication extends Application {
     private boolean mIsLogin;
     public LocationClient mLocationClient = null;
     public static String address = "";
+    public static String pwd = "";
     public static double weidu, jingdu;
 
     @Override
@@ -131,7 +133,8 @@ public class AlarmApplication extends Application {
                 .execute(new CallBack<ResponseMessageBean>() {
 
                     @Override
-                    public void onStart() {}
+                    public void onStart() {
+                    }
 
                     @Override
                     public void onNext(ResponseMessageBean postBean) {
@@ -146,7 +149,8 @@ public class AlarmApplication extends Application {
                     }
 
                     @Override
-                    public void onComplete() {}
+                    public void onComplete() {
+                    }
 
                     @Override
                     public void onError(Throwable e) {

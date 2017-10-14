@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.hall.HeaderSpanSizeLookup;
 import com.iss.phonealarm.hall.IHeader;
@@ -169,7 +170,7 @@ public class BenefitAdapter extends RecyclerView.Adapter implements IHeader {
         } else if (type == getInteger(context, R.integer.type_eager_report)) {
             iconResId = R.drawable.icon_eager_report;
         } else if (type == getInteger(context, R.integer.type_police_interact)) {
-            iconResId = R.drawable.icon_people_lost;
+            iconResId = R.drawable.icon_police_interact;
         } else if (type == getInteger(context, R.integer.type_rent_collect)) {
             iconResId = R.drawable.icon_rent_collect;
         } else if (type == getInteger(context, R.integer.type_hotel_collect)) {

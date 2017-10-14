@@ -31,6 +31,9 @@ public class UserInfoBean implements Serializable {
     @XStreamAlias("endadress")
     private String endadress = "暂未获取";
 
+    @XStreamAlias("endAddress")
+    private String endAddress = "暂未获取";
+
     @XStreamAlias("imei")
     private String imei;
 
@@ -46,6 +49,13 @@ public class UserInfoBean implements Serializable {
     @XStreamAlias("new_userid")
     private String new_userid;
 
+    public String getEndAddress() {
+        return endAddress;
+    }
+
+    public void setEndAddress(String endAddress) {
+        this.endAddress = endAddress;
+    }
 
     public String getCurrent_userid() {
         return current_userid;

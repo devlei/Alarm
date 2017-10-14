@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:tag="itemRoot">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
             <ImageView
                 android:layout_width="@dimen/s_7"
                 android:layout_height="@dimen/s_6"
-                android:background="@drawable/mark_must"/>
+                android:background="@drawable/mark_must" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -31,7 +32,7 @@
                 android:layout_marginLeft="@dimen/s_10"
                 android:text="@string/name"
                 android:textColor="@color/color_666666"
-                android:textSize="@dimen/f_15"/>
+                android:textSize="@dimen/f_15" />
         </LinearLayout>
 
         <EditText
@@ -43,7 +44,7 @@
             android:paddingLeft="@dimen/s_130"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_15"/>
+            android:textSize="@dimen/f_15" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -63,7 +64,7 @@
             <ImageView
                 android:layout_width="@dimen/s_7"
                 android:layout_height="@dimen/s_6"
-                android:background="@drawable/mark_must"/>
+                android:background="@drawable/mark_must" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,20 +72,28 @@
                 android:layout_marginLeft="@dimen/s_10"
                 android:text="@string/id_number"
                 android:textColor="@color/color_666666"
-                android:textSize="@dimen/f_15"/>
+                android:textSize="@dimen/f_15" />
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="@dimen/s_34"
+                android:layout_height="@dimen/s_34"
+                android:layout_marginLeft="@dimen/s_220"
+                android:background="#FF00FF" />
         </LinearLayout>
 
         <EditText
             android:id="@+id/hc_passenger_id_number"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/s_80"
             android:background="@null"
             android:hint="@string/id_number_hint"
             android:inputType="text"
             android:paddingLeft="@dimen/s_130"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_15"/>
+            android:textSize="@dimen/f_15" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -100,7 +109,7 @@
             android:layout_marginLeft="@dimen/s_32"
             android:text="@string/contact_way"
             android:textColor="@color/color_666666"
-            android:textSize="@dimen/f_15"/>
+            android:textSize="@dimen/f_15" />
 
         <EditText
             android:id="@+id/hc_passenger_phone"
@@ -113,7 +122,7 @@
             android:paddingLeft="@dimen/s_130"
             android:singleLine="true"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_15"/>
+            android:textSize="@dimen/f_15" />
     </RelativeLayout>
 
     <TextView
@@ -124,5 +133,5 @@
         android:paddingLeft="@dimen/s_15"
         android:paddingTop="@dimen/s_5"
         android:textColor="@color/color_4982F5"
-        android:textSize="@dimen/f_15"/>
+        android:textSize="@dimen/f_15" />
 </LinearLayout>

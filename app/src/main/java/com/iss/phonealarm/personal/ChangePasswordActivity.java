@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.iss.phonealarm.AlarmApplication;
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.BaseResponseBean;
@@ -85,7 +86,7 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
             ToastUtils.showToast(this, "密码输入不一致");
             return;
         }
-        if (mOldPasswordTv.getText().toString().equals(mNewPasswordTv.getText().toString())) {
+        if (AlarmApplication.pwd.equals(mNewPasswordTv.getText().toString())) {
             ToastUtils.showToast(this, "不能与上次密码相同");
             return;
         }
@@ -107,11 +108,13 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
                     .execute(new CallBack<ResponseMessageBean>() {
 
                         @Override
-                        public void onStart() {}
+                        public void onStart() {
+                        }
 
                         @Override
                         public void onNext(ResponseMessageBean postBean) {
                             if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                AlarmApplication.pwd = mNewPasswordTv.getText().toString();
                                 ToastUtils.showToast(ChangePasswordActivity.this, "重置密码成功");
                                 finish();
                             } else {
@@ -120,7 +123,8 @@ public class ChangePasswordActivity extends Activity implements OnClickListener 
                         }
 
                         @Override
-                        public void onComplete() {}
+                        public void onComplete() {
+                        }
                     });
         }
     }

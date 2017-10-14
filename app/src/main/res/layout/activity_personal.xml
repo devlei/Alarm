@@ -5,7 +5,7 @@
     android:background="@color/color_F6F6FA"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_title"/>
+    <include layout="@layout/layout_title" />
 
     <LinearLayout
         android:id="@+id/personal_info"
@@ -23,7 +23,7 @@
             android:layout_width="@dimen/s_55"
             android:layout_height="@dimen/s_57"
             android:scaleType="fitXY"
-            android:src="@drawable/icon_header_default"/>
+            android:src="@drawable/icon_header_default" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="用户昵称"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/f_15"/>
+                android:textSize="@dimen/f_15" />
 
             <TextView
                 android:id="@+id/personal_phone"
@@ -46,7 +46,7 @@
                 android:layout_marginTop="@dimen/s_5"
                 android:text="15212345678"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/f_15"/>
+                android:textSize="@dimen/f_15" />
 
         </LinearLayout>
     </LinearLayout>
@@ -65,7 +65,7 @@
         <ImageView
             android:layout_width="@dimen/s_22"
             android:layout_height="@dimen/s_19"
-            android:background="@drawable/icon_alarm_history"/>
+            android:background="@drawable/icon_alarm_history" />
 
         <TextView
             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/alarm_history"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
+            android:textSize="@dimen/f_13" />
     </LinearLayout>
 
     <LinearLayout
@@ -90,7 +90,7 @@
         <ImageView
             android:layout_width="@dimen/s_22"
             android:layout_height="@dimen/s_19"
-            android:background="@drawable/icon_emergency_contact"/>
+            android:background="@drawable/icon_emergency_contact" />
 
         <TextView
             android:layout_width="match_parent"
@@ -98,7 +98,7 @@
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/emergency_contact"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
+            android:textSize="@dimen/f_13" />
     </LinearLayout>
 
     <LinearLayout
@@ -115,7 +115,7 @@
         <ImageView
             android:layout_width="@dimen/s_22"
             android:layout_height="@dimen/s_19"
-            android:background="@drawable/icon_near_police"/>
+            android:background="@drawable/icon_near_police" />
 
         <TextView
             android:layout_width="match_parent"
@@ -123,7 +123,7 @@
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/near_police"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
+            android:textSize="@dimen/f_13" />
     </LinearLayout>
 
     <LinearLayout
@@ -140,7 +140,7 @@
         <ImageView
             android:layout_width="@dimen/s_22"
             android:layout_height="@dimen/s_19"
-            android:background="@drawable/icon_bind_phone"/>
+            android:background="@drawable/icon_bind_phone" />
 
         <TextView
             android:layout_width="match_parent"
@@ -148,7 +148,7 @@
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/bind_phone"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
+            android:textSize="@dimen/f_13" />
     </LinearLayout>
 
     <LinearLayout
@@ -165,7 +165,7 @@
         <ImageView
             android:layout_width="@dimen/s_22"
             android:layout_height="@dimen/s_19"
-            android:background="@drawable/icon_change_password"/>
+            android:background="@drawable/icon_change_password" />
 
         <TextView
             android:layout_width="match_parent"
@@ -173,7 +173,7 @@
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/change_password"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
+            android:textSize="@dimen/f_13" />
     </LinearLayout>
 
     <LinearLayout
@@ -190,7 +190,7 @@
         <ImageView
             android:layout_width="@dimen/s_22"
             android:layout_height="@dimen/s_19"
-            android:background="@drawable/icon_check_update"/>
+            android:background="@drawable/icon_check_update" />
 
         <TextView
             android:layout_width="match_parent"
@@ -198,7 +198,7 @@
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/check_update"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
+            android:textSize="@dimen/f_13" />
     </LinearLayout>
 
     <LinearLayout
@@ -215,7 +215,7 @@
         <ImageView
             android:layout_width="@dimen/s_22"
             android:layout_height="@dimen/s_19"
-            android:background="@drawable/icon_about"/>
+            android:background="@drawable/icon_about" />
 
         <TextView
             android:layout_width="match_parent"
@@ -223,7 +223,18 @@
             android:layout_marginLeft="@dimen/s_5"
             android:text="@string/about"
             android:textColor="@android:color/black"
-            android:textSize="@dimen/f_13"/>
+            android:textSize="@dimen/f_13" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/logout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/s_45"
+        android:layout_marginTop="@dimen/s_20"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:text="退出登录"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/f_13" />
 
 </LinearLayout>
