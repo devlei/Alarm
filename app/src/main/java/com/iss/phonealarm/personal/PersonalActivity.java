@@ -3,20 +3,20 @@ package com.iss.phonealarm.personal;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.iss.phonealarm.AlarmApplication;
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.BaseResponseBean;
 import com.iss.phonealarm.bean.ResponseMessageBean;
+import com.iss.phonealarm.bean.UpDate;
 import com.iss.phonealarm.bean.login.UserInfoBean;
 import com.iss.phonealarm.bean.modifyimg.AllUserInfo;
+import com.iss.phonealarm.bean.uploadalarm.UpDateInfo;
 import com.iss.phonealarm.network.UrlSet;
 import com.iss.phonealarm.network.callback.CallBack;
 import com.iss.phonealarm.network.http.util.OkHttpUtils;
@@ -27,8 +27,6 @@ import com.iss.phonealarm.utils.GlideUtils;
 import com.iss.phonealarm.utils.IntentUtils;
 import com.iss.phonealarm.utils.ToastUtils;
 import com.thoughtworks.xstream.XStream;
-
-import java.io.File;
 
 /**
  * Created by weizhilei on 2017/9/23.
@@ -121,7 +119,7 @@ public class PersonalActivity extends Activity implements OnClickListener {
                 IntentUtils.openChangePassword(this);
                 break;
             case R.id.personal_check_update:
-                ToastUtils.showToast(this, "已是最新版本：" + AppUtils.getVersionName(this));
+                checkUpdate();
                 break;
             case R.id.personal_about:
                 IntentUtils.openAbout(this);
@@ -130,23 +128,6 @@ public class PersonalActivity extends Activity implements OnClickListener {
                 logout();
                 break;
         }
-    }
-
-    /**
-     * 安装APK文件
-     */
-    private void installApk() {
-        File apkfile = new File("apkName");
-        if (!apkfile.exists()) {
-            return;
-        }
-        // 通过Intent安装APK文件
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.setDataAndType(Uri.parse("file://" + apkfile.toString()),
-                "application/vnd.android.package-archive");
-        startActivity(i);
-        android.os.Process.killProcess(android.os.Process.myPid());
     }
 
     @Override
@@ -236,6 +217,43 @@ public class PersonalActivity extends Activity implements OnClickListener {
             setData(AlarmApplication.mUserInfo);
         }
     };
+
+    /**
+     * 检查更新
+     */
+    private void checkUpdate() {
+        OkHttpUtils.postBuilder()
+                .url(UrlSet.URL_CHECK_UPDATE)
+                .addParam("userid", AlarmApplication.mAlarmApplication.getUserId())
+                .build()
+                .buildRequestCall()
+                .execute(new CallBack<UpDateInfo>() {
+
+                    @Override
+                    public void onStart() {}
+
+                    @Override
+                    public void onNext(UpDateInfo postBean) {
+                        if (postBean != null) {
+                            if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
+                                UpDate upDate = postBean.getAboutInfo();
+                                if (upDate != null) {
+                                    if (AppUtils.getVersionCode(PersonalActivity.this) < upDate.getBanbenhao()) {
+                                        UpgradeDialog.show(PersonalActivity.this, upDate.getDownloadUrl());
+                                    } else {
+                                        ToastUtils.showToast(PersonalActivity.this, R.string.latest_version);
+                                    }
+                                }
+                            } else {
+                                ToastUtils.showToast(PersonalActivity.this, postBean.getMessage());
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {}
+                });
+    }
 
     @Override
     protected void onDestroy() {

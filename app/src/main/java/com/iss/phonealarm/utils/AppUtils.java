@@ -165,6 +165,31 @@ public class AppUtils {
         return null;
     }
 
+    private static void chmodPathPermision(final String path) {
+        try {
+            String command = "chmod " + "777" + " " + path;
+            Runtime runtime = Runtime.getRuntime();
+            runtime.exec(command);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 普通安装
+     *
+     * @param context
+     * @param path
+     */
+    public static void installAPKFile(Context context, String path) {
+        chmodPathPermision(path);
+        Intent intent = new Intent();
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.parse("file://" + path), "application/vnd.android.package-archive");
+        context.startActivity(intent);
+        android.os.Process.killProcess(android.os.Process.myPid());
+    }
 
     /**
      * 普通卸载

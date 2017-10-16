@@ -1,26 +1,36 @@
 package com.iss.phonealarm;
 
 import android.app.Application;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.text.TextUtils;
+import android.widget.RemoteViews;
 import android.widget.Toast;
-
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.iss.phonealarm.bean.BaseResponseBean;
-import com.iss.phonealarm.bean.modifyimg.AllUserInfo;
-import com.iss.phonealarm.network.http.util.OkHttpUtils;
-import com.iss.phonealarm.utils.SharePreferencesUtils;
-import com.thoughtworks.xstream.XStream;
 import com.iss.phonealarm.bean.ResponseMessageBean;
 import com.iss.phonealarm.bean.interactquery.InterQueryAttrConverter;
 import com.iss.phonealarm.bean.login.UserInfoBean;
+import com.iss.phonealarm.bean.modifyimg.AllUserInfo;
 import com.iss.phonealarm.constants.Constants;
 import com.iss.phonealarm.network.UrlSet;
 import com.iss.phonealarm.network.callback.CallBack;
+import com.iss.phonealarm.network.http.util.OkHttpUtils;
 import com.iss.phonealarm.personal.observer.UserObserverHelper;
+import com.iss.phonealarm.utils.LogUtils;
+import com.iss.phonealarm.utils.SharePreferencesUtils;
+import com.kymjs.rxvolley.net.ApkDownloadCallback;
+import com.kymjs.rxvolley.net.NetManager;
+import com.kymjs.rxvolley.net.dowload.DownLoadManager;
+import com.kymjs.rxvolley.net.dowload.DownLoadManager.DownloadQueueListener;
+import com.kymjs.rxvolley.net.dowload.model.AppDownloadState;
+import com.thoughtworks.xstream.XStream;
 
 /**
  * Created by weizhilei on 2017/9/25.
@@ -41,9 +51,16 @@ public class AlarmApplication extends Application {
     public static String pwd = "";
     public static double weidu, jingdu;
 
+    private NotificationManager notificationManager;
+    private Notification notification;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        NetManager.getInstance().setDataCache(getCacheDir().getPath());
+        DownLoadManager.getInstance().init(getFilesDir().getPath());
+        setGlobleDownloadListener();
+        initNotification();
         SDKInitializer.initialize(getApplicationContext());
         mAlarmApplication = this;
         UserObserverHelper.getInstance().registerUserReceiver(this);
@@ -168,4 +185,68 @@ public class AlarmApplication extends Application {
         mUserInfo = null;
     }
 
+    private void initNotification() {
+        notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        notification = new Notification();
+    }
+
+    /**
+     * 通知栏中显示下载进度
+     */
+    private void showDownLoadNotice() {
+        // 下载过程中点击通知栏回到程序
+        Intent noticeIntent = new Intent(this, MainActivity.class);
+        noticeIntent.setAction(Intent.ACTION_MAIN);
+        noticeIntent.addCategory(Intent.CATEGORY_LAUNCHER);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, noticeIntent, 0);
+
+        // 设置通知的显示内容
+        notification.icon = R.mipmap.ic_launcher;
+        notification.tickerText = getString(R.string.app_name);
+        notification.contentView = new RemoteViews(getPackageName(), R.layout.app_updgrade_notice);
+        notification.contentIntent = pendingIntent;
+        notificationManager.notify(0, notification);
+    }
+
+    private void setGlobleDownloadListener() {
+        DownLoadManager.getInstance().setDownloadQueueListener(new DownloadQueueListener() {
+            @Override
+            public void downloadQueueUpdate(ApkDownloadCallback curCallBack, int queueSize) {
+                if (curCallBack != null) {
+                    AppDownloadState state = curCallBack.getAppState();
+                    if (getPackageName().equals(state.packName)) {
+                        switch (state.appState) {
+                            case start:
+                                showDownLoadNotice();
+                                break;
+                            case waiting:
+                                break;
+                            case pause:
+                                break;
+                            case downloading:
+                                notification.contentView.setProgressBar(R.id.upgrade_progress, 100, state.getProcess(),
+                                        false);
+                                notificationManager.notify(0, notification);
+                                break;
+                            case installing:
+                                break;
+                            case download_succ:
+                                LogUtils.i("『download success』");
+                                notificationManager.cancel(0);
+                                break;
+                            case install_succ:
+                                LogUtils.i("『install success』");
+                                break;
+                            case download_fail:
+                                LogUtils.i("『download fail』" + state.mErrorMsg);
+                                break;
+                            case install_fail:
+                                LogUtils.i("『install fail』" + state.mErrorMsg);
+                                break;
+                        }
+                    }
+                }
+            }
+        });
+    }
 }

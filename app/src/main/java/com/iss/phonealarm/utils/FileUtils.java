@@ -2,13 +2,11 @@ package com.iss.phonealarm.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 /**
  * 图片压缩
@@ -57,8 +55,7 @@ public class FileUtils {
         } else if (w < h && h > hh) {//如果高度高的话根据宽度固定大小缩放
             be = (int) (newOpts.outHeight / hh);
         }
-        if (be <= 0)
-            be = 1;
+        if (be <= 0) be = 1;
         newOpts.inSampleSize = be;//设置缩放比例
         //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
         bitmap = BitmapFactory.decodeFile(srcPath, newOpts);
@@ -79,5 +76,21 @@ public class FileUtils {
         }
         // 对字节数组Base64编码
         return Base64.encodeToString(data, Base64.DEFAULT);
+    }
+
+    public static String getImgLocalFileName(String url) {
+        url = url.replace(":", "&");
+        url = url.replace("/", "_");
+        return url;
+    }
+
+    public static String getFileAbsolutePath(String path, String fileName) {
+        if (!TextUtils.isEmpty(path) && !TextUtils.isEmpty(fileName)) {
+            Log.e("jaunce", "path:" + path);
+            String absolutePath = new StringBuffer(path).append("/").append(fileName).toString();
+            return absolutePath;
+        }
+        return "";
+
     }
 }

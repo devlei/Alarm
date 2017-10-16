@@ -12,17 +12,17 @@ import java.io.Serializable;
 public class UpDateInfo implements Serializable {
 
     @XStreamAlias("result")
-    private String result;
+    private int result;
     @XStreamAlias("message")
     private String message;
     @XStreamAlias("aboutInfo")
     private UpDate aboutInfo;
 
-    public String getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(int result) {
         this.result = result;
     }
 
@@ -44,10 +44,7 @@ public class UpDateInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "UpDateInfo{" +
-                "result='" + result + '\'' +
-                ", message='" + message + '\'' +
-                ", aboutInfo=" + aboutInfo +
-                '}';
+        return "UpDateInfo{" + "result='" + result + '\'' + ", message='" + message + '\'' + ", aboutInfo=" +
+                aboutInfo + '}';
     }
 }

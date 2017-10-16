@@ -143,4 +143,9 @@
     <string name="camera">拍照</string>
     <string name="album_select">从相册中选择</string>
 
+    <string name="latest_version">已是最新版本</string>
+    <string name="upgrade_title">升级提示</string>
+    <string name="upgrade_desc">APP有重大更新，请及时升级！</string>
+    <string name="upgrade_click">点我升级</string>
+
 </resources>

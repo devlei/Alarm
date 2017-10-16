@@ -11,15 +11,15 @@ import java.io.Serializable;
 public class UpDate implements Serializable {
 
     @XStreamAlias("banbenhao")
-    private String banbenhao;
+    private int banbenhao;
     @XStreamAlias("downloadUrl")
     private String downloadUrl;
 
-    public String getBanbenhao() {
+    public int getBanbenhao() {
         return banbenhao;
     }
 
-    public void setBanbenhao(String banbenhao) {
+    public void setBanbenhao(int banbenhao) {
         this.banbenhao = banbenhao;
     }
 
@@ -33,9 +33,6 @@ public class UpDate implements Serializable {
 
     @Override
     public String toString() {
-        return "UpDate{" +
-                "banbenhao='" + banbenhao + '\'' +
-                ", downloadUrl='" + downloadUrl + '\'' +
-                '}';
+        return "UpDate{" + "banbenhao='" + banbenhao + '\'' + ", downloadUrl='" + downloadUrl + '\'' + '}';
     }
 }
