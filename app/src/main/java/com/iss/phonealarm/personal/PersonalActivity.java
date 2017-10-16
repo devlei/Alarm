@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.iss.phonealarm.AlarmApplication;
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.BaseResponseBean;
@@ -165,6 +166,11 @@ public class PersonalActivity extends Activity implements OnClickListener {
                             if (postBean != null) {
                                 if (postBean.getResult() == BaseResponseBean.RESULT_SUCCESS) {
                                     IntentUtils.openLogin(PersonalActivity.this);
+                                    if (null != AlarmApplication.mainActivity) {
+                                        AlarmApplication.mainActivity.finish();
+                                        AlarmApplication.mainActivity = null;
+                                    }
+                                    finish();
                                 } else {
                                     ToastUtils.showToast(PersonalActivity.this, postBean.getMessage());
                                 }
@@ -230,7 +236,8 @@ public class PersonalActivity extends Activity implements OnClickListener {
                 .execute(new CallBack<UpDateInfo>() {
 
                     @Override
-                    public void onStart() {}
+                    public void onStart() {
+                    }
 
                     @Override
                     public void onNext(UpDateInfo postBean) {
@@ -251,7 +258,8 @@ public class PersonalActivity extends Activity implements OnClickListener {
                     }
 
                     @Override
-                    public void onComplete() {}
+                    public void onComplete() {
+                    }
                 });
     }
 

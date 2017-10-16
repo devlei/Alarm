@@ -133,12 +133,35 @@
             android:background="@android:color/white"
             android:visibility="invisible">
 
-            <ImageView
-                android:id="@+id/video_record"
-                android:layout_width="@dimen/s_86"
-                android:layout_height="@dimen/s_86"
+
+            <com.skyfishjy.library.RippleBackground
+                android:id="@+id/content"
+                android:layout_width="@dimen/s_250"
+                android:layout_height="match_parent"
                 android:layout_centerInParent="true"
-                android:src="@drawable/video_record" />
+                android:clickable="false"
+                android:saveEnabled="false"
+                app:rb_color="#FF065FCA"
+                app:rb_duration="2000"
+                app:rb_radius="15dp"
+                app:rb_rippleAmount="4"
+                app:rb_scale="6">
+
+                <ImageView
+                    android:id="@+id/video_record"
+                    android:layout_width="@dimen/s_86"
+                    android:layout_height="@dimen/s_86"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/video_record" />
+            </com.skyfishjy.library.RippleBackground>
+
+            <TextView
+                android:id="@+id/recore_notice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/s_20"
+                android:text="按住开始录音" />
 
             <ImageView
                 android:id="@+id/video_btn"

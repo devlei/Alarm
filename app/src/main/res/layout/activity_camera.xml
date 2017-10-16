@@ -1,46 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <SurfaceView
         android:id="@+id/surfaceview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="60dp" />
+        android:layout_height="match_parent" />
 
-    <ImageView
-        android:id="@+id/imageview"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="60dp"
-        android:src="@mipmap/ic_launcher" />
-
-    <Button
-        android:id="@+id/btnStartStop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/s_100"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Start" />
+        android:layout_marginBottom="@dimen/s_60">
 
-    <Button
-        android:id="@+id/btnPlayVideo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@id/btnStartStop"
-        android:text="Play" />
+        <TextView
+            android:id="@+id/notice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="按住开始录像"
+            android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="20dp"
-        android:text="0"
-        android:textSize="25sp" />
+        <ImageView
+            android:id="@+id/video_exit"
+            android:layout_width="@dimen/s_30"
+            android:layout_height="@dimen/s_30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_30"
+            android:src="@drawable/video_exit" />
+
+        <ImageView
+            android:id="@+id/video_back"
+            android:layout_width="@dimen/s_60"
+            android:layout_height="@dimen/s_60"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/s_30"
+            android:src="@drawable/video_back" />
+
+        <ImageView
+            android:id="@+id/video_over"
+            android:layout_width="@dimen/s_60"
+            android:layout_height="@dimen/s_60"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/s_30"
+            android:src="@drawable/video_complete" />
+
+        <com.iss.phonealarm.bean.uploadalarm.view.CircleProgressBar
+            android:id="@+id/circleProgressBar"
+            android:layout_width="@dimen/s_60"
+            android:layout_height="@dimen/s_60"
+            android:layout_centerInParent="true"
+            app:cpbForegroundColor="#ffcf0a28"
+            app:cpbMaxAngle="360"
+            app:cpbNeedAnim="false"
+            app:cpbProgressTextColor="#ff000000"
+            app:cpbStartAngle="-90"
+            app:cpbStrokeWidth="5"
+            app:cpbWholeBackgroundColor="#ff5ca5c3" />
+    </RelativeLayout>
 
 </RelativeLayout>

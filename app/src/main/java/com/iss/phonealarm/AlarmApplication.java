@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.RemoteViews;
 import android.widget.Toast;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -39,6 +40,8 @@ public class AlarmApplication extends Application {
 
     //application
     public static AlarmApplication mAlarmApplication;
+
+    public static MainActivity mainActivity;
 
     //用户信息
     public static AllUserInfo mUserInfo;
