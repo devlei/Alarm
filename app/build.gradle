@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion '26.0.0'
     defaultConfig {
         applicationId "com.iss.phonealarm"
@@ -26,7 +26,8 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'com.android.support:recyclerview-v7:23.1.0'
+    implementation 'com.android.support:recyclerview-v7:25.3.1'
     compile 'me.zhouzhuo.zzhorizontalprogressbar:zz-horizontal-progressbar:1.0.0'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'ch.ielse:imagewatcher:1.0.3'
 }

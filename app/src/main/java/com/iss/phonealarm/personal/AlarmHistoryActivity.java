@@ -3,6 +3,8 @@ package com.iss.phonealarm.personal;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,12 +15,17 @@ import android.view.View.OnClickListener;
 import android.widget.*;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.searchalarm.AlarmFilesList;
 import com.iss.phonealarm.bean.searchalarm.AlarmInfoBean;
 import com.iss.phonealarm.bean.searchalarm.MultimediaAttrBean;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import ch.ielse.view.imagewatcher.ImageWatcher;
 
 /**
  * Created by weizhilei on 2017/9/26.
@@ -35,7 +42,9 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
     private TextView mPlayTimeTv;
     private ProgressBar mProgressPb;
     private LinearLayout imgarray;
-
+    final List<ImageView> mList = new ArrayList<>();
+    final List<String> urlList = new ArrayList<>();
+    ImageWatcher vImageWatcher;
     //播放音频
     private MediaPlayer mPlayer;
     private String mediaPath = "http://218.241.189.52:8089/alarmFolder/2017-09-28/f06f6ff0-871c-42df-88ae" +
@@ -59,6 +68,29 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm_history);
+        vImageWatcher = ImageWatcher.Helper.with(this) // 一般来讲， ImageWatcher 需要占据全屏的位置
+                .setErrorImageRes(R.mipmap.error_picture) // 配置error图标 如果不介意使用lib自带的图标，并不一定要调用这个API
+                .setLoader(new ImageWatcher.Loader() {
+                    @Override
+                    public void load(Context context, String url, final ImageWatcher.LoadCallback lc) {
+                        Glide.with(context).load(url).asBitmap().into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                lc.onResourceReady(resource);
+                            }
+
+                            @Override
+                            public void onLoadStarted(Drawable placeholder) {
+                                lc.onLoadStarted(placeholder);
+                            }
+
+                            @Override
+                            public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                                lc.onLoadFailed(errorDrawable);
+                            }
+                        });
+                    }
+                }).create();
         init();
         setData();
     }
@@ -97,38 +129,48 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
 
     private void addImage(List<MultimediaAttrBean> attach_list) {
         if (null != attach_list && attach_list.size() > 0) {
+            urlList.clear();
+            mList.clear();
             for (int i = 0; i < attach_list.size(); i++) {
                 MultimediaAttrBean multimediaAttrBean = attach_list.get(i);
                 if (null != multimediaAttrBean) {
                     if (multimediaAttrBean.getType().equals("jpg") || multimediaAttrBean.getType().equals("png")) {
+                        urlList.add(multimediaAttrBean.getValue());
                         final ImageView img = new ImageView(this);
-                        img.setScaleType(ImageView.ScaleType.FIT_XY);
+                        img.setScaleType(ImageView.ScaleType.CENTER_CROP);
                         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                                 getResources().getDimensionPixelSize(R.dimen.s_50),
                                 LinearLayout.LayoutParams.MATCH_PARENT);
-                        lp.rightMargin = getResources().getDimensionPixelSize(R.dimen.s_21);
+                        lp.rightMargin = getResources().getDimensionPixelSize(R.dimen.s_18);
                         imgarray.addView(img, lp);
+                        mList.add(img);
                         Glide.with(this).load(multimediaAttrBean.getValue()).into(img);
-                    } else {
-                        mediaPath = multimediaAttrBean.getValue();
-                        if (null == mPlayer) {
-                            try {
-                                mPlayer = new MediaPlayer();
-                                mPlayer.setDataSource(mediaPath);
-                                mPlayer.prepare();
-//                                mPlayTimeTv.setText("0:" + mPlayer.getDuration() / 60);
-                                mProgressPb.setMax(mPlayer.getDuration());
-                                handler.sendEmptyMessageDelayed(200, 500);
-                                mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                                    @Override
-                                    public void onCompletion(MediaPlayer mp) {
-                                        mProgressPb.setProgress(mPlayer.getDuration());
-                                        handler.removeCallbacksAndMessages(null);
-                                    }
-                                });
-                            } catch (Exception e) {
+                        img.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                vImageWatcher.show(img, mList, urlList);
                             }
-                        }
+                        });
+                    } else {
+//                        mediaPath = multimediaAttrBean.getValue();
+//                        if (null == mPlayer) {
+//                            try {
+//                                mPlayer = new MediaPlayer();
+//                                mPlayer.setDataSource(mediaPath);
+//                                mPlayer.prepare();
+////                                mPlayTimeTv.setText("0:" + mPlayer.getDuration() / 60);
+//                                mProgressPb.setMax(mPlayer.getDuration());
+//                                handler.sendEmptyMessageDelayed(200, 500);
+//                                mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//                                    @Override
+//                                    public void onCompletion(MediaPlayer mp) {
+//                                        mProgressPb.setProgress(mPlayer.getDuration());
+//                                        handler.removeCallbacksAndMessages(null);
+//                                    }
+//                                });
+//                            } catch (Exception e) {
+//                            }
+//                        }
                     }
                 }
             }

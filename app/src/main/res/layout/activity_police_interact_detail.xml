@@ -46,12 +46,46 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/f_13" />
 
-            <ImageView
-                android:id="@+id/pid_img"
-                android:layout_width="@dimen/s_67"
-                android:layout_height="@dimen/s_76"
-                android:layout_marginTop="@dimen/s_10"
-                android:background="@drawable/icon_header_default" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/s_10">
+
+                <ImageView
+                    android:id="@+id/pid_img"
+                    android:layout_width="@dimen/s_67"
+                    android:layout_height="@dimen/s_76"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_header_default"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/pid_img_two"
+                    android:layout_width="@dimen/s_67"
+                    android:layout_height="@dimen/s_76"
+                    android:layout_marginLeft="@dimen/s_20"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_header_default"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/pid_img_three"
+                    android:layout_width="@dimen/s_67"
+                    android:layout_height="@dimen/s_76"
+                    android:layout_marginLeft="@dimen/s_20"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_header_default"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/pid_img_four"
+                    android:layout_width="@dimen/s_67"
+                    android:layout_height="@dimen/s_76"
+                    android:layout_marginLeft="@dimen/s_20"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/icon_header_default"
+                    android:visibility="invisible" />
+            </LinearLayout>
         </LinearLayout>
 
 

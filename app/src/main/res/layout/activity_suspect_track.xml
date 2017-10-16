@@ -260,7 +260,8 @@
                 android:layout_width="@dimen/s_67"
                 android:layout_height="@dimen/s_76"
                 android:layout_marginTop="@dimen/s_10"
-                android:background="@drawable/icon_header_default" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/icon_header_default" />
         </LinearLayout>
 
         <TextView

@@ -34,6 +34,7 @@ import com.iss.phonealarm.bean.uploadalarm.UploadFileList;
 import com.iss.phonealarm.network.UrlSet;
 import com.iss.phonealarm.network.callback.CallBack;
 import com.iss.phonealarm.network.http.util.OkHttpUtils;
+import com.iss.phonealarm.personal.HeaderDialog;
 import com.iss.phonealarm.utils.FileUtils;
 import com.thoughtworks.xstream.XStream;
 
@@ -46,7 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class FastAlarmActivity extends Activity implements View.OnClickListener {
+public class FastAlarmActivity extends Activity implements View.OnClickListener, HeaderDialog.OnHeaderDismissListener {
 
     /**
      * open
@@ -220,6 +221,15 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         } else if (typeResId == R.integer.type_eager_report) {
             title.setText(R.string.eager_report);
             titleOther.setText("举报");
+        } else if (typeResId == R.integer.type_vehicle_track) {
+            title.setText(R.string.vehicle_track);
+            titleOther.setText("报警");
+        } else if (typeResId == R.integer.type_suspect_track) {
+            title.setText(R.string.suspect_track);
+            titleOther.setText("报警");
+        } else if (typeResId == R.integer.type_people_lost) {
+            title.setText(R.string.people_lost);
+            titleOther.setText("报警");
         }
 
     }
@@ -431,7 +441,12 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
                 deleteHandle();
                 break;
             case R.id.imgadd:
-                dialog();
+                if (canSelect()) {
+                    HeaderDialog headerDialog = (HeaderDialog) HeaderDialog.show(this, this);
+                    headerDialog.setFirstText("摄像");
+                    headerDialog.setSecontText("拍照");
+                    headerDialog.setThirdText("从相册选择");
+                }
                 break;
             case R.id.location_ll:
                 setLocation();
@@ -450,32 +465,15 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         }
     }
 
-    private void dialog() {
+    private boolean canSelect() {
         if (null != recore_ll)
             recore_ll.setVisibility(View.INVISIBLE);
         if (null != imgarray && imgarray.getChildCount() < 5) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("提示");
-            builder.setMessage("请选择添加图片方式");
-            //调用相机拍照
-            builder.setPositiveButton("拍照", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    takePhoto();
-                }
-            });
-            //从相册里面取照片
-            builder.setNegativeButton("相册", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    pickPhoto();
-                }
-            });
-            builder.create().show();
+            return true;
         } else {
             Toast.makeText(this, "已经不能添加更多了", Toast.LENGTH_SHORT).show();
+            return false;
         }
-
     }
 
     /**
@@ -677,4 +675,18 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener 
         }
     }
 
+    @Override
+    public void onDismiss(int type) {
+        if (HeaderDialog.TYPE_CAMERA == type) {
+            takeVideo();
+        } else if (HeaderDialog.TYPE_ALBUM == type) {
+            takePhoto();
+        } else if (HeaderDialog.TYPE_VIDEO == type) {
+            pickPhoto();
+        }
+    }
+
+    private void takeVideo() {
+
+    }
 }

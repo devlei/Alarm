@@ -10,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+
 import com.iss.phonealarm.R;
 
 /**
@@ -19,6 +21,7 @@ public class HeaderDialog extends Dialog implements OnClickListener {
 
     public static final int TYPE_CAMERA = 1;
     public static final int TYPE_ALBUM = 2;
+    public static final int TYPE_VIDEO = 3;
 
     private OnHeaderDismissListener mListener;
 
@@ -60,6 +63,18 @@ public class HeaderDialog extends Dialog implements OnClickListener {
         findViewById(R.id.cancel).setOnClickListener(this);
     }
 
+    public void setFirstText(String str) {
+        ((Button) findViewById(R.id.camera)).setText(str);
+    }
+
+    public void setSecontText(String str) {
+        ((Button) findViewById(R.id.album)).setText(str);
+    }
+
+    public void setThirdText(String str) {
+        ((Button) findViewById(R.id.cancel)).setText(str);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -72,6 +87,7 @@ public class HeaderDialog extends Dialog implements OnClickListener {
                 dismiss();
                 break;
             case R.id.cancel:
+                if (mListener != null) mListener.onDismiss(TYPE_VIDEO);
                 dismiss();
                 break;
         }
