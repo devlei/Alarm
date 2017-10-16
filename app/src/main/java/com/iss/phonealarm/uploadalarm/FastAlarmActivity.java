@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.*;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Build;
@@ -16,12 +18,15 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.*;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.iss.phonealarm.AlarmApplication;
 import com.iss.phonealarm.BaiduMapTestActivity;
 import com.iss.phonealarm.LoadingDialog;
@@ -36,8 +41,10 @@ import com.iss.phonealarm.network.callback.CallBack;
 import com.iss.phonealarm.network.http.util.OkHttpUtils;
 import com.iss.phonealarm.personal.HeaderDialog;
 import com.iss.phonealarm.utils.FileUtils;
+import com.iss.phonealarm.utils.IntentUtils;
 import com.thoughtworks.xstream.XStream;
 
+import ch.ielse.view.imagewatcher.ImageWatcher;
 import me.zhouzhuo.zzhorizontalprogressbar.ZzHorizontalProgressBar;
 
 import java.io.File;
@@ -133,6 +140,9 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
 
     private TextView title;
     private RelativeLayout recore_ll;
+    volatile List<ImageView> mList = new ArrayList<>();
+    volatile List<String> urlList = new ArrayList<>();
+    ImageWatcher vImageWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,7 +210,29 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
                 return false;
             }
         });
+        vImageWatcher = ImageWatcher.Helper.with(this) // 一般来讲， ImageWatcher 需要占据全屏的位置
+                .setErrorImageRes(R.mipmap.error_picture) // 配置error图标 如果不介意使用lib自带的图标，并不一定要调用这个API
+                .setLoader(new ImageWatcher.Loader() {
+                    @Override
+                    public void load(Context context, String url, final ImageWatcher.LoadCallback lc) {
+                        Glide.with(context).load(url).asBitmap().into(new SimpleTarget<Bitmap>() {
+                            @Override
+                            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                lc.onResourceReady(resource);
+                            }
 
+                            @Override
+                            public void onLoadStarted(Drawable placeholder) {
+                                lc.onLoadStarted(placeholder);
+                            }
+
+                            @Override
+                            public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                                lc.onLoadFailed(errorDrawable);
+                            }
+                        });
+                    }
+                }).create();
 
     }
 
@@ -344,6 +376,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
 
     private void upLoad() {
         //一键报警 xml构建
+        LoadingDialog.show(this);
         UpLoadAlarmInfo upLoadAlarmInfo = new UpLoadAlarmInfo();
         upLoadAlarmInfo.setAlarm_addres(AlarmApplication.address);
         upLoadAlarmInfo.setAlarm_content(mEditText.getText().toString());
@@ -389,7 +422,6 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
         xStream.registerConverter(new UpLoadAttrConverter());
         String xmlString = xStream.toXML(upLoadAlarmInfo).replace("__", "_");
         System.out.println("===xmlString==" + xmlString);
-        LoadingDialog.show(this);
         OkHttpUtils.postBuilder()
                 .url(UrlSet.YIJIAN_BAOJING)
                 .addParam("userid",
@@ -482,6 +514,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
     public static final int SELECT_PIC_BY_TACK_PHOTO = 2000;
     public static final int REQ_IMAGE = 2001;
     public static final int MAP_REQUEST_CODE = 2003;
+    public static final int SELECT_VIDEO = 2004;
     public static double weidu, jingdu;
 
     private Uri photoUri;
@@ -520,8 +553,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
             if (cursor != null) {
                 cursor.moveToFirst();
                 String picpath = cursor.getString(cursor.getColumnIndexOrThrow(pojo[0]));
-                if (picpath != null && (picpath.endsWith(".png") || picpath.endsWith(".PNG") || picpath.endsWith(
-                        ".jpg"))) {
+                if (isPicture(picpath)) {
                     addImage(picpath);
                 } else {
                     Toast.makeText(this, "选择图片文件不正确", Toast.LENGTH_LONG).show();
@@ -543,25 +575,45 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
                 weidu = data.getDoubleExtra("WEIDU", 0.0);
                 jingdu = data.getDoubleExtra("JINGDU", 0.0);
             }
+        } else if (requestCode == SELECT_VIDEO) {
+            if (null != data) {
+                String address = data.getStringExtra("Address");
+            }
         }
     }
 
-    private void addImage(String imgUri) {
+    private boolean isPicture(String path) {
+        if (!TextUtils.isEmpty(path)) {
+            if ((path.endsWith(".png") || path.endsWith(".PNG") || path.endsWith(
+                    ".jpg"))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void addImage(final String imgUri) {
         System.out.println("==imgUri==>" + imgUri);
         if (null != imgarray && imgarray.getChildCount() < 5) {
             File file = new File(imgUri);
             final ImageView img = new ImageView(this);
-            img.setScaleType(ImageView.ScaleType.FIT_XY);
+            img.setScaleType(ImageView.ScaleType.CENTER_CROP);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     getResources().getDimensionPixelSize(R.dimen.s_50), LinearLayout.LayoutParams.MATCH_PARENT);
             lp.rightMargin = getResources().getDimensionPixelSize(R.dimen.s_21);
             imgarray.addView(img, imgarray.getChildCount() - 1, lp);
             img.setOnClickListener(this);
             img.setTag(R.id.imageid, imgUri);
+            if (isPicture(imgUri)) {
+                mList.add(img);
+                urlList.add(imgUri);
+            }
             Glide.with(this).load(file).into(img);
             img.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+                    mList.remove(img);
+                    urlList.remove(img.getTag(R.id.imageid));
                     imgarray.removeView(img);
                     return true;
                 }
@@ -569,6 +621,8 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
             img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    if (isPicture(imgUri))
+                        vImageWatcher.show(img, mList, urlList);
                     if (null != recore_ll)
                         recore_ll.setVisibility(View.INVISIBLE);
                 }
@@ -675,6 +729,8 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
         }
     }
 
+    public boolean isCanAddVideo = true;
+
     @Override
     public void onDismiss(int type) {
         if (HeaderDialog.TYPE_CAMERA == type) {
@@ -682,11 +738,13 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
         } else if (HeaderDialog.TYPE_ALBUM == type) {
             takePhoto();
         } else if (HeaderDialog.TYPE_VIDEO == type) {
-            pickPhoto();
+            if (isCanAddVideo)
+                pickPhoto();
         }
     }
 
     private void takeVideo() {
-
+        Intent intent = new Intent(this, Cameractivity.class);
+        startActivityForResult(intent, SELECT_VIDEO);
     }
 }
