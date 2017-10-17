@@ -1,5 +1,6 @@
 package com.iss.phonealarm.uploadalarm;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.hardware.Camera;
@@ -14,7 +15,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,7 +23,6 @@ import com.iss.phonealarm.bean.uploadalarm.view.CircleProgressBar;
 
 import java.io.File;
 import java.util.UUID;
-
 
 public class Cameractivity extends Activity implements SurfaceHolder.Callback, View.OnClickListener {
 
@@ -65,7 +64,7 @@ public class Cameractivity extends Activity implements SurfaceHolder.Callback, V
         video_exit.setOnClickListener(this);
         video_back.setOnClickListener(this);
         video_over.setOnClickListener(this);
-//        video_over.setVisibility(View.INVISIBLE);
+        video_over.setVisibility(View.INVISIBLE);
         video_back.setVisibility(View.INVISIBLE);
         circleProgressBar = (CircleProgressBar) findViewById(R.id.circleProgressBar);
         circleProgressBar.setLoadingCallBack(new CircleProgressBar.LoadingCallBack() {
@@ -75,6 +74,8 @@ public class Cameractivity extends Activity implements SurfaceHolder.Callback, V
                 playRecord();
                 circleProgressBar.setProgress(0);
                 circleProgressBar.setVisibility(View.INVISIBLE);
+                video_over.clearAnimation();
+                video_over.bringToFront();
                 video_over.setVisibility(View.VISIBLE);
                 video_exit.setVisibility(View.INVISIBLE);
                 video_back.setVisibility(View.VISIBLE);
