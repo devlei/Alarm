@@ -18,6 +18,11 @@ android {
         }
     }
 }
+repositories {
+    flatDir {
+        dirs 'E:\\alarm\\Alarm\\app\\libs' //就是你放aar的目录地址
+    }
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -31,4 +36,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     compile 'ch.ielse:imagewatcher:1.0.3'
     compile 'com.skyfishjy.ripplebackground:library:1.0.1'
+    compile name:'SMSSDK-3.0.0',ext:'aar'
+    compile name:'SMSSDKGUI-3.0.0',ext:'aar'
 }

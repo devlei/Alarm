@@ -31,12 +31,13 @@ import com.kymjs.rxvolley.net.NetManager;
 import com.kymjs.rxvolley.net.dowload.DownLoadManager;
 import com.kymjs.rxvolley.net.dowload.DownLoadManager.DownloadQueueListener;
 import com.kymjs.rxvolley.net.dowload.model.AppDownloadState;
+import com.mob.MobApplication;
 import com.thoughtworks.xstream.XStream;
 
 /**
  * Created by weizhilei on 2017/9/25.
  */
-public class AlarmApplication extends Application {
+public class AlarmApplication extends MobApplication {
 
     //application
     public static AlarmApplication mAlarmApplication;
