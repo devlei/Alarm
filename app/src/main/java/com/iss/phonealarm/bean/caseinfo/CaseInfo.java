@@ -1,5 +1,6 @@
 package com.iss.phonealarm.bean.caseinfo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import com.thoughtworks.xstream.annotations.XStreamImplicit;
  * @author Administrator
  */
 @XStreamAlias("casesInfo")
-public class CaseInfo {
+public class CaseInfo implements Serializable {
 
     @XStreamAlias("cases_id")
     private String cases_id;

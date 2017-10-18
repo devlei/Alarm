@@ -11,6 +11,7 @@ import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+
 import com.iss.phonealarm.R;
 import com.iss.phonealarm.bean.beLost.BelostInfo;
 import com.iss.phonealarm.bean.carinfo.CarInfo;
@@ -365,7 +366,7 @@ public class CommonSearchAdapter extends RecyclerView.Adapter<CommonSearchViewHo
             switch (mTypeResId) {
                 case R.integer.type_cases:
                     if (mCasesInfo != null) {
-                        IntentUtils.openWebView(v.getContext(), mCasesInfo.getWeburl());
+                        IntentUtils.openWebView(v.getContext(), mCasesInfo);
                     }
                     break;
                 case R.integer.type_vehicle_track:

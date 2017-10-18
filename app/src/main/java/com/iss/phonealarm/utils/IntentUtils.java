@@ -5,6 +5,7 @@ import android.content.Context;
 import com.iss.phonealarm.MainActivity;
 import com.iss.phonealarm.bean.beLost.BelostInfo;
 import com.iss.phonealarm.bean.carinfo.CarInfo;
+import com.iss.phonealarm.bean.caseinfo.CaseInfo;
 import com.iss.phonealarm.bean.interactquery.InterQueryInfo;
 import com.iss.phonealarm.bean.lost.LostInfo;
 import com.iss.phonealarm.bean.searchalarm.AlarmInfoBean;
@@ -157,6 +158,15 @@ public class IntentUtils {
      */
     public static void openWebView(Context context, String url) {
         WebViewActivity.open(context, url);
+    }
+    /**
+     * 打开网页
+     *
+     * @param context
+     * @param
+     */
+    public static void openWebView(Context context, CaseInfo mCasesInfo) {
+        WebViewActivity.open(context, mCasesInfo);
     }
 
     /**

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_4982F5"
+    android:orientation="vertical">
+
+    <include layout="@layout/layout_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+            <TextView
+                android:id="@+id/case_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/s_12"
+                android:singleLine="true"
+                android:textSize="@dimen/f_16" />
+
+            <LinearLayout
+                android:id="@+id/case_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/case_title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/s_15"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/case_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/f_12" />
+
+                <TextView
+                    android:id="@+id/case_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/s_20"
+                    android:singleLine="true"
+                    android:textSize="@dimen/f_12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/case_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/case_desc"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/s_27"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/case_pic"
+                    android:layout_width="@dimen/s_161"
+                    android:layout_height="@dimen/s_111"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/button_default"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/case_pic2"
+                    android:layout_width="@dimen/s_161"
+                    android:layout_height="@dimen/s_111"
+                    android:layout_marginLeft="@dimen/s_10"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/button_default"
+                    android:visibility="invisible" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/case_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/case_img"
+                android:layout_marginTop="@dimen/s_20"
+                android:paddingLeft="@dimen/s_11"
+                android:paddingRight="@dimen/s_11"
+                android:textSize="@dimen/f_13" />
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

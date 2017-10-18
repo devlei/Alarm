@@ -131,6 +131,11 @@ public class LoginActivity extends Activity implements OnClickListener {
                     @Override
                     public void onComplete() {
                     }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                    }
                 });
     }
 

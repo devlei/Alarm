@@ -39,7 +39,7 @@ import cn.smssdk.gui.RegisterPage;
 public class RegisterActivity extends Activity implements OnClickListener {
 
     private EditText mPhoneEt;
-    private EditText mPasswordEt;
+    private EditText mPasswordEt, register_name;
     private EditText mConfirmPasswordEt;
     private EventHandler eventHandler;
     private boolean verification;
@@ -65,6 +65,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
         mPhoneEt = (EditText) findViewById(R.id.register_phone);
         mPasswordEt = (EditText) findViewById(R.id.register_password);
         mConfirmPasswordEt = (EditText) findViewById(R.id.register_password_confirm);
+        register_name = (EditText) findViewById(R.id.register_name);
 
         //set listener
         findViewById(R.id.register_back).setOnClickListener(this);
@@ -171,9 +172,13 @@ public class RegisterActivity extends Activity implements OnClickListener {
             ToastUtils.showToast(this, "请检查输入的手机号是否正确");
             return;
         }
+        if (TextUtils.isEmpty(register_name.getText())) {
+            ToastUtils.showToast(this, "用户名不能为空");
+            return;
+        }
         UserInfoBean userInfoBean = new UserInfoBean();
         userInfoBean.setUserid(mPhoneEt.getText().toString());
-        userInfoBean.setUsername(mPhoneEt.getText().toString());
+        userInfoBean.setUsername(register_name.getText().toString());
         userInfoBean.setTelephone(mPhoneEt.getText().toString());
         userInfoBean.setStartadress(AlarmApplication.address);
         userInfoBean.setPassword(mPasswordEt.getText().toString());
