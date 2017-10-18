@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Build;
@@ -42,6 +43,7 @@ import com.iss.phonealarm.network.http.util.OkHttpUtils;
 import com.iss.phonealarm.personal.HeaderDialog;
 import com.iss.phonealarm.utils.FileUtils;
 import com.iss.phonealarm.utils.IntentUtils;
+import com.skyfishjy.library.RippleBackground;
 import com.thoughtworks.xstream.XStream;
 
 import ch.ielse.view.imagewatcher.ImageWatcher;
@@ -54,7 +56,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class FastAlarmActivity extends Activity implements View.OnClickListener, HeaderDialog.OnHeaderDismissListener {
+public class FastAlarmActivity extends Activity implements View.OnClickListener, HeaderDialog.OnHeaderDismissListener, MediaPlayer.OnCompletionListener {
 
     /**
      * open
@@ -80,7 +82,8 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
     //录音
     private MediaRecorder mediaRecorder;
     private File recordFile;
-    private RecordPlayer player;
+
+    private RippleBackground rippleBackground;
 
     public static final int TEXT = 121;
     public static final int PROGRESS = 122;
@@ -107,19 +110,9 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
                 }
             } else if (msg.what == PROGRESS) {
                 if (null != video_seekBar) {
-                    try {
-                        int amrDuration = getAmrDuration(recordFile);
-                        video_seekBar.setMax(amrDuration);
-                        if (amrDuration < 20) {
-                            mHandler.sendEmptyMessageDelayed(PROGRESS, 1000);
-                            video_seekBar.setProgress(duration++);
-                        } else {
-                            duration = 0;
-                            video_seekBar.setProgress(20);
-                            mHandler.removeMessages(PROGRESS);
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    if (mediaPlayer.getCurrentPosition() <= mediaPlayer.getDuration()) {
+                        mHandler.sendEmptyMessageDelayed(PROGRESS, 200);
+                        video_seekBar.setProgress(mediaPlayer.getCurrentPosition());
                     }
                 }
             }
@@ -138,7 +131,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
         }
     }
 
-    private TextView title;
+    private TextView title, recore_notice;
     private RelativeLayout recore_ll;
     volatile List<ImageView> mList = new ArrayList<>();
     volatile List<String> urlList = new ArrayList<>();
@@ -148,8 +141,6 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fast_alarm);
-        recordFile = new File(Environment.getExternalStorageDirectory().getPath(), "kk.amr");
-        player = new RecordPlayer(this);
         initView();
         init();
         eventHandle();
@@ -162,9 +153,11 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
         video_record = (ImageView) findViewById(R.id.video_record);
         recore_ll = (RelativeLayout) findViewById(R.id.recore_ll);
         findViewById(R.id.voice_icon).setOnClickListener(this);
+        recore_notice = (TextView) findViewById(R.id.recore_notice);
 
         video_local = (TextView) findViewById(R.id.video_local);
         voice_time = (TextView) findViewById(R.id.voice_time);
+        rippleBackground = (RippleBackground) findViewById(R.id.content);
 
         findViewById(R.id.location_ll).setOnClickListener(this);
 
@@ -174,7 +167,6 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
         video_seekBar = (ZzHorizontalProgressBar) findViewById(R.id.video_seekBar);
         video_seekBar.setEnabled(false);
         video_seekBar.setPadding(0);
-        video_seekBar.setMax(60);
 
         imgadd = (ImageView) findViewById(R.id.imgadd);
         imgadd.setOnClickListener(this);
@@ -276,11 +268,13 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
                         System.out.println("===down===");
                         totalLength = 0;
                         startRecording();//开始录制
+                        rippleBackground.startRippleAnimation();
+                        recore_notice.setVisibility(View.INVISIBLE);
                         mHandler.removeMessages(TEXT);
                         mHandler.sendEmptyMessage(TEXT);
                         return true;
                     case MotionEvent.ACTION_UP:
-                        System.out.println("===up===");
+                        rippleBackground.stopRippleAnimation();
                         stopRecording();
                         checkTimeLength();
                         mHandler.removeMessages(TEXT);
@@ -376,7 +370,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
 
     private void upLoad() {
         //一键报警 xml构建
-        LoadingDialog.show(this);
+        LoadingDialog.show(FastAlarmActivity.this);
         UpLoadAlarmInfo upLoadAlarmInfo = new UpLoadAlarmInfo();
         upLoadAlarmInfo.setAlarm_addres(AlarmApplication.address);
         upLoadAlarmInfo.setAlarm_content(mEditText.getText().toString());
@@ -396,11 +390,17 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
             for (int i = 0; i < imgarray.getChildCount() - 1; i++) {
                 View childAt = imgarray.getChildAt(i);
                 UpLoadFileBean upLoadFileBean = new UpLoadFileBean();
-                upLoadFileBean.setType("jpg");
-                upLoadFileBean.setFilename(UUID.randomUUID().toString() + ".jpg");
                 if (null != childAt) {
                     String tag = (String) childAt.getTag(R.id.imageid);
-                    upLoadFileBean.setValue(FileUtils.getimage(tag));
+                    if (isPicture(tag)) {
+                        upLoadFileBean.setType("jpg");
+                        upLoadFileBean.setFilename(UUID.randomUUID().toString() + ".jpg");
+                        upLoadFileBean.setValue(FileUtils.getimage(tag));
+                    } else {
+                        upLoadFileBean.setType("mp4");
+                        upLoadFileBean.setFilename(UUID.randomUUID().toString() + ".mp4");
+                        upLoadFileBean.setValue(FileUtils.getFileStr(tag));
+                    }
                     list.add(upLoadFileBean);
                 }
             }
@@ -577,7 +577,8 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
             }
         } else if (requestCode == SELECT_VIDEO) {
             if (null != data) {
-                String address = data.getStringExtra("Address");
+                String address = data.getStringExtra("VideoUrl");
+                addImage(address);
             }
         }
     }
@@ -607,6 +608,8 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
             if (isPicture(imgUri)) {
                 mList.add(img);
                 urlList.add(imgUri);
+            } else {
+                isCanAddVideo = false;
             }
             Glide.with(this).load(file).into(img);
             img.setOnLongClickListener(new View.OnLongClickListener() {
@@ -615,14 +618,18 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
                     mList.remove(img);
                     urlList.remove(img.getTag(R.id.imageid));
                     imgarray.removeView(img);
+                    if (!isPicture(imgUri)) {
+                        isCanAddVideo = true;
+                    }
                     return true;
                 }
             });
             img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (isPicture(imgUri))
+                    if (isPicture(imgUri)) {
                         vImageWatcher.show(img, mList, urlList);
+                    }
                     if (null != recore_ll)
                         recore_ll.setVisibility(View.INVISIBLE);
                 }
@@ -655,39 +662,62 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
 
     private void deleteHandle() {
         buttonHandle(false);
+        recore_notice.setVisibility(View.VISIBLE);
+        video_btn.setImageResource(R.drawable.video_play);
+        if (null != mediaPlayer) {
+            if (mediaPlayer.isPlaying())
+                mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
         if (null != recordFile && recordFile.exists()) {
-            stopplayer();
             recordFile.delete();
             mHandler.removeMessages(TEXT);
+            mHandler.removeMessages(PROGRESS);
+            video_seekBar.setProgress(0);
             voice_time.setText("0:00");
             duration = 0;
             totalLength = 0;
         }
     }
 
+    MediaPlayer mediaPlayer;
 
     private void handleVieo() {
-        if (player.isPlaying()) {
-            pauseplayer();
-            mHandler.removeMessages(PROGRESS);
-            video_btn.setImageResource(R.drawable.video_pause);
-        } else {
-            playRecording();
-            video_seekBar.setProgress(0);
-            mHandler.removeMessages(PROGRESS);
-            mHandler.sendEmptyMessage(PROGRESS);
-            duration = 0;
-            video_btn.setImageResource(R.drawable.video_play);
+        try {
+            if (null == mediaPlayer) {
+                mediaPlayer = new MediaPlayer();
+                mediaPlayer.setDataSource(recordFile.getAbsolutePath());
+                mediaPlayer.setOnCompletionListener(this);
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+                video_seekBar.setMax(mediaPlayer.getDuration());
+                mHandler.sendEmptyMessageDelayed(PROGRESS, 0);
+                video_btn.setImageResource(R.drawable.video_pause);
+            } else {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                    mHandler.removeMessages(PROGRESS);
+                    video_btn.setImageResource(R.drawable.video_play);
+                } else {
+                    mediaPlayer.start();
+                    mHandler.sendEmptyMessageDelayed(PROGRESS, 0);
+                    video_btn.setImageResource(R.drawable.video_pause);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     private void startRecording() {
         // 判断，若当前文件已存在，则删除
         mediaRecorder = new MediaRecorder();
-        if (recordFile.exists()) {
+        if (null != recordFile && recordFile.exists()) {
             System.out.println("---delete--->");
             recordFile.delete();
         }
+        recordFile = new File(Environment.getExternalStorageDirectory().getPath(), UUID.randomUUID() + ".amr");
         mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT);
         mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
@@ -706,26 +736,9 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
             try {
                 mediaRecorder.stop();
                 mediaRecorder.release();
+                mediaRecorder = null;
             } catch (Exception e) {
             }
-        }
-    }
-
-    private void playRecording() {
-        if (null != recordFile) {
-            player.playRecordFile(recordFile);
-        }
-    }
-
-    private void pauseplayer() {
-        if (null != player) {
-            player.pausePalyer();
-        }
-    }
-
-    private void stopplayer() {
-        if (null != player && player.isPlaying()) {
-            player.stopPalyer();
         }
     }
 
@@ -734,17 +747,23 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
     @Override
     public void onDismiss(int type) {
         if (HeaderDialog.TYPE_CAMERA == type) {
-            takeVideo();
+            if (isCanAddVideo) {
+                takeVideo();
+            }
         } else if (HeaderDialog.TYPE_ALBUM == type) {
             takePhoto();
         } else if (HeaderDialog.TYPE_VIDEO == type) {
-            if (isCanAddVideo)
-                pickPhoto();
+            pickPhoto();
         }
     }
 
     private void takeVideo() {
         Intent intent = new Intent(this, Cameractivity.class);
         startActivityForResult(intent, SELECT_VIDEO);
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+        video_btn.setImageResource(R.drawable.video_play);
     }
 }

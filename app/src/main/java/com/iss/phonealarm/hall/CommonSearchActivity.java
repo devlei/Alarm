@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import com.iss.phonealarm.AlarmApplication;
 import com.iss.phonealarm.LoadingDialog;
 import com.iss.phonealarm.R;
@@ -204,10 +205,13 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     }
 
                     @Override
-                    public void onComplete() {}
+                    public void onComplete() {
+                    }
 
                     @Override
-                    public void onError(Throwable e) {LoadingDialog.dismissSelf();}
+                    public void onError(Throwable e) {
+                        LoadingDialog.dismissSelf();
+                    }
                 });
     }
 
@@ -222,7 +226,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<InformationBean>() {
 
                     @Override
-                    public void onStart() { LoadingDialog.show(CommonSearchActivity.this);}
+                    public void onStart() {
+                        LoadingDialog.show(CommonSearchActivity.this);
+                    }
 
                     @Override
                     public void onNext(InformationBean getBean) {
@@ -241,10 +247,13 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     }
 
                     @Override
-                    public void onComplete() {}
+                    public void onComplete() {
+                    }
 
                     @Override
-                    public void onError(Throwable e) {LoadingDialog.dismissSelf();}
+                    public void onError(Throwable e) {
+                        LoadingDialog.dismissSelf();
+                    }
                 });
     }
 
@@ -259,7 +268,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<SuspectBean>() {
 
                     @Override
-                    public void onStart() {LoadingDialog.show(CommonSearchActivity.this);}
+                    public void onStart() {
+                        LoadingDialog.show(CommonSearchActivity.this);
+                    }
 
                     @Override
                     public void onNext(SuspectBean getBean) {
@@ -278,10 +289,13 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     }
 
                     @Override
-                    public void onComplete() {}
+                    public void onComplete() {
+                    }
 
                     @Override
-                    public void onError(Throwable e) {LoadingDialog.dismissSelf();}
+                    public void onError(Throwable e) {
+                        LoadingDialog.dismissSelf();
+                    }
                 });
     }
 
@@ -296,7 +310,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<BeLostBean>() {
 
                     @Override
-                    public void onStart() {LoadingDialog.show(CommonSearchActivity.this);}
+                    public void onStart() {
+                        LoadingDialog.show(CommonSearchActivity.this);
+                    }
 
                     @Override
                     public void onNext(BeLostBean getBean) {
@@ -315,10 +331,13 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     }
 
                     @Override
-                    public void onComplete() {}
+                    public void onComplete() {
+                    }
 
                     @Override
-                    public void onError(Throwable e) {LoadingDialog.dismissSelf();}
+                    public void onError(Throwable e) {
+                        LoadingDialog.dismissSelf();
+                    }
                 });
     }
 
@@ -333,7 +352,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                 .execute(new CallBack<LostBean>() {
 
                     @Override
-                    public void onStart() {LoadingDialog.show(CommonSearchActivity.this);}
+                    public void onStart() {
+                        LoadingDialog.show(CommonSearchActivity.this);
+                    }
 
                     @Override
                     public void onNext(LostBean getBean) {
@@ -352,10 +373,13 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     }
 
                     @Override
-                    public void onComplete() {}
+                    public void onComplete() {
+                    }
 
                     @Override
-                    public void onError(Throwable e) {LoadingDialog.dismissSelf();}
+                    public void onError(Throwable e) {
+                        LoadingDialog.dismissSelf();
+                    }
                 });
     }
 
@@ -372,7 +396,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     .execute(new CallBack<CheckAlarmMessage>() {
 
                         @Override
-                        public void onStart() {LoadingDialog.show(CommonSearchActivity.this);}
+                        public void onStart() {
+                            LoadingDialog.show(CommonSearchActivity.this);
+                        }
 
                         @Override
                         public void onNext(CheckAlarmMessage getBean) {
@@ -391,10 +417,13 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                         }
 
                         @Override
-                        public void onComplete() {}
+                        public void onComplete() {
+                        }
 
                         @Override
-                        public void onError(Throwable e) {LoadingDialog.dismissSelf();}
+                        public void onError(Throwable e) {
+                            LoadingDialog.dismissSelf();
+                        }
                     });
         }
     }
@@ -412,7 +441,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                     .execute(new CallBack<InterQueryBean>() {
 
                         @Override
-                        public void onStart() {LoadingDialog.show(CommonSearchActivity.this);}
+                        public void onStart() {
+                            LoadingDialog.show(CommonSearchActivity.this);
+                        }
 
                         @Override
                         public void onNext(InterQueryBean getBean) {
@@ -431,10 +462,13 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
                         }
 
                         @Override
-                        public void onComplete() {}
+                        public void onComplete() {
+                        }
 
                         @Override
-                        public void onError(Throwable e) {LoadingDialog.dismissSelf();}
+                        public void onError(Throwable e) {
+                            LoadingDialog.dismissSelf();
+                        }
                     });
         }
     }

@@ -22,6 +22,7 @@ import com.iss.phonealarm.bean.searchalarm.AlarmFilesList;
 import com.iss.phonealarm.bean.searchalarm.AlarmInfoBean;
 import com.iss.phonealarm.bean.searchalarm.MultimediaAttrBean;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
     final List<String> urlList = new ArrayList<>();
     ImageWatcher vImageWatcher;
     //播放音频
-    private MediaPlayer mPlayer;
+    private MediaPlayer mediaPlayer;
     private String mediaPath = "http://218.241.189.52:8089/alarmFolder/2017-09-28/f06f6ff0-871c-42df-88ae" +
             "-4786fc41169c.amr";
 
@@ -152,30 +153,11 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
                             }
                         });
                     } else {
-//                        mediaPath = multimediaAttrBean.getValue();
-//                        if (null == mPlayer) {
-//                            try {
-//                                mPlayer = new MediaPlayer();
-//                                mPlayer.setDataSource(mediaPath);
-//                                mPlayer.prepare();
-////                                mPlayTimeTv.setText("0:" + mPlayer.getDuration() / 60);
-//                                mProgressPb.setMax(mPlayer.getDuration());
-//                                handler.sendEmptyMessageDelayed(200, 500);
-//                                mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//                                    @Override
-//                                    public void onCompletion(MediaPlayer mp) {
-//                                        mProgressPb.setProgress(mPlayer.getDuration());
-//                                        handler.removeCallbacksAndMessages(null);
-//                                    }
-//                                });
-//                            } catch (Exception e) {
-//                            }
-//                        }
+                        mediaPath = multimediaAttrBean.getValue();
                     }
                 }
             }
         }
-
     }
 
     @Override
@@ -196,12 +178,52 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
         }
     }
 
+    public static final int PROGRESS = 122;
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == PROGRESS) {
+                if (null != mProgressPb) {
+                    if (mediaPlayer.getCurrentPosition() <= mediaPlayer.getDuration()) {
+                        mHandler.sendEmptyMessageDelayed(PROGRESS, 200);
+                        mProgressPb.setProgress(mediaPlayer.getCurrentPosition());
+                    }
+                }
+            }
+        }
+    };
 
     private void play(String path) {
-        if (mPlayer.isPlaying()) {
-            mPlayer.pause();
-        } else {
-            start();
+        try {
+            if (null == mediaPlayer) {
+                mediaPlayer = new MediaPlayer();
+                mediaPlayer.setDataSource(mediaPath);
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mProgressPb.setProgress(mp.getDuration());
+                        mPlayBtn.setBackgroundResource(R.drawable.icon_play_small);
+                    }
+                });
+                mediaPlayer.prepare();
+                mediaPlayer.start();
+                mProgressPb.setMax(mediaPlayer.getDuration());
+                mHandler.sendEmptyMessageDelayed(PROGRESS, 0);
+                mPlayBtn.setBackgroundResource(R.drawable.video_pause);
+            } else {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                    mHandler.removeMessages(PROGRESS);
+                    mPlayBtn.setBackgroundResource(R.drawable.icon_play_small);
+                } else {
+                    mediaPlayer.start();
+                    mHandler.sendEmptyMessageDelayed(PROGRESS, 0);
+                    mPlayBtn.setBackgroundResource(R.drawable.video_pause);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
@@ -209,32 +231,14 @@ public class AlarmHistoryActivity extends Activity implements OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        stop();
-        handler.removeCallbacksAndMessages(null);
-    }
-
-    public void start() {
-        //播放
-        if (null != mPlayer) {
-            mProgressPb.setProgress(0);
-            mPlayer.start();
+        if (null != mediaPlayer) {
+            if (mediaPlayer.isPlaying())
+                mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
+        mHandler.removeCallbacksAndMessages(null);
+        mHandler = null;
     }
-
-    public void stop() {
-        if (null != mPlayer) {
-            mPlayer.stop();
-            mPlayer.release();
-            mPlayer = null;
-        }
-    }
-
-    public Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            mProgressPb.setProgress(mPlayer.getCurrentPosition());
-            handler.sendEmptyMessageDelayed(200, 500);
-        }
-    };
 
 }

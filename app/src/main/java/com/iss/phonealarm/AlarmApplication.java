@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 import android.widget.RemoteViews;
 import android.widget.Toast;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -30,15 +31,18 @@ import com.kymjs.rxvolley.net.NetManager;
 import com.kymjs.rxvolley.net.dowload.DownLoadManager;
 import com.kymjs.rxvolley.net.dowload.DownLoadManager.DownloadQueueListener;
 import com.kymjs.rxvolley.net.dowload.model.AppDownloadState;
+import com.mob.MobApplication;
 import com.thoughtworks.xstream.XStream;
 
 /**
  * Created by weizhilei on 2017/9/25.
  */
-public class AlarmApplication extends Application {
+public class AlarmApplication extends MobApplication {
 
     //application
     public static AlarmApplication mAlarmApplication;
+
+    public static MainActivity mainActivity;
 
     //用户信息
     public static AllUserInfo mUserInfo;

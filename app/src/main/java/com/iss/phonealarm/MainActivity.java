@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
+
 import com.iss.phonealarm.hall.WrapGridLayoutManager;
 import com.iss.phonealarm.hall.adapter.BenefitAdapter;
 import com.iss.phonealarm.hall.adapter.InfoAdapter;
@@ -39,6 +40,7 @@ public class MainActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        AlarmApplication.mainActivity = this;
     }
 
     /**
