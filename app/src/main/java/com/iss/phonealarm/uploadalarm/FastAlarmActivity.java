@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
@@ -144,6 +145,32 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
         initView();
         init();
         eventHandle();
+        noticeGPS();
+    }
+
+    private void noticeGPS() {
+        LocationManager lManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("是否打开GPS定位");
+        alertDialogBuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivityForResult(intent, MAP_GPS);
+            }
+        });
+        alertDialogBuilder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        /* 确认GPS是否开启 */
+        if (!lManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            alertDialogBuilder.show();
+        }
+
+
     }
 
     private void initView() {
@@ -328,38 +355,6 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
         buttonHandle(true);
     }
 
-    public static int getAmrDuration(File file) throws IOException {
-        long duration = -1;
-        int[] packedSize = {12, 13, 15, 17, 19, 20, 26, 31, 5, 0, 0, 0, 0, 0, 0, 0};
-        RandomAccessFile randomAccessFile = null;
-        try {
-            randomAccessFile = new RandomAccessFile(file, "rw");
-            long length = file.length();// 文件的长度
-            int pos = 6;// 设置初始位置
-            int frameCount = 0;// 初始帧数
-            int packedPos = -1;
-
-            byte[] datas = new byte[1];// 初始数据值
-            while (pos <= length) {
-                randomAccessFile.seek(pos);
-                if (randomAccessFile.read(datas, 0, 1) != 1) {
-                    duration = length > 0 ? ((length - 6) / 650) : 0;
-                    break;
-                }
-                packedPos = (datas[0] >> 3) & 0x0F;
-                pos += packedSize[packedPos] + 1;
-                frameCount++;
-            }
-
-            duration += frameCount * 20;// 帧数*20
-        } finally {
-            if (randomAccessFile != null) {
-                randomAccessFile.close();
-            }
-        }
-        return (int) ((duration / 1000) + 1);
-    }
-
     private void buttonHandle(boolean isRecord) {
         video_record.setVisibility(isRecord ? View.GONE : View.VISIBLE);
         video_btn.setVisibility(isRecord ? View.VISIBLE : View.GONE);
@@ -515,6 +510,7 @@ public class FastAlarmActivity extends Activity implements View.OnClickListener,
     public static final int REQ_IMAGE = 2001;
     public static final int MAP_REQUEST_CODE = 2003;
     public static final int SELECT_VIDEO = 2004;
+    public static final int MAP_GPS = 2005;
     public static double weidu, jingdu;
 
     private Uri photoUri;
