@@ -84,6 +84,7 @@ public class Cameractivity extends Activity implements SurfaceHolder.Callback, V
 
             @Override
             public void loadingStart() {
+                stopRecord();
                 startRecord();
                 notice.setVisibility(View.INVISIBLE);
             }
@@ -92,6 +93,12 @@ public class Cameractivity extends Activity implements SurfaceHolder.Callback, V
         holder.addCallback(this);
         // setType必须设置，要不出错.
         holder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        mSurfaceview.post(new Runnable() {
+            @Override
+            public void run() {
+                startRecord();
+            }
+        });
     }
 
     private void startRecord() {
@@ -124,10 +131,10 @@ public class Cameractivity extends Activity implements SurfaceHolder.Callback, V
                 mRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.MPEG_4_SP);
                 mRecorder.setVideoSize(640, 480);
                 mRecorder.setVideoFrameRate(30);
-                mRecorder.setVideoEncodingBitRate(524288);//(int) (0.5 * 1024 * 1024)
+                mRecorder.setVideoEncodingBitRate(1 * 1024 * 1024);//(int) (0.5 * 1024 * 1024) 524288
                 mRecorder.setOrientationHint(90);
                 //设置记录会话的最大持续时间（毫秒）
-                mRecorder.setMaxDuration(30 * 1000);
+                mRecorder.setMaxDuration(300 * 1000);
                 mRecorder.setPreviewDisplay(mSurfaceHolder.getSurface());
                 mRecorder.setOutputFile(path);
                 mRecorder.prepare();

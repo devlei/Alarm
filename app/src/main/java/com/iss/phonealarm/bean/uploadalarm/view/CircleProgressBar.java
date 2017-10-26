@@ -48,7 +48,7 @@ public class CircleProgressBar extends View implements Runnable {
     private static final String KEY_STATE_NEED_SHOW_TEXT = "state_need_show_text";
     private static final String KEY_STATE_NEED_ANIM = "state_need_anim";
 
-    private static final float MAX_PROGRESS = 100f;
+    private static final float MAX_PROGRESS = 70f;
     private Context mContext;
 
     private int mCpbWholeBackgroundColor = Color.parseColor("#ffeeeaff");
