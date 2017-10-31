@@ -14,6 +14,7 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
+import com.igexin.sdk.PushManager;
 import com.iss.phonealarm.bean.BaseResponseBean;
 import com.iss.phonealarm.bean.ResponseMessageBean;
 import com.iss.phonealarm.bean.interactquery.InterQueryAttrConverter;
@@ -74,6 +75,8 @@ public class AlarmApplication extends MobApplication {
         location();
         mLocationClient.start();
         autoLogin();
+        PushManager.getInstance().initialize(this.getApplicationContext(), DemoPushService.class);
+        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), DemoIntentService.class);
     }
 
     public String getUserId() {
