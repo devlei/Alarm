@@ -29,6 +29,7 @@ public class DemoIntentService extends GTIntentService {
         System.out.println("=====?onReceiveMessageData===getTaskId===" + msg.getTaskId());
         System.out.println("=====?onReceiveMessageData===getPayload[]===" + msg.getPayload().length);
         System.out.println("=====?onReceiveMessageData===String===" + new String(msg.getPayload()));
+        //TODO 此处书写跳转逻辑
     }
 
     @Override
