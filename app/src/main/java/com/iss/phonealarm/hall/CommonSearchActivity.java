@@ -58,6 +58,9 @@ public class CommonSearchActivity extends Activity implements OnClickListener, T
         if (context != null) {
             Intent intent = new Intent(context, CommonSearchActivity.class);
             intent.putExtra(context.getString(R.string.key_type), typeResId);
+            if (!(context instanceof Activity)) {
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
             context.startActivity(intent);
         }
     }
